@@ -1,0 +1,84 @@
+/* :root {
+  --card-bg-color: #f5f5f5;
+  --card-border-color: #ccc;
+  --card-shadow-color: var(--black);
+  --header-bg-color: #ffcc80;
+  --header-text-color: #333;
+  --icon-color: #f5a623;
+  --total-header-color: #666;
+}
+
+.topic-card {
+  margin: 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--card-border-color);
+  border-radius: 5px;
+  background-color: var(--card-bg-color);
+  box-shadow: 0 2px 4px var(--card-shadow-color);
+  width: calc(33.33% - 1rem);
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
+  background-color: var(--header-bg-color);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--header-text-color);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 60%;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  background-color: #ffebcc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.icon-container .fa {
+  font-size: 40px;
+  color: var(--icon-color);
+}
+
+.total-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 5px;
+  height: 30%;
+  color: var(--total-header-color);
+  font-size: 12px;
+}
+
+.total-header div {
+  margin-bottom: 0.25rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+}
+
+.topic-checkbox {
+  position: relative;
+  transform: translateX(-50%);
+} */

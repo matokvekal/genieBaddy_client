@@ -1,0 +1,30 @@
+.topic-container {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
+   padding: 10px;
+
+   background-color: var(--main-blue) ;
+   color: var(--white);
+   border-radius: 5px;
+   padding: 1px;
+   font-family: Arial, sans-serif;
+   height: 100%;
+ }
+ 
+ .topic-item {
+   padding: 5px 5px;
+   border: none;
+   border-radius: 5px;
+   font-size: 16px;
+   transition: transform 0.2s, box-shadow 0.2s;
+   cursor: pointer;
+   height: 3rem;
+   margin: 0.1rem;
+ }
+ 
+ .topic-item:hover {
+   transform: scale(1.05);
+   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+ }
+ 

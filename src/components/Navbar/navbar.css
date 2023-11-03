@@ -1,0 +1,121 @@
+
+.navbar{
+  box-shadow: 0 0.5rem 1rem var(--black);
+  background-color: var(--white);
+  border: 1px solid  var(--lightgray);
+  height: 5rem;;
+}
+.navbar .container  {
+  box-shadow: 0 0.5rem 1rem var(--black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .container .menu-items {
+  display: flex;
+  justify-content: center;
+}
+.navbar .container  li {
+  list-style: none;
+}
+
+
+.navbar .container  button {
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 1.2rem;
+  padding: 0.7rem;
+  pointer-events: none;
+}
+.navbar .container  button:hover {
+  font-weight: 700;
+}
+.navbar .container  .hamburger-lines {
+  height: 16px;
+  width: 32px;
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.navbar  .container  .hamburger-lines .line {
+  height: 2px;
+  width: 100%;
+  border-radius: 10px;
+  background: var(--primary-color);
+}
+.navbar .container  .hamburger-lines .line1 {
+  transform-origin: 0% 0%;
+  transition: transform 0.4s ease-in-out;
+}
+.navbar .container  .hamburger-lines .line2 {
+  transition: transform 0.2s ease-in-out;
+}
+.navbar .container  .hamburger-lines .line3 {
+  transform-origin: 0% 100%;
+  transition: transform 0.4s ease-in-out;
+}
+.navbar .container .menu-items {
+  padding-top: 4em;
+  box-shadow: inset 0 0 2000px var(--lightgray); 
+  margin-right: 85%;
+  width: 15%;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s ease-in-out;
+  text-align: center;
+}
+.navbar .container .menu-items li {
+  margin-bottom: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.navbar .container .logo-container {
+  position: absolute;
+  top: 1em;
+  right: 1.5em;
+  
+}
+.navbar .container .logo-container .logo {
+  width: 3em;
+  height: 3em;
+}
+.container  input[type=checkbox]:checked ~ .menu-items {
+  opacity: 1;
+  background-color:  var(--white); 
+  border-radius: 16px;
+  box-shadow: 0 0.5rem 1rem var(--black);
+}
+
+
+@media (max-width: 600px) {
+  .navbar .container .menu-items {
+    padding-top: 120px;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+    margin-right: 0;
+    width: 100%;
+    opacity: 0;
+    display: none;
+    flex-direction: column;
+    transition: all 0.5s ease-in-out;
+    text-align: center;
+  }
+  .container  input[type=checkbox]:checked ~ .menu-items {
+    display: flex;
+  }
+  .container  input[type=checkbox]:checked ~ .logo-container {
+    display: none;
+  }
+}

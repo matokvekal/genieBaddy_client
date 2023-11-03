@@ -1,0 +1,123 @@
+
+
+.mainhead{
+height:8rem;
+min-height: 60px;
+background: var(--main-blue);
+color: var(--grey);
+width: 100%;
+display: flex;
+flex-direction: column;
+/* justify-content: center; */
+justify-content: space-between;
+}
+
+.head.navmenu{
+   display: flex;
+   justify-content: space-between;
+
+   height: 2rem;
+   color :bisque;
+}
+
+.head.chats{
+
+   height: 2rem;
+   display: flex;
+   align-items: center;
+   padding: 1rem;
+   justify-content: space-between;
+   margin-bottom: 0.5rem;;
+}
+
+.chat-button {
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+   margin: 0 1rem;
+   color: #D3D3D3;  
+   transition: color 0.3s;
+   position: relative;  /* Required for the positioning of the underline */
+   padding-bottom: 0.5rem;  /* Space for the underline */
+ }
+
+ .chat-button.active {
+   color: var(--white);
+ }
+
+ .chat-button.active::after {  /* This creates the underline */
+   content: "";
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 2px;  /* Thickness of the underline */
+   background-color: white;  /* Color of the underline */
+ }
+ 
+
+ .chat-button.active {
+   color: var(--white);/* Bright white when active */
+ }
+
+ .chat-button-name {
+   font-size: 1rem;
+   font-weight: 600;
+   margin-right: 0.5rem;
+ }
+
+ .chat-button-posts {
+   font-size: 0.9rem;
+   font-weight: 600;
+   color: #075E54;  /* WhatsApp green color */
+   background-color: #868efa;
+   width: 1.5rem;
+   height: 1.5rem;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;  /* Vertically center the number */
+   justify-content: center;  /* Horizontally center the number */
+ }
+ .chat-button-posts.active{
+    background-color:var(--white);
+ }
+ .head.navmenu {
+   margin-top: 2rem;
+   display: flex;
+   justify-content: space-between; 
+   align-items: center;
+   padding: 0.5rem 1rem;
+ }
+
+ .head.navmenu > span {
+
+   font-weight: bold;
+   font-size: 1.5rem;
+   margin-right: 1rem;
+ }
+
+ .head.navmenu > div > .fa-icon {
+   margin-left: 1rem; 
+   transition: color 0.3s, box-shadow 0.3s;  
+ }
+
+ .head.navmenu > div > .fa-icon:hover {
+   color: var(--green); 
+   box-shadow: 0 0 8px var(--dark-green);  
+ }
+
+ .faEllipsisV{
+   font-size: larger;
+ }
+ .fa-icon.fa-bars {
+  font-size: 2rem;   
+  margin-right: 1.7rem;  
+}
+.fa-icon.faArrowAltCircleLeft{
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.fa-icon.faArrowAltCircleLeft{
+  height: 2rem;
+}

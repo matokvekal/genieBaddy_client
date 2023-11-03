@@ -1,0 +1,112 @@
+.Login {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+ }
+ 
+ .Login__title {
+   font-size: 32px;
+   font-weight: bold;
+   text-align: center;
+   margin-bottom: 20px;
+ }
+ div.text-danger {
+  height: 20px; 
+  max-width: 300px; 
+  color:var(--red)
+}
+.Login__form .alert.alert-danger{
+  height: 20px; 
+  max-width: 300px; 
+  color:var(--red)
+}
+.Login__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+ .Login__form {
+   width: 100%;
+   margin-top: 10px;
+   padding: 30px;
+   background-color: var(--grey);
+   border: 1px solid var(--white);
+   border-radius: 8px;
+   box-shadow: 0 4px 8px var(--black);
+ }
+ 
+ .Login__form__error {
+   color: var(--form-error);
+   margin-top: 8px;
+   font-size: 14px;
+ }
+ 
+ .Login__form .form-group {
+   margin-bottom: 20px;
+ }
+ 
+ .Login__form label {
+   display: block;
+   font-size: 18px;
+   font-weight: bold;
+   margin-bottom: 8px;
+ }
+ 
+ .Login__form input[type="text"],
+ .Login__form input[type="username"],
+ .Login__form input[type="password"] {
+   width: 100%;
+   padding: 12px;
+   font-size: 16px;
+   border: 1px solid var(--grey);
+   border-radius: 6px;
+ }
+ 
+ .Login__form__error small {
+   display: block;
+   margin-top: 4px;
+ }
+ 
+ .Login__form__input-row {
+   display: flex;
+   flex-direction: row;
+ }
+ 
+ .Login__form__input-row .form-group:first-child {
+   margin-right: 10px;
+ }
+ 
+ .Login__submit-btn {
+   background-color: var(--background-blue);
+   color: var(--white); 
+   border: none;
+   padding: 12px 24px;
+   border-radius: 6px;
+   font-size: 18px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+ }
+ 
+ .Login__submit-btn:disabled {
+   background-color:var(--grey);
+   cursor: not-allowed;
+ }
+ 
+ .Login__submit-btn:hover {
+   background-color: var(--background-blue);
+ }
+ 
+ .Login__register-link {
+   color: var(--background-blue);
+   font-weight: bold;
+   text-decoration: none;
+ }
+ 
+ .Login__intro-image {
+   max-width: 100%;
+   height: auto;
+   margin-top: 40px;
+ }
+ 

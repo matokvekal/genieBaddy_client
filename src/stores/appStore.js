@@ -172,6 +172,7 @@ const useDataStore = createStore((set, get) => ({
       }
 
       const data = await response.json();
+      console.log("data at store ", data);
       set((state) => ({
         ...state,
         userName: data.user_name,

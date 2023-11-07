@@ -3,6 +3,10 @@
 
 
 what to test
+user  login ok
+genie login  ok
+logout user  X
+logout genie 
 1.user can add new
 2.user add up to 3 new in 24 and it clean at next day
 3.genie can see up to 10 each day
@@ -13,6 +17,13 @@ what to test
 8.genie new will be relese after 10 minutes
 9.changing image/nickname once in chat before start
 10 geneie can have no more than 5 chats open and can get new only if he start answer all that he had???//
+
+BAGS
+1)full url not work http://genieclient.s3-website.eu-central-1.amazonaws.com/logingenie
+2)IdToken not delete id storage
+3)avatar not delete in ls at logout user and genie
+4)user have only 2, but last user post count old date
+5)user can not send post IMPORTANT
 
 
 

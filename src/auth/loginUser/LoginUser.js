@@ -45,7 +45,7 @@ function LoginUser() {
   return (
     <div className="Login d-flex row justify-content-center">
       <div className="col-lg-6 order-sm-0 order-lg-1 my-lg-5">
-        <h2 className="Login__title">Login user</h2>
+        <h2 className="Login__title">Login user.</h2>
         <form
           className="Login__form mt-5 col-lg-8 px-0"
           onSubmit={formik.handleSubmit}

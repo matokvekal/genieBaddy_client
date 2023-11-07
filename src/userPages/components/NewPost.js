@@ -47,11 +47,14 @@ const NewPost = ({ handleCloseNewPostModal }) => {
         await refreshUserPosts();
         handleCloseNewPostModal();
       } else {
+        if(res?.status === 400){
+          triggerToast(res.data.error);
+        }else{
         console.log("error");
         triggerToast("Message didn't send. Please try again.");
       }
       setDisabledSend(false);
-    }
+    }}
   };
 
   const handleClose = () => {

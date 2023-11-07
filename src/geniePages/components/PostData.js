@@ -33,14 +33,15 @@ const PostData = async ({ sanitizedInput, postId, topic_id, header }) => {
   } catch (error) {
     console.error("Error in PostData:", error);
     if (error.response) {
-      const { status } = error.response;
-      if (status === 400) {
-        throw new Error("error.response.data.error");
-      } else if (error.request) {
-        throw new Error("No response received from the server");
-      } else {
-        throw error;
-      }
+      return error.response;
+      // const { status } = error.response;
+      // if (status === 400) {
+      //   throw new Error("error.response.data.error");
+      // } else if (error.request) {
+      //   throw new Error("No response received from the server");
+      // } else {
+      //   throw error;
+      // }
     }
   }
 };

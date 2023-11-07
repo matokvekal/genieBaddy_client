@@ -18,6 +18,7 @@ const configHeader = () => {
 };
 
 const PostData = async ({ sanitizedInput,avatar, postId, topic_id, header }) => {
+  debugger
   const endPoint = `${API_ENDPOINT}/userpost`;
   const payload = {
     message: sanitizedInput,
@@ -36,14 +37,17 @@ const PostData = async ({ sanitizedInput,avatar, postId, topic_id, header }) => 
   } catch (error) {
     console.error("Error in PostData:", error);
     if (error.response) {
-      const { status } = error.response;
-      if (status === 400) {
-        throw new Error("error.response.data.error");
-      } else if (error.request) {
-        throw new Error("No response received from the server");
-      } else {
-        throw error;
-      }
+      return error.response;
+      // const { status } = error.response;
+      // if (status === 400) {
+      //   return error.response;
+      //   // throw new Error("error.response.data.error");
+      // } else if (error.request) {
+      //   return error.response;
+      //   // throw new Error("No response received from the server");
+      // } else {
+      //   return error.response;
+      // }
     }
   }
 };

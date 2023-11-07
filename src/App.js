@@ -16,7 +16,7 @@ import MainUser from "userPages/mainUser/MainUser";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
-function App({ user }) {
+function App({ user }) {debugger
   let {
     loginStatus,
     userType,
@@ -28,6 +28,7 @@ function App({ user }) {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const localStorageLoginStatus = localStorage.getItem("authenticated");
@@ -36,7 +37,17 @@ function App({ user }) {
     if (!userType) {
       userType = localStorage.getItem("userType");
     }
+    console.log(PATHS_NAMES, pathname)
 
+    if (!userType) {
+      if (pathname.startsWith(PATHS_NAMES.LOGINUSER)) {
+        userType = USERS_ROLES.USER;
+      } else if (pathname.startsWith(PATHS_NAMES.LOGINGENIE)) {
+        userType = USERS_ROLES.GENIE;
+      }
+    }
+
+    
     if (!loginStatus && isAuth) {
       setLoginStatus(true);
     }
@@ -64,7 +75,8 @@ function App({ user }) {
 
   useEffect(() => {
     if (showToast && toastMessage) {
-      toast.success(toastMessage);
+      toast.error(toastMessage);
+      // toast.success(toastMessage);
       resetToast();
     }
   }, [showToast, toastMessage, resetToast]);
@@ -87,7 +99,7 @@ function App({ user }) {
           <Route exact path="/genietopics" element={<GenieTopics />} />  */}
         </Routes>
       </CookiesProvider>{" "}
-      <ToastContainer />
+      <ToastContainer theme="colored"/>
     </>
   );
 }

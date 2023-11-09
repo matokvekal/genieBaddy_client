@@ -1,21 +1,20 @@
-const env = process.env.ENV || "dev";
+const env = process.env.ENV || "development";
 export const AvailableLanguages = {
   he: "he",
   en: "en",
 };
 const LOCAL_SERVER = "localhost";
-// const PROD_SERVER = "prod";
 
-const dev = {
+const development = {
   apiBaseHost: `http://${LOCAL_SERVER}:5000/api/gb`,
 };
-const prod = {
+const production = {
   apiBaseHost: `api/gb`,
 };
 
 const envConfigs = {
-  dev,
-  prod,
+  development,
+  production,
 };
 
 export const apiEndPoint = () => {

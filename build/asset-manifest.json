@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7e1b5fd4.css",
+    "main.js": "/static/js/main.b1484cf0.js",
+    "static/media/avatar9.png": "/static/media/avatar9.2d28b40f43971b4dd161.png",
+    "static/media/avatar0.png": "/static/media/avatar0.4c0ce9fdb123b7811085.png",
+    "static/media/avatar10.png": "/static/media/avatar10.4c0ce9fdb123b7811085.png",
+    "static/media/avatar11.png": "/static/media/avatar11.86577fae7a67b9a1348e.png",
+    "static/media/avatar1.png": "/static/media/avatar1.d08fcf16cc48233fdf63.png",
+    "static/media/avatar2.png": "/static/media/avatar2.a70141a8b1c111beb04a.png",
+    "static/media/avatar8.png": "/static/media/avatar8.7c554a7fda0e537b9a33.png",
+    "static/media/avatar4.png": "/static/media/avatar4.80873c869d1aad6c0bf8.png",
+    "static/media/avatar6.png": "/static/media/avatar6.aff702bc955f928db72d.png",
+    "static/media/avatar3.png": "/static/media/avatar3.77e851f534ec168d1b91.png",
+    "static/media/avatar7.png": "/static/media/avatar7.9d7341bdfc783a04a9e2.png",
+    "static/media/avatar5.png": "/static/media/avatar5.b4d40ed552d38676727e.png",
+    "static/media/avatar2.svg": "/static/media/avatar2.316229c07cb36edfd9f20e2686a8faf4.svg",
+    "static/media/avatar5.svg": "/static/media/avatar5.316229c07cb36edfd9f20e2686a8faf4.svg",
+    "static/media/avatar1.svg": "/static/media/avatar1.e431c22e6543498f6963e8e8f3cba3c2.svg",
+    "static/media/avatar3.svg": "/static/media/avatar3.56df19b7c0a468ecddb3121b59b29171.svg",
+    "static/media/avatar7.svg": "/static/media/avatar7.56df19b7c0a468ecddb3121b59b29171.svg",
+    "static/media/avatar6.svg": "/static/media/avatar6.9cdeb41299c08213e7828d604d0d9445.svg",
+    "static/media/avatar4.svg": "/static/media/avatar4.15b6712581659b83f884de8ed0eb63e1.svg",
+    "static/media/send.svg": "/static/media/send.a1aa7a3eb4b4cc37865d703990932e5e.svg",
+    "static/media/sendwhite.svg": "/static/media/sendwhite.9d3c74f5e5192adc268badd513f6fa8d.svg",
+    "static/media/Logo1.svg": "/static/media/Logo1.eb5021430dcd591661d7a17a508046dc.svg",
+    "static/media/close-icon.svg": "/static/media/close-icon.bbd4a56f2dbe1db2fb0cdf9d2867ec58.svg",
+    "index.html": "/index.html",
+    "main.7e1b5fd4.css.map": "/static/css/main.7e1b5fd4.css.map",
+    "main.b1484cf0.js.map": "/static/js/main.b1484cf0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7e1b5fd4.css",
+    "static/js/main.b1484cf0.js"
+  ]
+}

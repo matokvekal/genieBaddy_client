@@ -3,10 +3,7 @@ import { BsChevronDown } from "react-icons/bs";
 import { useState } from "react";
 
 const Landing = () => {
-  const text = {
-    topText: "Hi ",
-  };
-  const [number, setNumber] = useState(0);
+
   return (
     <>
       <div className="container">

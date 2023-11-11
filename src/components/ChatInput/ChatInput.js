@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import "./ChatInput.css";
 import send from "assets/send.svg";
 import {
@@ -7,13 +7,12 @@ import {
 import {appInfo} from "../../config/config"
 
 const BackIcon = () => <span>{"<"}</span>;
-// const AddDocIcon = () => <span>📎</span>;
 
 const ChatInput = ({ setChatInput, chatInput, sendChat }) => {
   const maxCharacterLimit = appInfo.maxUserCharacterLimit;//////////////////////fix
   const textAreaRef = useRef(null);
   const clearText = () => {
-    setChatInput(""); // clear function
+    setChatInput(""); 
   };
   useEffect(() => {
     if (textAreaRef.current) {

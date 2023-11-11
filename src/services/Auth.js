@@ -2,6 +2,7 @@ import { apiEndPoint } from "../config/index";
 const API_ENDPOINT = apiEndPoint().apiBaseHost;
 
 export const Login = async (data) => {
+  console.log("data at login API_ENDPOINT", API_ENDPOINT);
   // console.log("API_ENDPOINT", API_ENDPOINT);
   let EndPoint = API_ENDPOINT + "/login";
   let res = await fetch(EndPoint, {

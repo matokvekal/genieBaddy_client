@@ -1,4 +1,7 @@
-const env = process.env.ENV || "development";
+// const env = process.env.ENV || "development";
+const env = process.env.ENV || "production";
+debugger;
+console.log("env:", env);
 export const AvailableLanguages = {
   he: "he",
   en: "en",

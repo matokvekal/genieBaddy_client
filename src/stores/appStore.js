@@ -148,6 +148,7 @@ const useDataStore = createStore((set, get) => ({
     localStorage.removeItem("userName");
     localStorage.removeItem("authenticated");
     localStorage.removeItem("geniePosts");
+    Cookies.remove("IdToken");
     deleteDb();
   },
   setLoginStatus: (loginStatus) => {

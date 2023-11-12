@@ -13,6 +13,6 @@ export const Login = async (data) => {
     },
     body: JSON.stringify(data),
   });
-  console.log("res", res);
+  // console.log("res", res);
   return res;
 };

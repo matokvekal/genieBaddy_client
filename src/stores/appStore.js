@@ -1,6 +1,7 @@
 import { createStore } from "zustand";
 import Cookies from "js-cookie";
 import { Login } from "../services/Auth";
+import moment from "moment";
 import {
   saveToIndexedDB,
   getAllFromIndexedDB,
@@ -142,6 +143,7 @@ const useDataStore = createStore((set, get) => ({
     localStorage.removeItem("token");
     localStorage.removeItem("userType");
     localStorage.removeItem("user_limits");
+    localStorage.removeItem("user_limits_date");
     localStorage.removeItem("topics");
     localStorage.removeItem("userName");
     localStorage.removeItem("authenticated");
@@ -193,7 +195,6 @@ const useDataStore = createStore((set, get) => ({
   },
   getUserPosts: async () => {
     try {
-      // console.log("start getUserPosts");
       const currentPosts = get().allPosts;
       if (currentPosts?.length) {
         return currentPosts;
@@ -216,7 +217,7 @@ const useDataStore = createStore((set, get) => ({
         return data;
       }
     } catch (err) {
-      console.log("error in getUserPosts", err);
+      // console.log("error in getUserPosts", err);
       return { status: "error", info: err.message };
     }
   },
@@ -248,7 +249,7 @@ const useDataStore = createStore((set, get) => ({
         return data;
       }
     } catch (err) {
-      console.log("error in getGeniePosts", err);
+      // console.log("error in getGeniePosts", err);
       return { status: "error", info: err.message };
     }
   },
@@ -289,6 +290,7 @@ const useDataStore = createStore((set, get) => ({
 
         // Save to localstorage
         localStorage.setItem("user_limits", JSON.stringify(userData));
+        localStorage.setItem("user_limits_date", JSON.stringify(moment()));
         return userData;
       }
     } catch (err) {

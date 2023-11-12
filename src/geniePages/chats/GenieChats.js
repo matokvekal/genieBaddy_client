@@ -21,7 +21,7 @@ const GenieChats = () => {
       } else {
         setHeaders(data);
       }
-      console.log("Fetched topics:", data);
+
     } catch (error) {
       console.log("Error fetching topics:", error);
     }
@@ -33,7 +33,7 @@ const GenieChats = () => {
 
   const handleHeaders = (type) => {
     setHeaderType(type);
-    console.log(type);
+    // console.log(type);
     fetchData(type);
   };
 

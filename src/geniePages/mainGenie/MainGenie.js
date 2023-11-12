@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import "./MainGenie.css";
 import "../heads/Head.css";
 import HeadMenu from "../heads/HeadMenu";

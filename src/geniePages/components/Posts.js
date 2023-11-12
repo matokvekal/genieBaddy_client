@@ -74,7 +74,7 @@ function Posts({ convFilter }) {
     });
   }
   const filteredPost = useMemo(() => {
-    console.log("At convFilter", convFilter);
+    // console.log("At convFilter", convFilter);
 
     switch (convFilter) {
       case POST_STATUS.ALL:

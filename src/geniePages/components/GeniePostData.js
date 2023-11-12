@@ -18,17 +18,17 @@ const GeniePostData = () => {
   const sendChat = async () => {
     if (chatInput.trim() !== "") {
       const sanitizedInput = clearText(chatInput.trim());
-      console.log(sanitizedInput);
+      // console.log(sanitizedInput);
       const res = await PostData({
         sanitizedInput,
         postId: postId,
         topic_id: null,
         header: null,
       });
-      if (res.status === 200) {
-        const result = await refreshUserPosts();
-        console.log(result);
-      }
+      // if (res.status === 200) {
+      //   const result = await refreshUserPosts();
+      //   console.log(result);
+      // }
     }
   };
 

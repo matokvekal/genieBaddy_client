@@ -25,10 +25,10 @@ const UserPostData = () => {
         topic_id: null,
         header: null,
       });
-      if (res.status === 200) {
-        const result = await refreshUserPosts();
-        console.log(result);
-      }
+      // if (res.status === 200) {
+      //   const result = await refreshUserPosts();
+      //   console.log(result);
+      // }
     }
   };
 

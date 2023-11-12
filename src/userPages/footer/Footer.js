@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Footer.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import moment from 'moment';
+import {userLimits} from "config/config.js";
 
 function Footer({ handleCloseNewPostModal }) {
   const {  updateUserLimits } = useStore(useDataStore);
@@ -9,14 +11,15 @@ function Footer({ handleCloseNewPostModal }) {
   const [leftPosts, setLeftPosts] = useState(0);
   const handleNewPost = () => {
     handleCloseNewPostModal();
-    console.log("new post");
+    // console.log("new post");
   };
-
 
   useEffect(() => {
     async function fetchLimits() {
       const localLimits = JSON.parse(localStorage.getItem("user_limits"));
-      if (localLimits) {
+      const localLimitsDate = moment(JSON.parse(localStorage.getItem("user_limits_date")));
+
+      if (localLimits &&localLimitsDate &&moment().diff(localLimitsDate, 'hours') < userLimits.user_limits_hours ) {
         const total = Number(localLimits.USER_POSTS_PER_DAY);
         const left = Number(localLimits.USER_POSTS_LEFT);
         setLeftPosts(left);

@@ -14,3 +14,6 @@ export const vectorAndHistoryCircleOptions = {
 export const appInfo={
 	maxUserCharacterLimit:3000,
 }
+export const userLimits={
+  user_limits_hours: 5,
+}

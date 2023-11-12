@@ -16,7 +16,7 @@ import MainUser from "userPages/mainUser/MainUser";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
-function App({ user }) {debugger
+function App() {
   let {
     loginStatus,
     userType,
@@ -37,7 +37,7 @@ function App({ user }) {debugger
     if (!userType) {
       userType = localStorage.getItem("userType");
     }
-    console.log(PATHS_NAMES, pathname)
+    // console.log(PATHS_NAMES, pathname);
 
     if (!userType) {
       if (pathname.startsWith(PATHS_NAMES.LOGINUSER)) {
@@ -47,7 +47,6 @@ function App({ user }) {debugger
       }
     }
 
-    
     if (!loginStatus && isAuth) {
       setLoginStatus(true);
     }
@@ -58,7 +57,7 @@ function App({ user }) {debugger
         pathsForRole && pathsForRole.includes(location.pathname);
 
       if (!isAllowedPath) {
-        console.log("no Allowed Path", isAllowedPath);
+        // console.log("no Allowed Path", isAllowedPath);
         // If the current path is not allowed for the user role, redirect them to the default path for their role
         const defaultPath = pathsForRole ? pathsForRole[0] : "/";
         navigate(defaultPath, { replace: true });
@@ -99,7 +98,7 @@ function App({ user }) {debugger
           <Route exact path="/genietopics" element={<GenieTopics />} />  */}
         </Routes>
       </CookiesProvider>{" "}
-      <ToastContainer theme="colored"/>
+      <ToastContainer theme="colored" />
     </>
   );
 }

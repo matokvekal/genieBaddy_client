@@ -53,8 +53,8 @@ const Sidebar = () => {
     toggleSideBar(false);
   };
   const handleLogOut = () => {
-    console.log("logout");
-    toggleSideBar(true);
+    // console.log("logout");
+    toggleSideBar(false);
     logOut();
   };
   const closeModal = () => {

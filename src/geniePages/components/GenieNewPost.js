@@ -79,7 +79,7 @@ const GenieNewPost = ({ setConvFilter }) => {
       const res = await genieCoosePost(posts[postId].id,avatar);
       if (res && res.status === 200 && res.statusText === "OK") {
         await cleanGeniePosts();
-        console.log(POST_STATUS.OPEN);
+        // console.log(POST_STATUS.OPEN);
         setConvFilter(POST_STATUS.OPEN);
         // setConvFilter(POST_STATUS.OPEN);
         //refreshData();

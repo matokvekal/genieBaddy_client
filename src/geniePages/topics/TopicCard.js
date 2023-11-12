@@ -16,7 +16,7 @@ const Topic = (props) => {
       let response = await updateTopic(data);
       // console.log("response:", response);
     } catch (error) {
-      console.log("Error updating topic:", error);
+      // console.log("Error updating topic:", error);
     }
   };
 

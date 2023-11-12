@@ -1,6 +1,5 @@
 // const env = process.env.NODE_ENV || "development";
 const env = process.env.NODE_ENV || "production";
-debugger;
 console.log("env:", env);
 export const AvailableLanguages = {
   he: "he",

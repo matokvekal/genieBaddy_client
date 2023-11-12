@@ -5,7 +5,7 @@ import "./Topics.css";
 
 const Topics = (props) => {
   const search = props.search;
-  console.log("At Topics");
+  // console.log("At Topics");
   const [genieTopics, setGenieTopics] = useState([]);
   const [filteredTopics, setFilteredTopics] = useState([]);
 
@@ -16,7 +16,7 @@ const Topics = (props) => {
         let response = await getAllTopics();
         data = response?.data?.result;
 
-        console.log("Fetched topics:", data);
+        // console.log("Fetched topics:", data);
         setGenieTopics(data);
       } catch (error) {
         console.log("Error fetching topics:", error);

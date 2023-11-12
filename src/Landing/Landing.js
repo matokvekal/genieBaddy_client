@@ -1,6 +1,5 @@
 import { Navbar } from "components";
-import { BsChevronDown } from "react-icons/bs";
-import { useState } from "react";
+
 
 const Landing = () => {
 

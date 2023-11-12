@@ -50,11 +50,12 @@ const Sidebar = () => {
   }, [selectedAvatar]);
 
   const handleMenu = () => {
+    console.log("handleMenu");
     toggleSideBar(false);
   };
   const handleLogOut = () => {
     console.log("logout");
-    toggleSideBar(true);
+    toggleSideBar(false);
     logOut();
   };
   const closeModal = () => {

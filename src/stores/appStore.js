@@ -2,16 +2,14 @@ import { createStore } from "zustand";
 import Cookies from "js-cookie";
 import { Login } from "../services/Auth";
 import moment from "moment";
-import {
-  saveToIndexedDB,
-  getAllFromIndexedDB,
-  deleteDb,
-} from "../services/IndexDb";
+
 import {
   fetchUserPosts,
   fetchGeniePosts,
   getUserLimitsFromServer,
   getTopics,
+  fetchUserNewChats,
+  fetchGenieNewChats
 } from "services/getData";
 export const initialState = {
   userId: "",
@@ -67,7 +65,7 @@ const useDataStore = createStore((set, get) => ({
   },
   savePostsToIndexDb: (posts) => {
     try {
-      saveToIndexedDB(posts);
+      localStorage.setItem("userPosts", JSON.stringify(posts));
     } catch (error) {
       console.error("Error saving posts to IndexedDB:", error);
     }
@@ -148,9 +146,11 @@ const useDataStore = createStore((set, get) => ({
     localStorage.removeItem("userName");
     localStorage.removeItem("authenticated");
     localStorage.removeItem("geniePosts");
+    localStorage.removeItem("avatar");
+    localStorage.removeItem("userPosts");
     Cookies.remove("IdToken");
-    deleteDb();
-  },
+    localStorage.removeItem("userPosts");
+    },
   setLoginStatus: (loginStatus) => {
     set((state) => ({
       ...state,
@@ -188,7 +188,7 @@ const useDataStore = createStore((set, get) => ({
       localStorage.setItem("authenticated", true);
       localStorage.setItem("token", data.token);
       localStorage.setItem("userType", data.user_role);
-      deleteDb();
+      localStorage.removeItem("userPosts");
       return { ...data, status: 200 };
     } catch (e) {
       console.error("error in handleLogin", e);
@@ -201,7 +201,7 @@ const useDataStore = createStore((set, get) => ({
         return currentPosts;
       }
 
-      const dbPosts = await getAllFromIndexedDB();
+      const dbPosts =  localStorage.getItem("userPosts");
       if (dbPosts?.length) {
         get().savePostsToState(dbPosts); // Save to state
         return dbPosts;
@@ -254,6 +254,31 @@ const useDataStore = createStore((set, get) => ({
       return { status: "error", info: err.message };
     }
   },
+  handleUserNewChats: async () => {
+    try{
+      const newPosts =  await fetchUserNewChats();
+      if (newPosts.length === 0) {
+        return { status: "no new chats" };
+      } else {
+        const curentost=localStorage.getItem("userPosts");
+        get().savePostsToState(newPosts);
+        //save genie posta s to localstorage
+        localStorage.setItem("geniePosts", JSON.stringify(newPosts));
+        // get().savePostsToIndexDb(data);
+
+        return newPosts;
+      }
+
+    }
+    //get new chts for user from server
+    //if res.length>0 then
+    //get user local storage posts
+    //remove from the list the rows with the id from server
+    //insert to list the new rows from server
+    //save to local storage
+    //save the new list to state
+
+  },
   refreshUserPosts: async () => {
     try {
       set((state) => ({
@@ -261,13 +286,13 @@ const useDataStore = createStore((set, get) => ({
         allPosts: [],
       }));
 
-      await deleteDb();
+      localStorage.removeItem("userPosts");
       const result = await fetchUserPosts();
       if (result.status !== 200) {
         throw new Error(`Failed to fetch posts: ${result.status}`);
       }
       const freshPosts = result?.data?.result;
-      saveToIndexedDB(freshPosts);
+      localStorage.setItem("userPosts", JSON.stringify(freshPosts));
 
       set((state) => ({
         ...state,

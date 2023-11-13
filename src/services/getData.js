@@ -65,6 +65,27 @@ export const fetchUserPosts = async () => {
     throw error;
   }
 };
+export const fetchUserNewChats = async () => {
+  const EndPoint = `${API_ENDPOINT}/usernewchats`;
+  // console.log("at fetchUserPosts :", EndPoint,configHeader());
+  let Header = configHeader();
+
+  if (!Header) {
+    return null;
+    //redirect to login
+  }
+  try {
+    const response = await axios.get(EndPoint, Header);
+    if (response.status === 200 && response.data?.result) {
+      return response.data.result;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error in fetchUserNewChats:", error);
+    throw error;
+  }
+};
 export const fetchGeniePosts = async () => {
   const EndPoint = `${API_ENDPOINT}/genieposts`;
   // console.log("at fetchGeniePosts :", EndPoint,configHeader());
@@ -86,7 +107,29 @@ export const fetchGeniePosts = async () => {
     throw error;
   }
 };
+export const fetchGenieNewChats = async () => {
+  const EndPoint = `${API_ENDPOINT}/genienewchats`;
+  // console.log("at fetchGeniePosts :", EndPoint,configHeader());
+  let Header = configHeader();
+
+  if (!Header) {
+    return null;
+    //redirect to login
+  }
+  try {
+    const response = await axios.get(EndPoint, Header);
+    if (response.status === 200 && response.data?.result) {
+      return response.data.result;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error in fetchGenieNewChats:", error);
+    throw error;
+  }
+};
 export const genieCoosePost = async (postId,avatar) => {
+  debugger
   const EndPoint = `${API_ENDPOINT}/geniechoosepost`;
   try {
     const response = await axios.post(

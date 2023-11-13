@@ -12,7 +12,7 @@ export const vectorAndHistoryCircleOptions = {
   zIndex: 1,
 };
 export const appInfo={
-	maxUserCharacterLimit:3000,
+	maxUserCharacterLimit:4000,
 }
 export const userLimits={
   user_limits_hours: 5,

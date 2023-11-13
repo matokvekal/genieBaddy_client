@@ -5,12 +5,13 @@ what to test❌
 user login local ✅
 
 genie login ok
-logout user X
+logout user ✅
 logout genie
 1.user can add new
 2.user add up to 3 new in 24 and it clean at next day
 3.genie can see up to 10 each day
 4.genie can se and answer
+genie message to long
 5.user can see and response to genie up to 3
 6.user can see history
 7/genie can see histopry
@@ -50,3 +51,15 @@ good to have
 3.add mongo db
 4.user can close/loack post
 5.geneei must answer in 3 days other, this post will move to store and genie will get bad point after 10 bad will get ban
+
+
+
+
+
+
+
+
+other way
+in ech chnges add sidn ar ne
+every minutes user check and get the new then update db
+evry time user get update all to 0

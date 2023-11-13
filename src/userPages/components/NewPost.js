@@ -47,8 +47,9 @@ const NewPost = ({ handleCloseNewPostModal }) => {
         await refreshUserPosts();
         handleCloseNewPostModal();
       } else {
-        if(res?.status === 400){
-          triggerToast(res.data.error);
+        if(res?.status === 400 || res?.status === 406){
+          debugger
+          triggerToast(res.data?.message);
         }else{
         console.log("error");
         triggerToast("Message didn't send. Please try again.");

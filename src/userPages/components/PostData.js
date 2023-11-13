@@ -17,7 +17,13 @@ const configHeader = () => {
   };
 };
 
-const PostData = async ({ sanitizedInput,avatar, postId, topic_id, header }) => {
+const PostData = async ({
+  sanitizedInput,
+  avatar,
+  postId,
+  topic_id,
+  header,
+}) => {
   const endPoint = `${API_ENDPOINT}/userpost`;
   const payload = {
     message: sanitizedInput,

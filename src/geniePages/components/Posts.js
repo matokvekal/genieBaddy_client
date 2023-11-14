@@ -87,9 +87,10 @@ function Posts({ convFilter }) {
         return null;
     }
   }, [convFilter, posts]);
+  debugger
   return (
     <div className="posts" ref={scrollContainerRef} onScroll={handleScroll}>
-      {filteredPost &&
+      {filteredPost &&filteredPost.length>0 &&
         filteredPost.map((post) =>
           post && post.id ? (
             <Post key={post.id} post={post} handleSelecPost={handleSelecPost} />

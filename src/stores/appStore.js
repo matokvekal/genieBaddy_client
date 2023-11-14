@@ -9,7 +9,7 @@ import {
   getUserLimitsFromServer,
   getTopics,
   fetchUserNewChats,
-  fetchGenieNewChats
+  fetchGenieNewChats,
 } from "services/getData";
 export const initialState = {
   userId: "",
@@ -33,8 +33,8 @@ export const initialState = {
     USER_POSTS_LEFT: null,
   },
   showToast: false,
-  toastMessage: '',
-  newChatsCounter:0
+  toastMessage: "",
+  newChatsCounter: 0,
 };
 
 //store
@@ -70,7 +70,7 @@ const useDataStore = createStore((set, get) => ({
       newChatsCounter: counter,
     }));
   },
-  savePostsToIndexDb: (posts) => {
+  savePostsToIndexLS: (posts) => {
     try {
       localStorage.setItem("userPosts", JSON.stringify(posts));
     } catch (error) {
@@ -132,12 +132,13 @@ const useDataStore = createStore((set, get) => ({
     }));
   },
 
-  triggerToast: (message,type = 'error') => set(state => ({
-    showToast: true,
-    toastMessage: message,
-    toastType: type
-  })),
-  resetToast: () => set({ showToast: false, toastMessage: '' }),
+  triggerToast: (message, type = "error") =>
+    set((state) => ({
+      showToast: true,
+      toastMessage: message,
+      toastType: type,
+    })),
+  resetToast: () => set({ showToast: false, toastMessage: "" }),
   logOut: () => {
     set((state) => ({
       ...state,
@@ -162,7 +163,7 @@ const useDataStore = createStore((set, get) => ({
     localStorage.removeItem("userPosts");
     Cookies.remove("IdToken");
     localStorage.removeItem("userPosts");
-    },
+  },
   setLoginStatus: (loginStatus) => {
     set((state) => ({
       ...state,
@@ -213,19 +214,20 @@ const useDataStore = createStore((set, get) => ({
         return currentPosts;
       }
 
-      const dbPosts =  localStorage.getItem("userPosts");
-      if (dbPosts?.length) {
+      const dbPosts = localStorage.getItem("userPosts");
+      if (dbPosts) {
         get().savePostsToState(JSON.parse(dbPosts));
         return dbPosts;
       }
 
       // Fetch from server
-      const data = await fetchUserPosts();
+      const res = await fetchUserPosts();
+      const data=res?.data?.result;
       if (data.length === 0) {
         return { status: "no data" };
       } else {
         get().savePostsToState(data);
-        get().savePostsToIndexDb(data);
+        get().savePostsToIndexLS(data);
 
         return data;
       }
@@ -261,61 +263,61 @@ const useDataStore = createStore((set, get) => ({
     }
   },
   handleUserNewChats: async () => {
-    try{
-      const newPosts =  await fetchUserNewChats();
+    try {
+      const newPosts = await fetchUserNewChats();
       if (newPosts.length === 0) {
         return { status: "no new chats" };
       } else {
-        const curentPosts=localStorage.getItem("userPosts");
+        const curentPosts = JSON.parse(localStorage.getItem("userPosts"));
 
         //replace at curentPosts the posts with the same id from newPosts
-        curentPosts.forEach((post)=>{
-          const newPost=newPosts.find((newPost)=>newPost.id===post.id);
-          if(newPost){
-            post=newPost;
-            get().updateNewChatsCounter(get().newChatsCounter+1);
+        curentPosts.forEach((post) => {
+          const newPost = newPosts.find((newPost) => newPost.id === post.id);
+          if (newPost) {
+            post = newPost;
+            get().updateNewChatsCounter(get().newChatsCounter + 1);
           }
         });
         get().savePostsToState(curentPosts);
         localStorage.setItem("userPosts", JSON.stringify(curentPosts));
         return true;
       }
-      }catch(err){
-        console.log("error in handleUserNewChats", err);
-        return false;
-      }
+    } catch (err) {
+      console.log("error in handleUserNewChats", err);
+      return false;
+    }
   },
   handleGenieNewChats: async () => {
-    try{
-      let newPosts =  await fetchGenieNewChats();
+    try {
+      let newPosts = await fetchGenieNewChats();
       if (newPosts.data.result.length === 0) {
         return { status: "no new chats" };
       } else {
-        debugger
-        newPosts=newPosts.data.result;
-        const curentPosts=localStorage.getItem("geniePosts");
-        const posts=JSON.parse(curentPosts);
+        debugger;
+        newPosts = newPosts.data.result;
+        const curentPosts = localStorage.getItem("geniePosts");
+        const posts = JSON.parse(curentPosts);
         //replace at curentPosts the posts with the same id from newPosts
-        posts.forEach((post)=>{
-          const newPost=newPosts.find((newPost)=>newPost.id===post.id);
-          if(newPost){
-            post=newPost;
-            get().updateNewChatsCounter(get().newChatsCounter+1);
+        posts.forEach((post) => {
+          const newPost = newPosts.find((newPost) => newPost.id === post.id);
+          if (newPost) {
+            post = newPost;
+            get().updateNewChatsCounter(get().newChatsCounter + 1);
           }
         });
         get().savePostsToState(curentPosts);
         localStorage.setItem("geniePosts", JSON.stringify(curentPosts));
         return true;
       }
-      }catch(err){
-        console.log("error in handleGenieNewChats", err);
-        return false;
-      }
+    } catch (err) {
+      console.log("error in handleGenieNewChats", err);
+      return false;
+    }
   },
   refreshUserPosts: async () => {
     try {
       const result = await fetchUserPosts();
-      
+
       if (result.status !== 200) {
         throw new Error(`Failed to fetch posts: ${result.status}`);
       }
@@ -326,7 +328,7 @@ const useDataStore = createStore((set, get) => ({
       }));
 
       localStorage.removeItem("userPosts");
-   
+
       localStorage.setItem("userPosts", JSON.stringify(freshPosts));
 
       set((state) => ({
@@ -342,7 +344,7 @@ const useDataStore = createStore((set, get) => ({
   },
   refreshGeniePosts: async () => {
     const result = await fetchGeniePosts();
-      
+
     if (result.status !== 200) {
       throw new Error(`Failed to fetch  GeniePosts: ${result.status}`);
     }
@@ -368,7 +370,7 @@ const useDataStore = createStore((set, get) => ({
   updateUserLimits: async (limits) => {
     try {
       const response = await getUserLimitsFromServer();
-debugger
+      debugger;
       const userData = response.data.result;
 
       if (userData && Object.keys(userData).length > 0) {

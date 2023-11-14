@@ -12,14 +12,14 @@ function HeadButtons({ convFilter, setConvFilter }) {
       getUserPosts();
     }
   }, [getUserPosts, allPosts.length]);
-
+debugger
   const postCounts = useMemo(() => {
     let open = 0,
       closed = 0,
       stars = 0,
       all = allPosts.length;
-    allPosts &&
-      allPosts?.forEach((post) => {
+    allPosts &&allPosts.length>0&&
+      allPosts.forEach((post) => {
         if (post.post_status === POST_STATUS.CLOSED) {
           closed++;
           if (post.rating > 0) stars++;

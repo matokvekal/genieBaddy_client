@@ -16,7 +16,7 @@ function HeadButtons({ convFilter, setConvFilter,newPostCounter }) {
   const postCounts = useMemo(() => {
     let open = 0;
     let closed = 0;
-
+debugger
     allPosts?.forEach((post) => {
       if (post.post_status === POST_STATUS.CLOSED) {
         closed++;

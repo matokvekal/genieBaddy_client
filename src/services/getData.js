@@ -152,6 +152,7 @@ export const getUserLimitsFromServer = async () => {
   }
 };
 export const genieGetNewPosts = async () => {
+  debugger
   const EndPoint = `${API_ENDPOINT}/genienewposts`;
   // console.log("at fetchGeniePosts :", EndPoint,configHeader());
   let Header = configHeader();

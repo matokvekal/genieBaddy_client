@@ -2,9 +2,13 @@ import React from "react";
 import { POST_STATUS } from "constants/jeneral";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+
 const HeadButton = ({ active, name, postsCount, setConvFilter }) => {
+  const { toggleSideBar } = useStore(useDataStore);
   const { genieNewPostsCounter } =  useStore(useDataStore);
-  const handelClick = () => {
+  const handelClick = (e) => {
+    e.stopPropagation();
+    toggleSideBar(false);
     setConvFilter(name);
   };
   return (

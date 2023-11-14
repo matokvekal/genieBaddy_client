@@ -49,11 +49,11 @@ const GenieNewPost = ({ setConvFilter }) => {
       try {
         debugger
         const data = await genieGetNewPosts();
-        if (data && data.result?.length > 0) {
-          setPosts(data.result);
-          updateGenieNewPostCounter(data.result.length);
+        if (data && data.data.result?.length > 0) {
+          setPosts(data.data.result);
+          updateGenieNewPostCounter(data.data.result.length);
           // setCurrentPost(data[0]);
-          setTotalMessage(data.result.length);
+          setTotalMessage(data.data.result.length);
         } else {
           updateGenieNewPostCounter(0);
           triggerToast(data.error);

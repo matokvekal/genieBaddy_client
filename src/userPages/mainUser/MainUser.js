@@ -17,6 +17,7 @@ const MainUser = () => {
   const [userNewPost, setUserNewPost] = useState(false);
   const [convFilter, setConvFilter] = useState(POST_STATUS.DEFAULT);
   const handleCloseNewPostModal = () => {
+    debugger
     setUserNewPost(!userNewPost);
   };
   return (

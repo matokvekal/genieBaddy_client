@@ -34,6 +34,7 @@ export const initialState = {
   },
   showToast: false,
   toastMessage: '',
+  newChatsCounter:0
 };
 
 //store
@@ -61,6 +62,12 @@ const useDataStore = createStore((set, get) => ({
     set((state) => ({
       ...state,
       genieNewPostsCounter: counter,
+    }));
+  },
+  updateNewChatsCounter: (counter) => {
+    set((state) => ({
+      ...state,
+      newChatsCounter: counter,
     }));
   },
   savePostsToIndexDb: (posts) => {
@@ -125,9 +132,10 @@ const useDataStore = createStore((set, get) => ({
     }));
   },
 
-  triggerToast: (message) => set(state => ({
+  triggerToast: (message,type = 'error') => set(state => ({
     showToast: true,
-    toastMessage: message
+    toastMessage: message,
+    toastType: type
   })),
   resetToast: () => set({ showToast: false, toastMessage: '' }),
   logOut: () => {
@@ -136,6 +144,10 @@ const useDataStore = createStore((set, get) => ({
       userName: "",
       userType: "",
       loginStatus: false,
+      allPosts: [],
+      geniePosts: [],
+      genieNewPostsCounter: 0,
+      topics: [],
     }));
     localStorage.removeItem("authenticated");
     localStorage.removeItem("token");
@@ -203,7 +215,7 @@ const useDataStore = createStore((set, get) => ({
 
       const dbPosts =  localStorage.getItem("userPosts");
       if (dbPosts?.length) {
-        get().savePostsToState(dbPosts); // Save to state
+        get().savePostsToState(JSON.parse(dbPosts));
         return dbPosts;
       }
 
@@ -229,7 +241,6 @@ const useDataStore = createStore((set, get) => ({
       if (currentPosts?.length) {
         return currentPosts;
       }
-      //get the genie posts from localstorage
       const posts = localStorage.getItem("geniePosts");
       if (posts) {
         const geniePosts = JSON.parse(posts);
@@ -237,20 +248,15 @@ const useDataStore = createStore((set, get) => ({
         return geniePosts;
       }
 
-      // Fetch from server
       const data = await fetchGeniePosts();
       if (data.length === 0) {
         return { status: "no data" };
       } else {
         get().savePostsToState(data);
-        //save genie posta s to localstorage
         localStorage.setItem("geniePosts", JSON.stringify(data));
-        // get().savePostsToIndexDb(data);
-
         return data;
       }
     } catch (err) {
-      // console.log("error in getGeniePosts", err);
       return { status: "error", info: err.message };
     }
   },
@@ -260,38 +266,67 @@ const useDataStore = createStore((set, get) => ({
       if (newPosts.length === 0) {
         return { status: "no new chats" };
       } else {
-        const curentost=localStorage.getItem("userPosts");
-        get().savePostsToState(newPosts);
-        //save genie posta s to localstorage
-        localStorage.setItem("geniePosts", JSON.stringify(newPosts));
-        // get().savePostsToIndexDb(data);
+        const curentPosts=localStorage.getItem("userPosts");
 
-        return newPosts;
+        //replace at curentPosts the posts with the same id from newPosts
+        curentPosts.forEach((post)=>{
+          const newPost=newPosts.find((newPost)=>newPost.id===post.id);
+          if(newPost){
+            post=newPost;
+            get().updateNewChatsCounter(get().newChatsCounter+1);
+          }
+        });
+        get().savePostsToState(curentPosts);
+        localStorage.setItem("userPosts", JSON.stringify(curentPosts));
+        return true;
       }
-
-    }
-    //get new chts for user from server
-    //if res.length>0 then
-    //get user local storage posts
-    //remove from the list the rows with the id from server
-    //insert to list the new rows from server
-    //save to local storage
-    //save the new list to state
-
+      }catch(err){
+        console.log("error in handleUserNewChats", err);
+        return false;
+      }
+  },
+  handleGenieNewChats: async () => {
+    try{
+      let newPosts =  await fetchGenieNewChats();
+      if (newPosts.data.result.length === 0) {
+        return { status: "no new chats" };
+      } else {
+        debugger
+        newPosts=newPosts.data.result;
+        const curentPosts=localStorage.getItem("geniePosts");
+        const posts=JSON.parse(curentPosts);
+        //replace at curentPosts the posts with the same id from newPosts
+        posts.forEach((post)=>{
+          const newPost=newPosts.find((newPost)=>newPost.id===post.id);
+          if(newPost){
+            post=newPost;
+            get().updateNewChatsCounter(get().newChatsCounter+1);
+          }
+        });
+        get().savePostsToState(curentPosts);
+        localStorage.setItem("geniePosts", JSON.stringify(curentPosts));
+        return true;
+      }
+      }catch(err){
+        console.log("error in handleGenieNewChats", err);
+        return false;
+      }
   },
   refreshUserPosts: async () => {
     try {
+      const result = await fetchUserPosts();
+      
+      if (result.status !== 200) {
+        throw new Error(`Failed to fetch posts: ${result.status}`);
+      }
+      const freshPosts = result?.data?.result;
       set((state) => ({
         ...state,
         allPosts: [],
       }));
 
       localStorage.removeItem("userPosts");
-      const result = await fetchUserPosts();
-      if (result.status !== 200) {
-        throw new Error(`Failed to fetch posts: ${result.status}`);
-      }
-      const freshPosts = result?.data?.result;
+   
       localStorage.setItem("userPosts", JSON.stringify(freshPosts));
 
       set((state) => ({
@@ -301,15 +336,40 @@ const useDataStore = createStore((set, get) => ({
 
       return true;
     } catch (error) {
-      console.error("Error during post refresh:", error);
+      console.error("Error during post refreshUserPosts:", error);
+      return false;
+    }
+  },
+  refreshGeniePosts: async () => {
+    const result = await fetchGeniePosts();
+      
+    if (result.status !== 200) {
+      throw new Error(`Failed to fetch  GeniePosts: ${result.status}`);
+    }
+    const freshPosts = result?.data?.result;
+    try {
+      set((state) => ({
+        ...state,
+        allPosts: [],
+      }));
+      localStorage.removeItem("geniePosts");
+      localStorage.setItem("geniePosts", JSON.stringify(freshPosts));
+
+      set((state) => ({
+        ...state,
+        allPosts: freshPosts,
+      }));
+      return true;
+    } catch (error) {
+      console.error("Error during post refreshGeniePosts:", error);
       return false;
     }
   },
   updateUserLimits: async (limits) => {
     try {
       const response = await getUserLimitsFromServer();
-
-      const userData = response;
+debugger
+      const userData = response.data.result;
 
       if (userData && Object.keys(userData).length > 0) {
         get().saveUserLimitsToState(userData);

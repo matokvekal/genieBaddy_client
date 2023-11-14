@@ -18,6 +18,7 @@ import { clearText } from "utils/clearText";
 import UserTopics from "./Topics";
 
 
+
 const NewPost = ({ handleCloseNewPostModal }) => {
   const [postText, setPostText] = useState("");
   const { refreshUserPosts, updateUserLimits ,triggerToast} = useStore(useDataStore);
@@ -25,11 +26,13 @@ const NewPost = ({ handleCloseNewPostModal }) => {
   const [showTopics, setShowTopics] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [disabledSend, setDisabledSend] = useState(false);
+
   const handleTopic = () => {
     setShowTopics(true);
   };
 
   const sendChat = async () => {
+    debugger
     setDisabledSend(true);
     if (postText.trim() !== "") {
       const sanitizedInput = clearText(postText.trim());
@@ -43,13 +46,15 @@ const NewPost = ({ handleCloseNewPostModal }) => {
         header: null,
       });
       if (res?.status === 200) {
+        triggerToast("Message sent successfully. It may take a few minutes to process.",'success');
         await updateUserLimits();
         await refreshUserPosts();
         handleCloseNewPostModal();
+
+        
       } else {
         if(res?.status === 400 || res?.status === 406){
-          debugger
-          triggerToast(res.data?.message);
+          triggerToast(res.data?.error);
         }else{
         console.log("error");
         triggerToast("Message didn't send. Please try again.");

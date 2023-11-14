@@ -12,7 +12,7 @@ import GeniePostData from "geniePages/components/GeniePostData";
 import MainGenie from "geniePages/mainGenie/MainGenie";
 import "react-toastify/dist/ReactToastify.css";
 import MainUser from "userPages/mainUser/MainUser";
-
+import {appInfo} from "config/config";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
@@ -24,6 +24,8 @@ function App() {
     showToast,
     toastMessage,
     resetToast,
+    handleUserNewChats,
+    handleGenieNewChats,
   } = useStore(useDataStore);
 
   const navigate = useNavigate();
@@ -31,14 +33,23 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
+    let chatCheckInterval;
+    if (loginStatus) {
+      const intervalFunction = userType === USERS_ROLES.GENIE ? handleGenieNewChats : handleUserNewChats;
+      chatCheckInterval = setInterval(intervalFunction, 1000 * 60 * appInfo.checkForNewPostsMinutes); // X is your chosen interval in minutes
+    }
+    return () => {
+      if (chatCheckInterval) {
+        clearInterval(chatCheckInterval);
+      }
+    };
+  }, [loginStatus, userType, handleUserNewChats, handleGenieNewChats]);
+  
+  useEffect(() => {
     const localStorageLoginStatus = localStorage.getItem("authenticated");
     const isAuth = localStorageLoginStatus === "true";
-
     if (!userType) {
-      userType = localStorage.getItem("userType");
-    }
-    // console.log(PATHS_NAMES, pathname);
-
+      userType = localStorage.getItem("userType");}
     if (!userType) {
       if (pathname.startsWith(PATHS_NAMES.LOGINUSER)) {
         userType = USERS_ROLES.USER;
@@ -55,9 +66,7 @@ function App() {
       const pathsForRole = rolesPaths[role]; // Get the allowed paths for the user's role
       const isAllowedPath =
         pathsForRole && pathsForRole.includes(location.pathname);
-
       if (!isAllowedPath) {
-        // console.log("no Allowed Path", isAllowedPath);
         // If the current path is not allowed for the user role, redirect them to the default path for their role
         const defaultPath = pathsForRole ? pathsForRole[0] : "/";
         navigate(defaultPath, { replace: true });

@@ -69,7 +69,9 @@ function Post({ handleSelecPost, post }) {
           <span className="post-data left upper">
             {post.user_header ? post.user_header : post.user_1}
           </span>
-          <span className="post-data left bottom">{post.user_1}</span>
+          <span className="post-data left bottom">{post.user_1.length > 30
+              ? `${post.user_1.slice(0, 30)}...`
+              : post.user_1}</span>
         </div>
         <div className="post-data right">
           <div className="post-right rate">{renderRatingIcons()}</div>
@@ -86,3 +88,4 @@ function Post({ handleSelecPost, post }) {
 }
 
 export default Post;
+

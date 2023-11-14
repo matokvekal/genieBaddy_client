@@ -1,8 +1,8 @@
-import  { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import HeadButton from "./HeadButton";
 import { useStore } from "zustand";
 import { POST_STATUS } from "constants/jeneral";
-import useDataStore from "../../stores/appStore"; 
+import useDataStore from "../../stores/appStore";
 
 function HeadButtons({ convFilter, setConvFilter }) {
   const { allPosts, getUserPosts } = useStore(useDataStore);
@@ -18,15 +18,15 @@ function HeadButtons({ convFilter, setConvFilter }) {
       closed = 0,
       stars = 0,
       all = allPosts.length;
-
-    allPosts.forEach((post) => {
-      if (post.post_status === POST_STATUS.CLOSED) {
-        closed++;
-        if (post.rating > 0) stars++;
-      } else {
-        open++;
-      }
-    });
+    allPosts &&
+      allPosts?.forEach((post) => {
+        if (post.post_status === POST_STATUS.CLOSED) {
+          closed++;
+          if (post.rating > 0) stars++;
+        } else {
+          open++;
+        }
+      });
 
     return { open, closed, stars, all };
   }, [allPosts]);

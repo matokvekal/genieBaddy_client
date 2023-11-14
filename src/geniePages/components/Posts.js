@@ -87,7 +87,6 @@ function Posts({ convFilter }) {
         return null;
     }
   }, [convFilter, posts]);
-
   return (
     <div className="posts" ref={scrollContainerRef} onScroll={handleScroll}>
       {filteredPost &&

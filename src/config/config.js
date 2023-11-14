@@ -13,7 +13,9 @@ export const vectorAndHistoryCircleOptions = {
 };
 export const appInfo={
 	maxUserCharacterLimit:4000,
+  checkForNewPostsMinutes: 10,
 }
 export const userLimits={
   user_limits_hours: 5,
+  maxMessages: 3,
 }

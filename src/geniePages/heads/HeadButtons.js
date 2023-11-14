@@ -17,7 +17,7 @@ function HeadButtons({ convFilter, setConvFilter,newPostCounter }) {
     let open = 0;
     let closed = 0;
 
-    allPosts.forEach((post) => {
+    allPosts?.forEach((post) => {
       if (post.post_status === POST_STATUS.CLOSED) {
         closed++;
       } else {

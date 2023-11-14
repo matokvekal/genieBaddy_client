@@ -1,18 +1,16 @@
 import React, { useRef, useEffect } from "react";
 import "./ChatInput.css";
 import send from "assets/send.svg";
-import {
-  FaTimes,
-} from "react-icons/fa";
-import {appInfo} from "../../config/config"
+import { FaTimes } from "react-icons/fa";
+import { appInfo } from "../../config/config";
 
 const BackIcon = () => <span>{"<"}</span>;
 
-const ChatInput = ({ setChatInput, chatInput, sendChat }) => {
-  const maxCharacterLimit = appInfo.maxUserCharacterLimit;//////////////////////fix
+const ChatInput = ({ setChatInput, chatInput, sendChat, disabled }) => {
+  const maxCharacterLimit = appInfo.maxUserCharacterLimit; //////////////////////fix
   const textAreaRef = useRef(null);
   const clearText = () => {
-    setChatInput(""); 
+    setChatInput("");
   };
   useEffect(() => {
     if (textAreaRef.current) {
@@ -47,6 +45,7 @@ const ChatInput = ({ setChatInput, chatInput, sendChat }) => {
 
       <div className="input-wrapper">
         <textarea
+          disabled={disabled}
           ref={textAreaRef}
           className="chat-textarea"
           rows={chatInput ? Math.min(chatInput.split("\n").length, 7) : 0}
@@ -55,7 +54,11 @@ const ChatInput = ({ setChatInput, chatInput, sendChat }) => {
           onChange={handleInputChange}
         />
         {chatInput && (
-          <button onClick={clearText} className="clear-text-button">
+          <button
+            onClick={clearText}
+            className="clear-text-button"
+            disabled={disabled}
+          >
             <FaTimes />
           </button>
         )}

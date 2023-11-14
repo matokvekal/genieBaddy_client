@@ -10,7 +10,7 @@ function LoginGenie() {
   const navigate = useNavigate();
   const { handleLogin, mode, loginStatus } = useStore(useDataStore);
   if (loginStatus === true || localStorage.getItem("authenticated") === true) {
-    navigate(PATHS_NAMES.MAIN);
+    navigate(PATHS_NAMES.GENIE);
   }
 
   const formik = useFormik({

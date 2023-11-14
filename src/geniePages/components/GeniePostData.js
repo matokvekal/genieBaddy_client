@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import "./GeniePostData.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
@@ -10,32 +10,40 @@ import { clearText } from "utils/clearText";
 import { POST_STATUS } from "constants";
 import PostData from "./PostData";
 import { hasValue } from "../../utils/hasValue";
+import {userLimits} from "config/config.js";
 
 const GeniePostData = () => {
   const [chatInput, setChatInput] = useState("");
-  const { postId, allPosts, refreshUserPosts } = useStore(useDataStore);
+  const { postId, allPosts,refreshGeniePosts } = useStore(useDataStore);
+  const[disabled,setDisabled]=useState(false)
 
   const sendChat = async () => {
     if (chatInput.trim() !== "") {
       const sanitizedInput = clearText(chatInput.trim());
-      // console.log(sanitizedInput);
       const res = await PostData({
         sanitizedInput,
         postId: postId,
         topic_id: null,
         header: null,
       });
-      // if (res.status === 200) {
-      //   const result = await refreshUserPosts();
-      //   console.log(result);
-      // }
+      if (res.status === 200) {
+        const result = await refreshGeniePosts();
+        console.log(result);
+        window.history.back();
+      }
     }
   };
 
   const post =
     allPosts && allPosts[0] ? allPosts.find((x) => x.id === postId) : null;
-  const maxMessages = 3;
-
+  const maxMessages =userLimits.maxMessages;
+  useEffect(() => {
+    if (post && post.last_writen_by && post.last_writen_by.includes("genie")) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [post]);
   const processTalkData = (post) => {
     
     const result = [];
@@ -108,6 +116,7 @@ const GeniePostData = () => {
                     setChatInput={setChatInput}
                     chatInput={chatInput}
                     sendChat={sendChat}
+                    disabled={disabled}
                   />
                 )}
                 <div className="chat-input-container"></div>

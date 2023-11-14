@@ -6,7 +6,7 @@ user login local ✅
 
 genie login ok
 logout user ✅
-logout genie
+logout genie✅
 1.user can add new
 2.user add up to 3 new in 24 and it clean at next day
 3.genie can see up to 10 each day
@@ -55,11 +55,11 @@ good to have
 
 
 
-
-
-
-
-other way
-in ech chnges add sidn ar ne
-every minutes user check and get the new then update db
-evry time user get update all to 0
+BAGS
+1.if not the user turn do not show green light
+2.after 24 hores, user steel see  only 1 chat left
+3after user send message we must have loader
+4.all topics must came from local storage
+5)important -user see his post  we must block the fotter  so he cant answer/same for genie 
+6)when genie answer  page shuld return to main then back he can see the page/or stay in page but download the his answer
+color at genie of conversation shuld be opocite

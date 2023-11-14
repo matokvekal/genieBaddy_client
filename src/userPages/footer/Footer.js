@@ -6,10 +6,12 @@ import moment from 'moment';
 import {userLimits} from "config/config.js";
 
 function Footer({ handleCloseNewPostModal }) {
-  const {  updateUserLimits } = useStore(useDataStore);
+  const {  updateUserLimits ,toggleSideBar} = useStore(useDataStore);
   const [totalPosts, setTotalPosts] = useState(3);
   const [leftPosts, setLeftPosts] = useState(0);
   const handleNewPost = () => {
+
+    toggleSideBar(false)
     handleCloseNewPostModal();
     // console.log("new post");
   };

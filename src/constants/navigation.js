@@ -6,7 +6,7 @@ export const PATHS_NAMES = {
   LOGINGENIE: "/logingenie",
   REGISTER: "/register",
   USERCHAT: "/userchat",
-  MAIN: "/user",
+  // MAIN: "/user",
   USER: "/user",
   GENIE: "/genie",
   // GENIECHAT: "/geniechat",

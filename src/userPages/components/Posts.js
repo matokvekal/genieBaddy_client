@@ -80,7 +80,7 @@ function Posts({ convFilter }) {
         return posts;
     }
   }, [convFilter, posts]);
-
+  debugger
   return (
     <div className="posts" ref={scrollContainerRef} onScroll={handleScroll}>
       {filteredPost &&

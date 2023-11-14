@@ -12,6 +12,7 @@ function UserTopics({ showTopics, setShowTopics ,setSelectedTopic}) {
         setTopics(JSON.parse(localData));
       } else {
         const data = await getTopics();
+        debugger
         if (data && data.length > 0) { 
           localStorage.setItem("topics", JSON.stringify(data));
           setTopics(data);

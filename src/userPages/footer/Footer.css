@@ -1,43 +1,36 @@
-.footer-area {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+.footer-area{
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   margin: 0 1rem;
+   color:var(--gb-primary-black);
+   background: var(--gb-white);
+   align-items: center;
+   /* margin-top: 1rem; */
+   
 }
 
-.footer-left, .footer-right {
-  width: 25%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.button-footer-newchat{
+   border: 1px solid var(--gb-primary-black);
+   width: 6.8rem;
+   height: 2rem;
+   border-radius: 6.25rem;
+   font-size: 0.9rem;
+   font-weight: 600;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   background: var(--gb-white);
+
+   
+
+}
+.button-footer-text{
+
+}
+.button-footer-plus{
+font-size: 1.5rem;
+font-weight: 300;
 }
 
-.icon {
-  width: 30px;
-  height: auto;
-}
-
-.footer-main {
-  width: 10%;
-  height: 2rem;
-  border-radius: 10px;
-  background: rgb(242, 44, 242);
-}
-
-.footer-icon {
-  width: 18px;
-  border-radius: 50%;
-  margin-left: 3px;
-}
-
-.footer-left {
-  display: flex;
-  justify-content: left;
-}
-
-.footer-left .used {
-  opacity: 0.4;
-}
-.no-post{
-  color:var(--white);
-}

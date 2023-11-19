@@ -2,7 +2,7 @@ import React from "react";
 
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
-import "./Head.css";
+// import "./Head.css";
 import {
   faAdjust,
   faCircleNotch,

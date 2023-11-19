@@ -32,10 +32,9 @@ export const getTopics = async (data) => {
   }
 };
 
-
 export const fetchUserPosts = async () => {
   const EndPoint = `${API_ENDPOINT}/userposts`;
-  
+
   let Header = configHeader();
   if (!Header) {
     return null;
@@ -54,15 +53,15 @@ export const fetchUserPosts = async () => {
 };
 export const fetchUserNewChats = async () => {
   try {
-  const EndPoint = `${API_ENDPOINT}/usernewchats`;
-  // console.log("at fetchUserPosts :", EndPoint,configHeader());
-  let Header = configHeader();
+    const EndPoint = `${API_ENDPOINT}/usernewchats`;
+    // console.log("at fetchUserPosts :", EndPoint,configHeader());
+    let Header = configHeader();
 
-  if (!Header) {
-    return null;
-    //redirect to login
-  }
- 
+    if (!Header) {
+      return null;
+      //redirect to login
+    }
+
     const response = await axios.get(EndPoint, Header);
     if (response.status === 200 && response.data?.result) {
       return response.data.result;
@@ -76,14 +75,14 @@ export const fetchUserNewChats = async () => {
 };
 export const fetchGeniePosts = async () => {
   try {
-  const EndPoint = `${API_ENDPOINT}/genieposts`;
-  // console.log("at fetchGeniePosts :", EndPoint,configHeader());
-  let Header = configHeader();
+    const EndPoint = `${API_ENDPOINT}/genieposts`;
+    // console.log("at fetchGeniePosts :", EndPoint,configHeader());
+    let Header = configHeader();
 
-  if (!Header) {
-    return null;
-    //redirect to login
-  }
+    if (!Header) {
+      return null;
+      //redirect to login
+    }
     const response = await axios.get(EndPoint, Header);
     if (response.status === 200 && response.data?.result) {
       return response.data.result;
@@ -117,12 +116,12 @@ export const fetchGenieNewChats = async () => {
     throw error;
   }
 };
-export const genieCoosePost = async (postId,avatar) => {
+export const genieCoosePost = async (postId, avatar) => {
   const EndPoint = `${API_ENDPOINT}/geniechoosepost`;
   try {
     const response = await axios.post(
       EndPoint,
-      JSON.stringify({ postId: postId ,avatar:avatar}),
+      JSON.stringify({ postId: postId, avatar: avatar }),
       configHeader()
     );
     return response;
@@ -152,7 +151,7 @@ export const getUserLimitsFromServer = async () => {
   }
 };
 export const genieGetNewPosts = async () => {
-  debugger
+  //debugger
   const EndPoint = `${API_ENDPOINT}/genienewposts`;
   // console.log("at fetchGeniePosts :", EndPoint,configHeader());
   let Header = configHeader();

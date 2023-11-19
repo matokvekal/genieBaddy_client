@@ -1,6 +1,4 @@
 import {useState } from "react";
-import "./MainGenie.css";
-import "../heads/Head.css";
 import HeadMenu from "../heads/HeadMenu";
 import HeadButtons from "../heads/HeadButtons";
 import GenieNewPost from "../components/GenieNewPost";

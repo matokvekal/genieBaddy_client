@@ -1,40 +1,59 @@
+.container-user {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+}
 
-.container {
+.header-user {
+  position: sticky;
+  top: 0;
+  z-index: 100; 
+
+}
+
+.main-user {
+  flex-grow: 1; 
+  overflow-y: auto; 
+  /* padding: 1rem;  */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+
+.footer-user {
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  height: 80px;
+  border:solid 1px red;
+  display: flex;
+
+}
+.main-user-posts{
    display: flex;
    flex-direction: column;
-   height: 100vh; 
-   width: 100%; 
- }
- 
- .header {
-   flex-shrink: 0; 
-
- }
- 
- .footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-   flex-shrink: 0; 
-   min-height: 4rem; 
-   background-color: var(--main-blue)
- }
- 
- .main {
+   width: 100%;
    height: 100%;
-   display: flex;
-   overflow: hidden; 
- }
- 
- .section {
-   flex-grow: 1; 
    overflow-y: auto;
-
- }
- 
-
- .sidebar {
-   width: 200px; 
- }
- 
+   /* padding: 1rem; */
+   border: 1px solid green;
+}
+.main-user-upper{
+   border: 1px solid red;
+   height: 4.3rem;
+   width: 100%;
+   padding: 0.5rem;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   }
+   .main-user-upper div{
+font-size: 1.3rem;
+font-weight: 650;
+   }
+   .main-user-upper img{
+      height: 1.5rem;
+      width: 1.5rem;
+      line-height: 100%;
+   }

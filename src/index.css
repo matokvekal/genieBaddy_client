@@ -5,6 +5,7 @@ body,
 	margin: 0;
 	/* direction: rtl; */
 	width: 100%;
+   max-width: 400px;
    height: 100%;
 }
 body {
@@ -12,35 +13,26 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, 'Rubik', 'Segoe UI',
 		'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
 		'Helvetica Neue', sans-serif;
-      /* height: 100%; */
 }
 * {
 	box-sizing: border-box;
 }
 
 :root {
-   /* --bg-main: #dadbd3;
-   --dark-green: #009688;
 
-   --chat-bg: #e5ddd5;
-   --scroll-thumb: rgba(0, 0, 0, 0.2);
-   --scroll-track: rgba(255, 255, 255, 0.08);
- 
-   --black: #000;
-   --side-panel: var(--white);
+   --gb-white: #fff;
+   --gb-primary-black: black;
+   --gb-dark-gray: darkGray;
+   --gb-dark-blue: #0277BD;
+   --gb-light-gray: #F3F3F3;
 
-   --secondary-text-color: #00000070;
-   --secondary-panel: #ededed;
+   --gb-purple: #8297ffbe;
+   --gb-dark-green: #00AB94;
+   --gb-light-green75: #00ab94c7;
+   --gb-danger:red;
 
-   --green: #04d755;
-   --light-green: #dbf8c6;
-   --blue: #85cff2;
-   --icon: #919191;
-  
-   --border: #00000014;
-   --border-lighter: #00000009; */
 
-   /* genie-pallets */
+
    --white: #fff;
    /* var(--white); */
    --text-color: #000;

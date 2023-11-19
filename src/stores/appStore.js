@@ -222,7 +222,7 @@ const useDataStore = createStore((set, get) => ({
 
       // Fetch from server
       const res = await fetchUserPosts();
-      const data=res?.data?.result;
+      const data = res?.data?.result;
       if (data.length === 0) {
         return { status: "no data" };
       } else {
@@ -293,7 +293,7 @@ const useDataStore = createStore((set, get) => ({
       if (newPosts.data.result.length === 0) {
         return { status: "no new chats" };
       } else {
-        debugger;
+        //debugger;
         newPosts = newPosts.data.result;
         const curentPosts = localStorage.getItem("geniePosts");
         const posts = JSON.parse(curentPosts);
@@ -370,7 +370,7 @@ const useDataStore = createStore((set, get) => ({
   updateUserLimits: async (limits) => {
     try {
       const response = await getUserLimitsFromServer();
-      debugger;
+      //debugger;
       const userData = response.data.result;
 
       if (userData && Object.keys(userData).length > 0) {

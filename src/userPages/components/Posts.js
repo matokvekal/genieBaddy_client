@@ -5,6 +5,7 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import { useNavigate } from "react-router-dom";
 import { POST_STATUS } from "constants/jeneral";
+import NoPosts from "./NoPosts";
 
 function Posts({ convFilter }) {
   const scrollContainerRef = useRef(null);
@@ -80,16 +81,28 @@ function Posts({ convFilter }) {
         return posts;
     }
   }, [convFilter, posts]);
-  debugger
   return (
-    <div className="posts" ref={scrollContainerRef} onScroll={handleScroll}>
-      {filteredPost &&filteredPost.length>0&&
-        filteredPost.map((post) =>
-          post && post.id ? (
-            <Post key={post.id} post={post} handleSelecPost={handleSelecPost} />
-          ) : null
-        )}
-    </div>
+    <>
+      {(filteredPost && filteredPost.length) > 0 ? (
+        <div
+          className="posts-rows"
+          ref={scrollContainerRef}
+          onScroll={handleScroll}
+        >
+          {filteredPost.map((post) =>
+            post && post.id ? (
+              <Post
+                key={post.id}
+                post={post}
+                handleSelecPost={handleSelecPost}
+              />
+            ) : null
+          )}
+        </div>
+      ) : (
+        <NoPosts />
+      )}
+    </>
   );
 }
 

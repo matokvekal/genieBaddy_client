@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./MainUser.css";
 import NewPost from "../components/NewPost";
-import HeadMenu from "../heads/HeadMenu";
+import Header from "../heads/Header";
 import HeadButtons from "../heads/HeadButtons";
-import "../heads/Head.css";
+// import "../heads/Head.css";
 import { USERS_ROLES } from "constants";
 import Footer from "../footer/Footer";
 import Posts from "../components/Posts";
@@ -17,33 +17,31 @@ const MainUser = () => {
   const [userNewPost, setUserNewPost] = useState(false);
   const [convFilter, setConvFilter] = useState(POST_STATUS.DEFAULT);
   const handleCloseNewPostModal = () => {
-    debugger
+    //debugger
     setUserNewPost(!userNewPost);
   };
   return (
     <>
       {!userNewPost ? (
-        <div className="container">
-          <div className="header">
-            <div className="mainhead">
-              <HeadMenu />
-              <HeadButtons
+        <div className="container-user">
+          <div className="header-user">
+            <Header />
+            {/* <HeadButtons
                 convFilter={convFilter}
                 setConvFilter={setConvFilter}
-              />
+              /> */}
+          </div>
+          <div className="main-user">
+            <div className="main-user-upper">
+              <div>My Chats</div>
+              <img src={require(`assets/PNG/mynaui_filter.png`)}  alt="mynaui_filter"/>
+            </div>
+            <div className="main-user-posts">
+              <Posts convFilter={convFilter} />
             </div>
           </div>
-          <div className="main">
-            <Sidebar />
-            <section className="section">
-              {(userType === USERS_ROLES.USER ||
-                getUserType() === USERS_ROLES.USER) && (
-                <Posts convFilter={convFilter} />
-              )}
-            </section>
-          </div>
 
-          <div className="footer">
+          <div className="footer-user">
             <Footer handleCloseNewPostModal={handleCloseNewPostModal} />
           </div>
         </div>

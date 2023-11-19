@@ -4,7 +4,7 @@ import { useStore } from "zustand";
 import { POST_STATUS } from "constants/jeneral";
 import useDataStore from "../../stores/appStore";
 
-function HeadButtons({ convFilter, setConvFilter,newPostCounter }) {
+function HeadButtons({ convFilter, setConvFilter, newPostCounter }) {
   const { allPosts, getGeniePosts } = useStore(useDataStore);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function HeadButtons({ convFilter, setConvFilter,newPostCounter }) {
   const postCounts = useMemo(() => {
     let open = 0;
     let closed = 0;
-debugger
+    //debugger
     allPosts?.forEach((post) => {
       if (post.post_status === POST_STATUS.CLOSED) {
         closed++;

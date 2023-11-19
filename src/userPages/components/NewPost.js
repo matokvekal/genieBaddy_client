@@ -17,11 +17,10 @@ import PostData from "./PostData";
 import { clearText } from "utils/clearText";
 import UserTopics from "./Topics";
 
-
-
 const NewPost = ({ handleCloseNewPostModal }) => {
   const [postText, setPostText] = useState("");
-  const { refreshUserPosts, updateUserLimits ,triggerToast} = useStore(useDataStore);
+  const { refreshUserPosts, updateUserLimits, triggerToast } =
+    useStore(useDataStore);
   const maxCharacterLimit = Number(appInfo.maxUserCharacterLimit);
   const [showTopics, setShowTopics] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState(null);
@@ -32,7 +31,7 @@ const NewPost = ({ handleCloseNewPostModal }) => {
   };
 
   const sendChat = async () => {
-    debugger
+    //debugger
     setDisabledSend(true);
     if (postText.trim() !== "") {
       const sanitizedInput = clearText(postText.trim());
@@ -46,21 +45,23 @@ const NewPost = ({ handleCloseNewPostModal }) => {
         header: null,
       });
       if (res?.status === 200) {
-        triggerToast("Message sent successfully. It may take a few minutes to process.",'success');
+        triggerToast(
+          "Message sent successfully. It may take a few minutes to process.",
+          "success"
+        );
         await updateUserLimits();
         await refreshUserPosts();
         handleCloseNewPostModal();
-
-        
       } else {
-        if(res?.status === 400 || res?.status === 406){
+        if (res?.status === 400 || res?.status === 406) {
           triggerToast(res.data?.error);
-        }else{
-        console.log("error");
-        triggerToast("Message didn't send. Please try again.");
+        } else {
+          console.log("error");
+          triggerToast("Message didn't send. Please try again.");
+        }
+        setDisabledSend(false);
       }
-      setDisabledSend(false);
-    }}
+    }
   };
 
   const handleClose = () => {
@@ -88,8 +89,6 @@ const NewPost = ({ handleCloseNewPostModal }) => {
     <>
       {!showTopics && (
         <div className="new-post-container">
-
-
           <div className="new-post-header">
             <span>Write Post</span>
             <span>Your post is anonymous and private.</span>

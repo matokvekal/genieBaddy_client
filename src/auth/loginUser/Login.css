@@ -4,6 +4,7 @@
    justify-content: center;
    align-items: center;
    height: 100vh;
+   background: linear-gradient(to right, var(--gb-light-gray), var(--white));
  }
  
  .Login__title {
@@ -15,12 +16,12 @@
  div.text-danger {
   height: 20px; 
   max-width: 300px; 
-  color:red
+  color:var(--gb-danger)
 }
 .Login__form .alert.alert-danger{
   height: 20px; 
   max-width: 300px; 
-  color:var(--red)
+  color:var(--gb-danger)
 }
 .Login__form {
   display: flex;
@@ -31,7 +32,7 @@
    width: 100%;
    margin-top: 10px;
    padding: 30px;
-   background-color: var(--grey);
+   background-color: var(--gb-purple);
    border: 1px solid var(--white);
    border-radius: 8px;
    box-shadow: 0 4px 8px var(--black);
@@ -113,3 +114,21 @@
   display: flex;
   flex-direction: column;
  }
+ .Login__form input[type="text"],
+.Login__form input[type="password"] {
+  padding: 15px; /* Increased padding */
+  font-size: 18px; /* Larger font size */
+}
+.Login__submit-btn {
+  padding: 15px 30px;
+  font-size: 20px;
+  /* Other styles */
+}
+.Login__submit-btn:hover {
+  background-color: darken(var(--background-blue), 10%); /* Slightly darken on hover */
+}
+div.text-danger {
+  font-size: 16px; /* Larger font size */
+  padding: 10px; /* Padding for better visibility */
+  /* Other styles */
+}

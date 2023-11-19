@@ -12,7 +12,7 @@ export const PATHS_NAMES = {
   // GENIECHAT: "/geniechat",
   GENIECHATS: "/geniechats",
   ERROR: "/error",
-  LANDING: "/landing",
+
   USERNEWCHAT: "/usernewchat",
   GENIETOPICS: "/genietopics",
   CONVERSATION: "/post",

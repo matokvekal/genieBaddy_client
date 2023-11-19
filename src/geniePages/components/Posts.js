@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { POST_STATUS } from "constants/jeneral";
 
 function Posts({ convFilter }) {
-
-
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
   const { getGeniePosts, setPostId, geniePosts } = useStore(useDataStore);
@@ -35,7 +33,7 @@ function Posts({ convFilter }) {
   const handleSelecPost = useCallback(
     (post) => {
       setPostId(post.id);
-      navigate("/geniePostData"); 
+      navigate("/geniePostData");
     },
     [setPostId, navigate]
   );
@@ -87,10 +85,11 @@ function Posts({ convFilter }) {
         return null;
     }
   }, [convFilter, posts]);
-  debugger
+  //debugger
   return (
     <div className="posts" ref={scrollContainerRef} onScroll={handleScroll}>
-      {filteredPost &&filteredPost.length>0 &&
+      {filteredPost &&
+        filteredPost.length > 0 &&
         filteredPost.map((post) =>
           post && post.id ? (
             <Post key={post.id} post={post} handleSelecPost={handleSelecPost} />

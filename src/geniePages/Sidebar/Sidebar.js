@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaTimes, FaPencilAlt } from "react-icons/fa";
-import "./Sidebar.css";
-// import { useNavigate } from "react-router-dom";
-// import { PATHS_NAMES } from "constants";
-// import { USERS_ROLES } from "constants";
+
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 

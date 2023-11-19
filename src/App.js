@@ -6,7 +6,6 @@ import LoginGenie from "./auth/loginGenie/LoginGenie";
 import rolesPaths from "./auth/rolesPaths.json";
 import { USERS_ROLES, PATHS_NAMES } from "constants";
 import { toast, ToastContainer } from "react-toastify";
-import Landing from "Landing/Landing";
 import UserPostData from "userPages/components/UserPostData";
 import GeniePostData from "geniePages/components/GeniePostData";
 import MainGenie from "geniePages/mainGenie/MainGenie";
@@ -95,7 +94,6 @@ function App() {
       {/* <ToastContainer /> */}
       <CookiesProvider>
         <Routes>
-          <Route exact path={PATHS_NAMES.EMPTY} element={<Landing />} />
           <Route exact path={PATHS_NAMES.LOGINUSER} element={<LoginUser />} />
           <Route exact path={PATHS_NAMES.LOGINGENIE} element={<LoginGenie />} />
           <Route exact path={PATHS_NAMES.USER} element={<MainUser />} />

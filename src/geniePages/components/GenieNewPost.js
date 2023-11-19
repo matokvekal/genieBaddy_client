@@ -47,7 +47,7 @@ const GenieNewPost = ({ setConvFilter }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        debugger
+        //debugger
         const data = await genieGetNewPosts();
         if (data && data.data.result?.length > 0) {
           setPosts(data.data.result);
@@ -77,7 +77,7 @@ const GenieNewPost = ({ setConvFilter }) => {
   const handleChoose = async () => {
     try {
       const avatar = localStorage.getItem("avatar");
-      const res = await genieCoosePost(posts[postId].id,avatar);
+      const res = await genieCoosePost(posts[postId].id, avatar);
       if (res && res.status === 200 && res.statusText === "OK") {
         await cleanGeniePosts();
         // console.log(POST_STATUS.OPEN);

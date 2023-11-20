@@ -47,7 +47,6 @@ const GenieNewPost = ({ setConvFilter }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //debugger
         const data = await genieGetNewPosts();
         if (data && data.data.result?.length > 0) {
           setPosts(data.data.result);

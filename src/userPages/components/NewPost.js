@@ -31,7 +31,6 @@ const NewPost = ({ handleCloseNewPostModal }) => {
   };
 
   const sendChat = async () => {
-    //debugger
     setDisabledSend(true);
     if (postText.trim() !== "") {
       const sanitizedInput = clearText(postText.trim());

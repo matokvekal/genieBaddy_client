@@ -23,12 +23,15 @@ body {
    --gb-white: #fff;
    --gb-primary-black: black;
    --gb-dark-gray: darkGray;
+   --gb-middle-gray: #F1F1F1;
    --gb-dark-blue: #0277BD;
    --gb-light-gray: #F3F3F3;
 
    --gb-purple: #8297ffbe;
    --gb-dark-green: #00AB94;
    --gb-light-green75: #00ab94c7;
+   --gb-circle-green: #27CA75;
+
    --gb-danger:red;
 
 

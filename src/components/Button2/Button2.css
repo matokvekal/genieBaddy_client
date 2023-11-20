@@ -1,0 +1,18 @@
+.button2{
+   border: 1px solid var(--gb-dark-blue);
+   height: 1.375rem;
+   border-radius: 6.25rem;
+   font-size: 0.9rem;
+   font-weight: 600;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   background: var(--gb-white);
+   color:var(--gb-dark-blue);
+}
+.button2.disabled {
+   border: 1px solid var(--gb-dark-blue);
+}
+.button2-text{
+   margin: 0.5rem;
+}

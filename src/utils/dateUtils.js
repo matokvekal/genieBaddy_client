@@ -1,36 +1,33 @@
+import moment from 'moment';
 
 export const formatDate = (date) => {
-  const now = new Date();
-  const currentDate = new Date(date); // assuming 'date' is valid Date string
+  const currentDate = moment(date);
+  const now = moment();
 
-  // Calculate the difference in milliseconds
-  const diffTime = now - currentDate;
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  // Calculate differences in various units
+  const diffMinutes = now.diff(currentDate, 'minutes');
+  const diffHours = now.diff(currentDate, 'hours');
+  const diffDays = now.diff(currentDate, 'days');
+  const diffWeeks = now.diff(currentDate, 'weeks');
+  const diffMonths = now.diff(currentDate, 'months');
+  const diffYears = now.diff(currentDate, 'years');
 
-  // Create an object with options to format the time part
-  const timeOptions = { hour: "numeric", minute: "numeric" };
-
-  if (diffDays === 0) {
-    // If the message was sent today, return just the time
-    return currentDate.toLocaleTimeString("en-US", timeOptions);
-  } else if (diffDays === 1) {
-    // If it was sent yesterday, return the word "Yesterday"
-    return "Yesterday";
+  if (diffMinutes < 5) {
+    return "Now";
+  } else if (diffMinutes < 60) {
+    return currentDate.fromNow(); // Utilizes Moment.js's relative time
+  } else if (diffHours < 12) {
+    return currentDate.fromNow(); // Utilizes Moment.js's relative time
   } else if (diffDays < 7) {
-    // If it was sent less than a week ago, return the number of days
-    return `${diffDays} days ago`;
-  } else if (diffDays >= 7 && diffDays < 365) {
-    // If it was sent more than a week ago but less than a year ago, return the date in "DD/MM" format
-    return currentDate.toLocaleDateString("en-US", {
-      day: "2-digit",
-      month: "2-digit",
-    });
+    return currentDate.fromNow(); // Utilizes Moment.js's relative time
+  } else if (diffWeeks < 4) {
+    return `${diffWeeks} weeks ago`;
+  } else if (diffMonths < 12) {
+    return `${diffMonths} months ago`;
+  } else if (diffYears >= 1) {
+    return `${diffYears} years ago`;
   } else {
-    // If it was sent more than a year ago, return the date in "DD/MM/YYYY" format
-    return currentDate.toLocaleDateString("en-US", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
+    // Fallback for any other case
+    return currentDate.format('DD/MM/YYYY'); // Formats date as "DD/MM/YYYY"
   }
 };

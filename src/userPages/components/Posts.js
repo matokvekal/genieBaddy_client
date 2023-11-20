@@ -65,21 +65,30 @@ function Posts({ convFilter }) {
 
   const filteredPost = useMemo(() => {
     console.log("At convFilter", convFilter);
-
+    let filtered;
     switch (convFilter) {
       case POST_STATUS.ALL:
-        return posts;
+        filtered = posts;
+        break;
       case POST_STATUS.CLOSED:
-        return posts.filter((conv) => conv.post_status === POST_STATUS.CLOSED);
+        filtered = posts.filter(
+          (conv) => conv.post_status === POST_STATUS.CLOSED
+        );
+        break;
       case POST_STATUS.OPEN:
-        return posts.filter((conv) => conv.post_status !== POST_STATUS.CLOSED);
+        filtered = posts.filter(
+          (conv) => conv.post_status !== POST_STATUS.CLOSED
+        );
+        break;
       case POST_STATUS.STARS:
-        return posts.filter(
+        filtered = posts.filter(
           (conv) => conv.post_status === POST_STATUS.CLOSED && conv.rating > 0
         );
+        break;
       default:
-        return posts;
+        filtered = posts;
     }
+    return Array.isArray(filtered) ? filtered : [];
   }, [convFilter, posts]);
   return (
     <>
@@ -89,7 +98,7 @@ function Posts({ convFilter }) {
           ref={scrollContainerRef}
           onScroll={handleScroll}
         >
-          {filteredPost.map((post) =>
+          {filteredPost.map((post, index) =>
             post && post.id ? (
               <Post
                 key={post.id}

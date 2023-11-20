@@ -216,8 +216,9 @@ const useDataStore = createStore((set, get) => ({
 
       const dbPosts = localStorage.getItem("userPosts");
       if (dbPosts) {
-        get().savePostsToState(JSON.parse(dbPosts));
-        return dbPosts;
+        const posts=JSON.parse(dbPosts)
+        get().savePostsToState(posts);
+        return posts;
       }
 
       // Fetch from server
@@ -293,7 +294,6 @@ const useDataStore = createStore((set, get) => ({
       if (newPosts.data.result.length === 0) {
         return { status: "no new chats" };
       } else {
-        //debugger;
         newPosts = newPosts.data.result;
         const curentPosts = localStorage.getItem("geniePosts");
         const posts = JSON.parse(curentPosts);
@@ -305,8 +305,8 @@ const useDataStore = createStore((set, get) => ({
             get().updateNewChatsCounter(get().newChatsCounter + 1);
           }
         });
-        get().savePostsToState(curentPosts);
-        localStorage.setItem("geniePosts", JSON.stringify(curentPosts));
+        get().savePostsToState(posts);
+        localStorage.setItem("geniePosts", curentPosts);
         return true;
       }
     } catch (err) {
@@ -370,7 +370,6 @@ const useDataStore = createStore((set, get) => ({
   updateUserLimits: async (limits) => {
     try {
       const response = await getUserLimitsFromServer();
-      //debugger;
       const userData = response.data.result;
 
       if (userData && Object.keys(userData).length > 0) {

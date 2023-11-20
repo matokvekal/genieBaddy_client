@@ -3,29 +3,18 @@
    display: flex;
    flex-direction: row;
    justify-content: space-between;
-   margin: 0 1rem;
+   padding: 0 1rem;
    color:var(--gb-primary-black);
    background: var(--gb-white);
    align-items: center;
+   height: 5rem;
    /* margin-top: 1rem; */
    
 }
 
-.button-footer-newchat{
-   border: 1px solid var(--gb-primary-black);
-   width: 6.8rem;
-   height: 2rem;
-   border-radius: 6.25rem;
-   font-size: 0.9rem;
-   font-weight: 600;
-   display: flex;
-   justify-content: space-around;
-   align-items: center;
-   background: var(--gb-white);
 
-   
 
-}
+
 .button-footer-text{
 
 }

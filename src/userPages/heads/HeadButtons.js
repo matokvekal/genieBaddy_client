@@ -12,7 +12,7 @@ function HeadButtons({ convFilter, setConvFilter }) {
       getUserPosts();
     }
   }, [getUserPosts, allPosts.length]);
-  //debugger
+
   const postCounts = useMemo(() => {
     let open = 0,
       closed = 0,

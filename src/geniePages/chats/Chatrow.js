@@ -36,7 +36,7 @@ const ChatRow = (props) => {
     <div className={`chat-item ${_class}`}>
       <div className="chat-item-left">
         <div className="circle">
-          <img src={require(`assets/PNG/avatar1.png`)} alt="avatar" />
+          <img src={require(`assets/PNG/avatars/avatar1.png`)} alt="avatar" />
           {/* <img src={require(`assets/PNG/${image}`)} alt="avatar" /> */}
         </div>
       </div>

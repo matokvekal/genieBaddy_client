@@ -4,34 +4,29 @@ import { FaTimes, FaPencilAlt } from "react-icons/fa";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
-
 const AvatarModal = ({ setSelectedAvatar, closeModal }) => {
   return (
     <div className="avatar-modal">
       {Array.from({ length: 11 }).map((_, index) => (
         <>
-          <img className="select_avatar"
-          key={index}
-          src={require(`assets/PNG/avatar${index + 1}.png`)}
-          alt="avatar"
-          onClick={() => {
-            setSelectedAvatar(index+1);
-            closeModal();
-          }}
-        />
+          <img
+            className="select_avatar"
+            key={index}
+            src={require(`assets/PNG/avatars/avatar${index + 1}.png`)}
+            alt="avatar"
+            onClick={() => {
+              setSelectedAvatar(index + 1);
+              closeModal();
+            }}
+          />
         </>
       ))}
     </div>
   );
 };
 const Sidebar = () => {
-  const {
-    sideBarState,
-    toggleSideBar,
-    logOut,
-    updateUserName,
-    getUsername,
-  } = useStore(useDataStore);
+  const { sideBarState, toggleSideBar, logOut, updateUserName, getUsername } =
+    useStore(useDataStore);
   // const navigate = useNavigate();
   const userName = getUsername();
   const [selectedAvatar, setSelectedAvatar] = useState(
@@ -100,7 +95,7 @@ const Sidebar = () => {
         <div className="sidebar-section">
           <div className="avatar-container">
             <img
-              src={require(`assets/PNG/avatar${selectedAvatar}.png`)}
+              src={require(`assets/PNG/avatars/avatar${selectedAvatar}.png`)}
               alt="avatar"
               width={40}
             />

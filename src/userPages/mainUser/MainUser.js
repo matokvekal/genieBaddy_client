@@ -17,11 +17,11 @@ const MainUser = () => {
   const [userNewPost, setUserNewPost] = useState(false);
   const [convFilter, setConvFilter] = useState(POST_STATUS.DEFAULT);
   const handleCloseNewPostModal = () => {
-    //debugger
     setUserNewPost(!userNewPost);
   };
   return (
     <>
+      <Sidebar />
       {!userNewPost ? (
         <div className="container-user">
           <div className="header-user">
@@ -34,7 +34,10 @@ const MainUser = () => {
           <div className="main-user">
             <div className="main-user-upper">
               <div>My Chats</div>
-              <img src={require(`assets/PNG/mynaui_filter.png`)}  alt="mynaui_filter"/>
+              <img
+                src={require(`assets/PNG/mynaui_filter.png`)}
+                alt="mynaui_filter"
+              />
             </div>
             <div className="main-user-posts">
               <Posts convFilter={convFilter} />
@@ -42,7 +45,7 @@ const MainUser = () => {
           </div>
 
           <div className="footer-user">
-            <Footer handleCloseNewPostModal={handleCloseNewPostModal} />
+          <Footer handleCloseNewPostModal={handleCloseNewPostModal} />
           </div>
         </div>
       ) : (

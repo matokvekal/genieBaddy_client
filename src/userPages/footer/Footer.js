@@ -4,7 +4,7 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import moment from "moment";
 import { userLimits } from "config/config.js";
-
+import Button1 from "components/Button1/Button1";
 function Footer({ handleCloseNewPostModal }) {
   const { updateUserLimits, toggleSideBar } = useStore(useDataStore);
   const [totalPosts, setTotalPosts] = useState(3);
@@ -44,18 +44,24 @@ function Footer({ handleCloseNewPostModal }) {
 
     fetchLimits();
   }, [updateUserLimits]);
-  debugger;
   return (
     <>
       <div className="footer-area">
-        <button
+        <Button1 
+          className="footer"
+          disabled={!leftPosts || Number(leftPosts) === 0}
+          onClick={handleNewPost}
+          text="New Chat"
+          icon="+"
+        ></Button1>
+        {/* <button
           className="button-footer-newchat"
           onClick={handleNewPost}
           disabled={!leftPosts || Number(leftPosts) === 0}
         >
           <div className="button-footer-text">New Chat</div>
           <div className="button-footer-plus">+</div>
-        </button>
+        </button> */}
 
         <div className="footer-lamps">
           {totalPosts &&

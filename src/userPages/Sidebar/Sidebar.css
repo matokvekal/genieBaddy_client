@@ -1,0 +1,91 @@
+.sidebar-user{
+      background-color: #f8f9fa;
+      border-right: 1px solid #dee2e6;
+      height: 100vh;
+      width: 13.75rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 200;
+      transform: translateX(-100%);
+      opacity: 0;
+      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+}
+
+
+.sidebar-user.open {
+transform: translateX(0);
+opacity: 1;
+}
+.sidebar-header{
+      width: 100%;
+      height: 5rem;
+      border-bottom: 2px solid var(--gb-light-gray);
+      display: flex;
+padding: 1rem;
+      justify-content: space-between;
+      align-items: center;
+}
+.sidebar-title{
+      /* margin: 1rem */
+}
+.sidebar-close{
+      margin-right: 1rem;
+      font-weight: bold;
+}
+
+
+.sidebar-personal{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content:space-around;
+      height: 9.375rem;
+      width:11.75rem ;
+      border: 1px var(--gb-dark-gray) solid;
+      border-bottom: 3px var(--gb-dark-gray) solid;;
+      padding: 0.8rem;
+      border-radius:0.625rem ;
+      margin-top:1rem;
+      /* box-shadow: 2; */
+      /* border:1px solid black; */
+}
+.sidebar-avatar-container{
+padding: 0.5rem;
+text-align: center;
+font-size: large;
+}
+.sidebar-user-name{
+
+   font-weight: 600;
+   font-size: large;
+   text-align: center;
+}
+.nsidebar-edit{
+/* margin-top: 0.5rem;
+display: flex; */
+
+}
+.sidebar-main{
+      width: 100%;
+      flex-grow: 1;
+}
+.sidebar-buttons{
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      width: 100%;
+      padding: 1rem;
+
+}
+.sidebar-buttons button{
+      margin: 0.7rem;
+}
+.sidebar-footer{
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+}

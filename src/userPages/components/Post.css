@@ -4,7 +4,15 @@
    display: flex;
    position: relative; 
 }
-
+.post-row::after {
+   content: ''; /* Required for pseudo-elements */
+   position: absolute;
+   bottom: 0; /* Position at the bottom of the post-row */
+   left: 50%; /* Center the line horizontally */
+   border-bottom: 2px solid var(--gb-middle-gray); /* The gray line */
+   width: 80%; /* Set the width of the line */
+   transform: translateX(-50%); /* Center the line */
+}
 .row-left,.row-middle,.row-right{
    /* border:1px blue solid; */
 }
@@ -76,7 +84,8 @@ color: var(--white);
 font-size: 0.9rem;
 }
 .row-right-upper{
-   margin-top: 0.9rem;;
+   margin-top: 0.9rem;
+   font-size: 0.875rem;
 }
 .row-right-bottom{
    /* margin-bottom: 0.3rem;; */

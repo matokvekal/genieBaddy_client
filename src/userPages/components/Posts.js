@@ -98,7 +98,7 @@ function Posts({ convFilter }) {
           ref={scrollContainerRef}
           onScroll={handleScroll}
         >
-          {filteredPost.map((post, index) =>
+          {filteredPost.map((post) =>
             post && post.id ? (
               <Post
                 key={post.id}

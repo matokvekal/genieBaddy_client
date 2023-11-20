@@ -5,9 +5,15 @@ body,
 	margin: 0;
 	/* direction: rtl; */
 	width: 100%;
-   max-width: 400px;
+   /* max-width: 400px; */
    height: 100%;
 }
+ul {
+   padding-inline-start: 0;
+   margin-block-start: 0;
+   margin-block-end: 0;
+ }
+ 
 body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Rubik', 'Segoe UI',

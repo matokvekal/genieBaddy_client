@@ -98,7 +98,10 @@ function App() {
           <Route exact path={PATHS_NAMES.LOGINGENIE} element={<LoginGenie />} />
           <Route exact path={PATHS_NAMES.USER} element={<MainUser />} />
           <Route exact path="/userpostdata" element={<UserPostData />} />
-          <Route exact path="/geniepostdata" element={<GeniePostData />} />
+          {/* <Route exact path="/geniepostdata" element={<GeniePostData />} /> */}
+          <Route exact path="/userpostdata/:id" element={<UserPostData />} />
+           {/* Updated line */}
+
           <Route exact path={PATHS_NAMES.GENIE} element={<MainGenie />} />
           {/* <Route exact path="/genieNewPost" element={<GenieNewPost />} /> */}
           {/* <Route exact path="/post/:id" element={<GenieChat />} />

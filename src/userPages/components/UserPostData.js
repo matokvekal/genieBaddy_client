@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import "./UserPostData.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import Header from "../heads/Header";
+
 import HeadUserPost from "userPages/heads/HeadUserPost";
 import { ChatInput } from "components";
 import MessageBubble from "./MessageBubble";
@@ -10,13 +12,15 @@ import { clearText } from "utils/clearText";
 import { POST_STATUS } from "constants";
 import PostData from "./PostData";
 import { hasValue } from "../../utils/hasValue";
-import {userLimits} from "config/config.js";
+import { userLimits } from "config/config.js";
 
 const UserPostData = () => {
   const [chatInput, setChatInput] = useState("");
   const { postId, allPosts, refreshUserPosts } = useStore(useDataStore);
   const [disabled, setDisabled] = useState(false);
-
+  if (!postId) {
+    window.history.back();
+  }
   const sendChat = async () => {
     if (chatInput.trim() !== "") {
       const sanitizedInput = clearText(chatInput.trim());
@@ -38,8 +42,7 @@ const UserPostData = () => {
 
   const post =
     allPosts && allPosts[0] ? allPosts.find((x) => x.id === postId) : null;
-  const maxMessages =userLimits.maxMessages;
-
+  const maxMessages = userLimits.maxMessages;
 
   useEffect(() => {
     if (post && post.last_writen_by && post.last_writen_by.includes("user")) {
@@ -79,11 +82,12 @@ const UserPostData = () => {
   return (
     <>
       <div className="post-page">
-        <HeadUserPost />
-
+        <Header />
+        {/* <HeadUserPost /> */}
+        <HeadUserPost post={post} />
         {post && (
           <>
-            <div>{post.postId}</div>
+            {/* <div>{post.postId}</div>
             <div className="post-content">
               {postData &&
                 postData.map((post, index) => (
@@ -123,7 +127,7 @@ const UserPostData = () => {
                 <div className="chat-input-container"></div>
                 <div className="chat-icons"></div>
               </div>
-            </div>
+            </div> */}
           </>
         )}
       </div>

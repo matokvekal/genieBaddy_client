@@ -51,13 +51,13 @@ function Post({ handleSelecPost, post }) {
       <div className="row-left">
         <img
           src={require(`assets/PNG/avatars/avatar${post.user_avatar}.png`)}
-          className="post-image"
+          className="post-image-avatar"
           alt="user avatar"
         />
       </div>
       <div className="row-middle">
         <div className="row-middle-upper">
-          <div className="row-middle-upper-left">LOLA</div>
+          <div className="row-middle-upper-left">{post.user_nickName}</div>
           <div className="row-middle-upper-right">
             {renderRatingIcons()}
             {/* <img
@@ -68,10 +68,10 @@ function Post({ handleSelecPost, post }) {
           </div>
         </div>
         <div className="row-middle-middle">
-          <Button2 text="text" />
+          <Button2 text={post.user_header?post.user_header:"General"} />
         </div>
         <div className="row-middle-bottom">
-          JUST TEXT123setrwtrwt ert ryt ert4rt 34t342rtyhtrytteyetrye5w
+          {post.user_1}
         </div>
       </div>
       <div className="row-right">

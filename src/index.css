@@ -8,6 +8,9 @@ body,
    /* max-width: 400px; */
    height: 100%;
 }
+textarea {
+   /* height: auto; */
+}
 ul {
    padding-inline-start: 0;
    margin-block-start: 0;

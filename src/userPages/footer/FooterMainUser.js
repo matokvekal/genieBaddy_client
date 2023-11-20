@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./Footer.css";
+import "./FooterMainUser.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import moment from "moment";
 import { userLimits } from "config/config.js";
 import Button1 from "components/Button1/Button1";
-function Footer({ handleCloseNewPostModal }) {
+
+function FooterMainUser({ handleCloseNewPostModal }) {
   const { updateUserLimits, toggleSideBar } = useStore(useDataStore);
   const [totalPosts, setTotalPosts] = useState(3);
   const [leftPosts, setLeftPosts] = useState(0);
@@ -83,4 +84,4 @@ function Footer({ handleCloseNewPostModal }) {
   );
 }
 
-export default Footer;
+export default FooterMainUser;

@@ -1,6 +1,6 @@
 .mainhead-userpost{
    height: 4.5rem;
-   border:1px solid red;
+   /* border:1px solid red; */
 }
 ul li{
    list-style-type: none;
@@ -27,7 +27,7 @@ li.head-topic{
    height:2rem ;
 }
 li.head-menu {
-   flex:1;
+   flex:2;
 }
 .postdata-image{
    height: 3rem;

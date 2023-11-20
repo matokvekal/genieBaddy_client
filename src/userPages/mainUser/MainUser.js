@@ -5,7 +5,7 @@ import Header from "../heads/Header";
 import HeadButtons from "../heads/HeadButtons";
 // import "../heads/Head.css";
 import { USERS_ROLES } from "constants";
-import Footer from "../footer/Footer";
+import FooterMainUser from "../footer/FooterMainUser";
 import Posts from "../components/Posts";
 import Sidebar from "userPages/Sidebar";
 import { useStore } from "zustand";
@@ -45,7 +45,7 @@ const MainUser = () => {
           </div>
 
           <div className="footer-user">
-          <Footer handleCloseNewPostModal={handleCloseNewPostModal} />
+          <FooterMainUser handleCloseNewPostModal={handleCloseNewPostModal} />
           </div>
         </div>
       ) : (

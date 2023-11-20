@@ -3,19 +3,23 @@ import "./UserPostData.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import Header from "../heads/Header";
-
+import "./UserPostData.css";
 import HeadUserPost from "userPages/heads/HeadUserPost";
 import { ChatInput } from "components";
 import MessageBubble from "./MessageBubble";
 import { formatDate } from "utils/dateUtils";
 import { clearText } from "utils/clearText";
-import { POST_STATUS } from "constants";
+import { POST_STATUS } from "constants/jeneral";
 import PostData from "./PostData";
 import { hasValue } from "../../utils/hasValue";
 import { userLimits } from "config/config.js";
-
+import FooterPostData from "../footer/FooterPostData";
 const UserPostData = () => {
   const [chatInput, setChatInput] = useState("");
+  const handleInputChange = (value) => {
+    debugger
+    setChatInput(value);
+  };
   const { postId, allPosts, refreshUserPosts } = useStore(useDataStore);
   const [disabled, setDisabled] = useState(false);
   if (!postId) {
@@ -81,13 +85,29 @@ const UserPostData = () => {
   }
   return (
     <>
-      <div className="post-page">
-        <Header />
+      <div className="postdata-main">
+      <Header />
+      {/* <div className="postdata-main"> */}
+        <HeadUserPost
+          post={post}
+          // setChatInput={setChatInput}
+          // chatInput={chatInput}
+          // disabled={disabled}
+        />
+        <div className="postdata-content">chats</div>
+        <div className="postdata-footer">
+          <FooterPostData 
+          post={post} 
+          setChatInput={setChatInput}
+          chatInput={chatInput}
+          disabled={disabled}
+          />
+        </div>
         {/* <HeadUserPost /> */}
-        <HeadUserPost post={post} />
-        {post && (
-          <>
-            {/* <div>{post.postId}</div>
+        {/* <HeadUserPost post={post} />
+        {post && ( */}
+
+        {/* <div>{post.postId}</div>
             <div className="post-content">
               {postData &&
                 postData.map((post, index) => (
@@ -128,8 +148,6 @@ const UserPostData = () => {
                 <div className="chat-icons"></div>
               </div>
             </div> */}
-          </>
-        )}
       </div>
     </>
   );

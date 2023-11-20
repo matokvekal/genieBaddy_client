@@ -29,7 +29,7 @@ function HeadMenu() {
             onClick={handleMenu}
           />
 
-          <span>Genie Baddy</span>
+          <span>Genie Buddy</span>
         </div>
         <div>
           <FontAwesomeIcon className="fa-icon" icon={faSearch} />

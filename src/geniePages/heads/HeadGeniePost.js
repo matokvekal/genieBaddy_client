@@ -19,7 +19,7 @@ function HeadGeniePost() {
                 onClick={goBack}
               />
             }
-            <span>Genie Baddy</span>
+            <span>Genie Buddy</span>
           </div>
         </div>
       </div>

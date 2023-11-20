@@ -25,7 +25,7 @@ function HeadMenu() {
             />
           </li>
           <li className="logo">
-              <div className="logo-text">genieBaddy</div>
+            <div className="logo-text">GenieBuddy</div>
             <div className="logo-img">
               <img
                 src={require(`assets/PNG/genie1.png`)}

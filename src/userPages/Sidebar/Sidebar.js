@@ -13,14 +13,14 @@ const Sidebar = () => {
     useStore(useDataStore);
   // const navigate = useNavigate();
   const userName = getUsername();
-  const [selectedAvatar, setSelectedAvatar] = useState(
+  const [selectedAvatar] = useState(
     localStorage.getItem("avatar") || 1
   );
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [ setModalOpen] = useState(false);
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
+  // const openModal = () => {
+  //   setModalOpen(true);
+  // };
   useEffect(() => {
     localStorage.setItem("avatar", selectedAvatar);
   }, [selectedAvatar]);
@@ -34,19 +34,17 @@ const Sidebar = () => {
     toggleSideBar(false);
     logOut();
   };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+
   const handleContact = () => {
     console.log("contact");
   };
-  const handleUpdateUserNameAndOpenModal = () => {
-    const newUserName = prompt("Enter new username:");
-    if (newUserName) {
-      updateUserName(newUserName);
-    }
-    openModal();
-  };
+  // const handleUpdateUserNameAndOpenModal = () => {
+  //   const newUserName = prompt("Enter new username:");
+  //   if (newUserName) {
+  //     updateUserName(newUserName);
+  //   }
+  //   openModal();
+  // };
 
   return (
     <>
@@ -81,7 +79,7 @@ const Sidebar = () => {
             className="button1-footer"
             disabled={false}
             onClick={handleContact}
-            text="New Chat"
+            text="Contact Us"
             icon={<img src={require(`assets/PNG/email.png`)} alt="avatar" />}
           ></Button1>
           <Button1

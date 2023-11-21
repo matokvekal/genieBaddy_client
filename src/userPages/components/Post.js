@@ -6,6 +6,7 @@ import useDataStore from "stores/appStore";
 import { faCommentAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button2 from "components/Button2/Button2";
+import Button3 from "components/Button3/Button3";
 
 function Post({ handleSelecPost, post }) {
   const { toggleSideBar } = useStore(useDataStore);
@@ -50,14 +51,18 @@ function Post({ handleSelecPost, post }) {
     <div className="post-row " onClick={showConversation}>
       <div className="row-left">
         <img
-          src={require(`assets/PNG/avatars/avatar${post.user_avatar?post.user_avatar:1}.png`)}
+          src={require(`assets/PNG/avatars/avatar${
+            post.user_avatar ? post.user_avatar : 1
+          }.png`)}
           className="post-image-avatar"
           alt="user avatar"
         />
       </div>
       <div className="row-middle">
         <div className="row-middle-upper">
-          <div className="row-middle-upper-left">{post.user_nickName?post.user_nickName:"user"}</div>
+          <div className="row-middle-upper-left">
+            {post.user_nickName ? post.user_nickName : "user"}
+          </div>
           <div className="row-middle-upper-right">
             {renderRatingIcons()}
             {/* <img
@@ -68,22 +73,33 @@ function Post({ handleSelecPost, post }) {
           </div>
         </div>
         <div className="row-middle-middle">
-          <Button2 text={post.user_header?post.user_header:"General"} />
+          <Button2 text={post.user_header ? post.user_header : "General"} />
         </div>
-        <div className="row-middle-bottom">
-          {post.user_1}
-        </div>
+        <div className="row-middle-bottom">{post.user_1}</div>
       </div>
       <div className="row-right">
         <div className="row-right-upper">{formatDate(post.created_at)}</div>
-        <div className="row-right-middle circle">{countMessages()}</div>
-        <div className="row-right-bottom">
-          <img
-            src={require(`assets/PNG/2v.png`)}
-            className="post-image"
-            alt="user avatar"
-          />
+        
+        {/*open  last_writen_by=genie_ user_read=0 */}
+        <div className="row-right-middle circle circle-green">
+          {countMessages()}
         </div>
+        {/*open last_writen_by=genie_ user_read=1*/}
+        <div className="row-right-middle circle circle-orange">
+          {countMessages()}
+        </div>
+        {/*open last_writen_by=user_  */}
+        <img
+          src={require(`assets/PNG/vector.png`)}
+          className="post-vector"
+          alt="in conversation"
+        />
+        {/*open  post_status="new" */}
+        <div className="row-right-bottom">
+          <Button3 text={"NEW"} />
+        </div>
+
+        {/* else null */}
       </div>
     </div>
     // <div className="post-container" onClick={showData}>

@@ -75,7 +75,7 @@ margin-bottom: 0.5rem;
 .row-right-middle.circle{
 width: 1.25rem;
 height: 1.25rem;
-background-color: var(--gb-circle-green);
+/* background-color: var(--gb-circle-green); */
 border-radius: 50%;
 display:flex;
 justify-content: center;
@@ -100,3 +100,13 @@ font-size: 0.9rem;
    position: relative;
  }
  
+.circle-orange{
+   background: var(--gb-circle-orange);
+}
+.circle-green{
+   background: var(--gb-circle-green);
+}
+.post-vector{
+   width: 1.25rem;
+   height: 1.25rem;
+}

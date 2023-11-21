@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   const handleMenu = () => {
-    toggleSideBar(true);
+
     // handleSideBar(!sideBarState);
   };
 

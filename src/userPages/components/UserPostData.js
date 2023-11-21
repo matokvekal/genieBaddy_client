@@ -14,6 +14,9 @@ import PostData from "./PostData";
 import { hasValue } from "../../utils/hasValue";
 import { userLimits } from "config/config.js";
 import FooterPostData from "../footer/FooterPostData";
+import PostModal from "components/PostModal/PostModal";     
+
+
 const UserPostData = () => {
   const [chatInput, setChatInput] = useState("");
   const handleInputChange = (value) => {
@@ -92,6 +95,8 @@ const UserPostData = () => {
           // chatInput={chatInput}
           // disabled={disabled}
         />
+             <PostModal />
+
         <div className="postdata-content">
           <div className="post-content">
             {postData &&

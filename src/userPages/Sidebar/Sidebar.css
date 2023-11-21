@@ -64,11 +64,7 @@ font-size: large;
    font-size: large;
    text-align: center;
 }
-.nsidebar-edit{
-/* margin-top: 0.5rem;
-display: flex; */
 
-}
 .sidebar-main{
       width: 100%;
       flex-grow: 1;

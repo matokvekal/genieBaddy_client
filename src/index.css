@@ -30,6 +30,7 @@ body {
 :root {
 
    --gb-white: #fff;
+   --gb-white-50: #ffffffe1;
    --gb-primary-black: black;
    --gb-dark-gray: darkGray;
    --gb-middle-gray: #F1F1F1;
@@ -41,6 +42,7 @@ body {
    --gb-light-green75: #00ab94c7;
    --gb-circle-green: #27CA75;
    --gb-bubble-green: #4fa27487;
+   --gb-circle-orange: #FFC01E;
 
    --gb-danger:red;
 

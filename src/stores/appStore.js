@@ -17,6 +17,7 @@ export const initialState = {
   userType: "",
   // userType: "user",
   sideBarState: false,
+  postModatState: true,
   isNewChat: true,
   loginStatus: false,
   mode: "development",
@@ -77,10 +78,11 @@ const useDataStore = createStore((set, get) => ({
       console.error("Error saving posts to IndexedDB:", error);
     }
   },
-  handleSidebar: (data) => {
+
+  handlePostModal: (data) => {
     set((state) => ({
       ...state,
-      sideBarState: data,
+      postModatState: data,
     }));
   },
   setPostId: (id) => {

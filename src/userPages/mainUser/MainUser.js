@@ -21,6 +21,7 @@ const MainUser = () => {
   };
   return (
     <>
+
       <Sidebar />
       {!userNewPost ? (
         <div className="container-user">
@@ -45,7 +46,7 @@ const MainUser = () => {
           </div>
 
           <div className="footer-user">
-          <FooterMainUser handleCloseNewPostModal={handleCloseNewPostModal} />
+            <FooterMainUser handleCloseNewPostModal={handleCloseNewPostModal} />
           </div>
         </div>
       ) : (

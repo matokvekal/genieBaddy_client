@@ -26,7 +26,7 @@ const ChatRow = (props) => {
 
   const star = true;
   const navigate = useNavigate();
-  // const { userType, handleSideBar, sideBarState } = useStore(useDataStore);
+
   const date = formatDate(user_1_date);
 
   const showPost = () => {

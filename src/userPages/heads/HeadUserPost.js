@@ -20,7 +20,7 @@ function HeadUserPost({ post }) {
           </li>
           <li className="head-avatar">
             <img
-              src={require(`assets/PNG/avatars/avatar${post.user_avatar}.png`)}
+              src={require(`assets/PNG/avatars/avatar${post.user_avatar?post.user_avatar:1}.png`)}
               className="postdata-image"
               alt="user avatar"
             />

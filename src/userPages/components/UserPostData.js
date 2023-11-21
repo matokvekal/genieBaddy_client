@@ -17,7 +17,6 @@ import FooterPostData from "../footer/FooterPostData";
 const UserPostData = () => {
   const [chatInput, setChatInput] = useState("");
   const handleInputChange = (value) => {
-    debugger
     setChatInput(value);
   };
   const { postId, allPosts, refreshUserPosts } = useStore(useDataStore);
@@ -76,7 +75,6 @@ const UserPostData = () => {
         break;
       }
     }
-
     return result;
   };
   let postData = null;
@@ -86,21 +84,47 @@ const UserPostData = () => {
   return (
     <>
       <div className="postdata-main">
-      <Header />
-      {/* <div className="postdata-main"> */}
+        <Header />
+        {/* <div className="postdata-main"> */}
         <HeadUserPost
           post={post}
           // setChatInput={setChatInput}
           // chatInput={chatInput}
           // disabled={disabled}
         />
-        <div className="postdata-content">chats</div>
+        <div className="postdata-content">
+          <div className="post-content">
+            {postData &&
+              postData.map((data, index) => (
+                <div key={index}>
+                  {hasValue(data[`user_${index + 1}`]) && (
+                    <MessageBubble
+                      sender={post["user_nickname"]}
+                      date={formatDate(data[`user_${index + 1}_date`])}
+                      message={data[`user_${index + 1}`]}
+                      isMine={true}
+                      avatar={post["user_avatar"]}
+                    />
+                  )}
+                  {hasValue(data[`genie_${index + 1}`]) && (
+                    <MessageBubble
+                      sender={post["user_nickname"]}
+                      date={formatDate(data[`genie_${index + 1}_date`])}
+                      message={data[`genie_${index + 1}`]}
+                      isMine={false}
+                      avatar={post["genie_avatar"]}
+                    />
+                  )}
+                </div>
+              ))}
+          </div>
+        </div>
         <div className="postdata-footer">
-          <FooterPostData 
-          post={post} 
-          setChatInput={setChatInput}
-          chatInput={chatInput}
-          disabled={disabled}
+          <FooterPostData
+            post={post}
+            setChatInput={setChatInput}
+            chatInput={chatInput}
+            disabled={disabled}
           />
         </div>
         {/* <HeadUserPost /> */}

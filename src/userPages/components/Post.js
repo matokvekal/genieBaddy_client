@@ -50,14 +50,14 @@ function Post({ handleSelecPost, post }) {
     <div className="post-row " onClick={showConversation}>
       <div className="row-left">
         <img
-          src={require(`assets/PNG/avatars/avatar${post.user_avatar}.png`)}
+          src={require(`assets/PNG/avatars/avatar${post.user_avatar?post.user_avatar:1}.png`)}
           className="post-image-avatar"
           alt="user avatar"
         />
       </div>
       <div className="row-middle">
         <div className="row-middle-upper">
-          <div className="row-middle-upper-left">{post.user_nickName}</div>
+          <div className="row-middle-upper-left">{post.user_nickName?post.user_nickName:"user"}</div>
           <div className="row-middle-upper-right">
             {renderRatingIcons()}
             {/* <img

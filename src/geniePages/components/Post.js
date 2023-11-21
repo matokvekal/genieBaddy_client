@@ -50,7 +50,7 @@ function Post({ handleSelecPost, post }) {
     >
       {/* <div className="post-container" onClick={showData}> */}
       <img
-        src={require(`assets/PNG/avatars/avatar${post.user_avatar}.png`)}
+        src={require(`assets/PNG/avatars/avatar${post.user_avatar?post.user_avatar:1}.png`)}
         className="post-image"
         alt="user avatar"
       />

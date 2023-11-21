@@ -138,7 +138,6 @@ export const getUserLimitsFromServer = async () => {
     return null;
   }
   try {
-    debugger;
     const response = await axios.get(EndPoint, Header);
 
     if (response.status === 200 && response.data?.result) {
@@ -148,7 +147,6 @@ export const getUserLimitsFromServer = async () => {
       return null;
     }
   } catch (error) {
-    debugger;
     console.error("Error in getuserlimits:", error);
     throw error;
   }

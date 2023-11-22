@@ -14,7 +14,7 @@ import {
 export const initialState = {
   userId: "",
   userName: "",
-  NickName: "user",
+  NickName: localStorage.getItem("NickName")||"user",
   userType: "",
   // userType: "user",
   sideBarState: false,
@@ -122,6 +122,7 @@ const useDataStore = createStore((set, get) => ({
     localStorage.setItem("userName", name);
   },
   updateNickName: (NickName) => {
+    debugger
     set((state) => ({
       ...state,
       NickName: NickName,

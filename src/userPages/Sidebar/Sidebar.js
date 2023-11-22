@@ -8,12 +8,15 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 const Sidebar = () => {
-  const { sideBarState, toggleSideBar, logOut, getNickName } =
+  const { sideBarState, toggleSideBar, logOut, getNickName, updateNickName } =
     useStore(useDataStore);
   // const navigate = useNavigate();
-  const NickName = getNickName();
-  const [selectedAvatar] = useState(localStorage.getItem("avatar") || 1);
-  const [setModalOpen] = useState(false);
+  // const NickName = getNickName();
+  const [nickName, setNickName] = useState(getNickName);
+  const [selectedAvatar, setSelectedAvatar] = useState(
+    localStorage.getItem("avatar") || 1
+  );
+  const [openModal, setOpenModal] = useState(false);
 
   // const openModal = () => {
   //   setModalOpen(true);
@@ -24,16 +27,29 @@ const Sidebar = () => {
 
   const handleMenu = () => {
     console.log("handleMenu");
+    setOpenModal(false);
     toggleSideBar(false);
   };
   const handleLogOut = () => {
     console.log("logout");
+    setOpenModal(false);
     toggleSideBar(false);
     logOut();
   };
 
   const handleContact = () => {
     console.log("contact");
+    setOpenModal(false);
+  };
+  const saveProfile = () => {
+    setOpenModal(false);
+    updateNickName(nickName);
+    console.log("saveProfile");
+  };
+
+  const handleEdit = () => {
+    console.log("handleEdit");
+    setOpenModal(true);
   };
   // const handleUpdateUserNameAndOpenModal = () => {
   //   const newUserName = prompt("Enter new username:");
@@ -61,16 +77,46 @@ const Sidebar = () => {
               width={40}
             />
           </div>
-          <div className="sidebar-user-name">Hello {NickName}</div>
+          <div className="sidebar-user-name" onClick={handleEdit}>
+            Hello: {nickName}
+          </div>
           <div className="sidebar-edit">
-            <img
-              src={require(`assets/PNG/carbon_edit.png`)}
-              alt="avatar"
-              // width={40}
-            />
+            <img src={require(`assets/PNG/carbon_edit.png`)} alt="avatar" />
           </div>
         </div>
-        <div className="sidebar-main"></div>
+
+        {openModal && (
+          <div className="sidebar-main">
+            <div className="edit-user">
+              <input
+                type="text"
+                placeholder="Change your nick name"
+                onChange={(e) => setNickName(e.target.value)}
+              />
+
+              <div className="avatarList">
+                {Array.from({ length: 151 }, (_, index) => (
+                  <img
+                    key={index}
+                    src={require(`assets/PNG/avatars/avatar${index + 1}.png`)}
+                    className={`avatar ${
+                      selectedAvatar === index + 1 ? "selected" : ""
+                    }`}
+                    alt={`avatar ${index + 1}`}
+                    onClick={() => setSelectedAvatar(index + 1)}
+                  />
+                ))}
+              </div>
+              <Button1
+                className="button1-save-profile"
+                disabled={false}
+                onClick={saveProfile}
+                text="Save"
+              ></Button1>
+            </div>
+          </div>
+        )}
+
         <div className="sidebar-buttons">
           <Button1
             className="button1-footer"
@@ -158,4 +204,5 @@ const AvatarModal = ({ setSelectedAvatar, closeModal }) => {
     </div>
   );
 };
+
 export default Sidebar;

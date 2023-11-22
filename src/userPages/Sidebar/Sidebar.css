@@ -46,7 +46,7 @@ padding: 1rem;
       height: 9.375rem;
       width:11.75rem ;
       border: 1px var(--gb-dark-gray) solid;
-      border-bottom: 3px var(--gb-dark-gray) solid;;
+      border-bottom: 3px var(--gb-dark-gray) solid;
       padding: 0.8rem;
       border-radius:0.625rem ;
       margin-top:1rem;
@@ -68,12 +68,13 @@ font-size: large;
 .sidebar-main{
       width: 100%;
       flex-grow: 1;
+      margin-top: 0.5rem;
 }
 .sidebar-buttons{
       display: flex;
       flex-direction: column;
       align-items: start;
-      width: 100%;
+      width: 11.75rem;
       padding: 1rem;
 
 }
@@ -85,3 +86,56 @@ font-size: large;
     margin-bottom: 0.5rem;
     margin-left: 0.5rem;
 }
+
+.edit-user{
+      width: 85%;
+      border: 1px var(--gb-dark-gray) solid;
+      border-radius: 5px;
+      margin-left:0.9rem;
+      /* height: 50vh; */
+}
+
+
+.edit-user {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .edit-user input{
+      height: 2rem;
+      margin-top: 0.5rem;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-bottom: 0.5px solid black;
+    }
+    .avatarList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      overflow-y: auto; 
+      /* max-height: 190px;  */
+      height: 50vh;
+      margin-top: 10px;
+      background: var(--gb-white);
+    }
+    
+    .avatar {
+      width: 30px; /* Adjust the size as needed */
+      height: 30px; /* Adjust the size as needed */
+      margin: 5px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    
+    .avatar.selected {
+      border-color: var(--gb-dark-gray); /* Highlight the selected avatar */
+      border-radius: 50%;
+    }
+    
+    .button1.button1-save-profile{
+      margin: 0.5rem;
+      background: var(--gb-purple);
+      color :var(--gb-white);
+      border: none;
+    }

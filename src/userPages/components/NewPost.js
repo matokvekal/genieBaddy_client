@@ -1,11 +1,3 @@
-//befor open the page chect at localstorage the counter and the date(we move to 0 at 2400 utc) and the user_posts_per_day
-//ifthe counter less than user_posts_per_day in same day  we open page, if day is before today we set counter to 0 and open page
-//if the day is today and counter === to user_post_per_day we show amessage to wait for  tommorow we have to considure the utc time
-//if we open page
-//at server we check amount from genie_config we take from user utc , then count his posts with same logic as client
-//if the amount is equal than user_posts_per_day we open page if not we show message to wait for tommorow
-//if we save message  we send count  to client so client will update  his local storage(client and server worked with utc datetime )
-
 import { useState } from "react";
 import "./NewPost.css";
 import sendwhite from "assets/sendwhite.svg";
@@ -15,7 +7,10 @@ import useDataStore from "stores/appStore";
 import { FaTimes } from "react-icons/fa";
 import PostData from "./PostData";
 import { clearText } from "utils/clearText";
-import UserTopics from "./Topics";
+import UserTopics from "./UserTopics";
+import Header from "../heads/Header";
+import HeadNewPost from "userPages/heads/HeadNewPost";
+import FooterPostData from "../footer/FooterPostData";
 
 const NewPost = ({ handleCloseNewPostModal }) => {
   const [postText, setPostText] = useState("");
@@ -23,11 +18,16 @@ const NewPost = ({ handleCloseNewPostModal }) => {
     useStore(useDataStore);
   const maxCharacterLimit = Number(appInfo.maxUserCharacterLimit);
   const [showTopics, setShowTopics] = useState(false);
-  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState("");
   const [disabledSend, setDisabledSend] = useState(false);
+  const [chatInput, setChatInput] = useState("");
 
-  const handleTopic = () => {
-    setShowTopics(true);
+  const avatar = localStorage.getItem("avatar");
+  const toggleTopics = () => {
+    setShowTopics(!showTopics);
+  };
+  const hideTopics = () => {
+    setShowTopics(false);
   };
 
   const sendChat = async () => {
@@ -35,12 +35,12 @@ const NewPost = ({ handleCloseNewPostModal }) => {
     if (postText.trim() !== "") {
       const sanitizedInput = clearText(postText.trim());
       setPostText(sanitizedInput);
-      const avatar = localStorage.getItem("avatar");
+
       const res = await PostData({
         sanitizedInput,
         avatar,
         postId: "new",
-        topic_id: selectedTopic ? selectedTopic.id : null,
+        topic_id: selectedTopic ? selectedTopic.id : 1,
         header: null,
       });
       if (res?.status === 200) {
@@ -67,9 +67,6 @@ const NewPost = ({ handleCloseNewPostModal }) => {
     console.log("Posted:", postText);
     handleCloseNewPostModal();
   };
-  const clean = () => {
-    setPostText(""); // clear function
-  };
   const handleInputChange = (event) => {
     if (event.target.value.length > maxCharacterLimit) return;
     setPostText(event.target.value);
@@ -86,9 +83,32 @@ const NewPost = ({ handleCloseNewPostModal }) => {
 
   return (
     <>
-      {!showTopics && (
-        <div className="new-post-container">
-          <div className="new-post-header">
+      {
+        <div className="newpost-main">
+          <Header />
+          <HeadNewPost
+            toggleTopics={toggleTopics}
+
+            topicName={selectedTopic.topic_name}
+            handleCloseNewPostModal={handleCloseNewPostModal}
+          />
+          <UserTopics
+            showTopics={showTopics}
+            selectedTopic={selectedTopic}
+            setSelectedTopic={setSelectedTopic}
+          />
+          <div className="newpost-content"
+          onClick={()=>hideTopics()}></div>
+
+          <div className="newpost-footer">
+            <FooterPostData
+              setChatInput={setChatInput}
+              chatInput={chatInput}
+              hideTopics={hideTopics}
+              // disabled={disabled}
+            />
+          </div>
+          {/* <div className="new-post-header">
             <span>Write Post</span>
             <span>Your post is anonymous and private.</span>
             <button onClick={handleClose}>✖️</button>
@@ -98,13 +118,9 @@ const NewPost = ({ handleCloseNewPostModal }) => {
             value={postText}
             onChange={handleInputChange}
             placeholder="Share your thoughts"
-          />
-          {postText && (
-            <button onClick={clean} className="clear-new-chat-button">
-              <FaTimes />
-            </button>
-          )}
-          <div className="new-post-footer">
+          /> */}
+
+          {/* <div className="new-post-footer">
             <button
               onClick={handleSend}
               className="send-button"
@@ -124,16 +140,9 @@ const NewPost = ({ handleCloseNewPostModal }) => {
                 X
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
-      )}
-      {showTopics && (
-        <UserTopics
-          showTopic={showTopics}
-          setShowTopics={setShowTopics}
-          setSelectedTopic={setSelectedTopic}
-        />
-      )}
+      }
     </>
   );
 };

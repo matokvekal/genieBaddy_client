@@ -6,7 +6,7 @@ import { appInfo } from "../../config/config";
 
 // const BackIcon = () => <span>{"<"}</span>;
 
-const ChatInput = ({ setChatInput, chatInput, sendChat, disabled }) => {
+const ChatInput = ({ setChatInput, chatInput, sendChat, disabled, hideTopics }) => {
   const maxCharacterLimit = appInfo.maxUserCharacterLimit; //////////////////////fix
   // const textAreaRef = useRef(null);
   const textAreaRef = useRef(null);
@@ -22,6 +22,7 @@ const ChatInput = ({ setChatInput, chatInput, sendChat, disabled }) => {
   // }, [chatInput]);
 
   const handleInputChange = (event) => {
+    hideTopics();
     if (event.target.value.length > maxCharacterLimit) return;
     setChatInput(event.target.value);
     // Remove the fixed height when the user starts typing

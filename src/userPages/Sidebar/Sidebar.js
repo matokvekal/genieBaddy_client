@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { FaTimes, FaPencilAlt } from "react-icons/fa";
 import "./Sidebar.css";
 import Button1 from "components/Button1/Button1";
 // import { useNavigate } from "react-router-dom";
@@ -9,14 +8,12 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 const Sidebar = () => {
-  const { sideBarState, toggleSideBar, logOut, updateUserName, getUsername } =
+  const { sideBarState, toggleSideBar, logOut, getNickName } =
     useStore(useDataStore);
   // const navigate = useNavigate();
-  const userName = getUsername();
-  const [selectedAvatar] = useState(
-    localStorage.getItem("avatar") || 1
-  );
-  const [ setModalOpen] = useState(false);
+  const NickName = getNickName();
+  const [selectedAvatar] = useState(localStorage.getItem("avatar") || 1);
+  const [setModalOpen] = useState(false);
 
   // const openModal = () => {
   //   setModalOpen(true);
@@ -64,7 +61,7 @@ const Sidebar = () => {
               width={40}
             />
           </div>
-          <div className="sidebar-user-name">Hello {userName}</div>
+          <div className="sidebar-user-name">Hello {NickName}</div>
           <div className="sidebar-edit">
             <img
               src={require(`assets/PNG/carbon_edit.png`)}

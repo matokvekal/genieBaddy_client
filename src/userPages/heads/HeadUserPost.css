@@ -34,7 +34,7 @@ li.head-menu {
 }
 .head-items li{
    height: 4.5rem;
-   border:1px solid green;
+   /* border:1px solid green; */
 }
 .head-back-arrow img{
    height: 2rem;

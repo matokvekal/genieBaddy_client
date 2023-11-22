@@ -1,0 +1,44 @@
+.mainhead-userpost{
+   height: 4.5rem;
+   /* border:1px solid red; */
+}
+ul li{
+   list-style-type: none;
+}
+ul.head-items{
+   display: flex ;
+   /* justify-content: flex-left; */
+   align-items: center;
+}
+
+.head-items li{
+   display:flex;
+   flex:1;
+   justify-content: center;
+   align-items: center;
+}
+li.head-nick-name{
+   flex:3;
+   justify-content: flex-start;
+   padding-left: 1rem;
+}
+li.head-topic{
+   flex:3;
+   height:2rem ;
+}
+li.head-menu {
+   flex:2;
+}
+.postdata-image{
+   height: 3rem;
+}
+.head-items li{
+   height: 4.5rem;
+   /* border:1px solid green; */
+}
+.head-back-arrow img{
+   height: 2rem;
+}
+.head-menu img{
+   height: 1.5rem;
+}

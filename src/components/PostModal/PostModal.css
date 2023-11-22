@@ -43,7 +43,7 @@
 display: flex;
 justify-content: flex-start;
 height: 1.5;
-border:1px solid green;
+/* border:1px solid green; */
 margin-top: 1rem;
 align-items: center;
 
@@ -55,11 +55,11 @@ align-items: center;
 
 }
 .post-modal-container .row div{
-   border:1px solid purple;
+   /* border:1px solid purple; */
    margin-left: 0.5rem;
 }
    .postdata-content.post-content{
-      border: 1 px solid black;
+      /* border: 1 px solid black; */
    }
    /* @media (max-width: 600px) {
       .post-modal {

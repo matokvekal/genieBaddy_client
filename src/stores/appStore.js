@@ -14,6 +14,7 @@ import {
 export const initialState = {
   userId: "",
   userName: "",
+  NickName: "user",
   userType: "",
   // userType: "user",
   sideBarState: false,
@@ -120,11 +121,22 @@ const useDataStore = createStore((set, get) => ({
     }));
     localStorage.setItem("userName", name);
   },
+  updateNickName: (NickName) => {
+    set((state) => ({
+      ...state,
+      NickName: NickName,
+    }));
+    localStorage.setItem("NickName", NickName);
+  },
   getUsername: () => {
     const state = get();
     let userName =
       get().userName || localStorage.getItem("userName") || state.userType;
     return userName;
+  },
+  getNickName: () => {
+    let NickName = get().NickName || localStorage.getItem("NickName");
+    return NickName;
   },
   cleanGeniePosts: () => {
     localStorage.removeItem("geniePosts");
@@ -158,6 +170,7 @@ const useDataStore = createStore((set, get) => ({
     localStorage.removeItem("user_limits");
     localStorage.removeItem("user_limits_date");
     localStorage.removeItem("topics");
+    localStorage.removeItem("topicsdate");
     localStorage.removeItem("userName");
     localStorage.removeItem("authenticated");
     localStorage.removeItem("geniePosts");
@@ -165,6 +178,7 @@ const useDataStore = createStore((set, get) => ({
     localStorage.removeItem("userPosts");
     Cookies.remove("IdToken");
     localStorage.removeItem("userPosts");
+    localStorage.removeItem("nickName");
   },
   setLoginStatus: (loginStatus) => {
     set((state) => ({
@@ -218,7 +232,7 @@ const useDataStore = createStore((set, get) => ({
 
       const dbPosts = localStorage.getItem("userPosts");
       if (dbPosts) {
-        const posts=JSON.parse(dbPosts)
+        const posts = JSON.parse(dbPosts);
         get().savePostsToState(posts);
         return posts;
       }
@@ -272,10 +286,13 @@ const useDataStore = createStore((set, get) => ({
         return { status: "no new chats" };
       } else {
         const curentPosts = JSON.parse(localStorage.getItem("userPosts"));
-
+        debugger;
         //replace at curentPosts the posts with the same id from newPosts
         curentPosts.forEach((post) => {
-          const newPost = newPosts.find((newPost) => newPost.id === post.id);
+          const newPost =
+            newPosts &&
+            newPosts.length > 0 &&
+            newPosts.find((newPost) => newPost.id === post.id);
           if (newPost) {
             post = newPost;
             get().updateNewChatsCounter(get().newChatsCounter + 1);
@@ -387,7 +404,7 @@ const useDataStore = createStore((set, get) => ({
       return { status: "error", info: err.message };
     }
   },
-  topics: async () => {
+  fetchTopics: async () => {
     try {
       const response = await getTopics();
 
@@ -398,6 +415,31 @@ const useDataStore = createStore((set, get) => ({
 
         // Save to localstorage
         localStorage.setItem("topics", JSON.stringify(topics));
+        localStorage.setItem("topicsdate", JSON.stringify(moment()));
+        return topics;
+      }
+    } catch (err) {
+      console.error("Error in topics:", err);
+      return { status: "error", info: err.message };
+    }
+  },
+  getTopics: async () => {
+    try {
+      //if no topics at state take from ls, if not at ls fetch
+      //if topic old then 24 hores also fetch
+      let topics = get().topics;
+      if (topics && Object.keys(topics).length > 0) {
+        return topics;
+      } else {
+        topics = localStorage.getItem("topics");
+        let topicsDate = localStorage.getItem("topicsdate");
+        if (topics && topicsDate < moment().subtract(24, "hours")) {
+          const topics = JSON.parse(topics);
+          get().saveTopicsToState(topics);
+          return topics;
+        } else {
+          topics = get().fetchTopics();
+        }
         return topics;
       }
     } catch (err) {

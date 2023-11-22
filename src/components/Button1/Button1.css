@@ -15,3 +15,12 @@
 .button1-text{
    margin: 0.5rem;
 }
+.button1.topic{
+   border: 1px solid var(--gb-dark-gray);
+   font-weight: 300;
+   margin-top: .5rem;
+   margin-right: 0.5rem;
+}
+.button1.topic .button1-icon{
+font-weight: 200;
+}

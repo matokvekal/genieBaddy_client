@@ -1,9 +1,12 @@
 import "./HeadUserPost.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button2 from "components/Button2/Button2";
-import { faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
+
 
 function HeadUserPost({ post }) {
+  // const { getNickName } = useStore(useDataStore);
+  // const [avatar, setAvatar] = useState(localStorage.getItem("avatar") || 1);
+  // const NickName = getNickName();
+
   function goBack() {
     window.history.back();
   }

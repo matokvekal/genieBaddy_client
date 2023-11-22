@@ -1,9 +1,7 @@
 
 
 
-.footer-postdata-main{
-   width: 100%;
-}
+
 .postdata-main{
    display: flex;
    flex-direction: column;
@@ -26,4 +24,7 @@
    /* border:solid 1px red; */
    display: flex;
    /* width: 100%; */
+}
+.footer-postdata-main{
+   width: 100%;
 }

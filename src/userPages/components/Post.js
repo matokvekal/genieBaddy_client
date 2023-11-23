@@ -3,8 +3,6 @@ import "./Post.css";
 import { POST_STATUS } from "constants/jeneral";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
-import { faCommentAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button2 from "components/Button2/Button2";
 import Button3 from "components/Button3/Button3";
 

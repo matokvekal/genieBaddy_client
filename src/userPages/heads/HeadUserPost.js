@@ -1,11 +1,17 @@
 import "./HeadUserPost.css";
 import Button2 from "components/Button2/Button2";
-
+import { useStore } from "zustand";
+import useDataStore from "stores/appStore";
 
 function HeadUserPost({ post }) {
+  const { handleActionModal, actionModalState } = useStore(useDataStore);
   // const { getNickName } = useStore(useDataStore);
   // const [avatar, setAvatar] = useState(localStorage.getItem("avatar") || 1);
   // const NickName = getNickName();
+const handleModal = () => {
+  handleActionModal(!actionModalState);
+
+}
 
   function goBack() {
     window.history.back();
@@ -23,16 +29,16 @@ function HeadUserPost({ post }) {
           </li>
           <li className="head-avatar">
             <img
-              src={require(`assets/PNG/avatars/avatar${post.user_avatar?post.user_avatar:1}.png`)}
+              src={require(`assets/PNG/avatars/avatar${post?.user_avatar?post.user_avatar:1}.png`)}
               className="postdata-image"
               alt="user avatar"
             />
           </li>
           <li className="head-nick-name">{post.user_nickname || "user"}</li>
           <li className="head-topic">
-            <Button2 text={post.user_header ? post.user_header : "General"} />
+            <Button2 text={post?.user_header ? post.user_header : "General"} />
           </li>
-          <li className="head-menu">
+          <li className="head-menu" onClick={handleModal}>
             <img
               src={require(`assets/PNG/3dots.png`)}
               className="post-image"
@@ -46,3 +52,5 @@ function HeadUserPost({ post }) {
 }
 
 export default HeadUserPost;
+
+

@@ -61,7 +61,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className={`sidebar-user ${sideBarState ? "open" : ""}`}>
+      <div className={`sidebar-user ${sideBarState ? "open" : ""}`} >
         <div className="sidebar-header">
           <div className="sidebar-title">Welcome Back!</div>
           <div className="sidebar-close" onClick={handleMenu}>

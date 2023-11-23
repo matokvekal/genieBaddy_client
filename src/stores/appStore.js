@@ -14,11 +14,12 @@ import {
 export const initialState = {
   userId: "",
   userName: "",
-  NickName: localStorage.getItem("NickName")||"user",
+  NickName: localStorage.getItem("NickName") || "user",
   userType: "",
   // userType: "user",
   sideBarState: false,
-  postModatState: true,
+  actionModalState: false,
+  filterModalState: false,
   isNewChat: true,
   loginStatus: false,
   mode: "development",
@@ -80,10 +81,16 @@ const useDataStore = createStore((set, get) => ({
     }
   },
 
-  handlePostModal: (data) => {
+  handleActionModal: (data) => {
     set((state) => ({
       ...state,
-      postModatState: data,
+      actionModalState: data,
+    }));
+  },
+  handleFilterModal: (data) => {
+    set((state) => ({
+      ...state,
+      filterModalState: data,
     }));
   },
   setPostId: (id) => {
@@ -122,7 +129,7 @@ const useDataStore = createStore((set, get) => ({
     localStorage.setItem("userName", name);
   },
   updateNickName: (NickName) => {
-    debugger
+    debugger;
     set((state) => ({
       ...state,
       NickName: NickName,

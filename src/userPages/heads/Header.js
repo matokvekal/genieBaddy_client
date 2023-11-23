@@ -7,8 +7,11 @@ import "./Header.css";
 import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function HeadMenu() {
-  const { toggleSideBar } = useStore(useDataStore);
+  const { toggleSideBar,handleFilterModal,filterModalState } = useStore(useDataStore);
+
+
   const handleMenu = () => {
+    handleFilterModal(false);
     toggleSideBar(true);
   };
 

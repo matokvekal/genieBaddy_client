@@ -1,0 +1,68 @@
+
+.filter-modal {
+   background-color:var(--gb-white-50);
+   border: 1px solid var(--gb-dark-gray);
+   border-radius: 5px;
+   width: 9rem; 
+   max-width: 300px; 
+   position: absolute; 
+   top: 13vh; 
+   right: 0;
+   /* right: 8.5vw;  */
+   z-index: 200;
+   transform: translateY(-40%);
+   opacity: 0;
+   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   pointer-events: none;
+ }
+.filter-modal.open {
+   transform: translateY(0);
+   opacity: 1;
+   visibility: visible;
+  pointer-events: auto;
+   }
+   .filter-modal-container .row img{
+      width: 1.5rem;
+      height: 1.5rem;
+   
+   }
+.filter-modal-container .row{
+display: flex;
+justify-content: flex-start;
+height: 1.5;
+/* border:1px solid green; */
+margin-top: 1rem;
+align-items: center;
+
+}
+
+
+.filter-modal-container .row:last-child{
+   margin-bottom: 1rem;
+
+}
+.filter-modal-container .row div{
+   /* border:1px solid purple; */
+   margin-left: 0.5rem;
+}
+.row.disabled {
+   opacity: 0.5;
+   pointer-events: none; /* Prevents clicking */
+ }
+
+   .confirmation-modal {
+      /* Style your confirmation modal */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 300; /* Higher than post-modal */
+    }
+    

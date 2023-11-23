@@ -7,6 +7,8 @@ import useDataStore from "stores/appStore";
 // import { getGeniePosts } from "api/geniePosts"; // Import
 const FilterModal = () => {
   const { getUserPosts, modals, setUserFilter } = useStore(useDataStore);
+  const [selectedFilter, setSelectedFilter] = useState(POST_STATUS.ALL);
+
   const [data, setData] = useState([]);
   const [counter, setCounter] = useState({
     all: 0,
@@ -28,7 +30,6 @@ const FilterModal = () => {
     let open = 0;
     let closed = 0;
     let saved = 0;
-    debugger;
     data?.forEach((post) => {
       all++;
       if (post.post_status === POST_STATUS.CLOSED) {
@@ -41,28 +42,31 @@ const FilterModal = () => {
     });
     setCounter({ all: all, open: open, closed: closed, saved: saved });
   }, [data]);
-
+  const handleFilterClick = (filter) => {
+    setUserFilter(filter);
+    setSelectedFilter(filter);
+  };
   const buttonsData = [
     {
-      className: "ButtonFilter",
+      className: "",
       text: POST_STATUS.OPEN,
       items: counter.open,
       filter: POST_STATUS.OPEN,
     },
     {
-      className: "ButtonFilter",
+      className: "",
       text: POST_STATUS.CLOSED,
       items: counter.closed,
       filter: POST_STATUS.CLOSED,
     },
     {
-      className: "ButtonFilter",
+      className: "",
       text: POST_STATUS.SAVED,
       items: counter.saved,
       filter: POST_STATUS.SAVED,
     },
     {
-      className: "ButtonFilter",
+      className: "",
       text: POST_STATUS.ALL,
       items: counter.all,
       filter: POST_STATUS.All,
@@ -74,18 +78,16 @@ const FilterModal = () => {
       <div className={`filter-modal ${modals.filter ? "open" : ""}`}>
         <div className="filter-modal-container">
           {buttonsData.map((button) => (
-            <>
-              <div
-                onClick={() => setUserFilter(button.filter)}
-                key={button.text}
-              >
-                <ButtonFilter
-                  className={button.className}
-                  text={button.text}
-                  items={button.items}
-                ></ButtonFilter>
-              </div>
-            </>
+            <div
+              key={button.text}
+              onClick={() => handleFilterClick(button.filter)}
+            >
+              <ButtonFilter
+                className={selectedFilter === button.filter ? "selected" : ""} // Your existing class
+                text={button.text}
+                items={button.items}
+              />
+            </div>
           ))}
         </div>
       </div>

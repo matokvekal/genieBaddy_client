@@ -13,6 +13,10 @@
    align-items: center; */
    background: var(--gb-light-gray);
 }
+.buttonFilter.selected{
+   background: var(--gb-orange);
+   border: 1px solid var(--gb-dark-blue);
+}
 .buttonFilter:last-child{
    margin-bottom: 1rem;
 }

@@ -79,8 +79,8 @@
    margin-right: 10px;
  }
  
- .Login__submit-btn {
-   background-color: var(--background-blue);
+ button.Login__submit-btn {
+   background-color: var(--gb-circle-orange);
    color: var(--white); 
    border: none;
    padding: 12px 24px;

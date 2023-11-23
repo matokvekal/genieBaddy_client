@@ -1,6 +1,25 @@
 ### `npm start`
 
 what to test❌
+fix all close modal
+check new
+check lamps
+delete for me
+delete if new
+add rubi up to 5
+save
+close
+------------
+start gini
+check if every 10 minutes we get new messages
+check every 24 hores we can send new chats
+gini see up to 10 new
+
+long messages
+no phone or email or face book 
+user name to long
+==============================
+
 
 user login local ✅
 

@@ -328,7 +328,6 @@ const useDataStore = createStore((set, get) => ({
         return { status: "no new chats" };
       } else {
         const curentPosts = JSON.parse(localStorage.getItem("userPosts"));
-        debugger;
         //replace at curentPosts the posts with the same id from newPosts
         curentPosts.forEach((post) => {
           const newPost =

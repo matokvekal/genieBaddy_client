@@ -1,11 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.92c41bd0.css",
-    "main.js": "/static/js/main.1385c043.js",
+    "main.css": "/static/css/main.791a50ec.css",
+    "main.js": "/static/js/main.e508feb4.js",
+    "static/media/Xoa_Logo_Symbol_Monochrome_BLACK_T.png": "/static/media/Xoa_Logo_Symbol_Monochrome_BLACK_T.754b82c7430f60f9bff3.png",
     "static/media/genie1.png": "/static/media/genie1.54889812bfa9562c403f.png",
     "static/media/avatar2.svg": "/static/media/avatar2.316229c07cb36edfd9f20e2686a8faf4.svg",
     "static/media/avatar5.svg": "/static/media/avatar5.316229c07cb36edfd9f20e2686a8faf4.svg",
     "static/media/avatar47.png": "/static/media/avatar47.78ce30e0c79d95ad41aa.png",
+    "static/media/logo1.ico": "/static/media/logo1.e93c38e72bef43f77f40.ico",
     "static/media/avatar1.svg": "/static/media/avatar1.e431c22e6543498f6963e8e8f3cba3c2.svg",
     "static/media/avatar3.svg": "/static/media/avatar3.56df19b7c0a468ecddb3121b59b29171.svg",
     "static/media/avatar7.svg": "/static/media/avatar7.56df19b7c0a468ecddb3121b59b29171.svg",
@@ -16,11 +18,11 @@
     "static/media/Logo1.svg": "/static/media/Logo1.eb5021430dcd591661d7a17a508046dc.svg",
     "static/media/close-icon.svg": "/static/media/close-icon.bbd4a56f2dbe1db2fb0cdf9d2867ec58.svg",
     "index.html": "/index.html",
-    "main.92c41bd0.css.map": "/static/css/main.92c41bd0.css.map",
-    "main.1385c043.js.map": "/static/js/main.1385c043.js.map"
+    "main.791a50ec.css.map": "/static/css/main.791a50ec.css.map",
+    "main.e508feb4.js.map": "/static/js/main.e508feb4.js.map"
   },
   "entrypoints": [
-    "static/css/main.92c41bd0.css",
-    "static/js/main.1385c043.js"
+    "static/css/main.791a50ec.css",
+    "static/js/main.e508feb4.js"
   ]
 }

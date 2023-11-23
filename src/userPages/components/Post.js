@@ -1,15 +1,11 @@
 import { formatDate } from "utils/dateUtils";
 import "./Post.css";
 import { POST_STATUS } from "constants/jeneral";
-import { useStore } from "zustand";
-import useDataStore from "stores/appStore";
 import Button2 from "components/Button2/Button2";
 import Button3 from "components/Button3/Button3";
 
 function Post({ handleSelecPost, post }) {
-  const { updateModalsStates } = useStore(useDataStore);
   const showConversation = () => {
-    // updateModalsStates("sidebar","close")
     handleSelecPost(post);
   };
   const renderRatingIcons = () => {
@@ -25,6 +21,52 @@ function Post({ handleSelecPost, post }) {
     }
     return icons;
   };
+
+  const renderPostStatus = () => {
+
+    if (post.post_status === POST_STATUS.NEW) {
+      return (
+        <div className="row-right-bottom">
+          <Button3 text={"NEW"} />
+        </div>
+      );
+    } else if (
+      post.post_status === POST_STATUS.OPEN &&
+      post.last_writen_by.includes("genie_") 
+    ) {
+      return (
+        <div className="row-right-middle circle circle-green">
+          {countMessages()}
+        </div>
+      );
+    } 
+    // else if (
+    //   post.post_status === POST_STATUS.OPEN &&
+    //   post.last_writen_by.includes("genie_") &&
+    //   post.user_read === 1
+    // ) {
+    //   return (
+    //     <div className="row-right-middle circle circle-orange">
+    //       {countMessages()}
+    //     </div>
+    //   );
+    // } 
+    else if (
+      post.post_status === POST_STATUS.OPEN &&
+      post.last_writen_by.includes("user_")
+    ) {
+      return (
+        <img
+          src={require(`assets/PNG/vector.png`)}
+          className="post-vector"
+          alt="in conversation"
+        />
+      );
+    } else {
+      return null;
+    }
+  };
+
   const countMessages = () => {
     let messageCount = 0;
     const messageKeys = [
@@ -60,14 +102,7 @@ function Post({ handleSelecPost, post }) {
           <div className="row-middle-upper-left">
             {post.user_nickName ? post.user_nickName : "user"}
           </div>
-          <div className="row-middle-upper-right">
-            {renderRatingIcons()}
-            {/* <img
-              src={require(`assets/PNG/rubi-red.png`)}
-              className="rubi-icon"
-              alt="rubi"
-            /> */}
-          </div>
+          <div className="row-middle-upper-right">{renderRatingIcons()}</div>
         </div>
         <div className="row-middle-middle">
           <Button2 text={post.user_header ? post.user_header : "General"} />
@@ -76,66 +111,9 @@ function Post({ handleSelecPost, post }) {
       </div>
       <div className="row-right">
         <div className="row-right-upper">{formatDate(post.created_at)}</div>
-        
-        {/*open  last_writen_by=genie_ user_read=0 */}
-        <div className="row-right-middle circle circle-green">
-          {countMessages()}
-        </div>
-        {/*open last_writen_by=genie_ user_read=1*/}
-        <div className="row-right-middle circle circle-orange">
-          {countMessages()}
-        </div>
-        {/*open last_writen_by=user_  */}
-        <img
-          src={require(`assets/PNG/vector.png`)}
-          className="post-vector"
-          alt="in conversation"
-        />
-        {/*open  post_status="new" */}
-        <div className="row-right-bottom">
-          <Button3 text={"NEW"} />
-        </div>
-
-        {/* else null */}
+        {renderPostStatus()}
       </div>
     </div>
-    // <div className="post-container" onClick={showData}>
-    //   <img
-    //     src={require(`assets/PNG/avatars/avatar${post.user_avatar}.png`)}
-    //     className="post-image"
-    //     alt="user avatar"
-    //   />
-    //   <div className="post-data">
-    //     <div className="post-data left">
-    //       <span>
-    //         {post.post_status === POST_STATUS.CLOSED ? (
-    //           <FontAwesomeIcon className="fa-icon red" icon={faCommentAlt} />
-    //         ) : (
-    //           <FontAwesomeIcon className="fa-icon green" icon={faCommentAlt} />
-    //         )}
-    //       </span>
-
-    //       <span className="post-data left upper">
-    //         {post.user_header ? post.user_header : post.user_1}
-    //       </span>
-    //       <span className="post-data left bottom">
-    //         {" "}
-    //         {post.user_1.length > 30
-    //           ? `${post.user_1.slice(0, 30)}...`
-    //           : post.user_1}
-    //       </span>
-    //     </div>
-    //     <div className="post-data right">
-    //       <div className="post-right rate">{renderRatingIcons()}</div>
-    //       <div className="post-right info">
-    //         <span className="post-right date ">
-    //           {formatDate(post.created_at)}
-    //         </span>
-    //         <span className="post-right icon">{countMessages()}</span>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 

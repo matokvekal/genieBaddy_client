@@ -4,7 +4,7 @@ export const POST_STATUS = {
   CLOSED: "closed",
   DEFAULT: "all",
   DEFAULTGENIE: "open",
-  STARS: "stars",
+  SAVED: "saved",
   NEW: "new",
   HISTORY: "history",
   RATING: "rating",

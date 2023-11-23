@@ -1,4 +1,4 @@
-import {useState } from "react";
+import { useState } from "react";
 import HeadMenu from "../heads/HeadMenu";
 import HeadButtons from "../heads/HeadButtons";
 import GenieNewPost from "../components/GenieNewPost";
@@ -16,31 +16,29 @@ const COMPONENT_MAP = {
   default: Posts,
 };
 
-const MainGenie = () => { 
+const MainGenie = () => {
   const { userType, getUserType } = useStore(useDataStore);
-  const [convFilter, setConvFilter] = useState(POST_STATUS.DEFAULTGENIE);
-  const[newPostCounter, setNewPostCounter] = useState(0);
+  const [userFilter, setUserFilter] = useState(POST_STATUS.DEFAULTGENIE);
+  const [newPostCounter, setNewPostCounter] = useState(0);
 
   const renderContent = () => {
     if (userType !== USERS_ROLES.GENIE && getUserType() !== USERS_ROLES.GENIE) {
       return null;
     }
 
-    const Component = COMPONENT_MAP[convFilter] || COMPONENT_MAP.default;
-    return <Component convFilter={convFilter} setConvFilter={setConvFilter} />;
+    const Component = COMPONENT_MAP[userFilter] || COMPONENT_MAP.default;
+    return <Component userFilter={userFilter} setUserFilter={setUserFilter} />;
   };
 
-
   return (
-    <>   
-
+    <>
       <div className="container">
         <div className="header">
           <div className="mainhead">
             <HeadMenu />
             <HeadButtons
-              convFilter={convFilter}
-              setConvFilter={setConvFilter}
+              userFilter={userFilter}
+              setUserFilter={setUserFilter}
               newPostCounter={newPostCounter}
               setNewPostCounter={setNewPostCounter}
             />

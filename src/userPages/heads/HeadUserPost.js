@@ -4,14 +4,16 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 function HeadUserPost({ post }) {
-  const { handleActionModal, actionModalState } = useStore(useDataStore);
+  const { updateModalsStates } = useStore(useDataStore);
+
   // const { getNickName } = useStore(useDataStore);
   // const [avatar, setAvatar] = useState(localStorage.getItem("avatar") || 1);
   // const NickName = getNickName();
-const handleModal = () => {
-  handleActionModal(!actionModalState);
+  // const handleModal = () => {
+  //   // handleActionModal(!actionModalState);
+  //   // updateModalsStates("action","toggle")
 
-}
+  // }
 
   function goBack() {
     window.history.back();
@@ -29,7 +31,9 @@ const handleModal = () => {
           </li>
           <li className="head-avatar">
             <img
-              src={require(`assets/PNG/avatars/avatar${post?.user_avatar?post.user_avatar:1}.png`)}
+              src={require(`assets/PNG/avatars/avatar${
+                post?.user_avatar ? post.user_avatar : 1
+              }.png`)}
               className="postdata-image"
               alt="user avatar"
             />
@@ -38,7 +42,12 @@ const handleModal = () => {
           <li className="head-topic">
             <Button2 text={post?.user_header ? post.user_header : "General"} />
           </li>
-          <li className="head-menu" onClick={handleModal}>
+          <li
+            className="head-menu"
+            onClick={() => {
+              updateModalsStates("action", "toggle");
+            }}
+          >
             <img
               src={require(`assets/PNG/3dots.png`)}
               className="post-image"
@@ -52,5 +61,3 @@ const handleModal = () => {
 }
 
 export default HeadUserPost;
-
-

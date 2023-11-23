@@ -1,18 +1,16 @@
-import {useState} from "react";
+import { useState } from "react";
 import "./ActionModal.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 const ActionModal = () => {
-  const { actionModalState } = useStore(useDataStore);
-  
+  const { modals } = useStore(useDataStore);
+
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [confirmAction, setConfirmAction] = useState(null);
 
-
-  
   // ... other handlers
-  
+
   const handleGiveRubi = () => {
     console.log("Giving Rubi");
   };
@@ -25,8 +23,6 @@ const ActionModal = () => {
     console.log("Closing Chat");
   };
 
-
-
   const handleDeleteForAll = () => {
     console.log("Delete for all");
   };
@@ -38,7 +34,7 @@ const ActionModal = () => {
       setShowConfirmModal(false);
     });
   };
-  
+
   const handleReportChat = () => {
     setShowConfirmModal(true);
     setConfirmAction(() => () => {
@@ -106,8 +102,9 @@ const ActionModal = () => {
 
   return (
     <>
-      <div className={`post-modal ${actionModalState ? "open" : ""}`}>
-        <div className="post-modal-container">
+
+      <div className={`action-modal ${modals.action ? "open" : ""}`}>
+        <div className="action-modal-container">
           {actions.map((action, index) => (
             <div
               key={index}
@@ -120,16 +117,15 @@ const ActionModal = () => {
               />
               <div>{action.label}</div>
             </div>
-            
           ))}
         </div>
         {showConfirmModal && (
-      <div className="confirmation-modal">
-        <p>Are you sure you want to perform this action?</p>
-        <button onClick={confirmAction}>Yes</button>
-        <button onClick={() => setShowConfirmModal(false)}>No</button>
-      </div>
-    )}
+          <div className="confirmation-modal">
+            <p>Are you sure you want to perform this action?</p>
+            <button onClick={confirmAction}>Yes</button>
+            <button onClick={() => setShowConfirmModal(false)}>No</button>
+          </div>
+        )}
       </div>
     </>
   );

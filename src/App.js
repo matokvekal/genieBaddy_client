@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect,useRef } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
 import LoginUser from "./auth/loginUser/LoginUser";
@@ -30,6 +30,7 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = useLocation();
+  const userTypeRef = useRef();
 
   useEffect(() => {
     let chatCheckInterval;
@@ -47,8 +48,8 @@ function App() {
   useEffect(() => {
     const localStorageLoginStatus = localStorage.getItem("authenticated");
     const isAuth = localStorageLoginStatus === "true";
-    if (!userType) {
-      userType = localStorage.getItem("userType");}
+
+    let userType = userTypeRef.current || localStorage.getItem("userType");
     if (!userType) {
       if (pathname.startsWith(PATHS_NAMES.LOGINUSER)) {
         userType = USERS_ROLES.USER;
@@ -56,29 +57,28 @@ function App() {
         userType = USERS_ROLES.GENIE;
       }
     }
+    userTypeRef.current = userType; // Update the useRef value
 
     if (!loginStatus && isAuth) {
       setLoginStatus(true);
     }
     if (loginStatus || isAuth) {
-      const role = userType.toLowerCase(); // Assuming the userType will match the keys in your JSON file after converting to lowercase
-      const pathsForRole = rolesPaths[role]; // Get the allowed paths for the user's role
-      const isAllowedPath =
-        pathsForRole && pathsForRole.includes(location.pathname);
+      const role = userType.toLowerCase();
+      const pathsForRole = rolesPaths[role];
+      const isAllowedPath = pathsForRole && pathsForRole.includes(location.pathname);
       if (!isAllowedPath) {
-        // If the current path is not allowed for the user role, redirect them to the default path for their role
         const defaultPath = pathsForRole ? pathsForRole[0] : "/";
         navigate(defaultPath, { replace: true });
       }
     } else if (!isAuth) {
-      // If not authenticated, navigate based on userType
       const targetPath =
         userType === USERS_ROLES.GENIE
           ? PATHS_NAMES.LOGINGENIE
           : PATHS_NAMES.LOGINUSER;
       navigate(targetPath, { replace: true });
     }
-  }, [loginStatus, userType, navigate, setLoginStatus, location.pathname]);
+  }, [loginStatus, navigate, setLoginStatus, location.pathname, pathname]);
+
 
   useEffect(() => {
     if (showToast && toastMessage) {

@@ -4,7 +4,7 @@ import { useStore } from "zustand";
 import { POST_STATUS } from "constants/jeneral";
 import useDataStore from "../../stores/appStore";
 
-function HeadButtons({ convFilter, setConvFilter, newPostCounter }) {
+function HeadButtons({ userFilter, setUserFilter, newPostCounter }) {
   const { allPosts, getGeniePosts } = useStore(useDataStore);
 
   useEffect(() => {
@@ -56,8 +56,8 @@ function HeadButtons({ convFilter, setConvFilter, newPostCounter }) {
             key={button.filter}
             name={button.name}
             postsCount={button.postsCount}
-            active={convFilter === button.filter}
-            setConvFilter={() => setConvFilter(button.filter)}
+            active={userFilter === button.filter}
+            setUserFilter={() => setUserFilter(button.filter)}
             // newPostCounter= {newPostCounter}
           />
         </>

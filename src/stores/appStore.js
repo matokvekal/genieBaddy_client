@@ -2,6 +2,7 @@ import { createStore } from "zustand";
 import Cookies from "js-cookie";
 import { Login } from "../services/Auth";
 import moment from "moment";
+import { POST_STATUS } from "../constants";
 
 import {
   fetchUserPosts,
@@ -17,9 +18,9 @@ export const initialState = {
   NickName: localStorage.getItem("NickName") || "user",
   userType: "",
   // userType: "user",
-  sideBarState: false,
-  actionModalState: false,
-  filterModalState: false,
+  // sideBarState: false,
+  // actionModalState: false,
+  // filterModalState: false,
   isNewChat: true,
   loginStatus: false,
   mode: "development",
@@ -27,7 +28,15 @@ export const initialState = {
   allPosts: [],
   geniePosts: [],
   genieNewPostsCounter: 0,
+  userFilter: POST_STATUS.DEFAULT,
   postId: null,
+  modals: {
+    sidebar: false,
+    action: false,
+    filter: false,
+    userseting: false,
+    usertopics: false,
+  },
   user_limits: {
     USER_CHATS_PER_POST: null,
     USER_POSTS_PER_DAY: null,
@@ -80,29 +89,55 @@ const useDataStore = createStore((set, get) => ({
       console.error("Error saving posts to IndexedDB:", error);
     }
   },
+  updateModalsStates: (modalName, action, the_rest = null) => {
+    console.log("updateModalsStates", modalName, action, the_rest);
+    set((state) => {
+      let newModalsState = { ...state.modals };
+      if (modalName === "all" && action === "close") {
+        Object.keys(newModalsState).forEach((key) => {
+          newModalsState[key] = false;
+        });
+      } else {
+        if (action === "open") {
+          newModalsState[modalName] = true;
+        } else if (action === "close") {
+          newModalsState[modalName] = false;
+        } else if (action === "toggle") {
+          newModalsState[modalName] = !state.modals[modalName];
+        }
 
-  handleActionModal: (data) => {
-    set((state) => ({
-      ...state,
-      actionModalState: data,
-    }));
+        if (the_rest === null) {
+          Object.keys(newModalsState).forEach((key) => {
+            if (key !== modalName) newModalsState[key] = false;
+          });
+        }
+      }
+      return { ...state, modals: newModalsState };
+    });
   },
-  handleFilterModal: (data) => {
+
+  // handleActionModal: (data) => {
+  //   set((state) => ({
+  //     ...state,
+  //     actionModalState: data,
+  //   }));
+  // },
+  // handleFilterModal: (data) => {
+  //   set((state) => ({
+  //     ...state,
+  //     filterModalState: data,
+  //   }));
+  // },
+  setUserFilter: (data) => {
     set((state) => ({
       ...state,
-      filterModalState: data,
+      userFilter: data,
     }));
   },
   setPostId: (id) => {
     set((state) => ({
       ...state,
       postId: id,
-    }));
-  },
-  toggleSideBar: (effect) => {
-    set((state) => ({
-      ...state,
-      sideBarState: effect,
     }));
   },
   updateUserType: (type) => {
@@ -129,7 +164,6 @@ const useDataStore = createStore((set, get) => ({
     localStorage.setItem("userName", name);
   },
   updateNickName: (NickName) => {
-    debugger;
     set((state) => ({
       ...state,
       NickName: NickName,
@@ -263,7 +297,7 @@ const useDataStore = createStore((set, get) => ({
   },
   getGeniePosts: async () => {
     try {
-      console.log("start getJeniePosts");
+      console.log("start getGeniePosts");
       const currentPosts = get().geniePosts;
       if (currentPosts?.length) {
         return currentPosts;

@@ -2,21 +2,20 @@ import { Logo1 } from "assets";
 // import { useModal } from "hooks";
 // import { EulaModal } from "components";
 import "./navbar.css";
-import Sidebar from "userPages/Sidebar";
+import Sidebar from "modals/UserSidebar";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 // Amplify.configure(awsExports);
 
 const Navbar = () => {
-  const { sideBarState, toggleSideBar } = useStore(useDataStore);
+  const { modals } = useStore(useDataStore);
 
   const handleLogOut = async () => {
     // console.log("logout");
   };
 
   const handleMenu = () => {
-
     // handleSideBar(!sideBarState);
   };
 
@@ -29,7 +28,7 @@ const Navbar = () => {
   //  let config = get().myConfig;
   return (
     <>
-      {sideBarState && <Sidebar />}
+      {modals.sidebar && <Sidebar />}
       <div className="navbar">
         <div className="container">
           <div className="hamburger-lines" onClick={handleMenu}>

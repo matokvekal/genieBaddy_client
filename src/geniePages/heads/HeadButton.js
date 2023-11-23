@@ -3,13 +3,14 @@ import { POST_STATUS } from "constants/jeneral";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
-const HeadButton = ({ active, name, postsCount, setConvFilter }) => {
-  const { toggleSideBar } = useStore(useDataStore);
-  const { genieNewPostsCounter } =  useStore(useDataStore);
+const HeadButton = ({ active, name, postsCount, setUserFilter }) => {
+  const { updateModalsStates } = useStore(useDataStore);
+  const { genieNewPostsCounter } = useStore(useDataStore);
+
   const handelClick = (e) => {
     e.stopPropagation();
-    toggleSideBar(false);
-    setConvFilter(name);
+    // updateModalsStates("sidebar","close")
+    setUserFilter(name);
   };
   return (
     <div

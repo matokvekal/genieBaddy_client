@@ -25,7 +25,7 @@ const AvatarModal = ({ setSelectedAvatar, closeModal }) => {
   );
 };
 const Sidebar = () => {
-  const { sideBarState, toggleSideBar, logOut, updateUserName, getUsername } =
+  const { modals, updateModalsStates, logOut, updateUserName, getUsername } =
     useStore(useDataStore);
   // const navigate = useNavigate();
   const userName = getUsername();
@@ -42,11 +42,11 @@ const Sidebar = () => {
   }, [selectedAvatar]);
 
   const handleMenu = () => {
-    toggleSideBar(false);
+    // updateModalsStates("sidebar","close")
   };
   const handleLogOut = () => {
     // console.log("logout");
-    toggleSideBar(false);
+    // updateModalsStates("sidebar","close")
     logOut();
   };
   const closeModal = () => {
@@ -84,7 +84,7 @@ const Sidebar = () => {
   // };
 
   return (
-    <div className={`sidebar ${sideBarState ? "open" : ""}`}>
+    <div className={`sidebar ${modals.sidebar ? "open" : ""}`}>
       <div className="sidebar-header">
         <div className="sidebar-title">GenieBuddy app.</div>
         <div className="sidebar-close" onClick={handleMenu}>

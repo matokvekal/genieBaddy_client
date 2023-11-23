@@ -1,5 +1,5 @@
 import ChatInput from "components/ChatInput/ChatInput";
-function FooterPostData({  chatInput, setChatInput, sendChat, disabled ,hideTopics}) {           
+function FooterPostData({  chatInput, setChatInput, sendChat, disabled }) {           
   return (
     <>
       <div className="footer-postdata-main">
@@ -9,7 +9,6 @@ function FooterPostData({  chatInput, setChatInput, sendChat, disabled ,hideTopi
             chatInput={chatInput}
             sendChat={sendChat}
             disabled={disabled}
-            hideTopics={hideTopics}
           />
         }
       </div>

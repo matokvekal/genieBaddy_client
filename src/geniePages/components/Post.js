@@ -6,10 +6,10 @@ import { faCommentAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Post({ handleSelecPost, post }) {
-  const { toggleSideBar } = useStore(useDataStore);
+  const { updateModalsStates } = useStore(useDataStore);
   const showData = () => {
     // console.log("props.post", post);
-    toggleSideBar(false);
+    // updateModalsStates("sidebar","toggle")
     handleSelecPost(post);
   };
   const renderRatingIcons = () => {

@@ -14,16 +14,16 @@ import PostData from "./PostData";
 import { hasValue } from "../../utils/hasValue";
 import { userLimits } from "config/config.js";
 import FooterPostData from "../footer/FooterPostData";
-import PostModal from "components/FilterModal/FilterModal";
-
+import ActionModal from "modals/ActionModal/ActionModal";
 
 const UserPostData = () => {
   const [chatInput, setChatInput] = useState("");
-  const { handleActionModal, actionModalState } = useStore(useDataStore);
+  const { updateModalsStates } = useStore(useDataStore);
   const handleModal = () => {
-    handleActionModal(!actionModalState);
-  }
-  
+    // handleActionModal(!actionModalState);
+    // updateModalsStates("action","toggle")
+  };
+
   const handleInputChange = (value) => {
     setChatInput(value);
   };
@@ -100,10 +100,15 @@ const UserPostData = () => {
           // chatInput={chatInput}
           // disabled={disabled}
         />
-        <PostModal />
+        <ActionModal />
 
         <div className="postdata-content">
-          <div className="post-content" onClick={handleModal}>
+          <div
+            className="post-content"
+            // onClick={() => {
+            //   updateModalsStates("action", "toogle");
+            // }}
+          >
             {postData &&
               postData.map((data, index) => (
                 <div key={index}>

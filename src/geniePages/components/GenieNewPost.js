@@ -20,7 +20,7 @@ import { HiChevronDoubleRight, HiChevronDoubleLeft } from "react-icons/hi";
 
 // import Swipe from "swipe-js-iso";
 
-const GenieNewPost = ({ setConvFilter }) => {
+const GenieNewPost = ({ setUserFilter }) => {
   const { cleanGeniePosts, updateGenieNewPostCounter, triggerToast } =
     useStore(useDataStore);
   const [posts, setPosts] = useState([]);
@@ -80,8 +80,8 @@ const GenieNewPost = ({ setConvFilter }) => {
       if (res && res.status === 200 && res.statusText === "OK") {
         await cleanGeniePosts();
         // console.log(POST_STATUS.OPEN);
-        setConvFilter(POST_STATUS.OPEN);
-        // setConvFilter(POST_STATUS.OPEN);
+        setUserFilter(POST_STATUS.OPEN);
+        // setUserFilter(POST_STATUS.OPEN);
         //refreshData();
         //go to tab open with sort acs
         // fetchData();

@@ -7,23 +7,25 @@ import "./Header.css";
 import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function HeadMenu() {
-  const { toggleSideBar,handleFilterModal,filterModalState } = useStore(useDataStore);
+  const { updateModalsStates } = useStore(useDataStore);
 
 
   const handleMenu = () => {
-    handleFilterModal(false);
-    toggleSideBar(true);
+    // updateModalsStates("sidebar","open")
+  };
+  const handleFilter = () => {
+    // updateModalsStates("filter","close")
   };
 
   return (
     <>
-      <div className="header">
+      <div className="header" onClick={handleFilter}>
         <ul className="menu">
           <li className="icon-bar">
             <FontAwesomeIcon
               className="fa-icon-bar"
               icon={faBars}
-              onClick={handleMenu}
+              onClick={()=>{ updateModalsStates("sidebar","open")}}
             />
           </li>
           <li className="logo">

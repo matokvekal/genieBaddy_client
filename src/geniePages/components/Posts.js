@@ -6,7 +6,7 @@ import useDataStore from "stores/appStore";
 import { useNavigate } from "react-router-dom";
 import { POST_STATUS } from "constants/jeneral";
 
-function Posts({ convFilter }) {
+function Posts({ userFilter }) {
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
   const { getGeniePosts, setPostId } = useStore(useDataStore);
@@ -63,7 +63,7 @@ function Posts({ convFilter }) {
   }
 
   const filteredPost = useMemo(() => {
-    switch (convFilter) {
+    switch (userFilter) {
       case POST_STATUS.ALL:
         return posts;
       case POST_STATUS.CLOSED:
@@ -73,7 +73,7 @@ function Posts({ convFilter }) {
       default:
         return [];
     }
-  }, [convFilter, posts]);
+  }, [userFilter, posts]);
 
   return (
     <div className="posts" ref={scrollContainerRef} onScroll={handleScroll}>
@@ -98,7 +98,7 @@ export default Posts;
 // import { useNavigate } from "react-router-dom";
 // import { POST_STATUS } from "constants/jeneral";
 
-// function Posts({ convFilter }) {
+// function Posts({ userFilter }) {
 //   const scrollContainerRef = useRef(null);
 //   const navigate = useNavigate();
 //   const { getGeniePosts, setPostId, geniePosts } = useStore(useDataStore);
@@ -164,9 +164,9 @@ export default Posts;
 //     });
 //   }
 //   const filteredPost = useMemo(() => {
-//     // console.log("At convFilter", convFilter);
+//     // console.log("At userFilter", userFilter);
 
-//     switch (convFilter) {
+//     switch (userFilter) {
 //       case POST_STATUS.ALL:
 //         return posts;
 //       case POST_STATUS.CLOSED:
@@ -176,7 +176,7 @@ export default Posts;
 //       default:
 //         return null;
 //     }
-//   }, [convFilter, posts]);
+//   }, [userFilter, posts]);
 
 //   return (
 //     <div className="posts" ref={scrollContainerRef} onScroll={handleScroll}>

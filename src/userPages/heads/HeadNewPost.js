@@ -4,12 +4,12 @@ import Button2 from "components/Button2/Button2";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
-function HeadUserPost({ toggleTopics,topicName,handleCloseNewPostModal }) {
-  const { getNickName } = useStore(useDataStore);
+function HeadUserPost({ topicName,handleCloseNewPostModal }) {
+  const { getNickName,updateModalsStates } = useStore(useDataStore);
   const [avatar, setAvatar] = useState(localStorage.getItem("avatar") || 1);
   const NickName = getNickName();
   function goBack() {
-    toggleTopics();
+    updateModalsStates("usertopics", "close")
     handleCloseNewPostModal()
     // window.history.back();
   }
@@ -34,16 +34,16 @@ function HeadUserPost({ toggleTopics,topicName,handleCloseNewPostModal }) {
             />
           </li>
           <li className="head-nick-name">{NickName}</li>
-          <li className="head-topic">
-            <Button2 text={topicName?topicName:"Choose topic"} onclick={toggleTopics} />
+          <li className="head-topic" onClick={()=>updateModalsStates("usertopics", "toggle")} >
+            <Button2 text={topicName?topicName:"Choose topic"} />
           </li>
-          <li className="head-menu">
+          {/* <li className="head-menu">
             <img
               src={require(`assets/PNG/3dots.png`)}
               className="post-image"
               alt="3dots"
             />
-          </li>
+          </li> */}
         </ul>
       </div>
     </>

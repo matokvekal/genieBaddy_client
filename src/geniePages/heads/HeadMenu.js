@@ -14,9 +14,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function HeadMenu() {
-  const { toggleSideBar } = useStore(useDataStore);
+  const { updateModalsStates } = useStore(useDataStore);
   const handleMenu = () => {
-    toggleSideBar(true);
+    // updateModalsStates("sidebar", "open");
   };
 
   return (

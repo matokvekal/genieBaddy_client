@@ -4,7 +4,7 @@ import sendwhite from "assets/sendwhite.svg";
 import { appInfo } from "../../config/config";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
-import { FaTimes } from "react-icons/fa";
+// import { FaTimes } from "react-icons/fa";
 import PostData from "./PostData";
 import { clearText } from "utils/clearText";
 import UserTopics from "./UserTopics";
@@ -14,21 +14,16 @@ import FooterPostData from "../footer/FooterPostData";
 
 const NewPost = ({ handleCloseNewPostModal }) => {
   const [postText, setPostText] = useState("");
-  const { refreshUserPosts, updateUserLimits, triggerToast } =
+  const { refreshUserPosts, updateUserLimits, triggerToast,updateModalsStates } =
     useStore(useDataStore);
   const maxCharacterLimit = Number(appInfo.maxUserCharacterLimit);
-  const [showTopics, setShowTopics] = useState(false);
+  // const [showTopics, setShowTopics] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("");
   const [disabledSend, setDisabledSend] = useState(false);
   const [chatInput, setChatInput] = useState("");
 
   const avatar = localStorage.getItem("avatar");
-  const toggleTopics = () => {
-    setShowTopics(!showTopics);
-  };
-  const hideTopics = () => {
-    setShowTopics(false);
-  };
+
 
   const sendChat = async () => {
     setDisabledSend(true);
@@ -87,24 +82,21 @@ const NewPost = ({ handleCloseNewPostModal }) => {
         <div className="newpost-main">
           <Header />
           <HeadNewPost
-            toggleTopics={toggleTopics}
 
             topicName={selectedTopic.topic_name}
             handleCloseNewPostModal={handleCloseNewPostModal}
           />
           <UserTopics
-            showTopics={showTopics}
             selectedTopic={selectedTopic}
             setSelectedTopic={setSelectedTopic}
           />
           <div className="newpost-content"
-          onClick={()=>hideTopics()}></div>
+          onClick={()=>updateModalsStates("usertopics", "close")}></div>  
 
           <div className="newpost-footer">
             <FooterPostData
               setChatInput={setChatInput}
               chatInput={chatInput}
-              hideTopics={hideTopics}
               // disabled={disabled}
             />
           </div>

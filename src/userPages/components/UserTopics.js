@@ -3,9 +3,9 @@ import "./UserTopics.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
-function UserTopics({ selectedTopic, setSelectedTopic, showTopics }) {
+function UserTopics({ selectedTopic, setSelectedTopic }) {
   const [topics, setTopics] = useState([]);
-  const { getTopics } = useStore(useDataStore);
+  const { getTopics,modals } = useStore(useDataStore);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,14 +22,14 @@ function UserTopics({ selectedTopic, setSelectedTopic, showTopics }) {
   // };
   return (
     <>
-      <div className={`topic-container ${showTopics ? "active" : null}`}>
+      <div className={`topic-container ${modals.usertopics ? "open" : null}`}>
         {topics &&
           topics
             .sort((a, b) => b.used - a.used)
             .map((topic) => (
               <>
                 <button
-                disabled={!showTopics}
+                disabled={!modals.usertopics}
                   key={topic.id}
                   className="button-topic"
                   onClick={() => {

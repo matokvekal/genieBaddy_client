@@ -8,7 +8,7 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 const Sidebar = () => {
-  const { sideBarState, toggleSideBar, logOut, getNickName, updateNickName } =
+  const { modals, updateModalsStates, logOut, getNickName, updateNickName } =
     useStore(useDataStore);
   // const navigate = useNavigate();
   // const NickName = getNickName();
@@ -16,7 +16,7 @@ const Sidebar = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(
     localStorage.getItem("avatar") || 1
   );
-  const [openModal, setOpenModal] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
 
   // const openModal = () => {
   //   setModalOpen(true);
@@ -25,32 +25,33 @@ const Sidebar = () => {
     localStorage.setItem("avatar", selectedAvatar);
   }, [selectedAvatar]);
 
-  const handleMenu = () => {
-    console.log("handleMenu");
-    setOpenModal(false);
-    toggleSideBar(false);
-  };
+  // const handleMenu = () => {
+  //   console.log("handleMenu");
+  //   setOpenModal(false);
+  //   // updateModalsStates("sidebar","close")
+  // };
   const handleLogOut = () => {
     console.log("logout");
-    setOpenModal(false);
-    toggleSideBar(false);
+    // setOpenModal(false);
+    updateModalsStates("sidebar", "close");
     logOut();
   };
 
   const handleContact = () => {
     console.log("contact");
-    setOpenModal(false);
+    // setOpenModal(false);
   };
   const saveProfile = () => {
-    setOpenModal(false);
+    // setOpenModal(false);
     updateNickName(nickName);
+    updateModalsStates("userseting", "close", "open");
     console.log("saveProfile");
   };
 
-  const handleEdit = () => {
-    console.log("handleEdit");
-    setOpenModal(true);
-  };
+  // const handleEdit = () => {
+  //   console.log("handleEdit");
+  //   // setOpenModal(true);
+  // };
   // const handleUpdateUserNameAndOpenModal = () => {
   //   const newUserName = prompt("Enter new username:");
   //   if (newUserName) {
@@ -61,15 +62,25 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className={`sidebar-user ${sideBarState ? "open" : ""}`} >
+      <div className={`sidebar-user ${modals.sidebar ? "open" : ""}`}>
         <div className="sidebar-header">
           <div className="sidebar-title">Welcome Back!</div>
-          <div className="sidebar-close" onClick={handleMenu}>
+          <div
+            className="sidebar-close"
+            onClick={() => {
+              updateModalsStates("sidebar", "close");
+            }}
+          >
             X
           </div>
         </div>
 
-        <div className="sidebar-personal">
+        <div
+          className="sidebar-personal"
+          onClick={() => {
+            updateModalsStates("userseting", "toggle", "open");
+          }}
+        >
           <div className="sidebar-avatar-container">
             <img
               src={require(`assets/PNG/avatars/avatar${selectedAvatar}.png`)}
@@ -77,7 +88,12 @@ const Sidebar = () => {
               width={40}
             />
           </div>
-          <div className="sidebar-user-name" onClick={handleEdit}>
+          <div
+            className="sidebar-user-name"
+            // onClick={() => {
+            //   updateModalsStates("userseting", "toggle", "open");
+            // }}
+          >
             Hello: {nickName}
           </div>
           <div className="sidebar-edit">
@@ -85,37 +101,35 @@ const Sidebar = () => {
           </div>
         </div>
 
-        {openModal && (
-          <div className="sidebar-main">
-            <div className="edit-user">
-              <input
-                type="text"
-                placeholder="Change your nick name"
-                onChange={(e) => setNickName(e.target.value)}
-              />
+        <div className="sidebar-main">
+          <div className={`edit-user ${modals.userseting ? "open" : ""}`}>
+            <input
+              type="text"
+              placeholder="Change your nick name"
+              onChange={(e) => setNickName(e.target.value)}
+            />
 
-              <div className="avatarList">
-                {Array.from({ length: 151 }, (_, index) => (
-                  <img
-                    key={index}
-                    src={require(`assets/PNG/avatars/avatar${index + 1}.png`)}
-                    className={`avatar ${
-                      selectedAvatar === index + 1 ? "selected" : ""
-                    }`}
-                    alt={`avatar ${index + 1}`}
-                    onClick={() => setSelectedAvatar(index + 1)}
-                  />
-                ))}
-              </div>
-              <Button1
-                className="button1-save-profile"
-                disabled={false}
-                onClick={saveProfile}
-                text="Save"
-              ></Button1>
+            <div className="avatarList">
+              {Array.from({ length: 151 }, (_, index) => (
+                <img
+                  key={index}
+                  src={require(`assets/PNG/avatars/avatar${index + 1}.png`)}
+                  className={`avatar ${
+                    selectedAvatar === index + 1 ? "selected" : ""
+                  }`}
+                  alt={`avatar ${index + 1}`}
+                  onClick={() => setSelectedAvatar(index + 1)}
+                />
+              ))}
             </div>
+            <Button1
+              className="button1-save-profile"
+              disabled={false}
+              onClick={saveProfile}
+              text="Save"
+            ></Button1>
           </div>
-        )}
+        </div>
 
         <div className="sidebar-buttons">
           <Button1

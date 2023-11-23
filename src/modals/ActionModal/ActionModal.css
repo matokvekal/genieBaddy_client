@@ -1,4 +1,4 @@
-/* .post-modal{
+/* .action-modal{
    background-color: #f8f9fa;
    border-right: 1px solid #dee2e6;
    width: 8.9rem;
@@ -13,7 +13,7 @@
    flex-direction: column;
    align-items: center;
 } */
-.post-modal {
+.action-modal {
    background-color:var(--gb-white-50);
    border: 1px solid var(--gb-dark-gray);
    border-radius: 5px;
@@ -31,18 +31,18 @@
    align-items: center;
    pointer-events: none;
  }
-.post-modal.open {
+.action-modal.open {
    transform: translateY(0);
    opacity: 1;
    visibility: visible;
   pointer-events: auto;
    }
-   .post-modal-container .row img{
+   .action-modal-container .row img{
       width: 1.5rem;
       height: 1.5rem;
    
    }
-.post-modal-container .row{
+.action-modal-container .row{
 display: flex;
 justify-content: flex-start;
 height: 1.5;
@@ -53,11 +53,11 @@ align-items: center;
 }
 
 
-.post-modal-container .row:last-child{
+.action-modal-container .row:last-child{
    margin-bottom: 1rem;
 
 }
-.post-modal-container .row div{
+.action-modal-container .row div{
    /* border:1px solid purple; */
    margin-left: 0.5rem;
 }
@@ -65,9 +65,7 @@ align-items: center;
    opacity: 0.5;
    pointer-events: none; /* Prevents clicking */
  }
-   .postdata-content.post-content{
-      /* border: 1 px solid black; */
-   }
+
    .confirmation-modal {
       /* Style your confirmation modal */
       position: fixed;
@@ -78,6 +76,6 @@ align-items: center;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      z-index: 300; /* Higher than post-modal */
+      z-index: 300; /* Higher than action-modal */
     }
     

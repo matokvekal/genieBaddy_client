@@ -7,10 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { POST_STATUS } from "constants/jeneral";
 import NoPosts from "./NoPosts";
 
-function Posts({ convFilter }) {
+function Posts() {
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { getUserPosts, setPostId } = useStore(useDataStore);
+  const { getUserPosts, setPostId, userFilter } = useStore(useDataStore);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -64,9 +64,8 @@ function Posts({ convFilter }) {
   }, [getUserPosts]);
 
   const filteredPost = useMemo(() => {
-    console.log("At convFilter", convFilter);
     let filtered;
-    switch (convFilter) {
+    switch (userFilter) {
       case POST_STATUS.ALL:
         filtered = posts;
         break;
@@ -77,19 +76,20 @@ function Posts({ convFilter }) {
         break;
       case POST_STATUS.OPEN:
         filtered = posts.filter(
-          (conv) => conv.post_status !== POST_STATUS.CLOSED
+          (conv) => conv.post_status === POST_STATUS.OPEN
         );
         break;
-      case POST_STATUS.STARS:
+      case POST_STATUS.SAVED:
         filtered = posts.filter(
-          (conv) => conv.post_status === POST_STATUS.CLOSED && conv.rating > 0
+          (conv) =>
+            conv.post_status === POST_STATUS.CLOSED && conv.user_save === 1
         );
         break;
       default:
         filtered = posts;
     }
     return Array.isArray(filtered) ? filtered : [];
-  }, [convFilter, posts]);
+  }, [userFilter, posts]);
   return (
     <>
       {(filteredPost && filteredPost.length) > 0 ? (

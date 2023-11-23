@@ -7,13 +7,12 @@ import { userLimits } from "config/config.js";
 import Button1 from "components/Button1/Button1";
 
 function FooterMainUser({ handleCloseNewPostModal }) {
-  const { updateUserLimits, toggleSideBar } = useStore(useDataStore);
+  const { updateUserLimits, updateModalsStates } = useStore(useDataStore);
   const [totalPosts, setTotalPosts] = useState(3);
   const [leftPosts, setLeftPosts] = useState(0);
   const handleNewPost = () => {
-    toggleSideBar(false);
+    // updateModalsStates("sidebar","close")
     handleCloseNewPostModal();
-    // console.log("new post");
   };
 
   useEffect(() => {

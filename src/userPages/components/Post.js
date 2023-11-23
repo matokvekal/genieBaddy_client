@@ -7,10 +7,9 @@ import Button2 from "components/Button2/Button2";
 import Button3 from "components/Button3/Button3";
 
 function Post({ handleSelecPost, post }) {
-  const { toggleSideBar } = useStore(useDataStore);
+  const { updateModalsStates } = useStore(useDataStore);
   const showConversation = () => {
-    // console.log("props.post", post);
-    toggleSideBar(false);
+    // updateModalsStates("sidebar","close")
     handleSelecPost(post);
   };
   const renderRatingIcons = () => {

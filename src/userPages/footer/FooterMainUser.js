@@ -6,11 +6,13 @@ import moment from "moment";
 import { userLimits } from "config/config.js";
 import Button1 from "components/Button1/Button1";
 
+
 function FooterMainUser({ handleCloseNewPostModal }) {
   const { updateUserLimits, updateModalsStates } = useStore(useDataStore);
   const [totalPosts, setTotalPosts] = useState(3);
   const [leftPosts, setLeftPosts] = useState(0);
   const handleNewPost = () => {
+    updateModalsStates("all", "close")
     // updateModalsStates("sidebar","close")
     handleCloseNewPostModal();
   };

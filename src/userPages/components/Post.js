@@ -3,11 +3,17 @@ import "./Post.css";
 import { POST_STATUS } from "constants/jeneral";
 import Button2 from "components/Button2/Button2";
 import Button3 from "components/Button3/Button3";
+import { useStore } from "zustand";
+import useDataStore from "stores/appStore";
+
 
 function Post({ handleSelecPost, post }) {
   const showConversation = () => {
+    updateModalsStates("all", "close");
     handleSelecPost(post);
   };
+  const {  updateModalsStates } =
+  useStore(useDataStore);
   const renderRatingIcons = () => {
     let icons = [];
     for (let i = 0; i < post.rating; i++) {

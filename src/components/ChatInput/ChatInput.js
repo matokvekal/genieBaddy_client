@@ -3,12 +3,14 @@ import "./ChatInput.css";
 import send from "assets/send.svg";
 import { FaTimes } from "react-icons/fa";
 import { appInfo } from "../../config/config";
+import { useStore } from "zustand";
+import useDataStore from "stores/appStore";
 
-// const BackIcon = () => <span>{"<"}</span>;
 
 const ChatInput = ({ setChatInput, chatInput, sendChat, disabled }) => {
   const maxCharacterLimit = appInfo.maxUserCharacterLimit; //////////////////////fix
   // const textAreaRef = useRef(null);
+  const {  updateModalsStates} =useStore(useDataStore);
   const textAreaRef = useRef(null);
   const clearText = () => {
     setChatInput("");
@@ -22,7 +24,7 @@ const ChatInput = ({ setChatInput, chatInput, sendChat, disabled }) => {
   // }, [chatInput]);
 
   const handleInputChange = (event) => {
-
+    updateModalsStates("all", "close")
     if (event.target.value.length > maxCharacterLimit) return;
     setChatInput(event.target.value);
     // Remove the fixed height when the user starts typing

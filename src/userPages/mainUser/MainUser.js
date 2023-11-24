@@ -4,7 +4,7 @@ import NewPost from "../components/NewPost";
 import Header from "../heads/Header";
 import HeadButtons from "../heads/HeadButtons";
 import FilterModal from "modals/FilterModal/FilterModal";
-// import "../heads/Head.css";
+import { useTranslation } from "react-i18next";
 import { USERS_ROLES } from "constants";
 import FooterMainUser from "../footer/FooterMainUser";
 import Posts from "../components/Posts";
@@ -17,6 +17,7 @@ const MainUser = () => {
   const { userType, getUserType, updateModalsStates, filterModalState } =
     useStore(useDataStore);
   const [userNewPost, setUserNewPost] = useState(false);
+  const { t } = useTranslation();
   // const [userFilter, setUserFilter] = useState(POST_STATUS.DEFAULT);
   const handleCloseNewPostModal = () => {
     setUserNewPost(!userNewPost);
@@ -45,7 +46,9 @@ const MainUser = () => {
               className="main-user-upper"
               // onClick={() => updateModalsStates("filter", "toggle")}
             >
-              <div>My Chats</div>
+              {/* <div>My Chats</div> */}
+              <div>{t("My Chats")}</div>
+
               <div
                 onClick={() => {
                   updateModalsStates("filter", "toggle");

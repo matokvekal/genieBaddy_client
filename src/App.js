@@ -14,6 +14,7 @@ import MainUser from "userPages/mainUser/MainUser";
 import {appInfo} from "config/config";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import 'config/i18n';
 
 function App() {
   let {

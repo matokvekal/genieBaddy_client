@@ -1,7 +1,7 @@
 ### `npm start`
 
 what to test❌
-fix all close modal
+
 check new
 check lamps
 delete for me
@@ -82,3 +82,52 @@ BAGS
 5)important -user see his post  we must block the fotter  so he cant answer/same for genie 
 6)when genie answer  page shuld return to main then back he can see the page/or stay in page but download the his answer
 color at genie of conversation shuld be opocite
+
+
+logic
+at client side:
+post_status="new": the user see green new
+post_ststus="user_check" user see orange circle and the post will contain some tect"we chaking the message"
+if its not the firs post genie will se  arrows
+post ststus="genie_check" genie will see orange circle, user will see arrow
+
+if post_status ="open"> , the client check last_writen_by, if user_1/_2/_3  then user see arrows and genie see green
+and opocite
+
+if post_status ="closed"  bought genie and user no sign
+
+server select only if is_active=1
+server insert  if active=1 and post_status = new(for genie) or open for bought
+
+user will not select if user_delete=1
+genie will not select if genie_delete=1
+
+gine/user report only if post_status=open
+
+
+
+
+
+post_status:
+user_check>>the post in the que,we will write" the post is in check we will show you later"
+at client:cant write,user_see orange
+
+genie_check >> the same
+
+new >> the user upload. the post is new, at client user see new, genie can choose
+------------------
+open > one side see arrow  the other side that have to write see green
+close>> no sign, user or genie can close any time no sign
+-----------------
+report, no one will see the post(we have  to write in comment whe and when)
+
+after report,clodse no one can write anymore/if post in open user can delete for me or for all, after post close, each one can delete for him.jenie can alway delete only for him
+
+----------
+rubi up to 5
+-------------
+
+new post,  insert to genie_post, status check_user    add to table check_posts , user can see but cand do anything  color orande, text : post in check
+after check, the post move to new
+if genie select and write, the post in genie_check, the message is that in check, genie see orange circle, user can not write yest, user see  arrows
+after check, genie seee arrows user see gren

@@ -46,17 +46,7 @@ function Post({ handleSelecPost, post }) {
         </div>
       );
     } 
-    // else if (
-    //   post.post_status === POST_STATUS.OPEN &&
-    //   post.last_writen_by.includes("genie_") &&
-    //   post.user_read === 1
-    // ) {
-    //   return (
-    //     <div className="row-right-middle circle circle-orange">
-    //       {countMessages()}
-    //     </div>
-    //   );
-    // } 
+
     else if (
       post.post_status === POST_STATUS.OPEN &&
       post.last_writen_by.includes("user_")

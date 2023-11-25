@@ -17,7 +17,7 @@ import FooterPostData from "../footer/FooterPostData";
 import ActionModal from "modals/ActionModal/ActionModal";
 
 const UserPostData = () => {
-  const [chatInput, setChatInput] = useState("");
+  const [textInput, setTextInput] = useState("");
   const { updateModalsStates } = useStore(useDataStore);
   const handleModal = () => {
     // handleActionModal(!actionModalState);
@@ -25,7 +25,7 @@ const UserPostData = () => {
   };
 
   const handleInputChange = (value) => {
-    setChatInput(value);
+    setTextInput(value);
   };
   const { postId, allPosts, refreshUserPosts } = useStore(useDataStore);
   const [disabled, setDisabled] = useState(false);
@@ -33,8 +33,9 @@ const UserPostData = () => {
     window.history.back();
   }
   const sendChat = async () => {
-    if (chatInput.trim() !== "") {
-      const sanitizedInput = clearText(chatInput.trim());
+
+    if (textInput.trim() !== "") {
+      const sanitizedInput = clearText(textInput.trim());
       console.log(sanitizedInput);
       setDisabled(true);
       const res = await PostData({
@@ -137,8 +138,9 @@ const UserPostData = () => {
         <div className="postdata-footer">
           <FooterPostData
             // post={post}
-            setChatInput={setChatInput}
-            chatInput={chatInput}
+            sendChat={sendChat}
+            setTextInput={setTextInput}
+            textInput={textInput}
             disabled={disabled}
           />
         </div>

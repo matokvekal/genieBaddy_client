@@ -13,13 +13,13 @@ import { hasValue } from "../../utils/hasValue";
 import {userLimits} from "config/config.js";
 
 const GeniePostData = () => {
-  const [chatInput, setChatInput] = useState("");
+  const [textInput, setTextInput] = useState("");
   const { postId, allPosts,refreshGeniePosts } = useStore(useDataStore);
   const[disabled,setDisabled]=useState(false)
 
   const sendChat = async () => {
-    if (chatInput.trim() !== "") {
-      const sanitizedInput = clearText(chatInput.trim());
+    if (textInput.trim() !== "") {
+      const sanitizedInput = clearText(textInput.trim());
       const res = await PostData({
         sanitizedInput,
         postId: postId,
@@ -113,8 +113,8 @@ const GeniePostData = () => {
               <div className="action">
                 {post.post_status === POST_STATUS.OPEN && (
                   <ChatInput
-                    setChatInput={setChatInput}
-                    chatInput={chatInput}
+                  setTextInput={setTextInput}
+                  textInput={textInput}
                     sendChat={sendChat}
                     disabled={disabled}
                   />

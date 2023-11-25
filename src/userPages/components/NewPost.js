@@ -13,23 +13,21 @@ import HeadNewPost from "userPages/heads/HeadNewPost";
 import FooterPostData from "../footer/FooterPostData";
 
 const NewPost = ({ handleCloseNewPostModal }) => {
-  const [postText, setPostText] = useState("");
   const { refreshUserPosts, updateUserLimits, triggerToast,updateModalsStates } =
     useStore(useDataStore);
   const maxCharacterLimit = Number(appInfo.maxUserCharacterLimit);
   // const [showTopics, setShowTopics] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("");
   const [disabledSend, setDisabledSend] = useState(false);
-  const [chatInput, setChatInput] = useState("");
+  const [textInput, setTextInput] = useState("");
 
   const avatar = localStorage.getItem("avatar");
 
-
   const sendChat = async () => {
     setDisabledSend(true);
-    if (postText.trim() !== "") {
-      const sanitizedInput = clearText(postText.trim());
-      setPostText(sanitizedInput);
+    if (textInput.trim() !== "") {
+      const sanitizedInput = clearText(textInput.trim());
+      setTextInput(sanitizedInput);
 
       const res = await PostData({
         sanitizedInput,
@@ -59,16 +57,16 @@ const NewPost = ({ handleCloseNewPostModal }) => {
   };
 
   const handleClose = () => {
-    console.log("Posted:", postText);
+    console.log("Posted:", textInput);
     handleCloseNewPostModal();
   };
   const handleInputChange = (event) => {
     if (event.target.value.length > maxCharacterLimit) return;
-    setPostText(event.target.value);
+    setTextInput(event.target.value);
   };
   const handleSend = () => {
-    if (postText.trim() !== "") {
-      sendChat(postText.trim());
+    if (textInput.trim() !== "") {
+      sendChat(textInput.trim());
     }
   };
   const HandleremoveTopic = (e) => {
@@ -95,8 +93,9 @@ const NewPost = ({ handleCloseNewPostModal }) => {
 
           <div className="newpost-footer">
             <FooterPostData
-              setChatInput={setChatInput}
-              chatInput={chatInput}
+              setTextInput={setTextInput}
+              textInput={textInput}
+              sendChat={sendChat}
               // disabled={disabled}
             />
           </div>

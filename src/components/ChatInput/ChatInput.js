@@ -6,14 +6,13 @@ import { appInfo } from "../../config/config";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
-
-const ChatInput = ({ setChatInput, chatInput, sendChat, disabled }) => {
+const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
   const maxCharacterLimit = appInfo.maxUserCharacterLimit; //////////////////////fix
   // const textAreaRef = useRef(null);
-  const {  updateModalsStates} =useStore(useDataStore);
+  const { updateModalsStates } = useStore(useDataStore);
   const textAreaRef = useRef(null);
   const clearText = () => {
-    setChatInput("");
+    setTextInput("");
   };
   // useEffect(() => {
   //   if (textAreaRef.current) {
@@ -24,9 +23,9 @@ const ChatInput = ({ setChatInput, chatInput, sendChat, disabled }) => {
   // }, [chatInput]);
 
   const handleInputChange = (event) => {
-    updateModalsStates("all", "close")
+    updateModalsStates("all", "close");
     if (event.target.value.length > maxCharacterLimit) return;
-    setChatInput(event.target.value);
+    setTextInput(event.target.value);
     // Remove the fixed height when the user starts typing
     if (event.target.value.length > 0) {
       event.target.style.height = "auto"; // or any other height adjustment
@@ -37,14 +36,14 @@ const ChatInput = ({ setChatInput, chatInput, sendChat, disabled }) => {
   };
 
   const handleSend = () => {
-    if (chatInput.trim() !== "") {
-      sendChat(chatInput.trim());
-      setChatInput("");
+    if (textInput.trim() !== "") {
+      sendChat(textInput.trim());
+      setTextInput("");
     }
   };
 
   const handleBack = () => {
-    setChatInput("");
+    setTextInput("");
     window.history.back();
   };
 
@@ -55,12 +54,14 @@ const ChatInput = ({ setChatInput, chatInput, sendChat, disabled }) => {
           // disabled={disabled}
           // ref={textAreaRef}
           className="chat-textarea"
-          rows={chatInput ? Math.min(chatInput.split("\n").length, 7) : 0}
-          value={chatInput}
+          rows={textInput ? Math.min(textInput.split("\n").length, 7) : 0}
+          value={textInput}
           placeholder="Type a message..."
           onChange={handleInputChange}
         />
+
         <img
+          onClick={handleSend}
           src={require(`assets/PNG/send1.png`)}
           className="send-icon"
           alt="send"

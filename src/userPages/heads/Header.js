@@ -6,9 +6,9 @@ import useDataStore from "stores/appStore";
 import "./Header.css";
 import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-function HeadMenu() {
-  const { updateModalsStates } = useStore(useDataStore);
 
+function HeadMenu() {
+  const { updateModalsStates, newChatsCounter } = useStore(useDataStore);
 
   const handleMenu = () => {
     // updateModalsStates("sidebar","open")
@@ -25,7 +25,9 @@ function HeadMenu() {
             <FontAwesomeIcon
               className="fa-icon-bar"
               icon={faBars}
-              onClick={()=>{ updateModalsStates("sidebar","open")}}
+              onClick={() => {
+                updateModalsStates("sidebar", "open");
+              }}
             />
           </li>
           <li className="logo">
@@ -43,6 +45,7 @@ function HeadMenu() {
           </li>
           <li className="icon-bell">
             <img src={require(`assets/PNG/bell.png`)} alt="bell" />
+            {newChatsCounter >0 &&<span className="bell-newChatsCounter">{newChatsCounter>0?newChatsCounter:null}</span>}
           </li>
         </ul>
       </div>

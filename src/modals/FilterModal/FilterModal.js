@@ -30,7 +30,7 @@ const FilterModal = () => {
     let open = 0;
     let closed = 0;
     let saved = 0;
-    data?.forEach((post) => {
+    data && !data.status && data?.forEach((post) => {
       all++;
       if (post.post_status === POST_STATUS.CLOSED) {
         closed++;
@@ -42,6 +42,8 @@ const FilterModal = () => {
     });
     setCounter({ all: all, open: open, closed: closed, saved: saved });
   }, [data]);
+
+
   const handleFilterClick = (filter) => {
     setUserFilter(filter);
     setSelectedFilter(filter);

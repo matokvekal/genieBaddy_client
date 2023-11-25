@@ -79,7 +79,7 @@ const useDataStore = createStore((set, get) => ({
   updateNewChatsCounter: (counter) => {
     set((state) => ({
       ...state,
-      newChatsCounter: counter,
+      newChatsCounter: Number(counter),
     }));
   },
   savePostsToIndexLS: (posts) => {
@@ -323,6 +323,7 @@ const useDataStore = createStore((set, get) => ({
   },
   handleUserNewChats: async () => {
     try {
+      console.log("start handleUserNewChats");
       const newPosts = await fetchUserNewChats();
       if (newPosts.length === 0) {
         return { status: "no new chats" };
@@ -336,6 +337,7 @@ const useDataStore = createStore((set, get) => ({
             newPosts.find((newPost) => newPost.id === post.id);
           if (newPost) {
             post = newPost;
+            console.log("get().newChatsCounter", get().newChatsCounter);
             get().updateNewChatsCounter(get().newChatsCounter + 1);
           }
         });

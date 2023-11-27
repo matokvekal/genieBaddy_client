@@ -8,7 +8,7 @@ const GenieChats = () => {
   const [headerType, setHeaderType] = useState("new");
   const [message, setMessage] = useState(null);
   const text = {
-    topText: "Hi jenie, please select up to 5 topics that you can help with",
+    topText: "Hi genie, please select up to 5 topics that you can help with",
   };
   const fetchData = async (type) => {
     try {
@@ -21,7 +21,6 @@ const GenieChats = () => {
       } else {
         setHeaders(data);
       }
-
     } catch (error) {
       console.log("Error fetching topics:", error);
     }

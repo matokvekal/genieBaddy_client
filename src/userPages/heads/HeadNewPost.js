@@ -37,13 +37,7 @@ function HeadUserPost({ topicName,handleCloseNewPostModal }) {
           <li className="head-topic" onClick={()=>updateModalsStates("usertopics", "toggle")} >
             <Button2 text={topicName?topicName:"Choose topic"} />
           </li>
-          {/* <li className="head-menu">
-            <img
-              src={require(`assets/PNG/3dots.png`)}
-              className="post-image"
-              alt="3dots"
-            />
-          </li> */}
+
         </ul>
       </div>
     </>

@@ -12,15 +12,12 @@ import {
   fetchUserNewChats,
   fetchGenieNewChats,
 } from "services/getData";
+import { getpostById } from "services/getData";
 export const initialState = {
   userId: "",
   userName: "",
-  NickName: localStorage.getItem("NickName") || "user",
+  NickName: localStorage.getItem("user-nickName") || "user",
   userType: "",
-  // userType: "user",
-  // sideBarState: false,
-  // actionModalState: false,
-  // filterModalState: false,
   isNewChat: true,
   loginStatus: false,
   mode: "development",
@@ -116,18 +113,6 @@ const useDataStore = createStore((set, get) => ({
     });
   },
 
-  // handleActionModal: (data) => {
-  //   set((state) => ({
-  //     ...state,
-  //     actionModalState: data,
-  //   }));
-  // },
-  // handleFilterModal: (data) => {
-  //   set((state) => ({
-  //     ...state,
-  //     filterModalState: data,
-  //   }));
-  // },
   setUserFilter: (data) => {
     set((state) => ({
       ...state,
@@ -168,7 +153,7 @@ const useDataStore = createStore((set, get) => ({
       ...state,
       NickName: NickName,
     }));
-    localStorage.setItem("NickName", NickName);
+    localStorage.setItem("user-nickName", NickName);
   },
   getUsername: () => {
     const state = get();
@@ -177,7 +162,8 @@ const useDataStore = createStore((set, get) => ({
     return userName;
   },
   getNickName: () => {
-    let NickName = get().NickName || localStorage.getItem("NickName");
+    let NickName =
+      get().NickName || localStorage.getItem("user-nickName") || "user";
     return NickName;
   },
   cleanGeniePosts: () => {
@@ -220,7 +206,7 @@ const useDataStore = createStore((set, get) => ({
     localStorage.removeItem("userPosts");
     Cookies.remove("IdToken");
     localStorage.removeItem("userPosts");
-    localStorage.removeItem("nickName");
+    localStorage.removeItem("user-nickName");
   },
   setLoginStatus: (loginStatus) => {
     set((state) => ({
@@ -345,6 +331,38 @@ const useDataStore = createStore((set, get) => ({
         localStorage.setItem("userPosts", JSON.stringify(curentPosts));
         return true;
       }
+    } catch (err) {
+      console.log("error in handleUserNewChats", err);
+      return false;
+    }
+  },
+  getUserPostById: async ( post_id) => {
+    try {
+      // debugger
+      // console.log("start getPostById");
+      const newPost = await getpostById(post_id ); ///////////////////////////////////////
+      // console.log("newPost", newPost);
+      const localStoragePosts = JSON.parse(localStorage.getItem("userPosts"));
+      // console.log("localStoragePosts", localStoragePosts);
+      const filterdPosts = localStoragePosts.filter((post) => post.id !== post_id);
+      // console.log("filterdPosts", filterdPosts);
+      if (newPost.data.result.length >= 0) {
+        filterdPosts.push(newPost.data.result[0]);
+      }
+      // console.log("filterdPosts", filterdPosts);
+      get().savePostsToState(filterdPosts);
+      localStorage.setItem("userPosts", JSON.stringify(filterdPosts));
+      return true;
+
+      //delete post from store and from ls
+
+      //find post by id
+      //remove post
+      //if newPost, then push new post
+      //update store
+      //update ls
+
+       
     } catch (err) {
       console.log("error in handleUserNewChats", err);
       return false;

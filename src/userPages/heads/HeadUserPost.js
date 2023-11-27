@@ -6,22 +6,16 @@ import useDataStore from "stores/appStore";
 function HeadUserPost({ post }) {
   const { updateModalsStates } = useStore(useDataStore);
 
-  // const { getNickName } = useStore(useDataStore);
-  // const [avatar, setAvatar] = useState(localStorage.getItem("avatar") || 1);
-  // const NickName = getNickName();
-  // const handleModal = () => {
-  //   // handleActionModal(!actionModalState);
-  //   // updateModalsStates("action","toggle")
 
-  // }
 
   function goBack() {
     window.history.back();
   }
+  
   return (
     <>
       <div className="mainhead-userpost">
-        <ul className="head-items">
+       {post && <ul className="head-items">
           <li className="head-back-arrow" onClick={goBack}>
             <img
               src={require(`assets/PNG/left-arrow-circle.png`)}
@@ -54,7 +48,7 @@ function HeadUserPost({ post }) {
               alt="3dots"
             />
           </li>
-        </ul>
+        </ul>}
       </div>
     </>
   );

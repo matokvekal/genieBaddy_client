@@ -18,7 +18,7 @@ const configHeader = () => {
 };
 
 const PostData = async ({ sanitizedInput, postId, topic_id, header }) => {
-  const endPoint = `${API_ENDPOINT}/geniepost`;/////////////////////////////////////fix
+  const endPoint = `${API_ENDPOINT}/geniepost`; /////////////////////////////////////fix
   const payload = {
     message: sanitizedInput,
     post_id: postId,
@@ -40,7 +40,8 @@ const PostData = async ({ sanitizedInput, postId, topic_id, header }) => {
       // } else if (error.request) {
       //   throw new Error("No response received from the server");
       // } else {
-      //   throw error;
+      //   // throw error;
+      return null;
       // }
     }
   }

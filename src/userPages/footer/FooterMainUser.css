@@ -13,11 +13,11 @@
 }
 
 
+.disabled-lamp {
+   opacity: 0.3;
+ }
 
 
-.button-footer-text{
-
-}
 .button-footer-plus{
 font-size: 1.5rem;
 font-weight: 300;

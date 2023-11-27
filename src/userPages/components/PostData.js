@@ -41,8 +41,8 @@ const PostData = async ({
     }
   } catch (error) {
     console.error("Error in PostData:", error);
-    if (error.response) {
-      return error.response;
+    if (error) {
+      return error.message;
       // const { status } = error.response;
       // if (status === 400) {
       //   return error.response;

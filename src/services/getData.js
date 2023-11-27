@@ -28,7 +28,8 @@ export const getTopics = async (data) => {
     }
   } catch (error) {
     console.error("Error in getTopics:", error);
-    throw error;
+    // throw error;
+    return null;
   }
 };
 
@@ -48,7 +49,8 @@ export const fetchUserPosts = async () => {
     }
   } catch (error) {
     console.error("Error in fetchUserPosts:", error);
-    throw error;
+    // throw error;
+    return null;
   }
 };
 export const fetchUserNewChats = async () => {
@@ -70,7 +72,8 @@ export const fetchUserNewChats = async () => {
     }
   } catch (error) {
     console.error("Error in fetchUserNewChats:", error);
-    throw error;
+    // throw error;
+    return null;
   }
 };
 export const fetchGeniePosts = async () => {
@@ -91,7 +94,8 @@ export const fetchGeniePosts = async () => {
     }
   } catch (error) {
     console.error("Error in fetchGeniePosts:", error);
-    throw error;
+    // throw error;
+    return null;
   }
 };
 export const fetchGenieNewChats = async () => {
@@ -113,10 +117,11 @@ export const fetchGenieNewChats = async () => {
     }
   } catch (error) {
     console.error("Error in fetchGenieNewChats:", error);
-    throw error;
+    // throw error;
+    return null;
   }
 };
-export const genieCoosePost = async (postId, avatar) => {
+export const genieChoosePost = async (postId, avatar) => {
   const EndPoint = `${API_ENDPOINT}/geniechoosepost`;
   try {
     const response = await axios.post(
@@ -126,8 +131,9 @@ export const genieCoosePost = async (postId, avatar) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in genieCoosePost:", error);
-    throw error;
+    console.error("Error in genieChoosePost:", error);
+    // throw error;
+    return null;
   }
 };
 
@@ -148,7 +154,8 @@ export const getUserLimitsFromServer = async () => {
     }
   } catch (error) {
     console.error("Error in getuserlimits:", error);
-    throw error;
+    // throw error;
+    return null;
   }
 };
 export const genieGetNewPosts = async () => {
@@ -172,6 +179,31 @@ export const genieGetNewPosts = async () => {
     }
   } catch (error) {
     console.error("Error in genieGetNewPosts:", error);
-    throw error;
+    // throw error;
+    return null;
+  }
+};
+export const getpostById = async (postId) => {
+  
+  const EndPoint = `${API_ENDPOINT}/getpostbyid?postId=${postId}`;
+  let Header = configHeader();
+
+  if (!Header) {
+    return null;
+  }
+  try {
+    console.log("at getpostById :", EndPoint, Header);
+    const response = await axios.get(EndPoint, Header);
+
+    if (response.status === 200 && response.data?.result) {
+      return response;
+    } else {
+      response.data.info = "no data";
+      return response;
+    }
+  } catch (error) {
+    console.error("Error in genieGetNewPosts:", error);
+    // throw error;
+    return null;
   }
 };

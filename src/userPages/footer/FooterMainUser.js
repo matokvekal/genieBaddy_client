@@ -76,7 +76,9 @@ function FooterMainUser({ handleCloseNewPostModal }) {
                     : require(`assets/PNG/lampDisabled.png`)
                 }
                 alt="lamp"
-                className="footer-icon"
+                className={
+                  index < leftPosts ? "footer-icon" : "footer-icon disabled-lamp"
+                }
               />
             ))}
         </div>

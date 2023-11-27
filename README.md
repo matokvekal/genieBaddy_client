@@ -9,17 +9,18 @@ delete if new
 add rubi up to 5
 save
 close
-------------
+
+---
+
 start gini
 check if every 10 minutes we get new messages
 check every 24 hores we can send new chats
 gini see up to 10 new
 
 long messages
-no phone or email or face book 
+no phone or email or face book
 user name to long
 ==============================
-
 
 user login local ✅
 
@@ -71,42 +72,34 @@ good to have
 4.user can close/loack post
 5.geneei must answer in 3 days other, this post will move to store and genie will get bad point after 10 bad will get ban
 
-
-
-
 BAGS
 1.if not the user turn do not show green light
-2.after 24 hores, user steel see  only 1 chat left
+2.after 24 hores, user steel see only 1 chat left
 3after user send message we must have loader
 4.all topics must came from local storage
-5)important -user see his post  we must block the fotter  so he cant answer/same for genie 
-6)when genie answer  page shuld return to main then back he can see the page/or stay in page but download the his answer
+5)important -user see his post we must block the fotter so he cant answer/same for genie
+6)when genie answer page shuld return to main then back he can see the page/or stay in page but download the his answer
 color at genie of conversation shuld be opocite
-
 
 logic
 at client side:
 post_status="new": the user see green new
 post_ststus="user_check" user see orange circle and the post will contain some tect"we chaking the message"
-if its not the firs post genie will se  arrows
+if its not the firs post genie will se arrows
 post ststus="genie_check" genie will see orange circle, user will see arrow
 
-if post_status ="open"> , the client check last_writen_by, if user_1/_2/_3  then user see arrows and genie see green
+if post_status ="open"> , the client check last_writen_by, if user_1/\_2/\_3 then user see arrows and genie see green
 and opocite
 
-if post_status ="closed"  bought genie and user no sign
+if post_status ="closed" bought genie and user no sign
 
 server select only if is_active=1
-server insert  if active=1 and post_status = new(for genie) or open for bought
+server insert if active=1 and post_status = new(for genie) or open for bought
 
 user will not select if user_delete=1
 genie will not select if genie_delete=1
 
 gine/user report only if post_status=open
-
-
-
-
 
 post_status:
 user_check>>the post in the que,we will write" the post is in check we will show you later"
@@ -114,20 +107,22 @@ at client:cant write,user_see orange
 
 genie_check >> the same
 
-new >> the user upload. the post is new, at client user see new, genie can choose
-------------------
-open > one side see arrow  the other side that have to write see green
+## new >> the user upload. the post is new, at client user see new, genie can choose
+
+open > one side see arrow the other side that have to write see green
 close>> no sign, user or genie can close any time no sign
------------------
-report, no one will see the post(we have  to write in comment whe and when)
 
-after report,clodse no one can write anymore/if post in open user can delete for me or for all, after post close, each one can delete for him.jenie can alway delete only for him
+---
 
-----------
-rubi up to 5
--------------
+report, no one will see the post(we have to write in comment whe and when)
 
-new post,  insert to genie_post, status check_user    add to table check_posts , user can see but cand do anything  color orande, text : post in check
+after report,clodse no one can write anymore/if post in open user can delete for me or for all, after post close, each one can delete for him.genie can alway delete only for him
+
+---
+
+## rubi up to 5
+
+new post, insert to genie_post, status check_user add to table check_posts , user can see but cand do anything color orande, text : post in check
 after check, the post move to new
-if genie select and write, the post in genie_check, the message is that in check, genie see orange circle, user can not write yest, user see  arrows
+if genie select and write, the post in genie_check, the message is that in check, genie see orange circle, user can not write yest, user see arrows
 after check, genie seee arrows user see gren

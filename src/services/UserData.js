@@ -10,7 +10,7 @@ const configHeader = () => {
   const config = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: storedToken,
+      Authorization: `Bearer ${storedToken}`,
     },
   };
   return config;
@@ -23,6 +23,7 @@ export const getUserTopics = async (data) => {
   return response;
 };
 
+
 export const updateTopic = async (data) => {
   let EndPoint = API_ENDPOINT + "/updategenietopic";
   // console.log("at updateTopic :", EndPoint);
@@ -33,6 +34,17 @@ export const updateTopic = async (data) => {
 export const newPost = async (data) => {
   let EndPoint = API_ENDPOINT + "/newpost";
   // console.log("at sendData :", EndPoint, "data:", data);
+  const response = await axios.post(
+    `${EndPoint}`,
+    JSON.stringify(data),
+    config
+  );
+  // console.log("at sendData response:", response);
+  return response; //return post object
+};
+export const userUpdateAction = async (data) => {
+  let EndPoint = API_ENDPOINT + "/useraction";
+   console.log("at userAction :");
   const response = await axios.post(
     `${EndPoint}`,
     JSON.stringify(data),

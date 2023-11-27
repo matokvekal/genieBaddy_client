@@ -19,10 +19,6 @@ import ActionModal from "modals/ActionModal/ActionModal";
 const UserPostData = () => {
   const [textInput, setTextInput] = useState("");
   const { updateModalsStates } = useStore(useDataStore);
-  const handleModal = () => {
-    // handleActionModal(!actionModalState);
-    // updateModalsStates("action","toggle")
-  };
 
   const handleInputChange = (value) => {
     setTextInput(value);
@@ -57,7 +53,7 @@ const UserPostData = () => {
   const maxMessages = userLimits.maxMessages;
 
   useEffect(() => {
-    if (post && post.last_writen_by && post.last_writen_by.includes("user")) {
+    if (post && post.last_writen_by && (post.last_writen_by.includes("user") || post.post_status===POST_STATUS.NEW)) {
       setDisabled(true);
     } else {
       setDisabled(false);
@@ -101,7 +97,7 @@ const UserPostData = () => {
           // chatInput={chatInput}
           // disabled={disabled}
         />
-        <ActionModal />
+        <ActionModal  post={post}/>
 
         <div className="postdata-content">
           <div

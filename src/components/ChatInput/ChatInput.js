@@ -51,12 +51,12 @@ const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
     <div className="chat-input">
       <div className="input-text">
         <textarea
-          // disabled={disabled}
+          disabled={disabled}
           // ref={textAreaRef}
           className="chat-textarea"
           rows={textInput ? Math.min(textInput.split("\n").length, 7) : 0}
           value={textInput}
-          placeholder="Type a message..."
+          placeholder={disabled ? "wait for genie's post" : "Type a message..."}
           onChange={handleInputChange}
         />
 

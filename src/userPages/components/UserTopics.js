@@ -10,7 +10,7 @@ function UserTopics({ selectedTopic, setSelectedTopic }) {
   useEffect(() => {
     const fetchData = async () => {
       const topics = await getTopics();
-      const priorityTopic =topics&& topics.find((topic) => topic.id === 1);
+      const priorityTopic =topics && topics?.find((topic) => topic.id === 1);
       const otherTopics = topics && topics.filter((topic) => topic.id !== 1);
       setTopics(priorityTopic ? [priorityTopic, ...otherTopics] : topics);
     };

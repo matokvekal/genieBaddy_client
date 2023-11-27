@@ -12,7 +12,7 @@ import React, { useState, useEffect } from "react";
 import "./GenieNewPost.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
-import { genieGetNewPosts, genieCoosePost } from "services/getData";
+import { genieGetNewPosts, genieChoosePost } from "services/getData";
 import GenieNewBubble from "./GenieNewBubble";
 import { POST_STATUS } from "constants/jeneral";
 import { formatDate } from "utils/dateUtils";
@@ -76,7 +76,7 @@ const GenieNewPost = ({ setUserFilter }) => {
   const handleChoose = async () => {
     try {
       const avatar = localStorage.getItem("avatar");
-      const res = await genieCoosePost(posts[postId].id, avatar);
+      const res = await genieChoosePost(posts[postId].id, avatar);
       if (res && res.status === 200 && res.statusText === "OK") {
         await cleanGeniePosts();
         // console.log(POST_STATUS.OPEN);

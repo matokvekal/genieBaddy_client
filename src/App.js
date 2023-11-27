@@ -1,4 +1,4 @@
-import { useEffect,useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
 import LoginUser from "./auth/loginUser/LoginUser";
@@ -11,10 +11,10 @@ import GeniePostData from "geniePages/components/GeniePostData";
 import MainGenie from "geniePages/mainGenie/MainGenie";
 import "react-toastify/dist/ReactToastify.css";
 import MainUser from "userPages/mainUser/MainUser";
-import {appInfo} from "config/config";
+import { appInfo } from "config/config";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
-import 'config/i18n';
+import "config/i18n";
 
 function App() {
   let {
@@ -24,7 +24,7 @@ function App() {
     showToast,
     toastMessage,
     resetToast,
-    handleUserNewChats,
+    handleUserNotRead,
     handleGenieNewChats,
   } = useStore(useDataStore);
 
@@ -36,16 +36,22 @@ function App() {
   useEffect(() => {
     let chatCheckInterval;
     if (loginStatus) {
-      const intervalFunction = userType === USERS_ROLES.GENIE ? handleGenieNewChats : handleUserNewChats;
-      chatCheckInterval = setInterval(intervalFunction, 1000 * 60 * appInfo.checkForNewPostsMinutes); // X is your chosen interval in minutes
+      const intervalFunction =
+        userType === USERS_ROLES.GENIE
+          ? handleGenieNewChats
+          : handleUserNotRead;
+      chatCheckInterval = setInterval(
+        intervalFunction,
+        1000 * 60 * appInfo.checkForNewPostsMinutes
+      ); // X is your chosen interval in minutes
     }
     return () => {
       if (chatCheckInterval) {
         clearInterval(chatCheckInterval);
       }
     };
-  }, [loginStatus, userType, handleUserNewChats, handleGenieNewChats]);
-  
+  }, [loginStatus, userType, handleUserNotRead, handleGenieNewChats]);
+
   useEffect(() => {
     const localStorageLoginStatus = localStorage.getItem("authenticated");
     const isAuth = localStorageLoginStatus === "true";
@@ -66,7 +72,8 @@ function App() {
     if (loginStatus || isAuth) {
       const role = userType.toLowerCase();
       const pathsForRole = rolesPaths[role];
-      const isAllowedPath = pathsForRole && pathsForRole.includes(location.pathname);
+      const isAllowedPath =
+        pathsForRole && pathsForRole.includes(location.pathname);
       if (!isAllowedPath) {
         const defaultPath = pathsForRole ? pathsForRole[0] : "/";
         navigate(defaultPath, { replace: true });
@@ -79,7 +86,6 @@ function App() {
       navigate(targetPath, { replace: true });
     }
   }, [loginStatus, navigate, setLoginStatus, location.pathname, pathname]);
-
 
   useEffect(() => {
     if (showToast && toastMessage) {
@@ -101,7 +107,7 @@ function App() {
           <Route exact path="/userpostdata" element={<UserPostData />} />
           {/* <Route exact path="/geniepostdata" element={<GeniePostData />} /> */}
           <Route exact path="/userpostdata/:id" element={<UserPostData />} />
-           {/* Updated line */}
+          {/* Updated line */}
 
           <Route exact path={PATHS_NAMES.GENIE} element={<MainGenie />} />
           {/* <Route exact path="/genieNewPost" element={<GenieNewPost />} /> */}

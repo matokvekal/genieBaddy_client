@@ -11,6 +11,8 @@ function HeadMenu() {
   const { updateModalsStates, newChatsCounter } = useStore(useDataStore);
 
   const handleMenu = () => {
+    
+    updateModalsStates("sidebar", "open");
     // updateModalsStates("sidebar","open")
   };
   const handleFilter = () => {
@@ -25,9 +27,7 @@ function HeadMenu() {
             <FontAwesomeIcon
               className="fa-icon-bar"
               icon={faBars}
-              onClick={() => {
-                updateModalsStates("sidebar", "open");
-              }}
+              onClick={handleMenu}
             />
           </li>
           <li className="logo">

@@ -207,3 +207,26 @@ export const getpostById = async (postId) => {
     return null;
   }
 };
+export const userReadPostById = async (postId) => {
+  
+  const EndPoint = `${API_ENDPOINT}/userreadposts?postid=${postId}`;
+  let Header = configHeader();
+
+  if (!Header) {
+    return null;
+  }
+  try {
+    // debugger
+    console.log("at userReadPostById :", EndPoint, Header);
+    const response = await axios.get(EndPoint, Header);
+    if (response.status === 200 && response.data?.user_read) {
+      return response.data?.user_read;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Error in userReadPostById:", error);
+    // throw error;
+    return null;
+  }
+};

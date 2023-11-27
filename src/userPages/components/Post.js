@@ -6,20 +6,20 @@ import Button3 from "components/Button3/Button3";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
-
 function Post({ handleSelecPost, post }) {
+
   const showConversation = () => {
     updateModalsStates("all", "close");
     handleSelecPost(post);
   };
-  const {  updateModalsStates } =
-  useStore(useDataStore);
+  
+  const { updateModalsStates } = useStore(useDataStore);
   const renderRatingIcons = () => {
     let icons = [];
     for (let i = 0; i < post.rating; i++) {
       icons.push(
         <img
-          src={require(`assets/PNG/rubi-red.png`)}
+          src={require(`assets/PNG/rubi_red.png`)}
           className="rubi-icon"
           alt="rubi"
         />
@@ -29,7 +29,6 @@ function Post({ handleSelecPost, post }) {
   };
 
   const renderPostStatus = () => {
-
     if (post.post_status === POST_STATUS.NEW) {
       return (
         <div className="row-right-bottom">
@@ -38,16 +37,26 @@ function Post({ handleSelecPost, post }) {
       );
     } else if (
       post.post_status === POST_STATUS.OPEN &&
+      post.user_read===0 &&
       post.last_writen_by.includes("genie_") 
+      
     ) {
       return (
         <div className="row-right-middle circle circle-green">
           {countMessages()}
         </div>
       );
-    } 
-
-    else if (
+    } else if (
+      post.post_status === POST_STATUS.OPEN &&
+       post.user_read===1 &&
+      post.last_writen_by.includes("genie_")
+    ) {
+      return (
+        <div className="row-right-middle circle circle-orange">
+          {countMessages()}
+        </div>
+      );
+    } else if (
       post.post_status === POST_STATUS.OPEN &&
       post.last_writen_by.includes("user_")
     ) {

@@ -56,7 +56,7 @@ const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
           className="chat-textarea"
           rows={textInput ? Math.min(textInput.split("\n").length, 7) : 0}
           value={textInput}
-          placeholder={disabled ? "wait for genie's post" : "Type a message..."}
+          placeholder={disabled ? "wait for genie..." : "Type a message..."}
           onChange={handleInputChange}
         />
 

@@ -11,8 +11,10 @@ import {
   getTopics,
   fetchUserNewChats,
   fetchGenieNewChats,
+  userReadPostById,
 } from "services/getData";
 import { getpostById } from "services/getData";
+import { exists } from "i18next";
 export const initialState = {
   userId: "",
   userName: "",
@@ -207,6 +209,7 @@ const useDataStore = createStore((set, get) => ({
     Cookies.remove("IdToken");
     localStorage.removeItem("userPosts");
     localStorage.removeItem("user-nickName");
+    localStorage.removeItem("i18nextLng");
   },
   setLoginStatus: (loginStatus) => {
     set((state) => ({
@@ -277,7 +280,6 @@ const useDataStore = createStore((set, get) => ({
         return data;
       }
     } catch (err) {
-      // console.log("error in getUserPosts", err);
       return { status: "error", info: err.message };
     }
   },
@@ -307,9 +309,9 @@ const useDataStore = createStore((set, get) => ({
       return { status: "error", info: err.message };
     }
   },
-  handleUserNewChats: async () => {
+  handleUserNotRead: async () => {
     try {
-      console.log("start handleUserNewChats");
+      console.log("start handleUserNotRead");
       const newPosts = await fetchUserNewChats();
       if (newPosts.length === 0) {
         return { status: "no new chats" };
@@ -323,7 +325,7 @@ const useDataStore = createStore((set, get) => ({
             newPosts.find((newPost) => newPost.id === post.id);
           if (newPost) {
             post = newPost;
-            console.log("get().newChatsCounter", get().newChatsCounter);
+            // console.log("get().newChatsCounter", get().newChatsCounter);
             get().updateNewChatsCounter(get().newChatsCounter + 1);
           }
         });
@@ -332,26 +334,57 @@ const useDataStore = createStore((set, get) => ({
         return true;
       }
     } catch (err) {
-      console.log("error in handleUserNewChats", err);
+      console.log("error in handleUserNotRead", err);
       return false;
     }
   },
-  getUserPostById: async ( post_id) => {
+  userReadPost: async (postId) => {
     try {
-      // debugger
+      const result = await userReadPostById(postId);
+      if (result) {
+        const localStoragePosts = JSON.parse(localStorage.getItem("userPosts"));
+        for (let post of localStoragePosts) {
+          if (post != null && post.id === postId) {
+            post.user_read = 1;
+            break;
+          }
+        }
+        get().savePostsToState(localStoragePosts);
+        localStorage.setItem("userPosts", JSON.stringify(localStoragePosts));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error in userReadPost:", error);
+      return null;
+    }
+  },
+  getUserPostById: async (post_id) => {
+    try {
       // console.log("start getPostById");
-      const newPost = await getpostById(post_id ); ///////////////////////////////////////
+      const newPost = await getpostById(post_id); ///////////////////////////////////////
       // console.log("newPost", newPost);
       const localStoragePosts = JSON.parse(localStorage.getItem("userPosts"));
       // console.log("localStoragePosts", localStoragePosts);
-      const filterdPosts = localStoragePosts.filter((post) => post.id !== post_id);
-      // console.log("filterdPosts", filterdPosts);
-      if (newPost.data.result.length >= 0) {
-        filterdPosts.push(newPost.data.result[0]);
+      // const filterdPosts = localStoragePosts.filter((post) => post.id !== post_id);
+      const filteredPosts = [];
+
+      for (let post of localStoragePosts) {
+        if (post != null && post.id !== post_id) {
+          filteredPosts.push(post);
+        }
       }
       // console.log("filterdPosts", filterdPosts);
-      get().savePostsToState(filterdPosts);
-      localStorage.setItem("userPosts", JSON.stringify(filterdPosts));
+      if (newPost.data.result.length > 0) {
+        filteredPosts.push(newPost.data.result[0]);
+      }
+      // console.log("filterdPosts", filterdPosts);
+      get().savePostsToState(filteredPosts);
+      if (filteredPosts && filteredPosts.length > 0) {
+        localStorage.setItem("userPosts", JSON.stringify(filteredPosts));
+      } else {
+        localStorage.removeItem("userPosts");
+      }
       return true;
 
       //delete post from store and from ls
@@ -361,10 +394,8 @@ const useDataStore = createStore((set, get) => ({
       //if newPost, then push new post
       //update store
       //update ls
-
-       
     } catch (err) {
-      console.log("error in handleUserNewChats", err);
+      console.log("error in handleUserNotRead", err);
       return false;
     }
   },

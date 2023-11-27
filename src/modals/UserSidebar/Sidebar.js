@@ -8,6 +8,7 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 const Sidebar = () => {
+  // debugger
   const { modals, updateModalsStates, logOut, getNickName, updateNickName } =
     useStore(useDataStore);
   // const navigate = useNavigate();
@@ -150,7 +151,9 @@ const Sidebar = () => {
           ></Button1>
         </div>
         <div className="sidebar-footer">
-          By using this app you accept our <a href>Terms and Conditions</a>
+          By using this app you accept our 
+          <strong>Terms and Conditions</strong>
+
         </div>
       </div>
     </>

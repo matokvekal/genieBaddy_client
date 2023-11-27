@@ -19,9 +19,10 @@
    border-radius: 5px;
    width: 10rem; 
    max-width: 300px; 
+   min-height: 10rem;
    position: absolute; 
-   top: 13vh; 
-   right: 8.5vw; 
+   top: 15vh; 
+   right: 11.5vw; 
    z-index: 200;
    transform: translateY(-40%);
    opacity: 0;

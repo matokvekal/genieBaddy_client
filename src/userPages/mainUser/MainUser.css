@@ -33,7 +33,7 @@
 .main-user-posts{
    display: flex;
    flex-direction: column;
-   width: 100%;
+   width: 99%;
    height: 100%;
    overflow-y: auto;
    /* padding: 1rem; */

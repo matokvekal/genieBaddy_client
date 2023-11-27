@@ -8,7 +8,7 @@ const MessageBubble = ({sender, date, message, isMine, avatar }) => {
         <div className={`sender-details ${isMine ? "me" : "other"}`}>
           {!isMine && (
             <img
-              src={require(`assets/PNG/avatars/avatar${avatar}.png`)}
+              src={require(`assets/PNG/avatars/avatar${avatar?avatar:1}.png`)}
               className="bubble-image"
               alt=" avatar"
             />

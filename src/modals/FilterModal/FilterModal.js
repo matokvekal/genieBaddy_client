@@ -24,13 +24,13 @@ const FilterModal = () => {
 
     fetchData();
   }, [getUserPosts]);
-
   useMemo(() => {
     let all = 0;
     let open = 0;
     let closed = 0;
     let saved = 0;
     data && !data.status && data?.forEach((post) => {
+      if(post){
       all++;
       if (post.post_status === POST_STATUS.CLOSED) {
         closed++;
@@ -38,7 +38,7 @@ const FilterModal = () => {
         open++;
       } else if (post.post_status === POST_STATUS.SAVED) {
         saved++;
-      }
+      }}
     });
     setCounter({ all: all, open: open, closed: closed, saved: saved });
   }, [data]);

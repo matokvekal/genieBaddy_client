@@ -15,6 +15,7 @@ import { hasValue } from "../../utils/hasValue";
 import { userLimits } from "config/config.js";
 import FooterPostData from "../footer/FooterPostData";
 import ActionModal from "modals/ActionModal/ActionModal";
+import Sidebar from "modals/UserSidebar";
 
 const UserPostData = () => {
   const [textInput, setTextInput] = useState("");
@@ -29,7 +30,6 @@ const UserPostData = () => {
     window.history.back();
   }
   const sendChat = async () => {
-
     if (textInput.trim() !== "") {
       const sanitizedInput = clearText(textInput.trim());
       console.log(sanitizedInput);
@@ -53,12 +53,18 @@ const UserPostData = () => {
   const maxMessages = userLimits.maxMessages;
 
   useEffect(() => {
-    if (post && post.last_writen_by && (post.last_writen_by.includes("user") || post.post_status===POST_STATUS.NEW)) {
+    if (
+      post &&
+      post.last_writen_by &&
+      (post.last_writen_by.includes("user") ||
+        post.post_status === POST_STATUS.NEW)
+    ) {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
   }, [post]);
+
   const processTalkData = (post) => {
     const result = [];
 
@@ -83,11 +89,22 @@ const UserPostData = () => {
     return result;
   };
   let postData = null;
-  if (post) {
+  if (post && processTalkData(post)) {
     postData = processTalkData(post);
+  } else {
+    window.history.back();
   }
+const handleClick = () => {
+  updateModalsStates("action", "close");
+}
+  // let postData = null;
+  // if (post) {
+
+  //   postData = processTalkData(post);
+  // }
   return (
     <>
+      <Sidebar />
       <div className="postdata-main">
         <Header />
         {/* <div className="postdata-main"> */}
@@ -97,15 +114,12 @@ const UserPostData = () => {
           // chatInput={chatInput}
           // disabled={disabled}
         />
-        <ActionModal  post={post}/>
+        <ActionModal post={post} />
 
-        <div className="postdata-content">
-          <div
-            className="post-content"
-            // onClick={() => {
-            //   updateModalsStates("action", "toogle");
-            // }}
-          >
+        <div
+          className="postdata-content"
+          onClick={handleClick}>
+          <div className="post-content">
             {postData &&
               postData.map((data, index) => (
                 <div key={index}>

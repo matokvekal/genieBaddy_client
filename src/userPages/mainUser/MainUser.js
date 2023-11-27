@@ -26,6 +26,7 @@ const MainUser = () => {
   //   handleFilterModal(state);
   //   updateModalsStates("filter","toggle")
   // };
+
   return (
     <>
       <Sidebar />

@@ -10,7 +10,7 @@ import NoPosts from "./NoPosts";
 function Posts() {
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { getUserPosts, setPostId, userFilter } = useStore(useDataStore);
+  const { getUserPosts, setPostId, userFilter,userReadPost } = useStore(useDataStore);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -30,10 +30,13 @@ function Posts() {
       );
     }
   }, []);
-
   const handleSelecPost = useCallback(
     (post) => {
+      // debugger
+    if(post.user_read===0){
+      userReadPost(post.id);}
       setPostId(post.id);
+      //update server user_read
       navigate("/userPostData");
     },
     [setPostId, navigate]

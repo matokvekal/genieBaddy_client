@@ -383,10 +383,14 @@ const useDataStore = createStore((set, get) => ({
       return null;
     }
   },
-  getUserPostById: async (post_id) => {
+  getActionPostById: async (post_id) => {
     try {
+      debugger;
       // console.log("start getPostById");
-      const newPost = await getpostById(post_id); ///////////////////////////////////////
+      const newPost = await getpostById(post_id); 
+      if(!newPost){
+        return false;
+      }
       // console.log("newPost", newPost);
       const localStoragePosts = JSON.parse(localStorage.getItem("userPosts"));
       // console.log("localStoragePosts", localStoragePosts);

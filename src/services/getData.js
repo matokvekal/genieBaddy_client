@@ -258,7 +258,7 @@ export const getpostById = async (postId) => {
   try {
     console.log("at getpostById :", EndPoint, Header);
     const response = await axios.get(EndPoint, Header);
-
+debugger
     if (response.status === 200 && response.data?.result) {
       return response;
     } else {
@@ -368,6 +368,7 @@ export const genieChoosePost = async (postId, avatar) => {
   }
 };
 export const updateAction = async (data) => {
+
   const EndPoint = `${API_ENDPOINT}/action`;
    console.log("at action :");
   const response = await axios.post(

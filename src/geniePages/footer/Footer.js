@@ -11,7 +11,7 @@ function FooterMain({ handleCloseNewPostModal }) {
       <div className="footer-area">
         <div className="footer-left"></div>
 
-        <button className="footer-main">SHUFFEL</button>
+        {/* <button className="footer-main">SHUFFEL</button> */}
 
         <div className="footer-right"></div>
       </div>

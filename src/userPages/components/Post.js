@@ -6,13 +6,12 @@ import Button3 from "components/Button3/Button3";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
-function Post({ handleSelecPost, post }) {
-
+function Post({ handleSelectPost, post }) {
   const showConversation = () => {
     updateModalsStates("all", "close");
-    handleSelecPost(post);
+    handleSelectPost(post);
   };
-  
+
   const { updateModalsStates } = useStore(useDataStore);
   const renderRatingIcons = () => {
     let icons = [];
@@ -37,9 +36,8 @@ function Post({ handleSelecPost, post }) {
       );
     } else if (
       post.post_status === POST_STATUS.OPEN &&
-      post.user_read===0 &&
-      post.last_writen_by.includes("genie_") 
-      
+      post.user_read === 0 &&
+      post.last_writen_by.includes("genie_")
     ) {
       return (
         <div className="row-right-middle circle circle-green">
@@ -48,7 +46,7 @@ function Post({ handleSelecPost, post }) {
       );
     } else if (
       post.post_status === POST_STATUS.OPEN &&
-       post.user_read===1 &&
+      post.user_read === 1 &&
       post.last_writen_by.includes("genie_")
     ) {
       return (
@@ -88,29 +86,28 @@ function Post({ handleSelecPost, post }) {
         messageCount += 1;
       }
     });
-
     return messageCount;
   };
   return (
     <div className="post-row " onClick={showConversation}>
       <div className="row-left">
-        <img
+        {post.user_avatar && <img
           src={require(`assets/PNG/avatars/avatar${
-            post.user_avatar ? post.user_avatar : 1
+            post.user_avatar
           }.png`)}
           className="post-image-avatar"
           alt="user avatar"
-        />
+        />}
       </div>
       <div className="row-middle">
         <div className="row-middle-upper">
           <div className="row-middle-upper-left">
-            {post.user_nickName ? post.user_nickName : "user"}
+            {post.user_nickname}
           </div>
           <div className="row-middle-upper-right">{renderRatingIcons()}</div>
         </div>
         <div className="row-middle-middle">
-          <Button2 text={post.user_header ? post.user_header : "General"} />
+          <Button2 text={post.topic_name} />
         </div>
         <div className="row-middle-bottom">{post.user_1}</div>
       </div>

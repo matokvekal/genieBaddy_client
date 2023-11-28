@@ -5,14 +5,17 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import { useNavigate } from "react-router-dom";
 import { POST_STATUS } from "constants/jeneral";
+import NoPosts from "./NoPosts";
 
-function Posts({ userFilter }) {
+function Posts() {
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { getGeniePosts, setPostId } = useStore(useDataStore);
+  const { getGeniePosts, setPostId, userFilter, userReadPost } =
+    useStore(useDataStore);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    // Restore scroll position when component mounts
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop =
         localStorage.getItem("scrollPosition") || 0;
@@ -20,6 +23,7 @@ function Posts({ userFilter }) {
   }, []);
 
   const handleScroll = useCallback(() => {
+    // Save scroll position in localStorage as the user scrolls
     if (scrollContainerRef.current) {
       localStorage.setItem(
         "scrollPosition",
@@ -27,10 +31,14 @@ function Posts({ userFilter }) {
       );
     }
   }, []);
-
-  const handleSelecPost = useCallback(
+  const handleSelectPost = useCallback(
     (post) => {
+      // debugger
+      if (post.user_read === 0) {
+        userReadPost(post.id);
+      }
       setPostId(post.id);
+      //update server user_read
       navigate("/geniePostData");
     },
     [setPostId, navigate]
@@ -41,8 +49,14 @@ function Posts({ userFilter }) {
       try {
         const res = await getGeniePosts();
         if (res && res.length > 0) {
-          const sorted = sortedPosts(res);
-          setPosts(sorted);
+          setPosts(res);
+          if (scrollContainerRef.current) {
+            const savedScrollPosition =
+              Number(localStorage.getItem("scrollPosition")) || 0;
+            setTimeout(() => {
+              scrollContainerRef.current.scrollTop = savedScrollPosition;
+            }, 100);
+          }
         } else {
           setPosts([]);
         }
@@ -54,141 +68,56 @@ function Posts({ userFilter }) {
     fetchPosts();
   }, [getGeniePosts]);
 
-  function sortedPosts(posts) {
-    return [...posts].sort((a, b) => {
-      const dateA = new Date(a.created_at);
-      const dateB = new Date(b.created_at);
-      return dateB - dateA;
-    });
-  }
-
   const filteredPost = useMemo(() => {
+    let filtered;
     switch (userFilter) {
       case POST_STATUS.ALL:
-        return posts;
+        filtered = posts;
+        break;
       case POST_STATUS.CLOSED:
-        return posts.filter((conv) => conv.post_status === POST_STATUS.CLOSED);
+        filtered = posts.filter(
+          (conv) => conv.post_status === POST_STATUS.CLOSED
+        );
+        break;
       case POST_STATUS.OPEN:
-        return posts.filter((conv) => conv.post_status === POST_STATUS.OPEN);
+        filtered = posts.filter(
+          (conv) => conv.post_status === POST_STATUS.OPEN
+        );
+        break;
+      case POST_STATUS.SAVED:
+        filtered = posts.filter(
+          (conv) =>
+            conv.post_status === POST_STATUS.CLOSED && conv.user_save === 1
+        );
+        break;
       default:
-        return [];
+        filtered = posts;
     }
+    return Array.isArray(filtered) ? filtered : [];
   }, [userFilter, posts]);
-
   return (
-    <div className="posts" ref={scrollContainerRef} onScroll={handleScroll}>
-      {filteredPost.length > 0 ? (
-        filteredPost.map((post) => (
-          <Post key={post.id} post={post} handleSelecPost={handleSelecPost} />
-        ))
+    <>
+      {(filteredPost && filteredPost.length) > 0 ? (
+        <div
+          className="posts-rows"
+          ref={scrollContainerRef}
+          onScroll={handleScroll}
+        >
+          {filteredPost.map((post) =>
+            post && post.id ? (
+              <Post
+                key={post.id}
+                post={post}
+                handleSelectPost={handleSelectPost}
+              />
+            ) : null
+          )}
+        </div>
       ) : (
-        <p>No posts available.</p>
+        <NoPosts />
       )}
-    </div>
+    </>
   );
 }
 
 export default Posts;
-
-// import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-// import "./Posts.css";
-// import Post from "./Post";
-// import { useStore } from "zustand";
-// import useDataStore from "stores/appStore";
-// import { useNavigate } from "react-router-dom";
-// import { POST_STATUS } from "constants/jeneral";
-
-// function Posts({ userFilter }) {
-//   const scrollContainerRef = useRef(null);
-//   const navigate = useNavigate();
-//   const { getGeniePosts, setPostId, geniePosts } = useStore(useDataStore);
-//   const [posts, setPosts] = useState([]);
-
-//   useEffect(() => {
-//     // Restore scroll position when component mounts
-//     if (scrollContainerRef.current) {
-//       scrollContainerRef.current.scrollTop =
-//         localStorage.getItem("scrollPosition") || 0;
-//     }
-//   }, []);
-
-//   const handleScroll = useCallback(() => {
-//     // Save scroll position in localStorage as the user scrolls
-//     if (scrollContainerRef.current) {
-//       localStorage.setItem(
-//         "scrollPosition",
-//         scrollContainerRef.current.scrollTop
-//       );
-//     }
-//   }, []);
-
-//   const handleSelecPost = useCallback(
-//     (post) => {
-//       setPostId(post.id);
-//       navigate("/geniePostData");
-//     },
-//     [setPostId, navigate]
-//   );
-
-//   useEffect(() => {
-//     const fetchPosts = async () => {
-//       try {
-//         const res = await getGeniePosts();
-
-//         if (res && res.length > 0) {
-//           const sorted = sortedPosts(res);
-//           setPosts(sorted);
-//           if (scrollContainerRef.current) {
-//             const savedScrollPosition =
-//               Number(localStorage.getItem("scrollPosition")) || 0;
-//             setTimeout(() => {
-//               scrollContainerRef.current.scrollTop = savedScrollPosition;
-//             }, 100);
-//           }
-//         } else {
-//           setPosts([]);
-//         }
-//       } catch (error) {
-//         console.error("Failed to fetch posts:", error);
-//       }
-//     };
-
-//     fetchPosts();
-//   }, [geniePosts]);
-
-//   function sortedPosts(posts) {
-//     return [...posts].sort((a, b) => {
-//       const dateA = new Date(a.created_at);
-//       const dateB = new Date(b.created_at);
-//       return dateB - dateA;
-//     });
-//   }
-//   const filteredPost = useMemo(() => {
-//     // console.log("At userFilter", userFilter);
-
-//     switch (userFilter) {
-//       case POST_STATUS.ALL:
-//         return posts;
-//       case POST_STATUS.CLOSED:
-//         return posts.filter((conv) => conv.post_status === POST_STATUS.CLOSED);
-//       case POST_STATUS.OPEN:
-//         return posts.filter((conv) => conv.post_status === POST_STATUS.OPEN);
-//       default:
-//         return null;
-//     }
-//   }, [userFilter, posts]);
-
-//   return (
-//     <div className="posts" ref={scrollContainerRef} onScroll={handleScroll}>
-//       {filteredPost &&
-//         filteredPost.length > 0 &&
-//         filteredPost.map((post) =>
-//           post && post.id ? (
-//             <Post key={post.id} post={post} handleSelecPost={handleSelecPost} />
-//           ) : null
-//         )}
-//     </div>
-//   );
-// }
-
-// export default Posts;

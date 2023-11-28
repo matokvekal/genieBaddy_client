@@ -1,56 +1,53 @@
 import { useState } from "react";
-import HeadMenu from "../heads/HeadMenu";
-import HeadButtons from "../heads/HeadButtons";
-import GenieNewPost from "../components/GenieNewPost";
-import GenieRating from "../components/GenieRating";
-import { USERS_ROLES } from "constants";
+import "./MainGenie.css";
+// import NewPost from "../components/NewPost";
+import Header from "../heads/Header";
+import FilterModal from "modals/FilterModal/FilterModal";
+import { useTranslation } from "react-i18next";
+import Footer from "../Footer/Footer";
 import Posts from "../components/Posts";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "modals/UserSidebar";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
-import { POST_STATUS } from "constants/jeneral";
-
-const COMPONENT_MAP = {
-  [POST_STATUS.NEW]: GenieNewPost,
-  [POST_STATUS.RATING]: GenieRating,
-  default: Posts,
-};
 
 const MainGenie = () => {
-  const { userType, getUserType } = useStore(useDataStore);
-  const [userFilter, setUserFilter] = useState(POST_STATUS.DEFAULTGENIE);
-  const [newPostCounter, setNewPostCounter] = useState(0);
-
-  const renderContent = () => {
-    if (userType !== USERS_ROLES.GENIE && getUserType() !== USERS_ROLES.GENIE) {
-      return null;
-    }
-
-    const Component = COMPONENT_MAP[userFilter] || COMPONENT_MAP.default;
-    return <Component userFilter={userFilter} setUserFilter={setUserFilter} />;
+  const { updateModalsStates } = useStore(useDataStore);
+  const [userNewPost, setUserNewPost] = useState(false);
+  const { t } = useTranslation();
+  const handleCloseNewPostModal = () => {
+    setUserNewPost(!userNewPost);
   };
 
   return (
     <>
-      <div className="container">
-        <div className="header">
-          <div className="mainhead">
-            <HeadMenu />
-            <HeadButtons
-              userFilter={userFilter}
-              setUserFilter={setUserFilter}
-              newPostCounter={newPostCounter}
-              setNewPostCounter={setNewPostCounter}
-            />
-          </div>
+      <Sidebar />
+      <FilterModal />
+      <div className="container-genie">
+        <div className="header-genie">
+          <Header />
         </div>
-        <div className="main">
-          <Sidebar />
-          <section className="section">{renderContent()}</section>
+        <div className="main-genie">
+          <div className="main-genie-upper">
+            <div>{t("My Chats")}</div>
+
+            <div
+            onClick={() => {
+              updateModalsStates("filter", "toggle");
+            }}
+            >
+              <img
+                src={require(`assets/PNG/mynaui_filter.png`)}
+                alt="mynaui_filter"
+              />
+            </div>
+          </div>
+          <div className="main-genie-posts">
+            <Posts />
+            </div>
         </div>
 
-        <div className="footer">
-          {/* <FooterMain handleCloseNewPostModal={handleCloseNewPostModal} /> */}
+        <div className="footer-genie">
+          <Footer />
         </div>
       </div>
     </>

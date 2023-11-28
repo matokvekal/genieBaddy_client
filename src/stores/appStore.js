@@ -12,8 +12,9 @@ import {
   fetchUserNewChats,
   fetchGenieNewChats,
   userReadPostById,
+  genieReadPostById,
+  getpostById,
 } from "services/getData";
-import { getpostById } from "services/getData";
 import { exists } from "i18next";
 export const initialState = {
   userId: "",
@@ -351,6 +352,29 @@ const useDataStore = createStore((set, get) => ({
         }
         get().savePostsToState(localStoragePosts);
         localStorage.setItem("userPosts", JSON.stringify(localStoragePosts));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error in userReadPost:", error);
+      return null;
+    }
+  },
+  genieReadPost: async (postId) => {
+    try {
+      const result = await genieReadPostById(postId);
+      if (result) {
+        const localStoragePosts = JSON.parse(
+          localStorage.getItem("geniePosts")
+        );
+        for (let post of localStoragePosts) {
+          if (post != null && post.id === postId) {
+            post.user_read = 1;
+            break;
+          }
+        }
+        get().savePostsToState(localStoragePosts);
+        localStorage.setItem("geniePosts", JSON.stringify(localStoragePosts));
         return true;
       }
       return false;

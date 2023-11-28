@@ -6,15 +6,15 @@ const MessageBubble = ({sender, date, message, isMine, avatar }) => {
     <div className={`message-wrapper ${isMine ? "me" : "other"}`}>
       <div className={`message-details ${isMine ? "me" : "other"}`}>
         <div className={`sender-details ${isMine ? "me" : "other"}`}>
-          {!isMine && (
+          {!isMine && avatar &&(
             <img
-              src={require(`assets/PNG/avatars/avatar${avatar?avatar:1}.png`)}
+              src={require(`assets/PNG/avatars/avatar${avatar}.png`)}
               className="bubble-image"
               alt=" avatar"
             />
           )}
           <span className={`message-sender-name ${isMine ? "me" : "other"}`}>
-            {sender}
+            {sender}{`${isMine ? "(me)" : "(jenie)"}`}
           </span>
           <span className={`message-message-date ${isMine ? "me" : "other"}`}>
             {date}

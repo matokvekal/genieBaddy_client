@@ -43,11 +43,11 @@ function LoginGenie() {
   });
 
   return (
-    <div className="Login d-flex row justify-content-center">
+    <div className="Logingenie  d-flex row justify-content-center">
       <div className="col-lg-6 order-sm-0 order-lg-1 my-lg-5">
-        <h2 className="Login__title">Login Genie</h2>
+        <h2 className="Logingenie__title">Login Genie</h2>
         <form
-          className="Login__form mt-5 col-lg-8 px-0"
+          className="Logingenie__form mt-5 col-lg-8 px-0"
           onSubmit={formik.handleSubmit}
           noValidate
         >
@@ -97,14 +97,14 @@ function LoginGenie() {
               Don't have an account?{" "}
               <Link
                 to={PATHS_NAMES.REGISTERGENIE}
-                className="Login__register-link"
+                className="Logingenie__register-link"
               >
                 Register
               </Link>
             </span>
             <span>
               Are you User?{" "}
-              <Link to={PATHS_NAMES.LOGINUSER} className="Login__register-link">
+              <Link to={PATHS_NAMES.LOGINUSER} className="Logingenie__register-link">
                 User Login
               </Link>
             </span>

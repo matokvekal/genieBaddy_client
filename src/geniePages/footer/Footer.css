@@ -1,0 +1,11 @@
+.footer-area{
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   padding: 0 1rem;
+   color:var(--gb-primary-black);
+   background: var(--gb-white);
+   align-items: center;
+   height: 5rem;
+}

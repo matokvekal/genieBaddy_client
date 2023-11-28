@@ -25,9 +25,8 @@ function App() {
     toastMessage,
     resetToast,
     handleUserNotRead,
-    handleGenieNewChats,
   } = useStore(useDataStore);
-
+  let { handleGenieNewChats } = useStore(useDataStore);
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = useLocation();
@@ -105,7 +104,8 @@ function App() {
           <Route exact path={PATHS_NAMES.LOGINGENIE} element={<LoginGenie />} />
           <Route exact path={PATHS_NAMES.USER} element={<MainUser />} />
           <Route exact path="/userpostdata" element={<UserPostData />} />
-          {/* <Route exact path="/geniepostdata" element={<GeniePostData />} /> */}
+          <Route exact path="/geniepostdata" element={<GeniePostData />} />
+          <Route exact path="/geniepostdata/:id" element={<GeniePostData />} />
           <Route exact path="/userpostdata/:id" element={<UserPostData />} />
           {/* Updated line */}
 

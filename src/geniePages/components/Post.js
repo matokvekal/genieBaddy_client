@@ -1,28 +1,76 @@
 import { formatDate } from "utils/dateUtils";
+import "./Post.css";
 import { POST_STATUS } from "constants/jeneral";
+import Button2 from "components/Button2/Button2";
+import Button3 from "components/Button3/Button3";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
-import { faCommentAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Post({ handleSelecPost, post }) {
+function Post({ handleSelectPost, post }) {
   const { updateModalsStates } = useStore(useDataStore);
-  const showData = () => {
-    // console.log("props.post", post);
-    // updateModalsStates("sidebar","toggle")
-    handleSelecPost(post);
+
+  const showConversation = () => {
+    // updateModalsStates("all", "close");
+    handleSelectPost(post);
   };
+
   const renderRatingIcons = () => {
     let icons = [];
     for (let i = 0; i < post.rating; i++) {
       icons.push(
-        <span key={i} className="diamond-icon">
-          ♦
-        </span>
+        <img
+          src={require(`assets/PNG/rubi_red.png`)}
+          className="rubi-icon"
+          alt="rubi"
+        />
       );
     }
     return icons;
   };
+
+  const renderPostStatus = () => {
+    if (post.post_status === POST_STATUS.NEW) {
+      return (
+        <div className="row-right-bottom">
+          <Button3 text={"NEW"} />
+        </div>
+      );
+    } else if (
+      post.post_status === POST_STATUS.OPEN &&
+      post.user_read === 0 &&
+      post.last_writen_by.includes("genie_")
+    ) {
+      return (
+        <div className="row-right-middle circle circle-green">
+          {countMessages()}
+        </div>
+      );
+    } else if (
+      post.post_status === POST_STATUS.OPEN &&
+      post.user_read === 1 &&
+      post.last_writen_by.includes("genie_")
+    ) {
+      return (
+        <div className="row-right-middle circle circle-orange">
+          {countMessages()}
+        </div>
+      );
+    } else if (
+      post.post_status === POST_STATUS.OPEN &&
+      post.last_writen_by.includes("user_")
+    ) {
+      return (
+        <img
+          src={require(`assets/PNG/vector.png`)}
+          className="post-vector"
+          alt="in conversation"
+        />
+      );
+    } else {
+      return null;
+    }
+  };
+
   const countMessages = () => {
     let messageCount = 0;
     const messageKeys = [
@@ -42,48 +90,31 @@ function Post({ handleSelecPost, post }) {
 
     return messageCount;
   };
-
   return (
-    <div
-      className={`post-container ${!post["genie_1"] ? "new" : ""}`}
-      onClick={showData}
-    >
-      {/* <div className="post-container" onClick={showData}> */}
-      <img
-        src={require(`assets/PNG/avatars/avatar${post.user_avatar?post.user_avatar:1}.png`)}
-        className="post-image"
-        alt="user avatar"
-      />
-
-      <div className="post-data">
-        <div className="post-data left">
-          {post.id}
-          <span>
-            {post.post_status === POST_STATUS.CLOSED ? (
-              <FontAwesomeIcon className="fa-icon red" icon={faCommentAlt} />
-            ) : (
-              <FontAwesomeIcon className="fa-icon green" icon={faCommentAlt} />
-            )}
-          </span>
-
-          <span className="post-data left upper">
-            {post.user_header ? post.user_header : post.user_1}
-          </span>
-          <span className="post-data left bottom">
-            {post.user_1.length > 30
-              ? `${post.user_1.slice(0, 30)}...`
-              : post.user_1}
-          </span>
-        </div>
-        <div className="post-data right">
-          <div className="post-right rate">{renderRatingIcons()}</div>
-          <div className="post-right info">
-            <span className="post-right date ">
-              {formatDate(post.created_at)}
-            </span>
-            <span className="post-right icon">{countMessages()}</span>
+    <div className="post-row " onClick={showConversation}>
+      <div className="row-left">
+        {post.genie_avatar &&<img
+          src={require(`assets/PNG/avatars/avatar${
+            post.genie_avatar 
+          }.png`)}
+          className="post-image-avatar"
+          alt="user avatar"
+        />}
+      </div>
+      <div className="row-middle">
+        <div className="row-middle-upper">
+          <div className="row-middle-upper-left">
+            {post.genie_nickname}
           </div>
+          <div className="row-middle-upper-right">{renderRatingIcons()}</div>
         </div>
+        <div className="row-middle-middle">
+        <Button2 text={post.topic_name} />        </div>
+        <div className="row-middle-bottom">{post.user_1}</div>
+      </div>
+      <div className="row-right">
+        <div className="row-right-upper">{formatDate(post.created_at)}</div>
+        {renderPostStatus()}
       </div>
     </div>
   );

@@ -3,9 +3,7 @@ import "./UserPostData.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import Header from "../heads/Header";
-import "./UserPostData.css";
 import HeadUserPost from "userPages/heads/HeadUserPost";
-import { ChatInput } from "components";
 import MessageBubble from "./MessageBubble";
 import { formatDate } from "utils/dateUtils";
 import { clearText } from "utils/clearText";
@@ -97,22 +95,13 @@ const UserPostData = () => {
 const handleClick = () => {
   updateModalsStates("action", "close");
 }
-  // let postData = null;
-  // if (post) {
-
-  //   postData = processTalkData(post);
-  // }
   return (
     <>
       <Sidebar />
       <div className="postdata-main">
         <Header />
-        {/* <div className="postdata-main"> */}
         <HeadUserPost
           post={post}
-          // setChatInput={setChatInput}
-          // chatInput={chatInput}
-          // disabled={disabled}
         />
         <ActionModal post={post} />
 
@@ -134,7 +123,7 @@ const handleClick = () => {
                   )}
                   {hasValue(data[`genie_${index + 1}`]) && (
                     <MessageBubble
-                      sender={post["user_nickname"]}
+                      sender={post["genie_nickname"]}
                       date={formatDate(data[`genie_${index + 1}_date`])}
                       message={data[`genie_${index + 1}`]}
                       isMine={false}
@@ -147,58 +136,12 @@ const handleClick = () => {
         </div>
         <div className="postdata-footer">
           <FooterPostData
-            // post={post}
             sendChat={sendChat}
             setTextInput={setTextInput}
             textInput={textInput}
             disabled={disabled}
           />
         </div>
-        {/* <HeadUserPost /> */}
-        {/* <HeadUserPost post={post} />
-        {post && ( */}
-
-        {/* <div>{post.postId}</div>
-            <div className="post-content">
-              {postData &&
-                postData.map((post, index) => (
-                  <div key={index}>
-                    {hasValue(post[`user_${index + 1}`]) && (
-                      <MessageBubble
-                        sender={post.user_nickname ? post.user_nickname : "you"}
-                        date={formatDate(post[`user_${index + 1}_date`])}
-                        message={post[`user_${index + 1}`]}
-                        isMine={true}
-                      />
-                    )}
-                    {hasValue(post[`genie_${index + 1}`]) && (
-                      <MessageBubble
-                        sender={
-                          post.genie_nickname ? post.genie_nickname : "genie"
-                        }
-                        date={formatDate(post[`genie_${index + 1}_date`])}
-                        message={post[`genie_${index + 1}`]}
-                        isMine={false}
-                      />
-                    )}
-                  </div>
-                ))}
-            </div>
-
-            <div className="post-footer">
-              <div className="action">
-                {post.post_status === POST_STATUS.OPEN && (
-                  <ChatInput
-                    setChatInput={setChatInput}
-                    chatInput={chatInput}
-                    sendChat={sendChat}
-                    disabled={disabled}
-                  />
-                )}
-                <div className="chat-input-container"></div>
-                <div className="chat-icons"></div>
-              </div>
-            </div> */}
       </div>
     </>
   );

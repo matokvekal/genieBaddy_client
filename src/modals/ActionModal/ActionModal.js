@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./ActionModal.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
-import { userUpdateAction } from "services/UserData";
+import { updateAction } from "services/getData";
 import { USER_ACTIONS } from "constants/jeneral";
 
 const ActionModal = ({ post }) => {
@@ -18,7 +18,7 @@ const ActionModal = ({ post }) => {
       comment,
     };
     try {
-      let res = await userUpdateAction(data);
+      let res = await updateAction(data);
       res = await getUserPostById(post.id);
       //////////
 

@@ -1,13 +1,17 @@
-.Login {
+.Logingenie {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background: linear-gradient(to right, var(--gb-light-gray), var(--white));
+  background-image: url('assets/PNG/bg1.png');
+  background-size: cover; 
+  background-position: center; 
 }
 
-.Login__title {
+
+.Logingenie__title {
   font-size: 32px;
   font-weight: bold;
   text-align: center;
@@ -18,46 +22,46 @@ div.text-danger {
  max-width: 300px; 
  color:var(--gb-danger)
 }
-.Login__form .alert.alert-danger{
+.Logingenie__form .alert.alert-danger{
  height: 20px; 
  max-width: 300px; 
  color:var(--gb-danger)
 }
-.Login__form {
+.Logingenie__form {
  display: flex;
  flex-direction: column;
  justify-content: space-between;
 }
-.Login__form {
+.Logingenie__form {
   width: 100%;
   margin-top: 10px;
   padding: 30px;
-  background-color: var(--gb-purple);
+  /* background-color: var(--gb-purple);
   border: 1px solid var(--white);
-  border-radius: 8px;
+  border-radius: 8px; */
   box-shadow: 0 4px 8px var(--black);
 }
 
-.Login__form__error {
+.Logingenie__form__error {
   color: var(--form-error);
   margin-top: 8px;
   font-size: 14px;
 }
 
-.Login__form .form-group {
+.Logingenie__form .form-group {
   margin-bottom: 20px;
 }
 
-.Login__form label {
+.Logingenie__form label {
   display: block;
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
-.Login__form input[type="text"],
-.Login__form input[type="username"],
-.Login__form input[type="password"] {
+.Logingenie__form input[type="text"],
+.Logingenie__form input[type="username"],
+.Logingenie__form input[type="password"] {
   width: 100%;
   padding: 12px;
   font-size: 16px;
@@ -65,21 +69,21 @@ div.text-danger {
   border-radius: 6px;
 }
 
-.Login__form__error small {
+.Logingenie__form__error small {
   display: block;
   margin-top: 4px;
 }
 
-.Login__form__input-row {
+.Logingenie__form__input-row {
   display: flex;
   flex-direction: row;
 }
 
-.Login__form__input-row .form-group:first-child {
+.Logingenie__form__input-row .form-group:first-child {
   margin-right: 10px;
 }
 
-.Login__submit-btn {
+.Logingenie__submit-btn {
   background-color: var(--background-blue);
   color: var(--white); 
   border: none;
@@ -90,22 +94,22 @@ div.text-danger {
   transition: background-color 0.3s ease;
 }
 
-.Login__submit-btn:disabled {
+.Logingenie__submit-btn:disabled {
   background-color:var(--grey);
   cursor: not-allowed;
 }
 
-.Login__submit-btn:hover {
+.Logingenie__submit-btn:hover {
   background-color: var(--background-blue);
 }
 
-.Login__register-link {
+.Logingenie__register-link {
   color: var(--background-blue);
   font-weight: bold;
   text-decoration: none;
 }
 
-.Login__intro-image {
+.Logingenie__intro-image {
   max-width: 100%;
   height: auto;
   margin-top: 40px;
@@ -114,17 +118,17 @@ div.text-danger {
  display: flex;
  flex-direction: column;
 }
-.Login__form input[type="text"],
-.Login__form input[type="password"] {
+.Logingenie__form input[type="text"],
+.Logingenie__form input[type="password"] {
  padding: 15px; /* Increased padding */
  font-size: 18px; /* Larger font size */
 }
-.Login__submit-btn {
+.Logingenie__submit-btn {
  padding: 15px 30px;
  font-size: 20px;
  /* Other styles */
 }
-.Login__submit-btn:hover {
+.Logingenie__submit-btn:hover {
  background-color: darken(var(--background-blue), 10%); /* Slightly darken on hover */
 }
 div.text-danger {

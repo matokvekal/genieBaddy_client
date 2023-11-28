@@ -6,7 +6,7 @@ import "./Userchat.css";
 
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //http://localhost:3000/userchat/1
 const Userchat = () => {

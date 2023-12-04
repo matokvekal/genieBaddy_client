@@ -1,7 +1,7 @@
 .container-genie {
    display: flex;
    flex-direction: column;
-   height: 100vh; 
+   height: 99.5vh; 
  }
  
  .header-genie {
@@ -18,17 +18,19 @@
    display: flex;
    flex-direction: column;
    width: 100%;
- 
  }
  
  .footer-genie {
    position: sticky;
    bottom: 0;
    height: 5rem;
-   border:solid 1px red;
+   /* border:solid 1px red; */
    display: flex;
+   border-top : 2px solid var(--gb-light-gray);
  
  }
+
+ 
  .main-genie-posts{
     display: flex;
     flex-direction: column;
@@ -36,7 +38,7 @@
     height: 100%;
     overflow-y: auto;
     /* padding: 1rem; */
-    border: 1px solid green;
+    /* border: 1px solid green; */
  }
  .main-genie-upper{
     /* border: 1px solid red; */

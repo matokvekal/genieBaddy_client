@@ -4,7 +4,7 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 // import "./Head.css";
 import "./Header.css";
-import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function HeadMenu() {
@@ -21,31 +21,31 @@ function HeadMenu() {
 
   return (
     <>
-      <div className="header" onClick={handleFilter}>
-        <ul className="menu">
-          <li className="icon-bar">
-            <FontAwesomeIcon
-              className="fa-icon-bar"
-              icon={faBars}
-              onClick={handleMenu}
-            />
+      <div className="genie-header" onClick={handleFilter}>
+        <ul className="genie-menu">
+          <li className="genie-icon-bar"       onClick={handleMenu}>
+                <img
+                src={require(`assets/PNG/bar.png`)}
+                alt="avatar"
+                className="genie-bar"
+              />
           </li>
-          <li className="logo">
-            <div className="logo-text">GenieBuddy</div>
-            <div className="logo-img">
+          <li className="genie-logo">
+            <div className="genie-logo-text">GenieBuddy</div>
+            <div className="genie-logo-img">
               <img
                 src={require(`assets/PNG/genie1.png`)}
                 alt="avatar"
-                className="logo-genie"
+                className="genie-logo-genie"
               />
             </div>
           </li>
-          <li className="icon-search">
-            <FontAwesomeIcon className="fa-icon-search" icon={faSearch} />
+          <li className="genie-icon-search">
+          <FontAwesomeIcon className="fa-icon-search" icon={faSearch} />
           </li>
-          <li className="icon-bell">
+          <li className="genie-icon-bell">
             <img src={require(`assets/PNG/bell.png`)} alt="bell" />
-            {newChatsCounter >0 &&<span className="bell-newChatsCounter">{newChatsCounter>0?newChatsCounter:null}</span>}
+            {newChatsCounter >0 &&<span className="genie-bell-newChatsCounter">{newChatsCounter>0?newChatsCounter:null}</span>}
           </li>
         </ul>
       </div>

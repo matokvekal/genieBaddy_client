@@ -5,6 +5,8 @@ import Button2 from "components/Button2/Button2";
 import Button3 from "components/Button3/Button3";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import rubi from "assets/SVG/rubi-red.svg";    
+
 
 function Post({ handleSelectPost, post }) {
   const showConversation = () => {
@@ -18,7 +20,7 @@ function Post({ handleSelectPost, post }) {
     for (let i = 0; i < post.rating; i++) {
       icons.push(
         <img
-          src={require(`assets/PNG/rubi_red.png`)}
+          src={rubi}
           className="rubi-icon"
           alt="rubi"
         />
@@ -91,9 +93,9 @@ function Post({ handleSelectPost, post }) {
   return (
     <div className="post-row " onClick={showConversation}>
       <div className="row-left">
-        {post.user_avatar && <img
+        {post.genie_avatar && <img
           src={require(`assets/PNG/avatars/avatar${
-            post.user_avatar
+            post.genie_avatar
           }.png`)}
           className="post-image-avatar"
           alt="user avatar"
@@ -102,7 +104,7 @@ function Post({ handleSelectPost, post }) {
       <div className="row-middle">
         <div className="row-middle-upper">
           <div className="row-middle-upper-left">
-            {post.user_nickname}
+            {post.genie_nickname}
           </div>
           <div className="row-middle-upper-right">{renderRatingIcons()}</div>
         </div>

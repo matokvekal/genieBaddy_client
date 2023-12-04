@@ -120,8 +120,8 @@ export const fetchGeniePosts = async () => {
 //     return null;
 //   }
 // };
-// export const genieChoosePost = async (postId, avatar) => {
-//   const EndPoint = `${API_ENDPOINT}/geniechoosepost`;
+// export const genieClaimPost = async (postId, avatar) => {
+//   const EndPoint = `${API_ENDPOINT}/genieClaimPost`;
 //   try {
 //     const response = await axios.post(
 //       EndPoint,
@@ -130,7 +130,7 @@ export const fetchGeniePosts = async () => {
 //     );
 //     return response;
 //   } catch (error) {
-//     console.error("Error in genieChoosePost:", error);
+//     console.error("Error in genieClaimPost:", error);
 //     // throw error;
 //     return null;
 //   }
@@ -167,7 +167,6 @@ export const genieGetNewPosts = async () => {
   }
   try {
     const response = await axios.get(EndPoint, Header);
-
     if (response.status === 200 && response.data?.result) {
       // return response.data.result;
       return response;
@@ -213,7 +212,6 @@ export const userReadPostById = async (postId) => {
     return null;
   }
   try {
-    // debugger
     console.log("at userReadPostById :", EndPoint, Header);
     const response = await axios.get(EndPoint, Header);
     if (response.status === 200 && response.data?.user_read) {
@@ -223,12 +221,10 @@ export const userReadPostById = async (postId) => {
     }
   } catch (error) {
     console.error("Error in userReadPostById:", error);
-    // throw error;
     return null;
   }
 };
 export const genieReadPostById = async (postId) => {
-  //////not ready at server
   const EndPoint = `${API_ENDPOINT}/geniereadposts?postid=${postId}`;
   let Header = configHeader();
 
@@ -258,7 +254,6 @@ export const getpostById = async (postId) => {
   try {
     console.log("at getpostById :", EndPoint, Header);
     const response = await axios.get(EndPoint, Header);
-debugger
     if (response.status === 200 && response.data?.result) {
       return response;
     } else {
@@ -342,18 +337,16 @@ export const fetchGenieNewChats = async () => {
     const response = await axios.get(EndPoint, Header);
     if (response.status === 200 && response.data?.result) {
       return response;
-      // return response.data.result;
     } else {
       return null;
     }
   } catch (error) {
     console.error("Error in fetchGenieNewChats:", error);
-    // throw error;
     return null;
   }
 };
-export const genieChoosePost = async (postId, avatar) => {
-  const EndPoint = `${API_ENDPOINT}/geniechoosepost`;
+export const genieClaimPost = async (postId, avatar) => {
+  const EndPoint = `${API_ENDPOINT}/genieclamepost`;
   try {
     const response = await axios.post(
       EndPoint,
@@ -362,20 +355,21 @@ export const genieChoosePost = async (postId, avatar) => {
     );
     return response;
   } catch (error) {
-    console.error("Error in genieChoosePost:", error);
+    console.error("Error in genieClaimPost:", error);
     // throw error;
+    if(error.response.data){
+      return error.response.data
+    }
     return null;
   }
 };
 export const updateAction = async (data) => {
-
   const EndPoint = `${API_ENDPOINT}/action`;
-   console.log("at action :");
+  console.log("at action :");
   const response = await axios.post(
     EndPoint,
     JSON.stringify(data),
     configHeader()
   );
-  return response; 
+  return response;
 };
-

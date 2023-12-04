@@ -37,6 +37,11 @@ export const initialState = {
     userseting: false,
     usertopics: false,
   },
+  geniePages: {
+    genieClaimPost: false,
+    GenieAchievements: false,
+    geniePosts: true,
+  },
   user_limits: {
     USER_CHATS_PER_POST: null,
     USER_POSTS_PER_DAY: null,
@@ -70,7 +75,7 @@ const useDataStore = createStore((set, get) => ({
       topics: topics,
     }));
   },
-  updateGenieNewPostCounter: (counter) => {
+  updateGenieNewPostCounter: (counter) => {//for claim post
     set((state) => ({
       ...state,
       genieNewPostsCounter: counter,
@@ -115,7 +120,31 @@ const useDataStore = createStore((set, get) => ({
       return { ...state, modals: newModalsState };
     });
   },
+  updateGeniePagesStates: (pageName, action, the_rest = null) => {
+    set((state) => {
+      let newGeniePagesState = { ...state.geniePages };
+      if (pageName === "all" && action === "close") {
+        Object.keys(newGeniePagesState).forEach((key) => {
+          newGeniePagesState[key] = false;
+        });
+      } else {
+        if (action === "open") {
+          newGeniePagesState[pageName] = true;
+        } else if (action === "close") {
+          newGeniePagesState[pageName] = false;
+        } else if (action === "toggle") {
+          newGeniePagesState[pageName] = !state.geniePages[pageName];
+        }
 
+        if (the_rest === null) {
+          Object.keys(newGeniePagesState).forEach((key) => {
+            if (key !== pageName) newGeniePagesState[key] = false;
+          });
+        }
+      }
+      return { ...state, geniePages: newGeniePagesState };
+    });
+  },
   setUserFilter: (data) => {
     set((state) => ({
       ...state,
@@ -385,10 +414,9 @@ const useDataStore = createStore((set, get) => ({
   },
   getActionPostById: async (post_id) => {
     try {
-      debugger;
       // console.log("start getPostById");
-      const newPost = await getpostById(post_id); 
-      if(!newPost){
+      const newPost = await getpostById(post_id);
+      if (!newPost) {
         return false;
       }
       // console.log("newPost", newPost);
@@ -554,7 +582,7 @@ const useDataStore = createStore((set, get) => ({
         topics = localStorage.getItem("topics");
         let topicsDate = localStorage.getItem("topicsdate");
         if (topics && topicsDate < moment().subtract(24, "hours")) {
-          const topics = JSON.parse(topics);
+          topics = JSON.parse(topics);
           get().saveTopicsToState(topics);
           return topics;
         } else {

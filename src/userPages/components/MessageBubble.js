@@ -1,12 +1,12 @@
 import React from "react";
 import "./MessageBubble.css";
 
-const MessageBubble = ({sender, date, message, isMine, avatar }) => {
+const MessageBubble = ({ sender, date, message, isMine, avatar }) => {
   return (
     <div className={`message-wrapper ${isMine ? "me" : "other"}`}>
       <div className={`message-details ${isMine ? "me" : "other"}`}>
         <div className={`sender-details ${isMine ? "me" : "other"}`}>
-          {!isMine && avatar &&(
+          {avatar && (
             <img
               src={require(`assets/PNG/avatars/avatar${avatar}.png`)}
               className="bubble-image"
@@ -14,7 +14,8 @@ const MessageBubble = ({sender, date, message, isMine, avatar }) => {
             />
           )}
           <span className={`message-sender-name ${isMine ? "me" : "other"}`}>
-            {sender}{`${isMine ? "(me)" : "(jenie)"}`}
+            {sender}
+            {`${isMine ? "(me)" : "(jenie)"}`}
           </span>
           <span className={`message-message-date ${isMine ? "me" : "other"}`}>
             {date}

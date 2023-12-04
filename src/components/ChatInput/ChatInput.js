@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "./ChatInput.css";
-import send from "assets/send.svg";
-import { FaTimes } from "react-icons/fa";
+// import send from "assets/send.svg";
+// import { FaTimes } from "react-icons/fa";
 import { appInfo } from "../../config/config";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";

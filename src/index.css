@@ -8,6 +8,9 @@ body,
    /* max-width: 400px; */
    height: 100%;
 }
+h1,h3{
+   margin: 0;
+}
 textarea {
    /* height: auto; */
 }
@@ -46,8 +49,12 @@ textarea {
    --gb-bubble-green: #4fa27487;
    --gb-circle-orange: #FFC01E;
    --gb-purple: #8296FF;
+   --gb-blue-bubble25:#256aff54;
+   --gb-blue-bubble:#256BFF;
+   --gb-font-inter:#303030;
 
    --gb-danger:red;
+   --gb-box-shadow1: 0px 2px 2px 0px rgba(0, 0, 0, 0.15);
 
 
 

@@ -8,58 +8,30 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 const Sidebar = () => {
-  // debugger
   const { modals, updateModalsStates, logOut, getNickName, updateNickName } =
     useStore(useDataStore);
-  // const navigate = useNavigate();
-  // const NickName = getNickName();
   const [nickName, setNickName] = useState(getNickName);
   const [selectedAvatar, setSelectedAvatar] = useState(
     localStorage.getItem("avatar") || 1
   );
-  // const [openModal, setOpenModal] = useState(false);
-
-  // const openModal = () => {
-  //   setModalOpen(true);
-  // };
   useEffect(() => {
     localStorage.setItem("avatar", selectedAvatar);
   }, [selectedAvatar]);
 
-  // const handleMenu = () => {
-  //   console.log("handleMenu");
-  //   setOpenModal(false);
-  //   // updateModalsStates("sidebar","close")
-  // };
   const handleLogOut = () => {
     console.log("logout");
-    // setOpenModal(false);
     updateModalsStates("sidebar", "close");
     logOut();
   };
 
   const handleContact = () => {
     console.log("contact");
-    // setOpenModal(false);
   };
   const saveProfile = () => {
-    // setOpenModal(false);
     updateNickName(nickName);
     updateModalsStates("userseting", "close", "open");
     console.log("saveProfile");
   };
-
-  // const handleEdit = () => {
-  //   console.log("handleEdit");
-  //   // setOpenModal(true);
-  // };
-  // const handleUpdateUserNameAndOpenModal = () => {
-  //   const newUserName = prompt("Enter new username:");
-  //   if (newUserName) {
-  //     updateUserName(newUserName);
-  //   }
-  //   openModal();
-  // };
 
   return (
     <>
@@ -89,14 +61,7 @@ const Sidebar = () => {
               width={40}
             />
           </div>
-          <div
-            className="sidebar-user-name"
-            // onClick={() => {
-            //   updateModalsStates("userseting", "toggle", "open");
-            // }}
-          >
-            Hello: {nickName}
-          </div>
+          <div className="sidebar-user-name">Hello: {nickName}</div>
           <div className="sidebar-edit">
             <img src={require(`assets/PNG/carbon_edit.png`)} alt="avatar" />
           </div>
@@ -151,9 +116,8 @@ const Sidebar = () => {
           ></Button1>
         </div>
         <div className="sidebar-footer">
-          By using this app you accept our 
+          By using this app you accept our
           <strong>Terms and Conditions</strong>
-
         </div>
       </div>
     </>

@@ -9,41 +9,40 @@ function HeadGeniePost({ post }) {
   function goBack() {
     window.history.back();
   }
-
   return (
     <>
-      <div className="mainhead-userpost">
+      <div className="genie-mainhead-userpost">
         {post && (
-          <ul className="head-items">
-            <li className="head-back-arrow" onClick={goBack}>
+          <ul className="genie-head-items">
+            <li className="genie-head-back-arrow" onClick={goBack}>
               <img
                 src={require(`assets/PNG/left-arrow-circle.png`)}
-                className="arrow-back"
+                className="genie-arrow-back"
                 alt="arrow back"
               />
             </li>
-            <li className="head-avatar">
+            <li className="genie-head-avatar">
               {post.genie_avatar && (
                 <img
                   src={require(`assets/PNG/avatars/avatar${post.genie_avatar}.png`)}
-                  className="postdata-image"
+                  className="genie-postdata-image"
                   alt="user avatar"
                 />
               )}
             </li>
-            <li className="head-nick-name">{post.genie_nickname}</li>
-            <li className="head-topic">
+            <li className="genie-head-nick-name">{post.genie_nickname}</li>
+            <li className="genie-head-topic">
               <Button2 text={post?.topic_name} />
             </li>
             <li
-              className="head-menu"
+              className="genie-head-menu"
               onClick={() => {
                 updateModalsStates("action", "toggle");
               }}
             >
               <img
                 src={require(`assets/PNG/3dots.png`)}
-                className="post-image"
+                className="genie-post-image"
                 alt="3dots"
               />
             </li>

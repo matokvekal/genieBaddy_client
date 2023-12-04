@@ -1,23 +1,23 @@
 import { useState } from "react";
 import "./MainGenie.css";
-// import NewPost from "../components/NewPost";
 import Header from "../heads/Header";
 import FilterModal from "modals/FilterModal/FilterModal";
 import { useTranslation } from "react-i18next";
-import Footer from "../Footer/Footer";
+import Footer from "../Footer/FooterMainGenie";
 import Posts from "../components/Posts";
 import Sidebar from "modals/UserSidebar";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import GenieClaimPost from "geniePages/components/GenieClaimPost";
+import GenieAchievements from "geniePages/components/GenieAchievements";
+import FooterClaimGenie from "geniePages/Footer/FooterClaimGenie";
 
 const MainGenie = () => {
-  const { updateModalsStates } = useStore(useDataStore);
-  const [userNewPost, setUserNewPost] = useState(false);
+  const { updateModalsStates, geniePages } = useStore(useDataStore);
+  const [postIndex, setPostIndex] = useState(0);
+  // const [selectedPost, setSelectedPost] = useState({});
+  const [newPosts, setNewPosts] = useState([]);
   const { t } = useTranslation();
-  const handleCloseNewPostModal = () => {
-    setUserNewPost(!userNewPost);
-  };
-
   return (
     <>
       <Sidebar />
@@ -26,28 +26,48 @@ const MainGenie = () => {
         <div className="header-genie">
           <Header />
         </div>
-        <div className="main-genie">
-          <div className="main-genie-upper">
-            <div>{t("My Chats")}</div>
+        {geniePages.geniePosts && <div className="main-genie">
+         
+            <div className="main-genie-new-post">
+              <div className="main-genie-upper">
+                <div>{t("My Chats")}</div>
 
-            <div
-            onClick={() => {
-              updateModalsStates("filter", "toggle");
-            }}
-            >
-              <img
-                src={require(`assets/PNG/mynaui_filter.png`)}
-                alt="mynaui_filter"
-              />
+                <div
+                  onClick={() => {
+                    updateModalsStates("filter", "toggle");
+                  }}
+                >
+                  <img
+                    src={require(`assets/PNG/mynaui_filter.png`)}
+                    alt="mynaui_filter"
+                  />
+                </div>
+              </div>
+              <div className="main-genie-posts">
+                <Posts />
+              </div>
             </div>
-          </div>
-          <div className="main-genie-posts">
-            <Posts />
-            </div>
-        </div>
+          
+        </div>}
+        {geniePages.genieClaimPost && (
+          <GenieClaimPost
+            postIndex={postIndex}
+            posts={newPosts}
+            setPosts={setNewPosts}
+          />
+        )}
+        {geniePages.GenieAchievements && <GenieAchievements />}
 
         <div className="footer-genie">
-          <Footer />
+          {(geniePages.geniePosts || geniePages.GenieAchievements) && <Footer />}
+          {geniePages.genieClaimPost && (
+            <FooterClaimGenie
+              postIndex={postIndex}
+              setPostIndex={setPostIndex}
+              posts={newPosts}
+              setNewPosts={setNewPosts}
+            />
+          )}
         </div>
       </div>
     </>

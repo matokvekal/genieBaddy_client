@@ -11,7 +11,6 @@ function HeadMenu() {
   const { updateModalsStates, newChatsCounter } = useStore(useDataStore);
 
   const handleMenu = () => {
-    
     updateModalsStates("sidebar", "open");
     // updateModalsStates("sidebar","open")
   };
@@ -23,11 +22,11 @@ function HeadMenu() {
     <>
       <div className="header" onClick={handleFilter}>
         <ul className="menu">
-          <li className="icon-bar">
-            <FontAwesomeIcon
-              className="fa-icon-bar"
-              icon={faBars}
-              onClick={handleMenu}
+          <li className="icon-bar"       onClick={handleMenu}>
+            <img
+              src={require(`assets/PNG/bar.png`)}
+              alt="avatar"
+              className="user-bar"
             />
           </li>
           <li className="logo">
@@ -41,11 +40,19 @@ function HeadMenu() {
             </div>
           </li>
           <li className="icon-search">
-            <FontAwesomeIcon className="fa-icon-search" icon={faSearch} />
+            <img
+              src={require(`assets/PNG/search.png`)}
+              alt="avatar"
+              className="genie-search"
+            />
           </li>
           <li className="icon-bell">
             <img src={require(`assets/PNG/bell.png`)} alt="bell" />
-            {newChatsCounter >0 &&<span className="bell-newChatsCounter">{newChatsCounter>0?newChatsCounter:null}</span>}
+            {newChatsCounter > 0 && (
+              <span className="bell-newChatsCounter">
+                {newChatsCounter > 0 ? newChatsCounter : null}
+              </span>
+            )}
           </li>
         </ul>
       </div>

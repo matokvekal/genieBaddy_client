@@ -23,15 +23,15 @@ function HeadUserPost({ post }) {
               />
             </li>
             <li className="head-avatar">
-              {post.user_avatar && (
+              {post.genie_avatar && (
                 <img
-                  src={require(`assets/PNG/avatars/avatar${post.user_avatar}.png`)}
+                  src={require(`assets/PNG/avatars/avatar${post.genie_avatar}.png`)}
                   className="postdata-image"
-                  alt="user avatar"
+                  alt="genie avatar"
                 />
               )}
             </li>
-            <li className="head-nick-name">{post.user_nickname || "user"}</li>
+            <li className="head-nick-name">{post.genie_nickname || "genie"}</li>
             <li className="head-topic">
               <Button2 text={post?.topic_name} />
             </li>

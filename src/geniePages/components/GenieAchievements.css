@@ -1,0 +1,68 @@
+.achiev-container{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+}
+
+.achiev-upper{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+}
+.achiev-upper-text{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   align-items: left;
+   margin-top:1rem ;
+   margin-left: 1rem;
+   margin-bottom: 1rem;
+}
+.achiev-upper-text h1{
+font-size: 1.25rem  ;
+}
+.achiev-upper-text h3{
+   font-size: 1rem  ;
+   /* margin-top: 0.5rem; */
+   font-weight: 400;
+   
+}
+.achiev-lower{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left:1rem;
+      margin-right: 1rem;
+}
+.achiev-lower-text{
+   display: flex;
+   width: 100%;
+   align-items: left;
+}
+.achiev-lower-rows{
+   display: flex;
+   width: 100%;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 16px;
+}
+.achiev-upper-image img{
+   width:8rem;
+   height:8rem;
+   margin-bottom: 1.75rem;
+}
+.achiev-upper-image{
+   margin-top:1.5rem;
+}
+.achiev-lower-text{
+   color: var(--gb-font-inter);
+   font-family: Inter;
+   font-size: 16px;
+   font-weight: 700;
+   line-height: 1.5rem; /* 125% */
+   margin-bottom: 2rem;
+}

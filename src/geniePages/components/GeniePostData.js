@@ -125,7 +125,7 @@ const UserPostData = () => {
                   )}
                   {hasValue(data[`genie_${index + 1}`]) && (
                     <MessageBubble
-                      sender={post["user_nickname"]}
+                      sender={post["genie_nickname"]}
                       date={formatDate(data[`genie_${index + 1}_date`])}
                       message={data[`genie_${index + 1}`]}
                       isMine={true}

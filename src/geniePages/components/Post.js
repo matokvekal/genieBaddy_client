@@ -3,11 +3,12 @@ import "./Post.css";
 import { POST_STATUS } from "constants/jeneral";
 import Button2 from "components/Button2/Button2";
 import Button3 from "components/Button3/Button3";
-import { useStore } from "zustand";
-import useDataStore from "stores/appStore";
+// import { useStore } from "zustand";
+// import useDataStore from "stores/appStore";
+import rubi from "assets/SVG/rubi-red.svg";    
 
 function Post({ handleSelectPost, post }) {
-  const { updateModalsStates } = useStore(useDataStore);
+  // const { updateModalsStates } = useStore(useDataStore);
 
   const showConversation = () => {
     // updateModalsStates("all", "close");
@@ -18,8 +19,13 @@ function Post({ handleSelectPost, post }) {
     let icons = [];
     for (let i = 0; i < post.rating; i++) {
       icons.push(
+        // <img
+        //   src={require(`assets/PNG/rubi_red.png`)}
+        //   className="rubi-icon"
+        //   alt="rubi"
+        // />
         <img
-          src={require(`assets/PNG/rubi_red.png`)}
+          src={rubi}
           className="rubi-icon"
           alt="rubi"
         />
@@ -31,7 +37,7 @@ function Post({ handleSelectPost, post }) {
   const renderPostStatus = () => {
     if (post.post_status === POST_STATUS.NEW) {
       return (
-        <div className="row-right-bottom">
+        <div className="">
           <Button3 text={"NEW"} />
         </div>
       );
@@ -41,7 +47,7 @@ function Post({ handleSelectPost, post }) {
       post.last_writen_by.includes("genie_")
     ) {
       return (
-        <div className="row-right-middle circle circle-green">
+        <div className="genie-circle genie-circle green">
           {countMessages()}
         </div>
       );
@@ -51,7 +57,7 @@ function Post({ handleSelectPost, post }) {
       post.last_writen_by.includes("genie_")
     ) {
       return (
-        <div className="row-right-middle circle circle-orange">
+        <div className="genie-circle genie-circle orange">
           {countMessages()}
         </div>
       );
@@ -67,7 +73,11 @@ function Post({ handleSelectPost, post }) {
         />
       );
     } else {
-      return null;
+      return (
+        <div className="">
+  
+        </div>
+      );
     }
   };
 
@@ -91,30 +101,31 @@ function Post({ handleSelectPost, post }) {
     return messageCount;
   };
   return (
-    <div className="post-row " onClick={showConversation}>
-      <div className="row-left">
-        {post.genie_avatar &&<img
+    <div className="genie-post-row" onClick={showConversation}>
+      <div className="genie-row-left">
+        {post.user_avatar &&<img
           src={require(`assets/PNG/avatars/avatar${
-            post.genie_avatar 
+            post.user_avatar 
           }.png`)}
-          className="post-image-avatar"
+          className="genie-post-image-avatar"
           alt="user avatar"
         />}
       </div>
-      <div className="row-middle">
-        <div className="row-middle-upper">
-          <div className="row-middle-upper-left">
-            {post.genie_nickname}
+      <div className="genie-row-middle">
+        <div className="genie-row-middle-upper">
+          <div className="genie-row-middle-upper-left">
+            {post.user_nickname}
           </div>
-          <div className="row-middle-upper-right">{renderRatingIcons()}</div>
+          <div className="genie-row-middle-upper-right">{renderRatingIcons()}</div>
         </div>
-        <div className="row-middle-middle">
+        <div className="genie-row-middle-middle">
         <Button2 text={post.topic_name} />        </div>
-        <div className="row-middle-bottom">{post.user_1}</div>
+        <div className="genie-row-middle-bottom">{post.user_1}</div>
       </div>
-      <div className="row-right">
-        <div className="row-right-upper">{formatDate(post.created_at)}</div>
-        {renderPostStatus()}
+      <div className="genie-row-right">
+        <div className="genie-row-right-upper">{formatDate(post.created_at)}</div>
+        <div className="genie-row-right-bottom"> {renderPostStatus()}</div>
+       
       </div>
     </div>
   );

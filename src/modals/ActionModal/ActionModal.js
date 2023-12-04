@@ -19,7 +19,6 @@ const ActionModal = ({ post }) => {
     };
     try {
       let res = await updateAction(data);
-      debugger;
       if(res.status === 200){
       res = await getActionPostById(post.id);
       }

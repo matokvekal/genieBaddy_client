@@ -3,7 +3,7 @@ import useDataStore from "stores/appStore";
 // import { getGeniePosts } from "api/geniePosts"; // Import
 
 
-function NoPosts() {
+function NoNewPostsToClame() {
   // const { userFilter } = useStore(useDataStore);
   return (
     <div className="posts-noposts">
@@ -23,4 +23,4 @@ function NoPosts() {
   );
 }
 
-export default NoPosts;
+export default NoNewPostsToClame;

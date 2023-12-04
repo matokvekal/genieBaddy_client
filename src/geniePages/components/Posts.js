@@ -5,7 +5,7 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import { useNavigate } from "react-router-dom";
 import { POST_STATUS } from "constants/jeneral";
-import NoPosts from "./NoPosts";
+import NoPosts from "./NoNewPostsToClame";
 
 function Posts() {
   const scrollContainerRef = useRef(null);
@@ -33,12 +33,10 @@ function Posts() {
   }, []);
   const handleSelectPost = useCallback(
     (post) => {
-      // debugger
       if (post.user_read === 0) {
         userReadPost(post.id);
       }
       setPostId(post.id);
-      //update server user_read
       navigate("/geniePostData");
     },
     [setPostId, navigate]

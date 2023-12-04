@@ -12,13 +12,13 @@
 }
 
 .message-data.me{
-   background: var(--gb-purple);
+   background: var( --gb-light-gray);
    margin-left: 1rem;
    margin-right: 2rem;
 
 }
 .message-data.other{
-   background: var(--gb-bubble-green);
+   background: var(--gb-blue-bubble25);
    margin-left: 2rem;
    margin-right: 1rem;
    /* color:black; */
@@ -37,7 +37,7 @@
 }
 .message-sender-name.me{
    font-weight: 600;
-   margin-left: 2rem;
+   margin-left: 0.5rem;
 }
 .message-message-date.me{
    margin-left: 0.5rem;
@@ -50,7 +50,7 @@
 .message-sender-name.other{
    margin-right: 1rem;
    font-weight: 600;
-   margin-left: 1rem;
+   margin-left: 0.5rem;
 }
 .message-message-date.other{
    margin-right: 1rem;

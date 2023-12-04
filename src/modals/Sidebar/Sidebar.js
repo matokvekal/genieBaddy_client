@@ -42,7 +42,7 @@ const Sidebar = () => {
   }, [selectedAvatar]);
 
   const handleMenu = () => {
-    // updateModalsStates("sidebar","close")
+    updateModalsStates("sidebar","close")
   };
   const handleLogOut = () => {
     // console.log("logout");

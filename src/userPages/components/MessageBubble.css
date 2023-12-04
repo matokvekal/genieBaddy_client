@@ -10,19 +10,24 @@
    border-radius:1.9rem;
    padding:1rem;
 }
+.message-details.me{
+   margin-left: 1rem;
+
+}
 
 .message-data.me{
-   background: var(--gb-purple);
+   background: var( --gb-light-gray);
    margin-left: 1rem;
    margin-right: 2rem;
 
 }
 .message-data.other{
-   background: var(--gb-bubble-green);
+   background: var(--gb-blue-bubble25);
    margin-left: 2rem;
    margin-right: 1rem;
    /* color:black; */
 }
+
 .message-data{line-height: 1.8;}
 
 .sender-details.me,.sender-details.other{

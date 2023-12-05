@@ -5,7 +5,6 @@ import Button2 from "components/Button2/Button2";
 import Button3 from "components/Button3/Button3";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
-import rubi from "assets/SVG/rubi-red.svg";    
 
 
 function Post({ handleSelectPost, post }) {
@@ -20,10 +19,10 @@ function Post({ handleSelectPost, post }) {
     for (let i = 0; i < post.rating; i++) {
       icons.push(
         <img
-          src={rubi}
-          className="rubi-icon"
-          alt="rubi"
-        />
+        src={require(`assets/PNG/rubi_red.png`)}
+        className="rubi-icon"
+        alt="rubi"
+      />
       );
     }
     return icons;

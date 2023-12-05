@@ -1,32 +1,37 @@
 import { useState } from "react";
 import "./MainGenie.css";
 import Header from "../heads/Header";
-import FilterModal from "modals/FilterModal/FilterModal";
+import FilterModalGenie from "modals/FilterModal/FilterModalGenie";
 import { useTranslation } from "react-i18next";
 import Footer from "../Footer/FooterMainGenie";
 import Posts from "../components/Posts";
 import Sidebar from "modals/UserSidebar";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import { POST_STATUS } from "constants/jeneral";
 import GenieClaimPost from "geniePages/components/GenieClaimPost";
 import GenieAchievements from "geniePages/components/GenieAchievements";
 import FooterClaimGenie from "geniePages/Footer/FooterClaimGenie";
 
 const MainGenie = () => {
-  const { updateModalsStates, geniePages } = useStore(useDataStore);
+  const { updateModalsStates, geniePages, modals ,setUserGenieFilter} = useStore(useDataStore);
   const [postIndex, setPostIndex] = useState(0);
   const [newPosts, setNewPosts] = useState([]);
   const { t } = useTranslation();
+  const handleModal = () => {
+    updateModalsStates("filter", "close");
+   setUserGenieFilter(POST_STATUS.ALL);
+  };
   return (
     <>
       <Sidebar />
-      <FilterModal />
+      {modals?.filter && <FilterModalGenie />}
       <div className="container-genie">
         <div className="header-genie">
           <Header />
         </div>
-        {geniePages.geniePosts && <div className="main-genie">
-         
+        {geniePages.geniePosts && (
+          <div className="main-genie">
             <div className="main-genie-new-post">
               <div className="main-genie-upper">
                 <div>{t("My Chats")}</div>
@@ -42,12 +47,17 @@ const MainGenie = () => {
                   />
                 </div>
               </div>
-              <div className="main-genie-posts">
+              <div
+                className="main-genie-posts"
+                onClick={() => {
+                  updateModalsStates("filter", "close");
+                }}
+              >
                 <Posts />
               </div>
             </div>
-          
-        </div>}
+          </div>
+        )}
         {geniePages.genieClaimPost && (
           <GenieClaimPost
             postIndex={postIndex}
@@ -57,8 +67,10 @@ const MainGenie = () => {
         )}
         {geniePages.GenieAchievements && <GenieAchievements />}
 
-        <div className="footer-genie">
-          {(geniePages.geniePosts || geniePages.GenieAchievements) && <Footer />}
+        <div className="footer-genie" onClick={handleModal}>
+          {(geniePages.geniePosts || geniePages.GenieAchievements) && (
+            <Footer />
+          )}
           {geniePages.genieClaimPost && (
             <FooterClaimGenie
               postIndex={postIndex}

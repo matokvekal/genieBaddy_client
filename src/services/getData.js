@@ -47,7 +47,6 @@ export const fetchUserPosts = async () => {
       return null;
     }
   } catch (error) {
-    debugger
     console.error("Error in fetchUserPosts:", error);
     // throw error;
     return null;

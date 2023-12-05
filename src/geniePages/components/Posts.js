@@ -10,7 +10,7 @@ import NoPosts from "./NoNewPostsToClame";
 function Posts() {
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { getGeniePosts, setPostId, userFilter, userReadPost } =
+  const { getGeniePosts, setPostId, userGenieFilter, userReadPost } =
     useStore(useDataStore);
   const [posts, setPosts] = useState([]);
 
@@ -68,7 +68,7 @@ function Posts() {
 
   const filteredPost = useMemo(() => {
     let filtered;
-    switch (userFilter) {
+    switch (userGenieFilter) {
       case POST_STATUS.ALL:
         filtered = posts;
         break;
@@ -92,7 +92,7 @@ function Posts() {
         filtered = posts;
     }
     return Array.isArray(filtered) ? filtered : [];
-  }, [userFilter, posts]);
+  }, [userGenieFilter, posts]);
   return (
     <>
       {(filteredPost && filteredPost.length) > 0 ? (

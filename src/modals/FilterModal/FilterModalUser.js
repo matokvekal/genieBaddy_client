@@ -5,8 +5,8 @@ import { POST_STATUS } from "constants/jeneral";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 // import { getGeniePosts } from "api/geniePosts"; // Import
-const FilterModal = () => {
-  const { getUserPosts, modals, setUserFilter } = useStore(useDataStore);
+const FilterModalUser = () => {
+  const { getUserPosts, modals, setUserGenieFilter } = useStore(useDataStore);
   const [selectedFilter, setSelectedFilter] = useState(POST_STATUS.ALL);
 
   const [data, setData] = useState([]);
@@ -17,7 +17,6 @@ const FilterModal = () => {
     saved: 0,
   });
   useEffect(() => {
-    debugger
     const fetchData = async () => {
       const fetchedData = await getUserPosts();
       setData(fetchedData);
@@ -30,23 +29,25 @@ const FilterModal = () => {
     let open = 0;
     let closed = 0;
     let saved = 0;
-    data && !data.status && data?.forEach((post) => {
-      if(post){
-      all++;
-      if (post.post_status === POST_STATUS.CLOSED) {
-        closed++;
-      } else if (post.post_status === POST_STATUS.OPEN) {
-        open++;
-      } else if (post.post_status === POST_STATUS.SAVED) {
-        saved++;
-      }}
-    });
+    data &&
+      !data.status &&
+      data?.forEach((post) => {
+        if (post) {
+          all++;
+          if (post.post_status === POST_STATUS.CLOSED) {
+            closed++;
+          } else if (post.post_status === POST_STATUS.OPEN) {
+            open++;
+          } else if (post.post_status === POST_STATUS.SAVED) {
+            saved++;
+          }
+        }
+      });
     setCounter({ all: all, open: open, closed: closed, saved: saved });
   }, [data]);
 
-
   const handleFilterClick = (filter) => {
-    setUserFilter(filter);
+    setUserGenieFilter(filter);
     setSelectedFilter(filter);
   };
   const buttonsData = [
@@ -72,7 +73,7 @@ const FilterModal = () => {
       className: "",
       text: POST_STATUS.ALL,
       items: counter.all,
-      filter: POST_STATUS.All,
+      filter: POST_STATUS.ALL,
     },
   ];
 
@@ -98,4 +99,4 @@ const FilterModal = () => {
   );
 };
 
-export default FilterModal;
+export default FilterModalUser;

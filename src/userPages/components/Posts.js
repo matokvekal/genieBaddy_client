@@ -10,7 +10,7 @@ import NoPosts from "./NoPosts";
 function Posts() {
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { getUserPosts, setPostId, userFilter, userReadPost } =
+  const { getUserPosts, setPostId, userGenieFilter, userReadPost } =
     useStore(useDataStore);
   const [posts, setPosts] = useState([]);
 
@@ -45,7 +45,6 @@ function Posts() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        debugger
         const res = await getUserPosts();
         if (res && res.length > 0) {
           setPosts(res);
@@ -69,7 +68,7 @@ function Posts() {
 
   const filteredPost = useMemo(() => {
     let filtered;
-    switch (userFilter) {
+    switch (userGenieFilter) {
       case POST_STATUS.ALL:
         filtered = posts;
         break;
@@ -93,7 +92,7 @@ function Posts() {
         filtered = posts;
     }
     return Array.isArray(filtered) ? filtered : [];
-  }, [userFilter, posts]);
+  }, [userGenieFilter, posts]);
   return (
     <>
       {(filteredPost && filteredPost.length) > 0 ? (

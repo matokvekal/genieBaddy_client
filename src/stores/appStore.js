@@ -15,7 +15,7 @@ import {
   genieReadPostById,
   getpostById,
 } from "services/getData";
-import { exists } from "i18next";
+// import { exists } from "i18next";
 export const initialState = {
   userId: "",
   userName: "",
@@ -28,7 +28,7 @@ export const initialState = {
   allPosts: [],
   geniePosts: [],
   genieNewPostsCounter: 0,
-  userFilter: POST_STATUS.DEFAULT,
+  userGenieFilter: POST_STATUS.DEFAULT,
   postId: null,
   modals: {
     sidebar: false,
@@ -75,7 +75,8 @@ const useDataStore = createStore((set, get) => ({
       topics: topics,
     }));
   },
-  updateGenieNewPostCounter: (counter) => {//for claim post
+  updateGenieNewPostCounter: (counter) => {
+    //for claim post
     set((state) => ({
       ...state,
       genieNewPostsCounter: counter,
@@ -145,10 +146,10 @@ const useDataStore = createStore((set, get) => ({
       return { ...state, geniePages: newGeniePagesState };
     });
   },
-  setUserFilter: (data) => {
+  setUserGenieFilter: (data) => {
     set((state) => ({
       ...state,
-      userFilter: data,
+      userGenieFilter: data,
     }));
   },
   setPostId: (id) => {
@@ -285,7 +286,6 @@ const useDataStore = createStore((set, get) => ({
     }
   },
   getUserPosts: async () => {
-    debugger
     try {
       const currentPosts = get().allPosts;
       if (currentPosts?.length) {
@@ -482,7 +482,6 @@ const useDataStore = createStore((set, get) => ({
   },
   refreshUserPosts: async () => {
     try {
-      debugger
       const result = await fetchUserPosts();
 
       if (result.status !== 200) {

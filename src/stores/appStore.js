@@ -8,7 +8,7 @@ import {
   fetchUserPosts,
   fetchGeniePosts,
   getUserLimitsFromServer,
-  getTopics,
+  fetchServerTopics,
   fetchUserNewChats,
   fetchGenieNewChats,
   userReadPostById,
@@ -19,12 +19,13 @@ import {
 export const initialState = {
   userId: "",
   userName: "",
-  NickName: localStorage.getItem("user-nickName") || "user",
+  nickName: localStorage.getItem("userNickName"),
   userType: "",
   isNewChat: true,
   loginStatus: false,
   mode: "development",
   topics: [],
+  topicsDate: null,
   allPosts: [],
   geniePosts: [],
   genieNewPostsCounter: 0,
@@ -69,12 +70,14 @@ const useDataStore = createStore((set, get) => ({
       user_limits: limits,
     }));
   },
-  saveTopicsToState: (topics) => {
+  saveTopicsToState: (topics, topicsDate) => {
     set((state) => ({
       ...state,
       topics: topics,
+      topicsDate: topicsDate,
     }));
   },
+
   updateGenieNewPostCounter: (counter) => {
     //for claim post
     set((state) => ({
@@ -186,7 +189,7 @@ const useDataStore = createStore((set, get) => ({
       ...state,
       NickName: NickName,
     }));
-    localStorage.setItem("user-nickName", NickName);
+    localStorage.setItem("userNickName", NickName);
   },
   getUsername: () => {
     const state = get();
@@ -196,7 +199,7 @@ const useDataStore = createStore((set, get) => ({
   },
   getNickName: () => {
     let NickName =
-      get().NickName || localStorage.getItem("user-nickName") || "user";
+      get().NickName || localStorage.getItem("userNickName") ||"user";
     return NickName;
   },
   cleanGeniePosts: () => {
@@ -207,12 +210,13 @@ const useDataStore = createStore((set, get) => ({
     }));
   },
 
-  triggerToast: (message, type = "error") =>
+  triggerToast: (message, type = "error") =>{
+    console.log(`Toast triggered: Message - ${message}, Type - ${type}`); // Debugging output
     set((state) => ({
       showToast: true,
       toastMessage: message,
       toastType: type,
-    })),
+    }));},
   resetToast: () => set({ showToast: false, toastMessage: "" }),
   logOut: () => {
     set((state) => ({
@@ -239,7 +243,8 @@ const useDataStore = createStore((set, get) => ({
     localStorage.removeItem("userPosts");
     Cookies.remove("IdToken");
     localStorage.removeItem("userPosts");
-    localStorage.removeItem("user-nickName");
+    localStorage.removeItem("userNickName");
+    localStorage.removeItem("genieNickName");
     localStorage.removeItem("i18nextLng");
   },
   setLoginStatus: (loginStatus) => {
@@ -553,14 +558,11 @@ const useDataStore = createStore((set, get) => ({
   },
   fetchTopics: async () => {
     try {
-      const response = await getTopics();
-
+      const response = await fetchServerTopics();
       const topics = response?.data?.result;
-
       if (topics && Object.keys(topics).length > 0) {
-        get().saveTopicsToState(topics);
-
-        // Save to localstorage
+        const topicsDate = moment();
+        get().saveTopicsToState(topics, topicsDate);
         localStorage.setItem("topics", JSON.stringify(topics));
         localStorage.setItem("topicsdate", JSON.stringify(moment()));
         return topics;
@@ -572,25 +574,27 @@ const useDataStore = createStore((set, get) => ({
   },
   getTopics: async () => {
     try {
-      //if no topics at state take from ls, if not at ls fetch
-      //if topic old then 24 hores also fetch
       let topics = get().topics;
-      if (topics && Object.keys(topics).length > 0) {
-        return topics;
-      } else {
-        topics = localStorage.getItem("topics");
-        let topicsDate = localStorage.getItem("topicsdate");
-        if (topics && topicsDate < moment().subtract(24, "hours")) {
-          topics = JSON.parse(topics);
-          get().saveTopicsToState(topics);
-          return topics;
+      let topicsDate = get().topicsDate;
+
+      if (!topicsDate || moment().diff(moment(topicsDate), "hours") >= 24) {
+        topics = JSON.parse(localStorage.getItem("topics"));
+        topicsDate = JSON.parse(localStorage.getItem("topicsDate"));
+
+        if (
+          !topics ||
+          !topicsDate ||
+          moment().diff(moment(topicsDate), "hours") >= 24
+        ) {
+          return await get().fetchTopics();
         } else {
-          topics = get().fetchTopics();
+          get().saveTopicsToState(topics, topicsDate);
         }
-        return topics;
       }
+
+      return topics;
     } catch (err) {
-      console.error("Error in topics:", err);
+      console.error("Error in getTopics:", err);
       return { status: "error", info: err.message };
     }
   },

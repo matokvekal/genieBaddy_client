@@ -1,29 +1,48 @@
 ### `npm start`
 
-what to test❌
+what to test❌✅
 
-check new
-check lamps
-delete for me
-delete if new
-add rubi up to 5
-save
-close
+1.new user ✅
+2.send 3 new messages:(
+   
+   change user nick, 
+   avater, 
+   one with not,✅
+   select topic)
+   no topic
+  no genie
+  finish for today
+  maxt words
+  remove phone or email
+  remove  special char
 
----
+3.new genie
+select 3 messages
+user can see that was select but it will be pending
+genew answer with diferent ick name and avatar
 
-start gini
 check if every 10 minutes we get new messages
-check every 24 hores we can send new chats
+
 gini see up to 10 new
+user see mesages status as his turn
 
 long messages
 no phone or email or face book
 user name to long
-==============================
-
+==============================+++++++++++++++++++++++++++++++++++++++++++++++++++++
+BAGS
+1. if message to long  it show error.thats ok we must have explenation to user for that
+2. if 24 houres pass , how user know that he has more 3 chats
 user login local ✅
+3לשנות פונט בעברית בהכנסה
+4.לא מוחק מספרי טלפון ולא אימילים דרוש טיפול בשרת
+מה קורה אם יוזר עם 2 טלפונים, איך יודע כמה שיחות יש לו
+כלומר , בכל קריאה לשרת צריך להוריד ליוזר גם את מספר השיחות להיום
 
+
+
+
+---------------------------------
 genie login ok
 logout user ✅
 logout genie✅

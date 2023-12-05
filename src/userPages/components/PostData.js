@@ -23,6 +23,7 @@ const PostData = async ({
   postId,
   topic_id,
   header,
+  userNickName,
 }) => {
   const endPoint = `${API_ENDPOINT}/userpost`;
   const payload = {
@@ -31,6 +32,7 @@ const PostData = async ({
     post_id: postId,
     topic_id,
     header,
+    userNickName,
   };
   try {
     const response = await axios.post(endPoint, payload, configHeader());

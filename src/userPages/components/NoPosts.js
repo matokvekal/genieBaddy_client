@@ -1,5 +1,6 @@
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import { POST_STATUS } from "constants/jeneral";
 // import { getGeniePosts } from "api/geniePosts"; // Import
 
 function NoPosts() {
@@ -8,7 +9,7 @@ function NoPosts() {
     <div className="posts-noposts">
       <div className="nopost-section">
         <div className="nopost-text-upper">
-          You dont have any {userGenieFilter} chats yet.
+          You dont have  {userGenieFilter===POST_STATUS.ALL?"":userGenieFilter} chats yet.
         </div>
         <div className="nopost-text-middle">
           Start by pressing the “new chat” button.

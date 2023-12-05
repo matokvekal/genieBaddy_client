@@ -25,6 +25,7 @@ function App() {
     showToast,
     toastMessage,
     resetToast,
+    toastType,
     handleUserNotRead,
   } = useStore(useDataStore);
   let { handleGenieNewChats } = useStore(useDataStore);
@@ -89,7 +90,8 @@ function App() {
 
   useEffect(() => {
     if (showToast && toastMessage) {
-      toast.error(toastMessage);
+      // toast.error(toastMessage);
+      toastType==="success"?toast.success(toastMessage):toast.error(toastMessage);
       // toast.success(toastMessage);
       resetToast();
     }

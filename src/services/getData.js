@@ -14,9 +14,10 @@ const configHeader = () => {
   };
 };
 
-export const getTopics = async (data) => {
+export const fetchServerTopics = async (data) => {
+
   const EndPoint = `${API_ENDPOINT}/topics`;
-  console.log("at getTopics :", EndPoint);
+  console.log("at fetchServerTopics :", EndPoint);
   try {
     let Header = configHeader();
     const response = await axios.get(EndPoint, Header);
@@ -26,7 +27,7 @@ export const getTopics = async (data) => {
       return null;
     }
   } catch (error) {
-    console.error("Error in getTopics:", error);
+    console.error("Error in fetchServerTopics:", error);
     // throw error;
     return null;
   }

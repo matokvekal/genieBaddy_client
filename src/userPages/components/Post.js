@@ -92,18 +92,24 @@ function Post({ handleSelectPost, post }) {
   return (
     <div className="post-row " onClick={showConversation}>
       <div className="row-left">
-        {post.genie_avatar && <img
+        {post.genie_avatar ? <img
           src={require(`assets/PNG/avatars/avatar${
             post.genie_avatar
           }.png`)}
           className="post-image-avatar"
           alt="user avatar"
-        />}
+        />:
+        <img
+          src={require(`assets/PNG/lampActive.png`)}
+          className="post-image-avatar"
+          alt="user avatar"
+        />
+        }
       </div>
       <div className="row-middle">
         <div className="row-middle-upper">
           <div className="row-middle-upper-left">
-            {post.genie_nickname}
+            {post.genie_nickname||"Awaiting Genie Selection."}
           </div>
           <div className="row-middle-upper-right">{renderRatingIcons()}</div>
         </div>

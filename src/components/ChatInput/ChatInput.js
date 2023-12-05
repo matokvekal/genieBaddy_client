@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import "./ChatInput.css";
+import { useNavigate } from "react-router-dom";
 // import send from "assets/send.svg";
 // import { FaTimes } from "react-icons/fa";
 import { appInfo } from "../../config/config";
@@ -7,20 +8,10 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
-  const maxCharacterLimit = appInfo.maxUserCharacterLimit; //////////////////////fix
-  // const textAreaRef = useRef(null);
+  const navigate = useNavigate();
+  const maxCharacterLimit = appInfo.maxUserCharacterLimit; 
+
   const { updateModalsStates } = useStore(useDataStore);
-  const textAreaRef = useRef(null);
-  const clearText = () => {
-    setTextInput("");
-  };
-  // useEffect(() => {
-  //   if (textAreaRef.current) {
-  //     textAreaRef.current.style.height = "0px";
-  //     const scrollHeight = textAreaRef.current.scrollHeight;
-  //     textAreaRef.current.style.height = scrollHeight + "px";
-  //   }
-  // }, [chatInput]);
 
   const handleInputChange = (event) => {
     updateModalsStates("all", "close");
@@ -44,7 +35,8 @@ const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
 
   const handleBack = () => {
     setTextInput("");
-    window.history.back();
+    // window.history.back();
+    navigate('/');
   };
 
   return (
@@ -52,7 +44,6 @@ const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
       <div className="input-text">
         <textarea
           disabled={disabled}
-          // ref={textAreaRef}
           className="chat-textarea"
           rows={textInput ? Math.min(textInput.split("\n").length, 7) : 0}
           value={textInput}
@@ -74,35 +65,7 @@ const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
           alt="mic"
         />
       </div>
-      {/* <button onClick={handleBack} className="back-button">
-        <BackIcon onClick={handleBack} />
-      </button> */}
-
-      {/* <div className="input-wrapper">
-        <textarea
-          disabled={disabled}
-          ref={textAreaRef}
-          className="chat-textarea"
-          rows={chatInput ? Math.min(chatInput.split("\n").length, 7) : 0}
-          value={chatInput}
-          placeholder="Type a message..."
-          onChange={handleInputChange}
-        />
-        {chatInput && (
-          <button
-            onClick={clearText}
-            className="clear-text-button"
-            disabled={disabled}
-          >
-            <FaTimes />
-          </button>
-        )}
-      </div> */}
-
-      {/* <button onClick={handleSend} className="send-button">
-        <img src={send} className="chat-send-icon" />
-      </button> */}
-      {/* <div className="character-counter">{`${chatInput.length}/${maxCharacterLimit}`}</div> */}
+  
     </div>
   );
 };

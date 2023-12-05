@@ -3,15 +3,17 @@ import "./HeadNewPost.css";
 import Button2 from "components/Button2/Button2";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import { useNavigate } from "react-router-dom";
 
 function HeadUserPost({ topicName,handleCloseNewPostModal }) {
+  const navigate = useNavigate();
   const { getNickName,updateModalsStates } = useStore(useDataStore);
   const [avatar, setAvatar] = useState(localStorage.getItem("avatar") || 1);
   const NickName = getNickName();
   function goBack() {
     updateModalsStates("usertopics", "close")
     handleCloseNewPostModal()
-    // window.history.back();
+    navigate('/');   
   }
   return (
     <>

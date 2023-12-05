@@ -2,12 +2,15 @@ import "./HeadUserPost.css";
 import Button2 from "components/Button2/Button2";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import { useNavigate } from "react-router-dom";
 
 function HeadUserPost({ post }) {
+  const navigate = useNavigate();
   const { updateModalsStates } = useStore(useDataStore);
 
   function goBack() {
-    window.history.back();
+    // window.history.back();
+    navigate('/');   
   }
 
   return (

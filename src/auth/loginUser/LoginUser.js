@@ -94,7 +94,7 @@ function LoginUser() {
           <hr className="mt-4" />
           <div className="text-center">
             <span>
-              Don't have an account?{" "}
+              Don't have an account?
               <Link
                 to={PATHS_NAMES.REGISTERUSER}
                 className="Login__register-link"
@@ -103,7 +103,7 @@ function LoginUser() {
               </Link>
             </span>
             <span>
-              Are you Genie?{" "}
+              Are you Genie?
               <Link
                 to={PATHS_NAMES.LOGINGENIE}
                 className="Login__register-link"

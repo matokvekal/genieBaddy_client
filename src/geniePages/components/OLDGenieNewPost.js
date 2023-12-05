@@ -81,7 +81,6 @@
 //       <HiChevronDoubleLeft className="icon leftArrow" onClick={decrement} />
 //       {totalMessage > 0 ? (
 //         <>
-//           {" "}
 //           <div className="bubbleContainer">
 //             {posts[postId].id}
 //             <GenieNewBubble

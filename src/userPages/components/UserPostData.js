@@ -14,8 +14,10 @@ import { userLimits } from "config/config.js";
 import FooterPostData from "../footer/FooterPostData";
 import ActionModal from "modals/ActionModal/ActionModal";
 import Sidebar from "modals/UserSidebar";
+import { useNavigate } from 'react-router-dom';
 
 const UserPostData = () => {
+  const navigate = useNavigate();
   const [textInput, setTextInput] = useState("");
   const { updateModalsStates } = useStore(useDataStore);
 
@@ -25,7 +27,7 @@ const UserPostData = () => {
   const { postId, allPosts, refreshUserPosts } = useStore(useDataStore);
   const [disabled, setDisabled] = useState(false);
   if (!postId) {
-    window.history.back();
+    navigate('/');   
   }
   const sendChat = async () => {
     if (textInput.trim() !== "") {
@@ -41,7 +43,7 @@ const UserPostData = () => {
       if (res.status === 200) {
         const result = await refreshUserPosts();
         console.log(result);
-        window.history.back();
+        navigate('/');  
       }
     }
   };
@@ -90,7 +92,8 @@ const UserPostData = () => {
   if (post && processTalkData(post)) {
     postData = processTalkData(post);
   } else {
-    window.history.back();
+    // window.history.back();
+    navigate('/');   
   }
 const handleClick = () => {
   updateModalsStates("action", "close");

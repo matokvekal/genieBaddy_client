@@ -8,7 +8,7 @@
    position: sticky;
    top: 0;
    z-index: 100; 
- background-color: white;
+ background-color: var(--gb-white);
  }
  
  .main-genie {

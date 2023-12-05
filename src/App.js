@@ -15,6 +15,7 @@ import { appInfo } from "config/config";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import "config/i18n";
+import NotFound from "404.js";
 
 function App() {
   let {
@@ -96,7 +97,6 @@ function App() {
 
   return (
     <>
-      {" "}
       {/* <ToastContainer /> */}
       <CookiesProvider>
         <Routes>
@@ -105,7 +105,7 @@ function App() {
           <Route exact path={PATHS_NAMES.USER} element={<MainUser />} />
           <Route exact path="/userpostdata" element={<UserPostData />} />
           <Route exact path="/geniepostdata" element={<GeniePostData />} />
-          <Route exact path="/geniepostdata/:id" element={<GeniePostData />} />
+          {/* <Route exact path="/geniepostdata/:id" element={<GeniePostData />} /> */}
           <Route exact path="/userpostdata/:id" element={<UserPostData />} />
           {/* Updated line */}
 
@@ -113,8 +113,10 @@ function App() {
           {/* <Route exact path="/genieNewPost" element={<GenieNewPost />} /> */}
           {/* <Route exact path="/post/:id" element={<GenieChat />} />
           <Route exact path="/genietopics" element={<GenieTopics />} />  */}
+          <Route path="*" element={<NotFound />} /> {/* This is the new line */}
+
         </Routes>
-      </CookiesProvider>{" "}
+      </CookiesProvider>
       <ToastContainer theme="colored" />
     </>
   );

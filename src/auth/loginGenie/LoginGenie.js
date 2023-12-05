@@ -94,7 +94,7 @@ function LoginGenie() {
           <hr className="mt-4" />
           <div className="text-center">
             <span>
-              Don't have an account?{" "}
+              Don't have an account?
               <Link
                 to={PATHS_NAMES.REGISTERGENIE}
                 className="Logingenie__register-link"
@@ -103,7 +103,7 @@ function LoginGenie() {
               </Link>
             </span>
             <span>
-              Are you User?{" "}
+              Are you User?
               <Link to={PATHS_NAMES.LOGINUSER} className="Logingenie__register-link">
                 User Login
               </Link>

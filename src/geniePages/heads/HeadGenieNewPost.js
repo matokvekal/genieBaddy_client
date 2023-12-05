@@ -2,12 +2,15 @@ import "./HeadGenieNewPost.css";
 import Button2 from "components/Button2/Button2";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import { useNavigate } from "react-router-dom";
 
 function HeadGeniePost({ post }) {
+  const navigate = useNavigate();
   const { updateModalsStates,updateGeniePagesStates,genieNewPostsCounter} = useStore(useDataStore);
 
   function goBack() {
     updateGeniePagesStates("geniePosts", "open");
+    navigate('/');  
     // window.history.back();
   }
   return (

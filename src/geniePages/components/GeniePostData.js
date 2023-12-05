@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+
 import "./GeniePostData.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
@@ -15,17 +17,19 @@ import FooterPostData from "../Footer/FooterPostData";
 import ActionModal from "modals/ActionModal/ActionModal";
 import Sidebar from "modals/UserSidebar";
 
+
 const UserPostData = () => {
+  const navigate = useNavigate();
   const [textInput, setTextInput] = useState("");
 
-  // const handleInputChange = (value) => {
-  //   setTextInput(value);
-  // };
+
   const { postId, allPosts, refreshUserPosts, updateModalsStates } =
     useStore(useDataStore);
   const [disabled, setDisabled] = useState(false);
   if (!postId) {
-    window.history.back();
+    console.log("no post id");
+    navigate('/');
+    // window.history.back();
   }
   const sendChat = async () => {
     if (textInput.trim() !== "") {
@@ -41,7 +45,8 @@ const UserPostData = () => {
       if (res.status === 200) {
         const result = await refreshUserPosts();
         console.log(result);
-        window.history.back();
+        navigate('/');  
+        // window.history.back();
       }
     }
   };
@@ -90,7 +95,8 @@ const UserPostData = () => {
   if (post && processTalkData(post)) {
     postData = processTalkData(post);
   } else {
-    window.history.back();
+    navigate('/');  
+    // window.history.back();
   }
   const handleClick = () => {
     updateModalsStates("action", "close");
@@ -101,15 +107,10 @@ const UserPostData = () => {
       <Sidebar />
       <div className="postdata-main">
         <Header />
-        <HeadGeniePost
-          post={post}
-
-        />
+        <HeadGeniePost post={post} />
         <ActionModal post={post} />
 
-        <div
-          className="postdata-content"
-          onClick={handleClick}>
+        <div className="postdata-content" onClick={handleClick}>
           <div className="post-content">
             {postData &&
               postData.map((data, index) => (

@@ -2,7 +2,7 @@ import React from "react";
 
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
-// import "./Head.css";
+
 import "./Header.css";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -22,7 +22,7 @@ const ActionModal = ({ post }) => {
       if(res.status === 200){
       res = await getActionPostById(post.id);
       }
-      //////////ADD TOSIFAY
+
 
       updateModalsStates("action", "close");
     } catch (error) {

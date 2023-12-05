@@ -32,7 +32,6 @@ const GenieChats = () => {
 
   const handleHeaders = (type) => {
     setHeaderType(type);
-    // console.log(type);
     fetchData(type);
   };
 

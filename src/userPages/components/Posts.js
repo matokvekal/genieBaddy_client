@@ -33,12 +33,10 @@ function Posts() {
   }, []);
   const handleSelectPost = useCallback(
     (post) => {
-      // debugger
       if (post.user_read === 0) {
         userReadPost(post.id);
       }
       setPostId(post.id);
-      //update server user_read
       navigate("/userPostData");
     },
     [setPostId, navigate]
@@ -47,6 +45,7 @@ function Posts() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        debugger
         const res = await getUserPosts();
         if (res && res.length > 0) {
           setPosts(res);

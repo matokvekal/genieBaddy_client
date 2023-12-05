@@ -1,10 +1,7 @@
-import { useState, useEffect } from "react";
+
 import { BsStar } from "react-icons/bs";
-import { USERS_ROLES } from "constants";
 import { PATHS_NAMES } from "constants";
 import { useNavigate } from "react-router-dom";
-import { useStore } from "zustand";
-import useDataStore from "stores/appStore";
 
 function formatDate(dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -17,7 +14,6 @@ const ChatRow = (props) => {
     topic_id,
     user_1_date,
     user_header,
-    user_nickname,
     topic_name,
     last_writen_by,
   } = props.item;

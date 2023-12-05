@@ -86,16 +86,5 @@
     color: var(--gb-white); 
     position: absolute;
     top:1.5rem;
-    /* position: absolute; */
-    /* top: 0.5rem; */
-    /* right: 0.5rem;
-    width: 1.5rem;
-    height: 1.5rem; */
-    /* border-radius: 50%;
-    background-color: var(--gb-red);
-    color: var(--gb-white);
-    font-size: 0.75rem; */
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
+
  }

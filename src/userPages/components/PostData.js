@@ -43,16 +43,6 @@ const PostData = async ({
     console.error("Error in PostData:", error);
     if (error) {
       return error.message;
-      // const { status } = error.response;
-      // if (status === 400) {
-      //   return error.response;
-      //   // throw new Error("error.response.data.error");
-      // } else if (error.request) {
-      //   return error.response;
-      //   // throw new Error("No response received from the server");
-      // } else {
-      //   return error.response;
-      // }
     }
   }
 };

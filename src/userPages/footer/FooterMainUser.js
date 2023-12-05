@@ -13,7 +13,6 @@ function FooterMainUser({ handleCloseNewPostModal }) {
   const [leftPosts, setLeftPosts] = useState(0);
   const handleNewPost = () => {
     updateModalsStates("all", "close")
-    // updateModalsStates("sidebar","close")
     handleCloseNewPostModal();
   };
 
@@ -56,14 +55,7 @@ function FooterMainUser({ handleCloseNewPostModal }) {
           text="New Chat"
           icon="+"
         ></Button1>
-        {/* <button
-          className="button-footer-newchat"
-          onClick={handleNewPost}
-          disabled={!leftPosts || Number(leftPosts) === 0}
-        >
-          <div className="button-footer-text">New Chat</div>
-          <div className="button-footer-plus">+</div>
-        </button> */}
+
 
         <div className="footer-lamps">
           {totalPosts &&

@@ -1,10 +1,10 @@
-import React from 'react'
+// import React from 'react'
 
-const Geniechat=()=> {
-  return (
-    <div>Genie chat</div>
+// const Geniechat=()=> {
+//   return (
+//     <div>Genie chat</div>
     
-  )
-}
+//   )
+// }
 
-export default Geniechat
+// export default Geniechat

@@ -17,6 +17,7 @@ const FilterModal = () => {
     saved: 0,
   });
   useEffect(() => {
+    debugger
     const fetchData = async () => {
       const fetchedData = await getUserPosts();
       setData(fetchedData);

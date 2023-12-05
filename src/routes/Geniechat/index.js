@@ -1,5 +1,5 @@
 
 
-import Geniechat from './Geniechat';
+// import Geniechat from './Geniechat';
 
-export default Geniechat;
+// export default Geniechat;

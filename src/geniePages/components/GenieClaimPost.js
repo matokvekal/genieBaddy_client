@@ -36,32 +36,6 @@ const GenieClaimPost = ({
 
     fetchData();
   }, []);
-  // const increment = () => {
-  //   setindex((prev) => (prev + 1) % genieNewPostsCounter);
-  // };
-
-  // const decrement = () => {
-  //   setindex((prev) => (prev - 1 + genieNewPostsCounter) % genieNewPostsCounter);
-  // };
-
-  // const handleChoose = async () => {
-  //   try {
-  //     const avatar = localStorage.getItem("avatar");
-  //     const res = await genieClaimPost(posts[index].id, avatar);
-  //     if (res && res.status === 200 && res.statusText === "OK") {
-  //       await cleanGeniePosts();
-  //       updateGeniePagesStates("geniePosts", "open");
-  //       // console.log(POST_STATUS.OPEN);
-  //       // setUserFilter(POST_STATUS.OPEN);
-  //       // setUserFilter(POST_STATUS.OPEN);
-  //       //refreshData();
-  //       //go to tab open with sort acs
-  //       // fetchData();
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
   return (
     <>
       <div className="claimpost-container">

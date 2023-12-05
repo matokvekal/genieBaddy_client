@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useStore } from "zustand";
-import useDataStore from "stores/appStore";
 import GenieAchievRow from "./GenieAchievRow";
 import "./GenieAchievements.css";
 
 const GenieAchievements = () => {
-  const [rows, setRows] = useState([
+  const [rows] = useState([
     {
       header: "Days",
       text: "Spent out of your time",

@@ -1,8 +1,8 @@
-import { useContext } from 'react';
-import { userDataContext } from 'contexts';
+// import { useContext } from 'react';
+// import { userDataContext } from 'contexts';
 
-const useUserData = () => {
-    return useContext(userDataContext);
-};
+// const useUserData = () => {
+//     return useContext(userDataContext);
+// };
 
-export default useUserData;
+// export default useUserData;

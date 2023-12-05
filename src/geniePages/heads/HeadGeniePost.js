@@ -23,15 +23,6 @@ function HeadGeniePost({ post }) {
                 alt="arrow back"
               />
             </li>
-            {/* <li className="genie-head-avatar">
-              {post.genie_avatar && (
-                <img
-                  src={require(`assets/PNG/avatars/avatar${post.genie_avatar}.png`)}
-                  className="genie-postdata-image"
-                  alt="user avatar"
-                />
-              )}
-            </li> */}
             <li className="genie-head-nick-name">{post.user_nickname}(user)</li>
             <li className="genie-head-topic">
               <Button2 text={post?.topic_name} />

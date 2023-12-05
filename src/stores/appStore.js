@@ -285,6 +285,7 @@ const useDataStore = createStore((set, get) => ({
     }
   },
   getUserPosts: async () => {
+    debugger
     try {
       const currentPosts = get().allPosts;
       if (currentPosts?.length) {
@@ -355,7 +356,6 @@ const useDataStore = createStore((set, get) => ({
             newPosts.find((newPost) => newPost.id === post.id);
           if (newPost) {
             post = newPost;
-            // console.log("get().newChatsCounter", get().newChatsCounter);
             get().updateNewChatsCounter(get().newChatsCounter + 1);
           }
         });
@@ -419,10 +419,9 @@ const useDataStore = createStore((set, get) => ({
       if (!newPost) {
         return false;
       }
-      // console.log("newPost", newPost);
+
       const localStoragePosts = JSON.parse(localStorage.getItem("userPosts"));
-      // console.log("localStoragePosts", localStoragePosts);
-      // const filterdPosts = localStoragePosts.filter((post) => post.id !== post_id);
+
       const filteredPosts = [];
 
       for (let post of localStoragePosts) {
@@ -430,11 +429,11 @@ const useDataStore = createStore((set, get) => ({
           filteredPosts.push(post);
         }
       }
-      // console.log("filterdPosts", filterdPosts);
+
       if (newPost.data.result.length > 0) {
         filteredPosts.push(newPost.data.result[0]);
       }
-      // console.log("filterdPosts", filterdPosts);
+
       get().savePostsToState(filteredPosts);
       if (filteredPosts && filteredPosts.length > 0) {
         localStorage.setItem("userPosts", JSON.stringify(filteredPosts));
@@ -483,6 +482,7 @@ const useDataStore = createStore((set, get) => ({
   },
   refreshUserPosts: async () => {
     try {
+      debugger
       const result = await fetchUserPosts();
 
       if (result.status !== 200) {

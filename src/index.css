@@ -5,15 +5,12 @@ body,
 	margin: 0;
 	/* direction: rtl; */
 	width: 100%;
-   /* max-width: 400px; */
    height: 100%;
 }
 h1,h3{
    margin: 0;
 }
-textarea {
-   /* height: auto; */
-}
+
 ul {
    padding-inline-start: 0;
    margin-block-start: 0;

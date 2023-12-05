@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import "./ChatInput.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 // import send from "assets/send.svg";
 // import { FaTimes } from "react-icons/fa";
 import { appInfo } from "../../config/config";
@@ -8,7 +8,7 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const maxCharacterLimit = appInfo.maxUserCharacterLimit; 
 
   const { updateModalsStates } = useStore(useDataStore);
@@ -33,11 +33,11 @@ const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
     }
   };
 
-  const handleBack = () => {
-    setTextInput("");
-    // window.history.back();
-    navigate('/');
-  };
+  // const handleBack = () => {
+  //   setTextInput("");
+  //   // window.history.back();
+  //   navigate('/');
+  // };
 
   return (
     <div className="chat-input">

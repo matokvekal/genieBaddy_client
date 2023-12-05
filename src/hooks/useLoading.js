@@ -1,8 +1,8 @@
-import { useContext } from 'react';
-import { loadingContext } from 'contexts';
+// import { useContext } from 'react';
+// import { loadingContext } from 'contexts';
 
-const useLoading = () => {
-	return useContext(loadingContext);
-};
+// const useLoading = () => {
+// 	return useContext(loadingContext);
+// };
 
-export default useLoading;
+// export default useLoading;

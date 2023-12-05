@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function HeadUserPost({ topicName,handleCloseNewPostModal }) {
   const navigate = useNavigate();
   const { getNickName,updateModalsStates } = useStore(useDataStore);
-  const [avatar, setAvatar] = useState(localStorage.getItem("avatar") || 1);
+  const [avatar] = useState(localStorage.getItem("avatar") || 1);
   const NickName = getNickName();
   function goBack() {
     updateModalsStates("usertopics", "close")

@@ -46,15 +46,7 @@ function FooterClaimGenie({
         await cleanGeniePosts();
         setNewPosts([]);
         updateGeniePagesStates("geniePosts", "open");
-        //clean the post
-        
-        // console.log(POST_STATUS.OPEN);
-        // setUserFilter(POST_STATUS.OPEN);
 
-        // setUserFilter(POST_STATUS.OPEN);
-        //refreshData();
-        //go to tab open with sort acs
-        // fetchData();
       } else {
         if (res) {
           triggerToast(res);

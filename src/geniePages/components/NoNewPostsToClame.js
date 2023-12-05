@@ -4,13 +4,11 @@ import useDataStore from "stores/appStore";
 
 
 function NoNewPostsToClame() {
-  // const { userFilter } = useStore(useDataStore);
   return (
     <div className="posts-noposts">
       <div className="nopost-section">
         <div className="nopost-text-upper">
           You dont have any post yet
-          {/* {userFilter} chats yet. */}
         </div>
         <div className="nopost-text-middle">
           Start by searcing for new posts.

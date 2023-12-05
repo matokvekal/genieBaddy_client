@@ -1,13 +1,12 @@
 .mainhead-userpost{
    height: 4.5rem;
-   /* border:1px solid red; */
 }
 ul li{
    list-style-type: none;
 }
 ul.head-items{
    display: flex ;
-   /* justify-content: flex-left; */
+
    align-items: center;
 }
 
@@ -34,7 +33,6 @@ li.head-menu {
 }
 .head-items li{
    height: 4.5rem;
-   /* border:1px solid green; */
 }
 .head-back-arrow img{
    height: 2rem;

@@ -17,9 +17,6 @@ function UserTopics({ selectedTopic, setSelectedTopic }) {
     fetchData();
   }, []);
 
-  // const toggleTopics = () => {
-  //   setSelectedTopic(!showTopics);
-  // };
   return (
     <>
       <div className={`topic-container ${modals.usertopics ? "open" : null}`}>

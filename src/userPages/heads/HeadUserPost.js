@@ -26,13 +26,7 @@ function HeadUserPost({ post }) {
               />
             </li>
             <li className="head-avatar">
-              {/* {post.genie_avatar && (
-                <img
-                  src={require(`assets/PNG/avatars/avatar${post.genie_avatar}.png`)}
-                  className="postdata-image"
-                  alt="genie avatar"
-                />
-              )} */}
+
             </li>
             <li className="head-nick-name">{post.genie_nickname }(genie)</li>
             <li className="head-topic">

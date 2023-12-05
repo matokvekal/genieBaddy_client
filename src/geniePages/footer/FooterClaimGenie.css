@@ -18,35 +18,3 @@ font-weight: 600;
    align-items: center;
    height: 5rem;
 }
-/* .footer-area.genie{
-   width: 100%;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-around;
-   padding: 0 1rem;
-   color:var(--gb-primary-black);
-   background: var(--gb-white);
-   align-items: center;
-   height: 5rem;
-}
-
-
-.footer-area .box{
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-}
-
-
-.genie-chats {
-   width: 2.25rem;
-   height: 2.25rem;
-}
-.genie_new,.genie_stats{
-   width: 2rem;
-   height: 2rem;
-}
-.footer-line{
-  font-weight: 700;
-} */

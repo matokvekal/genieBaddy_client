@@ -15,8 +15,6 @@ const Topics = (props) => {
       try {
         let response = await getAllTopics();
         data = response?.data?.result;
-
-        // console.log("Fetched topics:", data);
         setGenieTopics(data);
       } catch (error) {
         console.log("Error fetching topics:", error);

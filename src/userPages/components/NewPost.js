@@ -16,7 +16,6 @@ const NewPost = ({ handleCloseNewPostModal }) => {
   const { refreshUserPosts, updateUserLimits, triggerToast,updateModalsStates } =
     useStore(useDataStore);
   const maxCharacterLimit = Number(appInfo.maxUserCharacterLimit);
-  // const [showTopics, setShowTopics] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("");
   const [disabledSend, setDisabledSend] = useState(false);
   const [textInput, setTextInput] = useState("");
@@ -56,23 +55,6 @@ const NewPost = ({ handleCloseNewPostModal }) => {
     }
   };
 
-  const handleClose = () => {
-    console.log("Posted:", textInput);
-    handleCloseNewPostModal();
-  };
-  const handleInputChange = (event) => {
-    if (event.target.value.length > maxCharacterLimit) return;
-    setTextInput(event.target.value);
-  };
-  const handleSend = () => {
-    if (textInput.trim() !== "") {
-      sendChat(textInput.trim());
-    }
-  };
-  const HandleremoveTopic = (e) => {
-    e.stopPropagation();
-    setSelectedTopic(null);
-  };
 
   return (
     <>
@@ -96,42 +78,8 @@ const NewPost = ({ handleCloseNewPostModal }) => {
               setTextInput={setTextInput}
               textInput={textInput}
               sendChat={sendChat}
-              // disabled={disabled}
             />
           </div>
-          {/* <div className="new-post-header">
-            <span>Write Post</span>
-            <span>Your post is anonymous and private.</span>
-            <button onClick={handleClose}>✖️</button>
-          </div>
-          <textarea
-            className="new-post-input"
-            value={postText}
-            onChange={handleInputChange}
-            placeholder="Share your thoughts"
-          /> */}
-
-          {/* <div className="new-post-footer">
-            <button
-              onClick={handleSend}
-              className="send-button"
-              disabled={disabledSend}
-            >
-              <img src={sendwhite} className="chat-send-icon" alt="send" />
-            </button>
-            <div
-              className="topic"
-              onClick={handleTopic}
-              style={{
-                backgroundColor: selectedTopic ? selectedTopic.color : "",
-              }}
-            >
-              {selectedTopic ? selectedTopic.topic_name : "Topic +"}
-              <span className="remove-topic" onClick={HandleremoveTopic}>
-                X
-              </span>
-            </div>
-          </div> */}
         </div>
       }
     </>

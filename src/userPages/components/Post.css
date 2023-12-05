@@ -1,5 +1,4 @@
 .post-row {
-   /* border-top:1px solid var(--gb-dark-gray); */
    height: 6.25rem;
    display: flex;
    position: relative; 
@@ -7,11 +6,11 @@
 .post-row::after {
    content: ''; /* Required for pseudo-elements */
    position: absolute;
-   bottom: 0; /* Position at the bottom of the post-row */
-   left: 50%; /* Center the line horizontally */
-   border-bottom: 2px solid var(--gb-middle-gray); /* The gray line */
-   width: 80%; /* Set the width of the line */
-   transform: translateX(-50%); /* Center the line */
+   bottom: 0; 
+   left: 50%; 
+   border-bottom: 2px solid var(--gb-middle-gray); 
+   width: 80%; 
+   transform: translateX(-50%); 
 }
 .row-left,.row-middle,.row-right{
    /* border:1px blue solid; */
@@ -75,7 +74,6 @@ margin-bottom: 0.5rem;
 .row-right-middle.circle{
 width: 1.25rem;
 height: 1.25rem;
-/* background-color: var(--gb-circle-green); */
 border-radius: 50%;
 display:flex;
 justify-content: center;

@@ -15,7 +15,6 @@ import FooterClaimGenie from "geniePages/Footer/FooterClaimGenie";
 const MainGenie = () => {
   const { updateModalsStates, geniePages } = useStore(useDataStore);
   const [postIndex, setPostIndex] = useState(0);
-  // const [selectedPost, setSelectedPost] = useState({});
   const [newPosts, setNewPosts] = useState([]);
   const { t } = useTranslation();
   return (

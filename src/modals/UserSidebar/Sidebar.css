@@ -134,15 +134,15 @@ font-size: large;
     }
     
     .avatar {
-      width: 30px; /* Adjust the size as needed */
-      height: 30px; /* Adjust the size as needed */
+      width: 30px; 
+      height: 30px; 
       margin: 5px;
       cursor: pointer;
       border: 2px solid transparent;
     }
     
     .avatar.selected {
-      border-color: var(--gb-dark-gray); /* Highlight the selected avatar */
+      border-color: var(--gb-dark-gray);
       border-radius: 50%;
     }
     

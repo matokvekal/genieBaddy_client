@@ -59,29 +59,7 @@ const Sidebar = () => {
     }
     openModal();
   };
-  // const handleNavigate = (nav) => {
-  //   switch (nav) {
-  //     case PATHS_NAMES.USERCHATS:
-  //       updateUserType(USERS_ROLES.USER);
-  //       navigate(PATHS_NAMES.USERCHATS, { replace: true });
-  //       break;
-  //     case PATHS_NAMES.GENIECHATS:
-  //       updateUserType(USERS_ROLES.GENIE);
-  //       navigate(PATHS_NAMES.GENIECHATS, { replace: true });
-  //       break;
-  //     case PATHS_NAMES.USERNEWCHAT:
-  //       updateUserType(USERS_ROLES.USER);
-  //       navigate(PATHS_NAMES.USERNEWCHAT, { replace: true });
-  //       break;
-  //     case PATHS_NAMES.GENIETOPICS:
-  //       updateUserType(USERS_ROLES.GENIE);
-  //       navigate(PATHS_NAMES.GENIETOPICS, { replace: true });
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   handleMenu();
-  // };
+
 
   return (
     <div className={`sidebar ${modals.sidebar ? "open" : ""}`}>

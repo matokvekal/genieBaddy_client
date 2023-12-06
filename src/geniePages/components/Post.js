@@ -26,16 +26,17 @@ function Post({ handleSelectPost, post }) {
   };
 
   const renderPostStatus = () => {
-    if (post.post_status === POST_STATUS.NEW) {
-      return (
-        <div className="">
-          <Button3 text={"NEW"} />
-        </div>
-      );
-    } else if (
+    // if (post.post_status === POST_STATUS.NEW) {
+    //   return (
+    //     <div className="">
+    //       <Button3 text={"NEW"} />
+    //     </div>
+    //   );
+    // } else 
+    if (
       post.post_status === POST_STATUS.OPEN &&
-      post.user_read === 0 &&
-      post.last_writen_by.includes("genie_")
+      post.genie_read === 0 &&
+      post.last_writen_by.includes("user_")
     ) {
       return (
         <div className="genie-circle genie-circle green">
@@ -44,8 +45,8 @@ function Post({ handleSelectPost, post }) {
       );
     } else if (
       post.post_status === POST_STATUS.OPEN &&
-      post.user_read === 1 &&
-      post.last_writen_by.includes("genie_")
+      post.genie_read === 1 &&
+      post.last_writen_by.includes("user_")
     ) {
       return (
         <div className="genie-circle genie-circle orange">
@@ -63,13 +64,7 @@ function Post({ handleSelectPost, post }) {
           alt="in conversation"
         />
       );
-    } else {
-      return (
-        <div className="">
-  
-        </div>
-      );
-    }
+    } 
   };
 
   const countMessages = () => {

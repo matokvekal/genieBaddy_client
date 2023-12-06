@@ -196,10 +196,11 @@ export const genieReadPostById = async (postId) => {
     return null;
   }
   try {
+    
     console.log("at genieReadPostById :", EndPoint, Header);
     const response = await axios.get(EndPoint, Header);
-    if (response.status === 200 && response.data?.genie_read) {
-      return response.data?.genie_read;
+    if (response.status === 200 && response.data?.post_id) {
+      return response.data?.post_id;
     } else {
       return false;
     }

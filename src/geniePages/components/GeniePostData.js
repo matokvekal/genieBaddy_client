@@ -62,9 +62,9 @@ const UserPostData = () => {
       (post.last_writen_by.includes("user") ||
         post.post_status === POST_STATUS.NEW)
     ) {
-      setDisabled(true);
-    } else {
       setDisabled(false);
+    } else {
+      setDisabled(true);
     }
   }, [post]);
 

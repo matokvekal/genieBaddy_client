@@ -430,7 +430,7 @@ const useDataStore = createStore((set, get) => ({
         );
         for (let post of localStoragePosts) {
           if (post != null && post.id === postId) {
-            post.user_read = 1;
+            post.genie_read = 1;
             break;
           }
         }
@@ -440,7 +440,7 @@ const useDataStore = createStore((set, get) => ({
       }
       return false;
     } catch (error) {
-      console.error("Error in userReadPost:", error);
+      console.error("Error in genieReadPost:", error);
       return null;
     }
   },

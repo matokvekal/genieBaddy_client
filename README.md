@@ -34,26 +34,34 @@ user name to long
 BAGS
 USERS
 1. if message to long  it show error.thats ok we must have explenation to user for that
-2. if 24 houres pass , how user know that he has more 3 chats✅
-user login local ✅
-3לשנות פונט בעברית בהכנסה ✅
+
 4.לא מוחק מספרי טלפון ולא אימילים דרוש טיפול בשרת
 מה קורה אם יוזר עם 2 טלפונים, איך יודע כמה שיחות יש לו
 כלומר , בכל קריאה לשרת צריך להוריד ליוזר גם את מספר השיחות להיום
 מסך השיחות קצת רחב מידי וחורג ימינה שמאלה     - to check
-יוז יכול להכניס שם ארוך מידי, צריך גם בו לבדוק שאין אימיל או טלפון או משהו מיוחד✅
+
 DELETE  חובה לשים האם אתה בטוח ולצבוע את הלא בכחול
 יוזר לוחץ SEND לסגור  SIDEBAR
 GENIE
-שגיני בוחר שיחה אין ניק ניים
 שיחה שגיני בחר לא מצליח היוזר למחוק
-2לוג אאוט לא מנקה שיחות חדשות לבחירה✅
 3תפריט צדדי לא נסגר שלוחצים על שיחה חדשה
-4 בNICK NAME לשים בורדר כי לא קולטים את זה
 5 שגיני בוחר שיחה לשאול are you sure
-6 גיני בחר שיחה ויוזר עדין לא רואה את השם שלו אלא את המשפט 
+
 7 שיחות בהולד היוזר לא רואה, צריך להראות לו ולהציג  אולי הולד ירוק✅
 8 אחרי שגיני מושך שיחה   ולוחץ שןב על חדש השיחה הראשונה שמופיעה היא ריקה ורק אם מדפדף רואה עוד
+----------------------------------------------------------------
+1 שיחות שגיני בחר הוא אמור לראות עיגול ירוק עם 1 בתוכו
+ואם הוא נכנס לתוכה וראה אז ישתנה בDB שהוא קרא ואז ישאר עיגול צבע כתום
+
+יוזר שכותב שיחה צל uder_read
+שגיני עונה  צל last = genie
+user_read=0
+genie_raed=1
+גיני אמור להשתנות לחיצים
+אצל יוזר אמור להשתנות לירוק עם 2
+
+
+
 ---------------------------------
 genie login ok
 logout user ✅
@@ -159,3 +167,6 @@ new post, insert to genie_post, status check_user add to table check_posts , use
 after check, the post move to new
 if genie select and write, the post in genie_ai, the message is that in check, genie see orange circle, user can not write yest, user see arrows
 after check, genie seee arrows user see gren
+
+
+genei

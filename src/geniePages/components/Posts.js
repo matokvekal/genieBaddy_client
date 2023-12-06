@@ -10,7 +10,7 @@ import NoPosts from "./NoNewPostsToClame";
 function Posts() {
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { getGeniePosts, setPostId, userGenieFilter, userReadPost } =
+  const { getGeniePosts, setPostId, userGenieFilter, genieReadPost } =
     useStore(useDataStore);
   const [posts, setPosts] = useState([]);
 
@@ -33,8 +33,8 @@ function Posts() {
   }, []);
   const handleSelectPost = useCallback(
     (post) => {
-      if (post.user_read === 0) {
-        userReadPost(post.id);
+      if (post.genie_read === 0) {
+        genieReadPost(post.id);
       }
       setPostId(post.id);
       navigate("/geniePostData");

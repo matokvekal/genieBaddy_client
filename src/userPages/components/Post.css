@@ -50,6 +50,12 @@
 .row-middle-upper-left{
    font-size: 0.875rem;
    font-weight: 700  ;
+   text-overflow: ellipsis; 
+   white-space: nowrap;  
+   overflow: hidden;   
+   padding-left: 1rem;
+   margin-bottom: 0.5rem;
+   width: 8rem;
 }
 .row-middle-upper-right{
    margin-left: 1rem;
@@ -61,12 +67,13 @@
 }
 .row-middle-bottom {
 font-size: 0.75rem;
-width: 15rem;
+width: 8rem;
 white-space: nowrap;  
 overflow: hidden;   
 text-overflow: ellipsis; 
 padding-left: 1rem;
 margin-bottom: 0.5rem;
+
 }
 .rubi-icon{
    width: 1rem;

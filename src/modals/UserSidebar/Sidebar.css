@@ -67,8 +67,8 @@ font-size: large;
 
 .sidebar-main{
       width: 100%;
-      flex-grow: 1;
-      height: 50%;
+      /* flex-grow: 1; */
+      /* height: 50%; */
       /* margin-top: 0.5rem; */
 }
 .sidebar-buttons{
@@ -134,7 +134,7 @@ font-size: large;
       justify-content: center;
       overflow-y: auto; 
       /* max-height: 190px;  */
-      height: 40vh;
+      height: 30vh;
       margin-top: 10px;
       background: var(--gb-white);
 
@@ -158,4 +158,8 @@ font-size: large;
       background: var(--gb-purple);
       color :var(--gb-white);
       border: none;
+    }
+    .sidebar-container{
+      display: flex;
+    flex-direction: column;
     }

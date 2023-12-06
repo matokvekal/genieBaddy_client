@@ -11,7 +11,7 @@
    bottom: 0;
    left: 50%; 
    border-bottom: 2px solid var(--gb-middle-gray); 
-   width: 90%; 
+   width: 100%; 
    transform: translateX(-50%); 
 }
 
@@ -46,6 +46,10 @@
    justify-content: flex-start;
    padding-left: 1rem;
    margin-top: 0.9rem;
+   white-space: nowrap;  
+overflow: hidden;   
+text-overflow: ellipsis; 
+width: 9rem;
 }
 .genie-row-middle-upper-left{
    font-size: 0.875rem;
@@ -61,7 +65,7 @@
 }
 .genie-row-middle-bottom {
 font-size: 0.75rem;
-width: 15rem;
+width: 9rem;
 white-space: nowrap;  
 overflow: hidden;   
 text-overflow: ellipsis; 

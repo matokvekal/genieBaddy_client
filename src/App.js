@@ -36,15 +36,19 @@ function App() {
 
   useEffect(() => {
     let chatCheckInterval;
+    console.log("useEffect triggered", { loginStatus, userType });
+
     if (loginStatus) {
+      console.log("Setting up interval");
+
       const intervalFunction =
         userType === USERS_ROLES.GENIE
           ? handleGenieNewChats
           : handleUserNotRead;
-      chatCheckInterval = setInterval(
-        intervalFunction,
-        1000 * 60 * appInfo.checkForNewPostsMinutes
-      ); // X is your chosen interval in minutes
+      chatCheckInterval = setInterval(() => {
+        console.log("Interval function called", { userType });
+        intervalFunction();
+      }, 1000 * 60 * appInfo.checkForNewPostsMinutes); // X is your chosen interval in minutes
     }
     return () => {
       if (chatCheckInterval) {
@@ -91,7 +95,9 @@ function App() {
   useEffect(() => {
     if (showToast && toastMessage) {
       // toast.error(toastMessage);
-      toastType==="success"?toast.success(toastMessage):toast.error(toastMessage);
+      toastType === "success"
+        ? toast.success(toastMessage)
+        : toast.error(toastMessage);
       // toast.success(toastMessage);
       resetToast();
     }
@@ -110,13 +116,11 @@ function App() {
           {/* <Route exact path="/geniepostdata/:id" element={<GeniePostData />} /> */}
           <Route exact path="/userpostdata/:id" element={<UserPostData />} />
           {/* Updated line */}
-
           <Route exact path={PATHS_NAMES.GENIE} element={<MainGenie />} />
           {/* <Route exact path="/genieNewPost" element={<GenieNewPost />} /> */}
           {/* <Route exact path="/post/:id" element={<GenieChat />} />
           <Route exact path="/genietopics" element={<GenieTopics />} />  */}
           <Route path="*" element={<NotFound />} /> {/* This is the new line */}
-
         </Routes>
       </CookiesProvider>
       <ToastContainer theme="colored" />

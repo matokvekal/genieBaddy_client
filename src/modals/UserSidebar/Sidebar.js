@@ -3,11 +3,22 @@ import "./Sidebar.css";
 import Button1 from "components/Button1/Button1";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import { PATHS_NAMES } from "constants";
 
 const Sidebar = () => {
-  const { modals, updateModalsStates, logOut, getNickName, updateNickName } =
-    useStore(useDataStore);
-  const [nickName, setNickName] = useState(getNickName);
+  const {
+    modals,
+    updateModalsStates,
+    logOut,
+    getUserNickName,
+    updateUserNickName,
+    getGenieNickName,
+    updateGenieNickName,
+    getUserType,
+    
+  } = useStore(useDataStore);
+  const userType = getUserType();
+  const [nickName, setNickName] = useState(userType==='user'?getUserNickName():getGenieNickName());
   const [selectedAvatar, setSelectedAvatar] = useState(
     localStorage.getItem("avatar") || 1
   );
@@ -15,17 +26,32 @@ const Sidebar = () => {
     localStorage.setItem("avatar", selectedAvatar);
   }, [selectedAvatar]);
 
-  const handleLogOut = () => {
-    console.log("logout");
-    updateModalsStates("sidebar", "close");
-    logOut();
+
+  const handleNickName = (e) => {
+    let inputValue = e.target.value;
+    inputValue = inputValue.replace(/[^\p{L}]/gu, '').substring(0, 15);
+    setNickName(inputValue);
+    userType==='user'?updateUserNickName(inputValue):updateGenieNickName(inputValue);
   };
 
-  const handleContact = () => {
+  const handleLogOut = () => {
+    console.log("logout");
+    const type = getUserType();
+    updateModalsStates("sidebar", "close");
+    logOut();
+    if (type === "user") {
+      window.location.href = PATHS_NAMES.LOGINUSER;
+    } else {
+      window.location.href = PATHS_NAMES.LOGINGENIE;
+    }
+  };
+
+  const handleContactUs = () => {
     console.log("contact");
   };
   const saveProfile = () => {
-    updateNickName(nickName);
+    userType === "genie"?updateGenieNickName(nickName): updateUserNickName(nickName);
+
     updateModalsStates("userseting", "close", "open");
     console.log("saveProfile");
   };
@@ -59,9 +85,11 @@ const Sidebar = () => {
             />
           </div>
           <div className="sidebar-user-name">Hello: {nickName}</div>
-          <div className="sidebar-edit">
-            <img src={require(`assets/PNG/carbon_edit.png`)} alt="avatar" />
-          </div>
+          {!modals.userseting && (
+            <div className="sidebar-edit">
+              <img src={require(`assets/PNG/carbon_edit.png`)} alt="avatar" />
+            </div>
+          )}
         </div>
 
         <div className="sidebar-main">
@@ -69,9 +97,15 @@ const Sidebar = () => {
             <input
               type="text"
               placeholder="Change your nick name"
-              onChange={(e) => setNickName(e.target.value)}
+              onChange={handleNickName}
+              value={nickName}
+              // onChange={(e) => setNickName(e.target.value)}
             />
-
+            <img
+              src={require(`assets/PNG/carbon_edit.png`)}
+              alt="avatar"
+              className="carbon_edit"
+            />
             <div className="avatarList">
               {Array.from({ length: 151 }, (_, index) => (
                 <img
@@ -98,7 +132,7 @@ const Sidebar = () => {
           <Button1
             className="button1-footer"
             disabled={false}
-            onClick={handleContact}
+            onClick={handleContactUs}
             text="Contact Us"
             icon={<img src={require(`assets/PNG/email.png`)} alt="avatar" />}
           ></Button1>
@@ -118,7 +152,6 @@ const Sidebar = () => {
         </div>
       </div>
     </>
-  
   );
 };
 

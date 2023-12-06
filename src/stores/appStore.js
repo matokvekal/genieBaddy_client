@@ -19,7 +19,8 @@ import {
 export const initialState = {
   userId: "",
   userName: "",
-  nickName: localStorage.getItem("userNickName"),
+  userNickName: localStorage.getItem("userNickName"),
+  genieNickName: localStorage.getItem("genieNickName"),
   userType: "",
   isNewChat: true,
   loginStatus: false,
@@ -184,12 +185,19 @@ const useDataStore = createStore((set, get) => ({
     }));
     localStorage.setItem("userName", name);
   },
-  updateNickName: (NickName) => {
+  updateUserNickName: (userNickName) => {
     set((state) => ({
       ...state,
-      NickName: NickName,
+      userNickName: userNickName,
     }));
-    localStorage.setItem("userNickName", NickName);
+    localStorage.setItem("userNickName", userNickName);
+  },
+  updateGenieNickName: (genieNickName) => {
+    set((state) => ({
+      ...state,
+      genieNickName: genieNickName,
+    }));
+    localStorage.setItem("genieNickName", genieNickName);
   },
   getUsername: () => {
     const state = get();
@@ -197,10 +205,15 @@ const useDataStore = createStore((set, get) => ({
       get().userName || localStorage.getItem("userName") || state.userType;
     return userName;
   },
-  getNickName: () => {
-    let NickName =
-      get().NickName || localStorage.getItem("userNickName") ||"user";
-    return NickName;
+  getUserNickName: () => {
+    let userNickName =
+      get().userNickName || localStorage.getItem("userNickName") || "user";
+    return userNickName;
+  },
+  getGenieNickName: () => {
+    let genieNickName =
+      get().genieNickName || localStorage.getItem("genieNickName") || "genie";
+    return genieNickName;
   },
   cleanGeniePosts: () => {
     localStorage.removeItem("geniePosts");
@@ -210,13 +223,14 @@ const useDataStore = createStore((set, get) => ({
     }));
   },
 
-  triggerToast: (message, type = "error") =>{
+  triggerToast: (message, type = "error") => {
     console.log(`Toast triggered: Message - ${message}, Type - ${type}`); // Debugging output
     set((state) => ({
       showToast: true,
       toastMessage: message,
       toastType: type,
-    }));},
+    }));
+  },
   resetToast: () => set({ showToast: false, toastMessage: "" }),
   logOut: () => {
     set((state) => ({
@@ -246,6 +260,7 @@ const useDataStore = createStore((set, get) => ({
     localStorage.removeItem("userNickName");
     localStorage.removeItem("genieNickName");
     localStorage.removeItem("i18nextLng");
+    set({ ...initialState });
   },
   setLoginStatus: (loginStatus) => {
     set((state) => ({
@@ -347,25 +362,37 @@ const useDataStore = createStore((set, get) => ({
   },
   handleUserNotRead: async () => {
     try {
-      console.log("start handleUserNotRead");
+      console.log("start handleUserNotRead 1 min");
       const newPosts = await fetchUserNewChats();
       if (newPosts.length === 0) {
         return { status: "no new chats" };
       } else {
-        const curentPosts = JSON.parse(localStorage.getItem("userPosts"));
-        //replace at curentPosts the posts with the same id from newPosts
-        curentPosts.forEach((post) => {
-          const newPost =
-            newPosts &&
-            newPosts.length > 0 &&
-            newPosts.find((newPost) => newPost.id === post.id);
-          if (newPost) {
-            post = newPost;
+        let curentPosts = JSON.parse(localStorage.getItem("userPosts") || "[]");
+        // Process each newPost
+        newPosts.forEach((newPost) => {
+          const existingPostIndex = curentPosts.findIndex(
+            (p) => p.id === newPost.id
+          );
+
+          if (existingPostIndex !== -1) {
+            // If post exists and the status is different, update it
+            if (
+              curentPosts[existingPostIndex].post_status !== newPost.post_status
+            ) {
+              curentPosts[existingPostIndex] = newPost;
+              get().updateNewChatsCounter(get().newChatsCounter + 1);
+            }
+          } else {
+            // If post does not exist, add it
+            curentPosts.push(newPost);
             get().updateNewChatsCounter(get().newChatsCounter + 1);
           }
         });
+
+        // Save updated posts to state and localStorage
         get().savePostsToState(curentPosts);
         localStorage.setItem("userPosts", JSON.stringify(curentPosts));
+
         return true;
       }
     } catch (err) {

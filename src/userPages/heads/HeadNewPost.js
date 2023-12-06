@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 
 function HeadUserPost({ topicName,handleCloseNewPostModal }) {
   const navigate = useNavigate();
-  const { getNickName,updateModalsStates } = useStore(useDataStore);
+  const { getUserNickName,updateModalsStates } = useStore(useDataStore);
   const [avatar] = useState(localStorage.getItem("avatar") || 1);
-  const NickName = getNickName();
+  const userNickName = getUserNickName();
   function goBack() {
     updateModalsStates("usertopics", "close")
     handleCloseNewPostModal()
@@ -35,7 +35,7 @@ function HeadUserPost({ topicName,handleCloseNewPostModal }) {
               alt="user avatar"
             />
           </li>
-          <li className="head-nick-name">{NickName}</li>
+          <li className="head-nick-name">{userNickName}</li>
           <li className="head-topic" onClick={()=>updateModalsStates("usertopics", "toggle")} >
             <Button2 text={topicName?topicName:"Choose topic"} />
           </li>

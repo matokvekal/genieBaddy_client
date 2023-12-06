@@ -10,7 +10,7 @@ import NoPosts from "./NoPosts";
 function Posts() {
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { getUserPosts, setPostId, userGenieFilter, userReadPost } =
+  const { getUserPosts, setPostId, userGenieFilter, userReadPost,allPosts } =
     useStore(useDataStore);
   const [posts, setPosts] = useState([]);
 
@@ -64,7 +64,7 @@ function Posts() {
     };
 
     fetchPosts();
-  }, [getUserPosts]);
+  }, [allPosts,getUserPosts]);
 
   const filteredPost = useMemo(() => {
     let filtered;

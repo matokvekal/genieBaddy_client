@@ -53,7 +53,7 @@ export const fetchUserPosts = async () => {
     return null;
   }
 };
-export const fetchUserNewChats = async () => {
+export const fetchUserNewChats = async () => {//user check wvwry 1 min
   try {
     const EndPoint = `${API_ENDPOINT}/usernewchats`;
     // console.log("at fetchUserPosts :", EndPoint,configHeader());
@@ -249,12 +249,12 @@ export const fetchGenieNewChats = async () => {
     return null;
   }
 };
-export const genieClaimPost = async (postId, avatar) => {
+export const genieClaimPost = async (postId, avatar,genieNickname) => {
   const EndPoint = `${API_ENDPOINT}/genieclamepost`;
   try {
     const response = await axios.post(
       EndPoint,
-      JSON.stringify({ postId: postId, avatar: avatar }),
+      JSON.stringify({ postId, avatar,genieNickname }),
       configHeader()
     );
     return response;

@@ -5,22 +5,23 @@ what to test❌✅
 1.new user ✅
 2.send 3 new messages:(
    
-   change user nick, 
-   avater, 
+   change user nick, ✅
+   avater, ✅
    one with not,✅
-   select topic)
-   no topic
-  no genie
-  finish for today
-  maxt words
+   select topic)✅
+   no topic✅
+  no genie✅
+  finish for today✅
+  maxt words❌
   remove phone or email
-  remove  special char
+  remove  special char✅✅
 
 3.new genie
-select 3 messages
-user can see that was select but it will be pending
+select 3 messages only his topics
+user can see that was select but it will be HOLD ✅
 genew answer with diferent ick name and avatar
-
+max genie post 10 per day
+after 10 minutes posts are free
 check if every 10 minutes we get new messages
 
 gini see up to 10 new
@@ -31,17 +32,28 @@ no phone or email or face book
 user name to long
 ==============================+++++++++++++++++++++++++++++++++++++++++++++++++++++
 BAGS
+USERS
 1. if message to long  it show error.thats ok we must have explenation to user for that
-2. if 24 houres pass , how user know that he has more 3 chats
+2. if 24 houres pass , how user know that he has more 3 chats✅
 user login local ✅
-3לשנות פונט בעברית בהכנסה
+3לשנות פונט בעברית בהכנסה ✅
 4.לא מוחק מספרי טלפון ולא אימילים דרוש טיפול בשרת
 מה קורה אם יוזר עם 2 טלפונים, איך יודע כמה שיחות יש לו
 כלומר , בכל קריאה לשרת צריך להוריד ליוזר גם את מספר השיחות להיום
-
-
-
-
+מסך השיחות קצת רחב מידי וחורג ימינה שמאלה     - to check
+יוז יכול להכניס שם ארוך מידי, צריך גם בו לבדוק שאין אימיל או טלפון או משהו מיוחד✅
+DELETE  חובה לשים האם אתה בטוח ולצבוע את הלא בכחול
+יוזר לוחץ SEND לסגור  SIDEBAR
+GENIE
+שגיני בוחר שיחה אין ניק ניים
+שיחה שגיני בחר לא מצליח היוזר למחוק
+2לוג אאוט לא מנקה שיחות חדשות לבחירה✅
+3תפריט צדדי לא נסגר שלוחצים על שיחה חדשה
+4 בNICK NAME לשים בורדר כי לא קולטים את זה
+5 שגיני בוחר שיחה לשאול are you sure
+6 גיני בחר שיחה ויוזר עדין לא רואה את השם שלו אלא את המשפט 
+7 שיחות בהולד היוזר לא רואה, צריך להראות לו ולהציג  אולי הולד ירוק✅
+8 אחרי שגיני מושך שיחה   ולוחץ שןב על חדש השיחה הראשונה שמופיעה היא ריקה ורק אם מדפדף רואה עוד
 ---------------------------------
 genie login ok
 logout user ✅
@@ -74,6 +86,8 @@ BAGS
 4)user have only 2, but last user post count old date
 5)user can not send post IMPORTANT 5. to many dymonds change the width
 6/width of login change
+
+
 
 important fiture
 1.user registration. after user login if forgote password send code to email

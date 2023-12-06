@@ -18,7 +18,7 @@ const NewPost = ({ handleCloseNewPostModal }) => {
     updateUserLimits,
     triggerToast,
     updateModalsStates,
-    getNickName,
+    getUserNickName,
   } = useStore(useDataStore);
   const maxCharacterLimit = Number(appInfo.maxUserCharacterLimit);
   const [selectedTopic, setSelectedTopic] = useState("");
@@ -30,7 +30,7 @@ const NewPost = ({ handleCloseNewPostModal }) => {
   const sendChat = async () => {
     setDisabledSend(true);
     const avatar = localStorage.getItem("avatar");
-    const nickName = getNickName();    if (textInput.trim() !== "") {
+    const userNickName = getUserNickName();    if (textInput.trim() !== "") {
       const sanitizedInput = clearText(textInput.trim());
       setTextInput(sanitizedInput);
 
@@ -40,7 +40,7 @@ const NewPost = ({ handleCloseNewPostModal }) => {
         postId: "new",
         topic_id: selectedTopic ? selectedTopic.id : 1,
         header: null,
-        userNickName: nickName,
+        userNickName: userNickName,
       });
       if (res?.status === 200 && res.data.status === 'success') {
         triggerToast(

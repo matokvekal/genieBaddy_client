@@ -18,6 +18,7 @@ function FooterClaimGenie({
     genieNewPostsCounter,
     cleanGeniePosts,
     triggerToast,
+    getGenieNickName,
   } = useStore(useDataStore);
 
   const handleFooterMenu = (item) => {
@@ -40,7 +41,8 @@ function FooterClaimGenie({
     try {
       updateGenieNewPostCounter(0)
       const avatar = localStorage.getItem("avatar");
-      const res = await genieClaimPost(posts[postIndex].id, avatar);
+      const genieNickname=getGenieNickName()
+      const res = await genieClaimPost(posts[postIndex].id, avatar,genieNickname);
 
       if (res && res.status === 200 && res.statusText === "OK") {
         await cleanGeniePosts();

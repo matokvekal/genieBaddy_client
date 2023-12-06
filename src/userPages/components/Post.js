@@ -6,7 +6,6 @@ import Button3 from "components/Button3/Button3";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
-
 function Post({ handleSelectPost, post }) {
   const showConversation = () => {
     updateModalsStates("all", "close");
@@ -19,17 +18,20 @@ function Post({ handleSelectPost, post }) {
     for (let i = 0; i < post.rating; i++) {
       icons.push(
         <img
-        src={require(`assets/PNG/rubi_red.png`)}
-        className="rubi-icon"
-        alt="rubi"
-      />
+          src={require(`assets/PNG/rubi_red.png`)}
+          className="rubi-icon"
+          alt="rubi"
+        />
       );
     }
     return icons;
   };
 
   const renderPostStatus = () => {
-    if (post.post_status === POST_STATUS.NEW) {
+    if (
+      post.post_status === POST_STATUS.NEW ||
+      post.post_status === POST_STATUS.HOLD
+    ) {
       return (
         <div className="row-right-bottom">
           <Button3 text={"NEW"} />
@@ -92,24 +94,24 @@ function Post({ handleSelectPost, post }) {
   return (
     <div className="post-row " onClick={showConversation}>
       <div className="row-left">
-        {post.genie_avatar ? <img
-          src={require(`assets/PNG/avatars/avatar${
-            post.genie_avatar
-          }.png`)}
-          className="post-image-avatar"
-          alt="user avatar"
-        />:
-        <img
-          src={require(`assets/PNG/lampActive.png`)}
-          className="post-image-avatar"
-          alt="user avatar"
-        />
-        }
+        {post.genie_avatar ? (
+          <img
+            src={require(`assets/PNG/avatars/avatar${post.genie_avatar}.png`)}
+            className="post-image-avatar"
+            alt="user avatar"
+          />
+        ) : (
+          <img
+            src={require(`assets/PNG/lampActive.png`)}
+            className="post-image-avatar"
+            alt="user avatar"
+          />
+        )}
       </div>
       <div className="row-middle">
         <div className="row-middle-upper">
           <div className="row-middle-upper-left">
-            {post.genie_nickname||"Awaiting Genie Selection."}
+            {post.genie_nickname || "Awaiting Genie Selection."}
           </div>
           <div className="row-middle-upper-right">{renderRatingIcons()}</div>
         </div>

@@ -3,6 +3,7 @@
    height: 6.25rem;
    display: flex;
    position: relative; 
+   width: 100%;
 }
 .genie-post-row::after {
    content: '';

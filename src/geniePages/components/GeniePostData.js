@@ -10,10 +10,10 @@ import MessageBubble from "./MessageBubble";
 import { formatDate } from "utils/dateUtils";
 import { clearText } from "utils/clearText";
 import { POST_STATUS } from "constants/jeneral";
-import PostData from "./PostData";
+// import PostData from "./PostData";
 import { hasValue } from "../../utils/hasValue";
 import { userLimits } from "config/config.js";
-import FooterPostData from "../Footer/FooterPostData";
+import FooterPostData from "../footer/FooterPostData";
 import ActionModal from "modals/ActionModal/ActionModal";
 import Sidebar from "modals/UserSidebar";
 
@@ -23,7 +23,34 @@ const UserPostData = () => {
   const [textInput, setTextInput] = useState("");
 
 
-  const { postId, allPosts, refreshUserPosts, updateModalsStates } =
+  // const { postId, allPosts, refreshUserPosts, updateModalsStates } =
+  //   useStore(useDataStore);
+  // const [disabled, setDisabled] = useState(false);
+  // if (!postId) {
+  //   console.log("no post id");
+  //   navigate('/');
+  //   // window.history.back();
+  // }
+  // const sendChat = async () => {
+  //   if (textInput.trim() !== "") {
+  //     const sanitizedInput = clearText(textInput.trim());
+  //     console.log(sanitizedInput);
+  //     setDisabled(true);
+  //     const res = await PostData({
+  //       sanitizedInput,
+  //       postId: postId,
+  //       topic_id: null,
+  //       header: null,
+  //     });
+  //     if (res.status === 200) {
+  //       const result = await refreshUserPosts();
+  //       console.log(result);
+  //       navigate('/');  
+  //       // window.history.back();
+  //     }
+  //   }
+  // };
+  const { postId, allPosts, refreshUserPosts, updateModalsStates,geniePostChat } =
     useStore(useDataStore);
   const [disabled, setDisabled] = useState(false);
   if (!postId) {
@@ -36,11 +63,9 @@ const UserPostData = () => {
       const sanitizedInput = clearText(textInput.trim());
       console.log(sanitizedInput);
       setDisabled(true);
-      const res = await PostData({
+      const res = await geniePostChat({
         sanitizedInput,
         postId: postId,
-        topic_id: null,
-        header: null,
       });
       if (res.status === 200) {
         const result = await refreshUserPosts();
@@ -50,7 +75,6 @@ const UserPostData = () => {
       }
     }
   };
-
   const post =
     allPosts && allPosts[0] ? allPosts.find((x) => x.id === postId) : null;
   const maxMessages = userLimits.maxMessages;
@@ -139,10 +163,11 @@ const UserPostData = () => {
         </div>
         <div className="postdata-footer">
           <FooterPostData
-            sendChat={sendChat}
-            setTextInput={setTextInput}
-            textInput={textInput}
-            disabled={disabled}
+             sendChat={sendChat}
+             setTextInput={setTextInput}
+             textInput={textInput}
+             disabled={disabled}
+             placeholder={disabled?"wait for user":"Type your message here"}
           />
         </div>
       </div>

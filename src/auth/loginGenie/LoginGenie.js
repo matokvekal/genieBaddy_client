@@ -95,19 +95,19 @@ function LoginGenie() {
           <div className="text-center">
             <span>
               Don't have an account?
-              <Link
+              {/* <Link
                 to={PATHS_NAMES.REGISTERGENIE}
                 className="Logingenie__register-link"
               >
                 Register
-              </Link>
+              </Link> */}
             </span>
-            <span>
+            {/* <span>
               Are you User?
               <Link to={PATHS_NAMES.LOGINUSER} className="Logingenie__register-link">
                 User Login
               </Link>
-            </span>
+            </span> */}
           </div>
         </form>
       </div>

@@ -4,6 +4,7 @@ import Button1 from "components/Button1/Button1";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import { PATHS_NAMES } from "constants";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const {
@@ -16,12 +17,17 @@ const Sidebar = () => {
     updateGenieNickName,
     getUserType,
   } = useStore(useDataStore);
+  const navigate = useNavigate();
   const userType = getUserType();
-  const [nickName, setNickName] = useState(
-    userType === "user" ? getUserNickName() : getGenieNickName()
-  );
+  const [nickName, setNickName] = useState("");
+  useEffect(() => {
+    const initialNickName =
+      userType === "user" ? getUserNickName() : getGenieNickName();
+    setNickName(initialNickName);
+  }, [userType]);
+
   const [selectedAvatar, setSelectedAvatar] = useState(
-    localStorage.getItem("avatar") || 1
+    localStorage.getItem("avatar") || 20
   );
   useEffect(() => {
     localStorage.setItem("avatar", selectedAvatar);
@@ -39,6 +45,7 @@ const Sidebar = () => {
   const handleLogOut = () => {
     console.log("logout");
     const type = getUserType();
+
     updateModalsStates("sidebar", "close");
     logOut();
     if (type === "user") {

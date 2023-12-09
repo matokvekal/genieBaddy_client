@@ -278,3 +278,52 @@ export const updateAction = async (data) => {
   );
   return response;
 };
+export const userPostData = async (payload) => {
+  try {
+    const EndPoint = `${API_ENDPOINT}/userpost`;
+    console.log("at userPostDatation :");
+    const response = await axios.post(
+      EndPoint,
+      payload,
+      configHeader()
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in userPostData:", error);
+    return false;
+  }
+};
+export const geniePostData = async (payload) => {
+  try {
+    const EndPoint = `${API_ENDPOINT}/geniepost`;
+    console.log("at geniePostData :");
+    const response = await axios.post(
+      EndPoint,
+      payload,
+      configHeader()
+    );
+    return response;
+  } catch (error) {
+    console.error("Error in geniePostData:", error);
+    return false;
+  }
+};
+export const userRefreshPosts = async () => {
+  const EndPoint = `${API_ENDPOINT}/userrefreshposts`;
+
+  let Header = configHeader();
+  if (!Header) {
+    return null;
+  }
+  try {
+    const response = await axios.get(EndPoint, Header);
+    if (response.status === 200 && response.data?.result) {
+      return response;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error in userRefreshPosts:", error);
+    return null;
+  }
+};

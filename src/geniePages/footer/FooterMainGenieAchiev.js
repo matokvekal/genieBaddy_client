@@ -15,6 +15,18 @@ function FooterMainGenie() {
     <>
       <div className="footer-area genie">
         <div className="box footer-left">
+          <div onClick={() => handleFooterMenu("genieClaimPost")}>
+            <img
+              src={require(`assets/PNG/genie_new.png`)}
+              className="genie_new"
+              alt="genie_new"
+            />
+          </div>
+
+          <div>new</div>
+        </div>
+        <div className="footer-line">|</div>
+        <div className="box footer-center">
           <div onClick={() => handleFooterMenu("geniePosts")}>
             <img
               src={require(`assets/PNG/genie_chats.png`)}
@@ -23,19 +35,6 @@ function FooterMainGenie() {
             />
           </div>
           <div>chats</div>
-        </div>
-
-        <div className="footer-line">|</div>
-        <div
-          className="box footer-center"
-          onClick={() => handleFooterMenu("genieClaimPost")}
-        >
-          <img
-            src={require(`assets/PNG/genie_new2.png`)}
-            className="genie_new2"
-            alt="genie_new"
-          />
-          <div>new</div>
         </div>
 
         <div className="footer-line">|</div>

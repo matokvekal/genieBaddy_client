@@ -20,106 +20,113 @@ import NotFound from "404.js";
 function App() {
   let {
     loginStatus,
-    userType,
+    getUserType,
     setLoginStatus,
     showToast,
     toastMessage,
     resetToast,
     toastType,
     handleUserNotRead,
+    setUserType,
+    handleGenieNewChats,
   } = useStore(useDataStore);
-  let { handleGenieNewChats } = useStore(useDataStore);
+
   const navigate = useNavigate();
   const location = useLocation();
-  const { pathname } = useLocation();
-  const userTypeRef = useRef();
+  const { pathname } = location;
 
   useEffect(() => {
     let chatCheckInterval;
-    console.log("useEffect triggered", { loginStatus, userType });
-
     if (loginStatus) {
-      console.log("Setting up interval");
-
+      const myUserType = getUserType(); // Get userType here
       const intervalFunction =
-        userType === USERS_ROLES.GENIE
+        myUserType === USERS_ROLES.GENIE
           ? handleGenieNewChats
           : handleUserNotRead;
       chatCheckInterval = setInterval(() => {
-        console.log("Interval function called", { userType });
         intervalFunction();
-      }, 1000 * 60 * appInfo.checkForNewPostsMinutes); // X is your chosen interval in minutes
+      }, 1000 * 60 * appInfo.checkForNewPostsMinutes);
     }
     return () => {
       if (chatCheckInterval) {
         clearInterval(chatCheckInterval);
       }
     };
-  }, [loginStatus, userType, handleUserNotRead, handleGenieNewChats]);
+  }, [loginStatus, getUserType, handleGenieNewChats, handleUserNotRead]); // Added getUserType to dependency array
 
   useEffect(() => {
-    const localStorageLoginStatus = localStorage.getItem("authenticated");
-    const isAuth = localStorageLoginStatus === "true";
+    let isLogin =
+      loginStatus || localStorage.getItem("authenticated") === "true";
+    // Get userType here
 
-    let userType = userTypeRef.current || localStorage.getItem("userType");
-    if (!userType) {
-      if (pathname.startsWith(PATHS_NAMES.LOGINUSER)) {
-        userType = USERS_ROLES.USER;
-      } else if (pathname.startsWith(PATHS_NAMES.LOGINGENIE)) {
-        userType = USERS_ROLES.GENIE;
-      }
-    }
-    userTypeRef.current = userType; // Update the useRef value
+    // if (!myUserType) {
+    //   if (pathname.startsWith(PATHS_NAMES.LOGINUSER)) {
+    //     myUserType = USERS_ROLES.USER;
+    //   } else if (pathname.startsWith(PATHS_NAMES.LOGINGENIE)) {
+    //     myUserType = USERS_ROLES.GENIE;
+    //   }
+    // }
 
-    if (!loginStatus && isAuth) {
+    if (isLogin) {
       setLoginStatus(true);
-    }
-    if (loginStatus || isAuth) {
-      const role = userType.toLowerCase();
-      const pathsForRole = rolesPaths[role];
-      const isAllowedPath =
-        pathsForRole && pathsForRole.includes(location.pathname);
-      if (!isAllowedPath) {
-        const defaultPath = pathsForRole ? pathsForRole[0] : "/";
-        navigate(defaultPath, { replace: true });
+      let myUserType = getUserType();
+      if (myUserType) {
+        setUserType(myUserType); // Assuming this is the correct method to update userType in store
+        localStorage.setItem("userType", myUserType);
       }
-    } else if (!isAuth) {
-      const targetPath =
-        userType === USERS_ROLES.GENIE
-          ? PATHS_NAMES.LOGINGENIE
-          : PATHS_NAMES.LOGINUSER;
-      navigate(targetPath, { replace: true });
+      const pathsForRole = rolesPaths[myUserType];
+      const isAllowedPath = pathsForRole?.includes(pathname);
+      if (!isAllowedPath && pathsForRole) {
+        navigate(pathsForRole[0], { replace: true });
+      }
+    } else {
+      if (pathname.startsWith("/loginuser")) {
+        navigate(PATHS_NAMES.LOGINUSER, { replace: true });
+      } else if (pathname.startsWith("/logingenie")) {
+        navigate(PATHS_NAMES.LOGINGENIE, { replace: true });
+      }
     }
-  }, [loginStatus, navigate, setLoginStatus, location.pathname, pathname]);
+  }, [
+    loginStatus,
+    pathname,
+    navigate,
+    setUserType,
+    getUserType,
+    setLoginStatus,
+  ]);
 
   useEffect(() => {
     if (showToast && toastMessage) {
-      // toast.error(toastMessage);
       toastType === "success"
         ? toast.success(toastMessage)
         : toast.error(toastMessage);
-      // toast.success(toastMessage);
       resetToast();
     }
-  }, [showToast, toastMessage, resetToast]);
+  }, [showToast, toastMessage, resetToast, toastType]);
+
+  const getHomeComponent = () => {
+    // const myUserType = getUserType() || localStorage.getItem("userType"); // Get userType here
+    if (localStorage.getItem("userType")==="user" ||pathname.startsWith("/loginuser")) {
+      return <MainUser />;
+    } else if (localStorage.getItem("userType")==="genie"||pathname.startsWith("/logingenie")) {
+        return <MainGenie />;
+    }
+    // return <Redirect to="/login" />; // Replace with your desired behavior
+  };
 
   return (
     <>
       {/* <ToastContainer /> */}
       <CookiesProvider>
         <Routes>
-          <Route exact path={PATHS_NAMES.LOGINUSER} element={<LoginUser />} />
-          <Route exact path={PATHS_NAMES.LOGINGENIE} element={<LoginGenie />} />
-          <Route exact path={PATHS_NAMES.USER} element={<MainUser />} />
+          <Route exact path="/" element={getHomeComponent()} />
+          <Route exact path={"/loginuser"} element={<LoginUser />} />
+          <Route exact path={"/logingenie"} element={<LoginGenie />} />
+          <Route exact path={"/user"} element={<MainUser />} />
           <Route exact path="/userpostdata" element={<UserPostData />} />
           <Route exact path="/geniepostdata" element={<GeniePostData />} />
-          {/* <Route exact path="/geniepostdata/:id" element={<GeniePostData />} /> */}
           <Route exact path="/userpostdata/:id" element={<UserPostData />} />
-          {/* Updated line */}
-          <Route exact path={PATHS_NAMES.GENIE} element={<MainGenie />} />
-          {/* <Route exact path="/genieNewPost" element={<GenieNewPost />} /> */}
-          {/* <Route exact path="/post/:id" element={<GenieChat />} />
-          <Route exact path="/genietopics" element={<GenieTopics />} />  */}
+          <Route exact path={"/genie"} element={<MainGenie />} />
           <Route path="*" element={<NotFound />} /> {/* This is the new line */}
         </Routes>
       </CookiesProvider>

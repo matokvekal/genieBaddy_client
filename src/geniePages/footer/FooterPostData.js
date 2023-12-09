@@ -1,5 +1,5 @@
 import ChatInput from "components/ChatInput/ChatInput";
-function FooterPostData({ textInput, setTextInput, sendChat, disabled }) {       
+function FooterPostData({ textInput, setTextInput, sendChat, disabled,placeholder}) {       
   return (
     <>
       <div className="footer-postdata-main">
@@ -9,6 +9,7 @@ function FooterPostData({ textInput, setTextInput, sendChat, disabled }) {
           textInput={textInput}
             sendChat={sendChat}
             disabled={disabled}
+            placeholder={placeholder}
           />
         }
       </div>

@@ -14,6 +14,8 @@ import {
   userReadPostById,
   genieReadPostById,
   getpostById,
+  userPostData,
+  geniePostData,
 } from "services/getData";
 // import { exists } from "i18next";
 export const initialState = {
@@ -162,14 +164,14 @@ const useDataStore = createStore((set, get) => ({
       postId: id,
     }));
   },
-  updateUserType: (type) => {
+  setUserType: (type) => {
     set((state) => ({
       ...state,
       userType: type,
     }));
   },
   getUserType: () => {
-    let userType = get().userType || localStorage.getItem("userType");
+    let userType = get().userType;
     return userType;
   },
   updateNewChat: (type) => {
@@ -623,6 +625,57 @@ const useDataStore = createStore((set, get) => ({
     } catch (err) {
       console.error("Error in getTopics:", err);
       return { status: "error", info: err.message };
+    }
+  },
+  userPostChat: async ({
+    sanitizedInput,
+    avatar,
+    postId,
+    topic_id,
+    header,
+    userNickName,
+  }) => {
+    const payload = {
+      message: sanitizedInput,
+      avatar,
+      post_id: postId,
+      topic_id,
+      header,
+      userNickName,
+    };
+    try {
+      const response = await userPostData(payload);
+      if (response.status === 200) {
+        get().refreshUserPosts();
+        return response;
+      } else {
+        throw new Error("Unexpected status code");
+      }
+    } catch (error) {
+      console.error("Error in userPostChat:", error);
+      if (error) {
+        return error.message;
+      }
+    }
+  },
+  geniePostChat: async ({ sanitizedInput, postId }) => {
+    const payload = {
+      message: sanitizedInput,
+      post_id: postId,
+    };
+    try {
+      const response = await geniePostData(payload);
+      if (response.status === 200) {
+        get().refreshGeniePosts();
+        return response;
+      } else {
+        throw new Error("Unexpected status code");
+      }
+    } catch (error) {
+      console.error("Error in geniePostChat:", error);
+      if (error) {
+        return error.message;
+      }
     }
   },
 }));

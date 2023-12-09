@@ -3,7 +3,8 @@ import "./MainGenie.css";
 import Header from "../heads/Header";
 import FilterModalGenie from "modals/FilterModal/FilterModalGenie";
 import { useTranslation } from "react-i18next";
-import Footer from "../Footer/FooterMainGenie";
+import Footer from "../footer/FooterMainGenie";
+import FooterAchiev from "../footer/FooterMainGenieAchiev";
 import Posts from "../components/Posts";
 import Sidebar from "modals/UserSidebar";
 import { useStore } from "zustand";
@@ -11,7 +12,7 @@ import useDataStore from "stores/appStore";
 import { POST_STATUS } from "constants/jeneral";
 import GenieClaimPost from "geniePages/components/GenieClaimPost";
 import GenieAchievements from "geniePages/components/GenieAchievements";
-import FooterClaimGenie from "geniePages/Footer/FooterClaimGenie";
+import FooterClaimGenie from "geniePages/footer/FooterClaimGenie";
 
 const MainGenie = () => {
   const { updateModalsStates, geniePages, modals ,setUserGenieFilter} = useStore(useDataStore);
@@ -68,8 +69,11 @@ const MainGenie = () => {
         {geniePages.GenieAchievements && <GenieAchievements />}
 
         <div className="footer-genie" onClick={handleModal}>
-          {(geniePages.geniePosts || geniePages.GenieAchievements) && (
+          {(geniePages.geniePosts ) && (
             <Footer />
+          )}
+          {( geniePages.GenieAchievements) && (
+            <FooterAchiev />
           )}
           {geniePages.genieClaimPost && (
             <FooterClaimGenie

@@ -1,14 +1,11 @@
 import React, { useRef } from "react";
 import "./ChatInput.css";
-// import { useNavigate } from "react-router-dom";
-// import send from "assets/send.svg";
-// import { FaTimes } from "react-icons/fa";
+
 import { appInfo } from "../../config/config";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
-  // const navigate = useNavigate();
   const maxCharacterLimit = appInfo.maxUserCharacterLimit; 
 
   const { updateModalsStates } = useStore(useDataStore);
@@ -17,7 +14,6 @@ const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
     updateModalsStates("all", "close");
     if (event.target.value.length > maxCharacterLimit) return;
     setTextInput(event.target.value);
-    // Remove the fixed height when the user starts typing
     if (event.target.value.length > 0) {
       event.target.style.height = "auto"; // or any other height adjustment
       event.target.style.border = "1px solid lightgray";

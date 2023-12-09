@@ -8,7 +8,7 @@ import MessageBubble from "./MessageBubble";
 import { formatDate } from "utils/dateUtils";
 import { clearText } from "utils/clearText";
 import { POST_STATUS } from "constants/jeneral";
-import PostData from "./PostData";
+// import PostData from "./PostData";
 import { hasValue } from "../../utils/hasValue";
 import { userLimits } from "config/config.js";
 import FooterPostData from "../footer/FooterPostData";
@@ -24,17 +24,24 @@ const UserPostData = () => {
   const handleInputChange = (value) => {
     setTextInput(value);
   };
-  const { postId, allPosts, refreshUserPosts } = useStore(useDataStore);
+  const { postId, allPosts, refreshUserPosts ,userPostChat } = useStore(useDataStore);
   const [disabled, setDisabled] = useState(false);
-  if (!postId) {
-    navigate('/');   
-  }
+  // if (!postId) {
+  //   navigate('/');   
+  // }
+  useEffect(() => {
+    if (!postId) {
+      navigate('/');
+    }
+  }, [postId, navigate]);
+  
+  
   const sendChat = async () => {
     if (textInput.trim() !== "") {
       const sanitizedInput = clearText(textInput.trim());
       console.log(sanitizedInput);
       setDisabled(true);
-      const res = await PostData({
+      const res = await userPostChat({
         sanitizedInput,
         postId: postId,
         topic_id: null,
@@ -47,7 +54,24 @@ const UserPostData = () => {
       }
     }
   };
-
+    // const sendChat = async () => {
+    //   if (textInput.trim() !== "") {
+    //     const sanitizedInput = clearText(textInput.trim());
+    //     console.log(sanitizedInput);
+    //     setDisabled(true);
+    //     const res = await PostData({
+    //       sanitizedInput,
+    //       postId: postId,
+    //       topic_id: null,
+    //       header: null,
+    //     });
+    //     if (res.status === 200) {
+    //       const result = await refreshUserPosts();
+    //       console.log(result);
+    //       navigate('/');  
+    //     }
+    //   }
+    // };
   const post =
     allPosts && allPosts[0] ? allPosts.find((x) => x.id === postId) : null;
   const maxMessages = userLimits.maxMessages;

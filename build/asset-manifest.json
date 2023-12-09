@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.67fe3cb1.css",
-    "main.js": "/static/js/main.355b22d3.js",
+    "main.css": "/static/css/main.7ea46830.css",
+    "main.js": "/static/js/main.68960b73.js",
     "static/media/bg3.png": "/static/media/bg3.8e2220a3d2926a1eb8f4.png",
     "static/media/bg2.png": "/static/media/bg2.710807b0f24c1e1bec38.png",
     "static/media/bg11.png": "/static/media/bg11.c75595cae0f688d0d9c0.png",
@@ -9,13 +9,12 @@
     "static/media/Xoa_Logo_Symbol_Monochrome_BLACK_T.png": "/static/media/Xoa_Logo_Symbol_Monochrome_BLACK_T.754b82c7430f60f9bff3.png",
     "static/media/genie1.png": "/static/media/genie1.54889812bfa9562c403f.png",
     "static/media/avatar47.png": "/static/media/avatar47.78ce30e0c79d95ad41aa.png",
-    "static/media/sendwhite.svg": "/static/media/sendwhite.9d3c74f5e5192adc268badd513f6fa8d.svg",
     "index.html": "/index.html",
-    "main.67fe3cb1.css.map": "/static/css/main.67fe3cb1.css.map",
-    "main.355b22d3.js.map": "/static/js/main.355b22d3.js.map"
+    "main.7ea46830.css.map": "/static/css/main.7ea46830.css.map",
+    "main.68960b73.js.map": "/static/js/main.68960b73.js.map"
   },
   "entrypoints": [
-    "static/css/main.67fe3cb1.css",
-    "static/js/main.355b22d3.js"
+    "static/css/main.7ea46830.css",
+    "static/js/main.68960b73.js"
   ]
 }

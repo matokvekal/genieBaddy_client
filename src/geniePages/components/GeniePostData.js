@@ -18,39 +18,13 @@ import ActionModal from "modals/ActionModal/ActionModal";
 import Sidebar from "modals/UserSidebar";
 
 
-const UserPostData = () => {
+const GeniePostData = () => {
   const navigate = useNavigate();
   const [textInput, setTextInput] = useState("");
+  const [placeHolderText, setPlaceHolderText] = useState("");
 
-
-  // const { postId, allPosts, refreshUserPosts, updateModalsStates } =
-  //   useStore(useDataStore);
-  // const [disabled, setDisabled] = useState(false);
-  // if (!postId) {
-  //   console.log("no post id");
-  //   navigate('/');
-  //   // window.history.back();
-  // }
-  // const sendChat = async () => {
-  //   if (textInput.trim() !== "") {
-  //     const sanitizedInput = clearText(textInput.trim());
-  //     console.log(sanitizedInput);
-  //     setDisabled(true);
-  //     const res = await PostData({
-  //       sanitizedInput,
-  //       postId: postId,
-  //       topic_id: null,
-  //       header: null,
-  //     });
-  //     if (res.status === 200) {
-  //       const result = await refreshUserPosts();
-  //       console.log(result);
-  //       navigate('/');  
-  //       // window.history.back();
-  //     }
-  //   }
-  // };
-  const { postId, allPosts, refreshUserPosts, updateModalsStates,geniePostChat } =
+ 
+  const { postId, allPosts, refreshGeniePosts, updateModalsStates,geniePostChat } =
     useStore(useDataStore);
   const [disabled, setDisabled] = useState(false);
   if (!postId) {
@@ -68,7 +42,7 @@ const UserPostData = () => {
         postId: postId,
       });
       if (res.status === 200) {
-        const result = await refreshUserPosts();
+        const result = await refreshGeniePosts();
         console.log(result);
         navigate('/');  
         // window.history.back();
@@ -87,8 +61,17 @@ const UserPostData = () => {
         post.post_status === POST_STATUS.NEW)
     ) {
       setDisabled(false);
+      setPlaceHolderText("Type your message here");
     } else {
       setDisabled(true);
+      if (
+        post.last_writen_by === "genie_3" ||
+        post.post_status === POST_STATUS.CLOSED
+      ) {
+        setPlaceHolderText("Post is closed");
+      } else {
+        setPlaceHolderText("wait for user");
+      }
     }
   }, [post]);
 
@@ -175,4 +158,4 @@ const UserPostData = () => {
   );
 };
 
-export default UserPostData;
+export default GeniePostData;

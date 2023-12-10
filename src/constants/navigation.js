@@ -9,7 +9,6 @@ export const PATHS_NAMES = {
   MAIN: "/user",
   USER: "/user",
   GENIE: "/genie",
-  // GENIECHAT: "/geniechat",
   GENIECHATS: "/geniechats",
   ERROR: "/error",
 
@@ -20,5 +19,4 @@ export const PATHS_NAMES = {
 
 export const HOME_PATH_BY_ROLE = {
   [USERS_ROLES.USERCHAT]: PATHS_NAMES.USERCHAT,
-  // [USERS_ROLES.USERCHATS]: PATHS_NAMES.USERCHATS,
 };

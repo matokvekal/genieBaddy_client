@@ -4,8 +4,6 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 // import "./Head.css";
 import "./Header.css";
-import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function HeadMenu() {
   const { updateModalsStates, newChatsCounter } = useStore(useDataStore);

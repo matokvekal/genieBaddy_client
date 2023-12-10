@@ -1,12 +1,18 @@
-import React, { useRef } from "react";
+import React from "react";
 import "./ChatInput.css";
 
 import { appInfo } from "../../config/config";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
-const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
-  const maxCharacterLimit = appInfo.maxUserCharacterLimit; 
+const ChatInput = ({
+  textInput,
+  setTextInput,
+  sendChat,
+  disabled,
+  placeholder,
+}) => {
+  const maxCharacterLimit = appInfo.maxUserCharacterLimit;
 
   const { updateModalsStates } = useStore(useDataStore);
 
@@ -28,13 +34,6 @@ const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
       setTextInput("");
     }
   };
-
-  // const handleBack = () => {
-  //   setTextInput("");
-  //   // window.history.back();
-  //   navigate('/');
-  // };
-
   return (
     <div className="chat-input">
       <div className="input-text">
@@ -43,7 +42,7 @@ const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
           className="chat-textarea"
           rows={textInput ? Math.min(textInput.split("\n").length, 7) : 0}
           value={textInput}
-          placeholder={disabled ? "wait for genie..." : "Type a message..."}
+          placeholder={placeholder}
           onChange={handleInputChange}
         />
 
@@ -61,7 +60,6 @@ const ChatInput = ({ textInput, setTextInput, sendChat, disabled }) => {
           alt="mic"
         />
       </div>
-  
     </div>
   );
 };

@@ -308,9 +308,9 @@ export const geniePostData = async (payload) => {
     return false;
   }
 };
-export const userRefreshPosts = async () => {
-  const EndPoint = `${API_ENDPOINT}/userrefreshposts`;
 
+export const genieRefreshPosts = async () => {
+  const EndPoint = `${API_ENDPOINT}/genierefreshposts`;
   let Header = configHeader();
   if (!Header) {
     return null;
@@ -323,7 +323,28 @@ export const userRefreshPosts = async () => {
       return null;
     }
   } catch (error) {
-    console.error("Error in userRefreshPosts:", error);
+    console.error("Error in genieRefreshPosts:", error);
     return null;
   }
 };
+
+export const userRefreshPosts = async () => {
+  const EndPoint = `${API_ENDPOINT}/userrefreshposts`;
+  let Header = configHeader();
+  if (!Header) {
+    return null;
+  }
+  try {
+    const response = await axios.get(EndPoint, Header);
+
+    if (response.status === 200 && response.data?.result) {
+      return response;
+      // return response.data.result;
+    } else {
+      return null;
+    } 
+   } catch (error) {
+      console.error("Error in userRefreshPosts:", error);
+      return null;
+    }
+  };

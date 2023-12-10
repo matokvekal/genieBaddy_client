@@ -4,8 +4,6 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 import "./Header.css";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function HeadMenu() {
   const { updateModalsStates, newChatsCounter } = useStore(useDataStore);
@@ -41,7 +39,7 @@ function HeadMenu() {
             </div>
           </li>
           <li className="genie-icon-search">
-          <FontAwesomeIcon className="fa-icon-search" icon={faSearch} />
+          <img src={require(`assets/PNG/search.png`)} alt="search" />
           </li>
           <li className="genie-icon-bell">
             <img src={require(`assets/PNG/bell.png`)} alt="bell" />

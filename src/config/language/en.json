@@ -45,23 +45,7 @@
 			"time_to_arrive": "זמן צפוי "
 		}
 	},
-	"alertType": {
-		"skip_station": "אי מעבר בתחנה",
-		"delay_start": "איחור",
-		"skip_leg": "אי מעבר בתחנה",
-		"no_location": "מיקום לא ידוע",
-		"check_delay_start_again": " איחור",
-		"no_matching_data": "מידע לא תקין",
-		"data_incompability": "מידע לא תקין"
-	},
 
-	"filters_in_search_control": {
-		"title": {
-			"zone": "היקף",
-			"chaperone_name": "מלווים",
-			"cartype_name": "רכב"
-		}
-	},
 
 	"tasksInScheduleTop": {
 		"tasks": "משימות  ",
@@ -72,18 +56,6 @@
 		"Task_free_primary_resources": " משאבים ראשיים ללא משימה "
 	},
 		"constraints": {
-			"safety_belts": "חגורת בטיחות",
-			"wifi": "wifi",
-			"toilet": "שירותים",
-			"finishing": "גימור",
-			"clasify": "סיוג",
-			"language": "שפה",
-			"gender": "מגדר",
-			"driver": "נהג",
-			"chaperone": "מלווה",
-			"blocked": "פסולים",
-			"vehicle": "רכב",
-
 			"finishing_1": "נמוך",
 			"finishing_2": "בינוני",
 			"finishing_3": "יקר",

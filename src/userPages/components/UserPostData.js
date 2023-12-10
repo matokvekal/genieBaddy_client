@@ -14,28 +14,26 @@ import { userLimits } from "config/config.js";
 import FooterPostData from "../footer/FooterPostData";
 import ActionModal from "modals/ActionModal/ActionModal";
 import Sidebar from "modals/UserSidebar";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const UserPostData = () => {
   const navigate = useNavigate();
   const [textInput, setTextInput] = useState("");
   const { updateModalsStates } = useStore(useDataStore);
-
-  const handleInputChange = (value) => {
-    setTextInput(value);
-  };
-  const { postId, allPosts, refreshUserPosts ,userPostChat } = useStore(useDataStore);
+  const [placeHolderText, setPlaceHolderText] = useState("");
+  // const handleInputChange = (value) => {
+  //   setTextInput(value);
+  // };
+  const { postId, allPosts, refreshUserPosts, userPostChat } =
+    useStore(useDataStore);
   const [disabled, setDisabled] = useState(false);
-  // if (!postId) {
-  //   navigate('/');   
-  // }
+
   useEffect(() => {
     if (!postId) {
-      navigate('/');
+      navigate("/");
     }
   }, [postId, navigate]);
-  
-  
+
   const sendChat = async () => {
     if (textInput.trim() !== "") {
       const sanitizedInput = clearText(textInput.trim());
@@ -50,28 +48,11 @@ const UserPostData = () => {
       if (res.status === 200) {
         const result = await refreshUserPosts();
         console.log(result);
-        navigate('/');  
+        navigate("/");
       }
     }
   };
-    // const sendChat = async () => {
-    //   if (textInput.trim() !== "") {
-    //     const sanitizedInput = clearText(textInput.trim());
-    //     console.log(sanitizedInput);
-    //     setDisabled(true);
-    //     const res = await PostData({
-    //       sanitizedInput,
-    //       postId: postId,
-    //       topic_id: null,
-    //       header: null,
-    //     });
-    //     if (res.status === 200) {
-    //       const result = await refreshUserPosts();
-    //       console.log(result);
-    //       navigate('/');  
-    //     }
-    //   }
-    // };
+
   const post =
     allPosts && allPosts[0] ? allPosts.find((x) => x.id === postId) : null;
   const maxMessages = userLimits.maxMessages;
@@ -84,8 +65,18 @@ const UserPostData = () => {
         post.post_status === POST_STATUS.NEW)
     ) {
       setDisabled(true);
+      if (
+        post.last_writen_by === "user_3" ||
+        post.last_writen_by === "genie_3" ||
+        post.post_status === POST_STATUS.CLOSED
+      ) {
+        setPlaceHolderText("Post is closed");
+      } else {
+        setPlaceHolderText("wait for genie");
+      }
     } else {
       setDisabled(false);
+      setPlaceHolderText("Type your message here");
     }
   }, [post]);
 
@@ -117,24 +108,20 @@ const UserPostData = () => {
     postData = processTalkData(post);
   } else {
     // window.history.back();
-    navigate('/');   
+    navigate("/");
   }
-const handleClick = () => {
-  updateModalsStates("action", "close");
-}
+  const handleClick = () => {
+    updateModalsStates("action", "close");
+  };
   return (
     <>
       <Sidebar />
       <div className="postdata-main">
         <Header />
-        <HeadUserPost
-          post={post}
-        />
+        <HeadUserPost post={post} />
         <ActionModal post={post} />
 
-        <div
-          className="postdata-content"
-          onClick={handleClick}>
+        <div className="postdata-content" onClick={handleClick}>
           <div className="post-content">
             {postData &&
               postData.map((data, index) => (
@@ -167,6 +154,7 @@ const handleClick = () => {
             setTextInput={setTextInput}
             textInput={textInput}
             disabled={disabled}
+            placeholder={placeHolderText}
           />
         </div>
       </div>

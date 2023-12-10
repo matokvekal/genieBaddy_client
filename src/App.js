@@ -57,16 +57,6 @@ function App() {
   useEffect(() => {
     let isLogin =
       loginStatus || localStorage.getItem("authenticated") === "true";
-    // Get userType here
-
-    // if (!myUserType) {
-    //   if (pathname.startsWith(PATHS_NAMES.LOGINUSER)) {
-    //     myUserType = USERS_ROLES.USER;
-    //   } else if (pathname.startsWith(PATHS_NAMES.LOGINGENIE)) {
-    //     myUserType = USERS_ROLES.GENIE;
-    //   }
-    // }
-
     if (isLogin) {
       setLoginStatus(true);
       let myUserType = getUserType();

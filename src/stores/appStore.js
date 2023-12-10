@@ -16,6 +16,8 @@ import {
   getpostById,
   userPostData,
   geniePostData,
+  userRefreshPosts,
+  genieRefreshPosts,
 } from "services/getData";
 // import { exists } from "i18next";
 export const initialState = {
@@ -516,8 +518,7 @@ const useDataStore = createStore((set, get) => ({
   },
   refreshUserPosts: async () => {
     try {
-      const result = await fetchUserPosts();
-
+      const result = await userRefreshPosts();
       if (result.status !== 200) {
         throw new Error(`Failed to fetch posts: ${result.status}`);
       }
@@ -538,12 +539,12 @@ const useDataStore = createStore((set, get) => ({
 
       return true;
     } catch (error) {
-      console.error("Error during post refreshUserPosts:", error);
+      console.error("Error during  refreshUserPosts:", error);
       return false;
     }
   },
   refreshGeniePosts: async () => {
-    const result = await fetchGeniePosts();
+    const result = await genieRefreshPosts();
 
     if (result.status !== 200) {
       throw new Error(`Failed to fetch  GeniePosts: ${result.status}`);
@@ -563,7 +564,7 @@ const useDataStore = createStore((set, get) => ({
       }));
       return true;
     } catch (error) {
-      console.error("Error during post refreshGeniePosts:", error);
+      console.error("Error during  refreshGeniePosts:", error);
       return false;
     }
   },

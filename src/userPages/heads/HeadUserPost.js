@@ -9,7 +9,6 @@ function HeadUserPost({ post }) {
   const { updateModalsStates } = useStore(useDataStore);
 
   function goBack() {
-    // window.history.back();
     navigate('/');   
   }
 

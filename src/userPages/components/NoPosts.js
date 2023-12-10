@@ -1,7 +1,6 @@
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import { POST_STATUS } from "constants/jeneral";
-// import { getGeniePosts } from "api/geniePosts"; // Import
 
 function NoPosts() {
   const { userGenieFilter } = useStore(useDataStore);

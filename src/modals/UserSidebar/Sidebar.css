@@ -1,6 +1,6 @@
 .sidebar-user{
-      background-color: #f8f9fa;
-      border-right: 1px solid #dee2e6;
+      background-color: var(--gb-white);
+      border-right: 1px solid var(--gb-light-gray);
       height: 100vh;
       width: 13.75rem;
       position: fixed;
@@ -30,11 +30,13 @@ padding: 1rem;
       align-items: center;
 }
 .sidebar-title{
+      font-size: 1rem;
       /* margin: 1rem */
 }
 .sidebar-close{
-      margin-right: 1rem;
-      font-weight: bold;
+      font-size: 1rem;
+      /* margin-right: 1rem; */
+      /* font-weight: bold; */
 }
 
 
@@ -45,8 +47,8 @@ padding: 1rem;
       justify-content:space-around;
       height: 9.375rem;
       width:11.75rem ;
-      border: 1px var(--gb-dark-gray) solid;
-      border-bottom: 3px var(--gb-dark-gray) solid;
+      border: 1px var(--gb-light-gray) solid;
+      border-bottom: 3px var(--gb-light-gray) solid;
       padding: 0.8rem;
       border-radius:0.625rem ;
       margin-top:1rem;
@@ -76,7 +78,8 @@ font-size: large;
       flex-direction: column;
       align-items: start;
       width: 11.75rem;
-      padding: 1rem;
+      padding-top: 1rem;
+      /* padding: 1rem; */
 
 }
 .sidebar-buttons button{
@@ -88,8 +91,8 @@ font-size: large;
     margin-left: 0.5rem;
 }
 .edit-user {
-      width: 85%;
-      border: 1px var(--gb-dark-gray) solid;
+      width: 86%;
+      border: 1px var(--gb-light-gray) solid;
       border-radius: 5px;
       margin-left: 0.9rem;
       /* transform: translateY(-100%);  */

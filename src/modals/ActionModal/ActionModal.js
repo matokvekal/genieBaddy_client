@@ -8,7 +8,7 @@ import { USER_ACTIONS } from "constants/jeneral";
 const ActionModal = ({ post }) => {
   const { modals, getUserType, updateModalsStates, getActionPostById } =
     useStore(useDataStore);
-  const userType = getUserType();
+  const userType = getUserType() || localStorage.getItem("userType");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const handleAction = async (action, comment = null) => {

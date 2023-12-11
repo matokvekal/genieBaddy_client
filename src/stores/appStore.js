@@ -31,7 +31,7 @@ export const initialState = {
   mode: "development",
   topics: [],
   topicsDate: null,
-  allPosts: [],
+  userPosts: [],
   geniePosts: [],
   genieNewPostsCounter: 0,
   userGenieFilter: POST_STATUS.DEFAULT,
@@ -63,10 +63,16 @@ export const initialState = {
 //store
 const useDataStore = createStore((set, get) => ({
   ...initialState,
-  savePostsToState: (posts) => {
+  saveUserPostsToState: (posts) => {
     set((state) => ({
       ...state,
-      allPosts: posts,
+      userPosts: posts,
+    }));
+  },
+  saveGeniePostsToState: (posts) => {
+    set((state) => ({
+      ...state,
+      geniePosts: posts,
     }));
   },
   saveUserLimitsToState: (limits) => {
@@ -242,7 +248,7 @@ const useDataStore = createStore((set, get) => ({
       userName: "",
       userType: "",
       loginStatus: false,
-      allPosts: [],
+      userPosts: [],
       geniePosts: [],
       genieNewPostsCounter: 0,
       topics: [],
@@ -311,7 +317,7 @@ const useDataStore = createStore((set, get) => ({
   },
   getUserPosts: async () => {
     try {
-      const currentPosts = get().allPosts;
+      const currentPosts = get().userPosts;
       if (currentPosts?.length) {
         return currentPosts;
       }
@@ -319,7 +325,7 @@ const useDataStore = createStore((set, get) => ({
       const dbPosts = localStorage.getItem("userPosts");
       if (dbPosts) {
         const posts = JSON.parse(dbPosts);
-        get().savePostsToState(posts);
+        get().saveUserPostsToState(posts);
         return posts;
       }
 
@@ -327,9 +333,9 @@ const useDataStore = createStore((set, get) => ({
       const res = await fetchUserPosts();
       const data = res?.data?.result;
       if (data.length === 0) {
-        return { status: "no data" };
+        return null;
       } else {
-        get().savePostsToState(data);
+        get().saveUserPostsToState(data);
         get().savePostsToIndexLS(data);
 
         return data;
@@ -348,15 +354,14 @@ const useDataStore = createStore((set, get) => ({
       const posts = localStorage.getItem("geniePosts");
       if (posts) {
         const geniePosts = JSON.parse(posts);
-        get().savePostsToState(geniePosts);
+        get().saveGeniePostsToState(geniePosts);
         return geniePosts;
       }
-
       const data = await fetchGeniePosts();
       if (data.length === 0) {
-        return { status: "no data" };
+        return null;
       } else {
-        get().savePostsToState(data);
+        get().saveGeniePostsToState(data);
         localStorage.setItem("geniePosts", JSON.stringify(data));
         return data;
       }
@@ -379,13 +384,14 @@ const useDataStore = createStore((set, get) => ({
           );
 
           if (existingPostIndex !== -1) {
+            // update in any case
             // If post exists and the status is different, update it
-            if (
-              curentPosts[existingPostIndex].post_status !== newPost.post_status
-            ) {
-              curentPosts[existingPostIndex] = newPost;
-              get().updateNewChatsCounter(get().newChatsCounter + 1);
-            }
+            // if (
+            //   curentPosts[existingPostIndex].post_status !== newPost.post_status
+            // ) {
+            curentPosts[existingPostIndex] = newPost;
+            get().updateNewChatsCounter(get().newChatsCounter + 1);
+            // }
           } else {
             // If post does not exist, add it
             curentPosts.push(newPost);
@@ -394,7 +400,7 @@ const useDataStore = createStore((set, get) => ({
         });
 
         // Save updated posts to state and localStorage
-        get().savePostsToState(curentPosts);
+        get().saveUserPostsToState(curentPosts);
         localStorage.setItem("userPosts", JSON.stringify(curentPosts));
 
         return true;
@@ -415,7 +421,7 @@ const useDataStore = createStore((set, get) => ({
             break;
           }
         }
-        get().savePostsToState(localStoragePosts);
+        get().saveUserPostsToState(localStoragePosts);
         localStorage.setItem("userPosts", JSON.stringify(localStoragePosts));
         return true;
       }
@@ -438,7 +444,7 @@ const useDataStore = createStore((set, get) => ({
             break;
           }
         }
-        get().savePostsToState(localStoragePosts);
+        get().saveGeniePostsToState(localStoragePosts);
         localStorage.setItem("geniePosts", JSON.stringify(localStoragePosts));
         return true;
       }
@@ -470,7 +476,7 @@ const useDataStore = createStore((set, get) => ({
         filteredPosts.push(newPost.data.result[0]);
       }
 
-      get().savePostsToState(filteredPosts);
+      get().saveUserPostsToState(filteredPosts);
       if (filteredPosts && filteredPosts.length > 0) {
         localStorage.setItem("userPosts", JSON.stringify(filteredPosts));
       } else {
@@ -486,29 +492,45 @@ const useDataStore = createStore((set, get) => ({
       //update store
       //update ls
     } catch (err) {
-      console.log("error in handleUserNotRead", err);
+      console.log("error in getActionPostById", err);
       return false;
     }
   },
   handleGenieNewChats: async () => {
     try {
       let newPosts = await fetchGenieNewChats();
+
       if (newPosts.data.result.length === 0) {
         return { status: "no new chats" };
       } else {
         newPosts = newPosts.data.result;
-        const curentPosts = localStorage.getItem("geniePosts");
-        const posts = JSON.parse(curentPosts);
+        let curentPosts = localStorage.getItem("geniePosts");
+        curentPosts = JSON.parse(curentPosts);
         //replace at curentPosts the posts with the same id from newPosts
-        posts.forEach((post) => {
-          const newPost = newPosts.find((newPost) => newPost.id === post.id);
-          if (newPost) {
-            post = newPost;
+        // posts.forEach((post) => {
+        //   const newPost = newPosts.find((newPost) => newPost.id === post.id);
+        //   if (newPost) {
+        //     post = newPost;
+        //     get().updateNewChatsCounter(get().newChatsCounter + 1);
+        //   }
+        // });
+
+        newPosts.forEach((newPost) => {
+          const existingPostIndex = curentPosts.findIndex(
+            (p) => p.id === newPost.id
+          );
+          if (existingPostIndex !== -1) {
+            // update in any case
+            curentPosts[existingPostIndex] = newPost;
+            get().updateNewChatsCounter(get().newChatsCounter + 1);
+            // }
+          } else {
+            curentPosts.push(newPost);
             get().updateNewChatsCounter(get().newChatsCounter + 1);
           }
         });
-        get().savePostsToState(posts);
-        localStorage.setItem("geniePosts", curentPosts);
+        get().saveGeniePostsToState(curentPosts);
+        localStorage.setItem("geniePosts", JSON.stringify(curentPosts));
         return true;
       }
     } catch (err) {
@@ -522,11 +544,14 @@ const useDataStore = createStore((set, get) => ({
       if (result.status !== 200) {
         throw new Error(`Failed to fetch posts: ${result.status}`);
       }
+      if (result.data.result.length === 0) {
+        return false;
+      }
       const freshPosts = result?.data?.result;
-      set((state) => ({
-        ...state,
-        allPosts: [],
-      }));
+      // set((state) => ({
+      //   ...state,
+      //   userPosts: [],
+      // }));
 
       localStorage.removeItem("userPosts");
 
@@ -534,7 +559,7 @@ const useDataStore = createStore((set, get) => ({
 
       set((state) => ({
         ...state,
-        allPosts: freshPosts,
+        userPosts: freshPosts,
       }));
 
       return true;
@@ -549,18 +574,21 @@ const useDataStore = createStore((set, get) => ({
     if (result.status !== 200) {
       throw new Error(`Failed to fetch  GeniePosts: ${result.status}`);
     }
+    if (result.data.result.length === 0) {
+      return false;
+    }
     const freshPosts = result?.data?.result;
     try {
-      set((state) => ({
-        ...state,
-        allPosts: [],
-      }));
+      // set((state) => ({
+      //   ...state,
+      //   allPosts: [],
+      // }));
       localStorage.removeItem("geniePosts");
       localStorage.setItem("geniePosts", JSON.stringify(freshPosts));
 
       set((state) => ({
         ...state,
-        allPosts: freshPosts,
+        geniePosts: freshPosts,
       }));
       return true;
     } catch (error) {
@@ -647,7 +675,7 @@ const useDataStore = createStore((set, get) => ({
     try {
       const response = await userPostData(payload);
       if (response.status === 200) {
-        get().refreshUserPosts();
+        // get().refreshUserPosts();
         return response;
       } else {
         throw new Error("Unexpected status code");
@@ -667,7 +695,7 @@ const useDataStore = createStore((set, get) => ({
     try {
       const response = await geniePostData(payload);
       if (response.status === 200) {
-        get().refreshGeniePosts();
+        // get().refreshGeniePosts();
         return response;
       } else {
         throw new Error("Unexpected status code");

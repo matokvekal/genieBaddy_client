@@ -37,12 +37,17 @@ function App() {
 
   useEffect(() => {
     let chatCheckInterval;
-    if (loginStatus) {
-      const myUserType = getUserType(); // Get userType here
-      const intervalFunction =
-        myUserType === USERS_ROLES.GENIE
-          ? handleGenieNewChats
-          : handleUserNotRead;
+    if (loginStatus || localStorage.getItem("authenticated") === "true") {
+      const myUserType = getUserType() || localStorage.getItem("userType"); // Get userType here
+      const intervalFunction = () => {
+        if (myUserType === "genie") {
+          // if (myUserType === USERS_ROLES.GENIE) {
+          handleGenieNewChats();
+        } else {
+          handleUserNotRead();
+        }
+      };
+
       chatCheckInterval = setInterval(() => {
         intervalFunction();
       }, 1000 * 60 * appInfo.checkForNewPostsMinutes);
@@ -59,7 +64,7 @@ function App() {
       loginStatus || localStorage.getItem("authenticated") === "true";
     if (isLogin) {
       setLoginStatus(true);
-      let myUserType = getUserType();
+      let myUserType = getUserType() || localStorage.getItem("userType"); // Get userType here
       if (myUserType) {
         setUserType(myUserType); // Assuming this is the correct method to update userType in store
         localStorage.setItem("userType", myUserType);
@@ -96,10 +101,16 @@ function App() {
 
   const getHomeComponent = () => {
     // const myUserType = getUserType() || localStorage.getItem("userType"); // Get userType here
-    if (localStorage.getItem("userType")==="user" ||pathname.startsWith("/loginuser")) {
+    if (
+      localStorage.getItem("userType") === "user" ||
+      pathname.startsWith("/loginuser")
+    ) {
       return <MainUser />;
-    } else if (localStorage.getItem("userType")==="genie"||pathname.startsWith("/logingenie")) {
-        return <MainGenie />;
+    } else if (
+      localStorage.getItem("userType") === "genie" ||
+      pathname.startsWith("/logingenie")
+    ) {
+      return <MainGenie />;
     }
     // return <Redirect to="/login" />; // Replace with your desired behavior
   };

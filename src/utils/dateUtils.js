@@ -15,19 +15,20 @@ export const formatDate = (date) => {
   if (diffMinutes < 5) {
     return "Now";
   } else if (diffMinutes < 60) {
-    return currentDate.fromNow(); // Utilizes Moment.js's relative time
-  } else if (diffHours < 12) {
-    return currentDate.fromNow(); // Utilizes Moment.js's relative time
+    return `${diffMinutes} minute${diffMinutes > 1 ? 's' : ''}`;
+  } else if (diffHours < 24) {
+    return `${diffHours} hour${diffHours > 1 ? 's' : ''}`;
+  } else if (diffDays === 1) {
+    return "Yesterday";
   } else if (diffDays < 7) {
-    return currentDate.fromNow(); // Utilizes Moment.js's relative time
-  } else if (diffWeeks < 4) {
-    return `${diffWeeks} weeks ago`;
+    return `${diffDays} day${diffDays > 1 ? 's' : ''}`;
+  } else if (currentDate.isSame(now, 'week')) {
+    return "This week";
+  } else if (currentDate.isSame(now, 'month')) {
+    return "This month";
   } else if (diffMonths < 12) {
-    return `${diffMonths} months ago`;
-  } else if (diffYears >= 1) {
-    return `${diffYears} years ago`;
+    return `${diffMonths} month${diffMonths > 1 ? 's' : ''}`;
   } else {
-    // Fallback for any other case
-    return currentDate.format('DD/MM/YYYY'); // Formats date as "DD/MM/YYYY"
+    return `${diffYears} year${diffYears > 1 ? 's' : ''}`;
   }
 };

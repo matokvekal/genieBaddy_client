@@ -15,7 +15,6 @@ const configHeader = () => {
 };
 
 export const fetchServerTopics = async (data) => {
-
   const EndPoint = `${API_ENDPOINT}/topics`;
   console.log("at fetchServerTopics :", EndPoint);
   try {
@@ -53,7 +52,8 @@ export const fetchUserPosts = async () => {
     return null;
   }
 };
-export const fetchUserNewChats = async () => {//user check wvwry 1 min
+export const fetchUserNewChats = async () => {
+  //user check wvwry 1 min
   try {
     const EndPoint = `${API_ENDPOINT}/usernewchats`;
     // console.log("at fetchUserPosts :", EndPoint,configHeader());
@@ -98,7 +98,6 @@ export const fetchGeniePosts = async () => {
     return null;
   }
 };
-
 
 export const getUserLimitsFromServer = async () => {
   const EndPoint = `${API_ENDPOINT}/getuserlimits`;
@@ -196,7 +195,6 @@ export const genieReadPostById = async (postId) => {
     return null;
   }
   try {
-    
     console.log("at genieReadPostById :", EndPoint, Header);
     const response = await axios.get(EndPoint, Header);
     if (response.status === 200 && response.data?.post_id) {
@@ -250,20 +248,20 @@ export const fetchGenieNewChats = async () => {
     return null;
   }
 };
-export const genieClaimPost = async (postId, avatar,genieNickname) => {
+export const genieClaimPost = async (postId, avatar, genieNickname) => {
   const EndPoint = `${API_ENDPOINT}/genieclamepost`;
   try {
     const response = await axios.post(
       EndPoint,
-      JSON.stringify({ postId, avatar,genieNickname }),
+      JSON.stringify({ postId, avatar, genieNickname }),
       configHeader()
     );
     return response;
   } catch (error) {
     console.error("Error in genieClaimPost:", error);
     // throw error;
-    if(error.response.data){
-      return error.response.data
+    if (error.response.data) {
+      return error.response.data;
     }
     return null;
   }
@@ -282,11 +280,7 @@ export const userPostData = async (payload) => {
   try {
     const EndPoint = `${API_ENDPOINT}/userpost`;
     console.log("at userPostDatation :");
-    const response = await axios.post(
-      EndPoint,
-      payload,
-      configHeader()
-    );
+    const response = await axios.post(EndPoint, payload, configHeader());
     return response;
   } catch (error) {
     console.error("Error in userPostData:", error);
@@ -297,11 +291,7 @@ export const geniePostData = async (payload) => {
   try {
     const EndPoint = `${API_ENDPOINT}/geniepost`;
     console.log("at geniePostData :");
-    const response = await axios.post(
-      EndPoint,
-      payload,
-      configHeader()
-    );
+    const response = await axios.post(EndPoint, payload, configHeader());
     return response;
   } catch (error) {
     console.error("Error in geniePostData:", error);
@@ -342,9 +332,9 @@ export const userRefreshPosts = async () => {
       // return response.data.result;
     } else {
       return null;
-    } 
-   } catch (error) {
-      console.error("Error in userRefreshPosts:", error);
-      return null;
     }
-  };
+  } catch (error) {
+    console.error("Error in userRefreshPosts:", error);
+    return null;
+  }
+};

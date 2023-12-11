@@ -34,39 +34,7 @@ const NewPost = ({ handleCloseNewPostModal }) => {
       const sanitizedInput = clearText(textInput.trim());
       setTextInput(sanitizedInput);
 
-  //     const res = await PostData({
-  //       sanitizedInput,
-  //       avatar,
-  //       postId: "new",
-  //       topic_id: selectedTopic ? selectedTopic.id : 1,
-  //       header: null,
-  //       userNickName: userNickName,
-  //     });
-  //     if (res?.status === 200 && res.data.status === 'success') {
-  //       triggerToast(
-  //         "Message sent successfully. It may take a few minutes to process.",
-  //         "success"
-  //       );
-  //       await updateUserLimits();
-  //       await refreshUserPosts();
-  //       handleCloseNewPostModal();
-  //     } else if(res?.status === 200 && res.data.status === 'limitReached'){
-  //       triggerToast(
-  //         'Daily post limit reached, try again tomorrow.',
-  //         "error"
-  //       );
-  //     }
-  //     else {
-  //       if (res?.status === 400 || res?.status === 406) {
-  //         triggerToast(res.data?.error);
-  //       } else {
-  //         console.log("error");
-  //         triggerToast("Message didn't send. Please try again.", "error");
-  //       }
-  //       setDisabledSend(false);
-  //     }
-  //   }
-  // };
+
   const res = await userPostChat({
     sanitizedInput,
     avatar,

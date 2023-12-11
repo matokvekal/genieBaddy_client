@@ -35,7 +35,8 @@ function LoginGenie() {
     onSubmit: async (values) => {
       const res = await handleLogin(
         values,
-        (values.userRole = USERS_ROLES.GENIE)
+        (values.userRole = 'genie')
+        // (values.userRole = USERS_ROLES.GENIE)
       );
       if (res.status !== 200) {
         formik.setStatus({ errorMsg: "Invalid username or password" });

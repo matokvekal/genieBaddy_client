@@ -44,7 +44,7 @@ function Post({ handleSelectPost, post }) {
     ) {
       return (
         <div className="row-right-middle circle circle-green">
-          {countMessages()}
+          {messageKeys[post.last_writen_by]}
         </div>
       );
     } else if (
@@ -54,7 +54,7 @@ function Post({ handleSelectPost, post }) {
     ) {
       return (
         <div className="row-right-middle circle circle-orange">
-          {countMessages()}
+          {messageKeys[post.last_writen_by]}
         </div>
       );
     } else if (
@@ -73,24 +73,24 @@ function Post({ handleSelectPost, post }) {
     }
   };
 
-  const countMessages = () => {
-    let messageCount = 0;
-    const messageKeys = [
-      "user_1",
-      "genie_1",
-      "user_2",
-      "genie_2",
-      "user_3",
-      "genie_3",
-    ];
-
-    messageKeys.forEach((key) => {
-      if (post[key] && post[key] !== "") {
-        messageCount += 1;
-      }
-    });
-    return messageCount;
+  // const countMessages = () => {
+  //   let messageCount = 0;
+  const messageKeys = {
+    user_1: 1,
+    genie_1: 2,
+    user_2: 3,
+    genie_2: 4,
+    user_3: 5,
+    genie_3: 6,
   };
+
+  // messageKeys.forEach((key) => {
+  //   if (post[key] && post[key] !== "") {
+  //     messageCount += 1;
+  //   }
+  // });
+  //   return messageCount;
+  // };
   return (
     <div className="post-row " onClick={showConversation}>
       <div className="row-left">
@@ -102,7 +102,7 @@ function Post({ handleSelectPost, post }) {
           />
         ) : (
           <img
-            src={require(`assets/PNG/lampActive.png`)}
+            src={require(`assets/PNG/graycircle.png`)}
             className="post-image-avatar"
             alt="user avatar"
           />
@@ -111,7 +111,10 @@ function Post({ handleSelectPost, post }) {
       <div className="row-middle">
         <div className="row-middle-upper">
           <div className="row-middle-upper-left">
-            {post.genie_nickname || "Awaiting Genie Selection."}
+            {post.genie_nickname && post.genie_nickname.trim() !== ""
+              ? post.genie_nickname
+              : "Awaiting Genie Selection."}
+            {/* {post.genie_nickname || "Awaiting Genie Selection."} */}
           </div>
           <div className="row-middle-upper-right">{renderRatingIcons()}</div>
         </div>

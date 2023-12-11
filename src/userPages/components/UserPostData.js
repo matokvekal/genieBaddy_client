@@ -24,7 +24,7 @@ const UserPostData = () => {
   // const handleInputChange = (value) => {
   //   setTextInput(value);
   // };
-  const { postId, allPosts, refreshUserPosts, userPostChat } =
+  const { postId, userPosts, refreshUserPosts, userPostChat } =
     useStore(useDataStore);
   const [disabled, setDisabled] = useState(false);
 
@@ -35,6 +35,7 @@ const UserPostData = () => {
   }, [postId, navigate]);
 
   const sendChat = async () => {
+    
     if (textInput.trim() !== "") {
       const sanitizedInput = clearText(textInput.trim());
       console.log(sanitizedInput);
@@ -54,29 +55,25 @@ const UserPostData = () => {
   };
 
   const post =
-    allPosts && allPosts[0] ? allPosts.find((x) => x.id === postId) : null;
+    userPosts && userPosts[0] ? userPosts.find((x) => x.id === postId) : null;
   const maxMessages = userLimits.maxMessages;
 
   useEffect(() => {
-    if (
-      post &&
-      post.last_writen_by &&
-      (post.last_writen_by.includes("user") ||
-        post.post_status === POST_STATUS.NEW)
-    ) {
-      setDisabled(true);
+    if (post) {
+      let isDisabled = true;
+      let placeholder = "Wait for genie";
       if (
-        post.last_writen_by === "user_3" ||
         post.last_writen_by === "genie_3" ||
         post.post_status === POST_STATUS.CLOSED
       ) {
-        setPlaceHolderText("Post is closed");
-      } else {
-        setPlaceHolderText("wait for genie");
+        placeholder = "Post is closed";
+      } else if (post.last_writen_by?.includes("genie")) {
+        placeholder = "Type your message here";
+        isDisabled = false;
       }
-    } else {
-      setDisabled(false);
-      setPlaceHolderText("Type your message here");
+
+      setDisabled(isDisabled);
+      setPlaceHolderText(placeholder);
     }
   }, [post]);
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import "./GeniePostData.css";
 import { useStore } from "zustand";
@@ -17,19 +17,22 @@ import FooterPostData from "../footer/FooterPostData";
 import ActionModal from "modals/ActionModal/ActionModal";
 import Sidebar from "modals/UserSidebar";
 
-
 const GeniePostData = () => {
   const navigate = useNavigate();
   const [textInput, setTextInput] = useState("");
   const [placeHolderText, setPlaceHolderText] = useState("");
 
- 
-  const { postId, allPosts, refreshGeniePosts, updateModalsStates,geniePostChat } =
-    useStore(useDataStore);
+  const {
+    postId,
+    geniePosts,
+    refreshGeniePosts,
+    updateModalsStates,
+    geniePostChat,
+  } = useStore(useDataStore);
   const [disabled, setDisabled] = useState(false);
   if (!postId) {
     console.log("no post id");
-    navigate('/');
+    navigate("/");
     // window.history.back();
   }
   const sendChat = async () => {
@@ -44,34 +47,32 @@ const GeniePostData = () => {
       if (res.status === 200) {
         const result = await refreshGeniePosts();
         console.log(result);
-        navigate('/');  
+        navigate("/");
         // window.history.back();
       }
     }
   };
   const post =
-    allPosts && allPosts[0] ? allPosts.find((x) => x.id === postId) : null;
+    geniePosts && geniePosts[0] ? geniePosts.find((x) => x.id === postId) : null;
   const maxMessages = userLimits.maxMessages;
 
   useEffect(() => {
-    if (
-      post &&
-      post.last_writen_by &&
-      (post.last_writen_by.includes("user") ||
-        post.post_status === POST_STATUS.NEW)
-    ) {
-      setDisabled(false);
-      setPlaceHolderText("Type your message here");
-    } else {
-      setDisabled(true);
-      if (
+    if (post) {
+      let isDisabled = true;
+      let placeholder = "wait for user";
+
+      if (post.last_writen_by?.includes("user")) {
+        isDisabled = false;
+        placeholder = "Type your message here";
+      } else if (
         post.last_writen_by === "genie_3" ||
         post.post_status === POST_STATUS.CLOSED
       ) {
-        setPlaceHolderText("Post is closed");
-      } else {
-        setPlaceHolderText("wait for user");
+        placeholder = "Post is closed";
       }
+
+      setDisabled(isDisabled);
+      setPlaceHolderText(placeholder);
     }
   }, [post]);
 
@@ -102,7 +103,7 @@ const GeniePostData = () => {
   if (post && processTalkData(post)) {
     postData = processTalkData(post);
   } else {
-    navigate('/');  
+    navigate("/");
     // window.history.back();
   }
   const handleClick = () => {
@@ -146,11 +147,11 @@ const GeniePostData = () => {
         </div>
         <div className="postdata-footer">
           <FooterPostData
-             sendChat={sendChat}
-             setTextInput={setTextInput}
-             textInput={textInput}
-             disabled={disabled}
-             placeholder={disabled?"wait for user":"Type your message here"}
+            sendChat={sendChat}
+            setTextInput={setTextInput}
+            textInput={textInput}
+            disabled={disabled}
+            placeholder={placeHolderText}
           />
         </div>
       </div>

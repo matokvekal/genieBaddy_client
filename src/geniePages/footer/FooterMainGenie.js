@@ -47,7 +47,7 @@ function FooterMainGenie() {
               alt="genie_stats"
             />
           </div>
-          <div>Achievements</div>
+          <div>Me</div>
         </div>
       </div>
     </>

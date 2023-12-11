@@ -17,8 +17,8 @@ const Sidebar = () => {
     updateGenieNickName,
     getUserType,
   } = useStore(useDataStore);
-  const navigate = useNavigate();
-  const userType = getUserType();
+  // const navigate = useNavigate();
+  const userType = getUserType() || localStorage.getItem("userType");
   const [nickName, setNickName] = useState("");
   useEffect(() => {
     const initialNickName =
@@ -44,7 +44,7 @@ const Sidebar = () => {
 
   const handleLogOut = () => {
     console.log("logout");
-    const type = getUserType();
+    const type = getUserType() || localStorage.getItem("userType");
 
     updateModalsStates("sidebar", "close");
     logOut();
@@ -78,7 +78,11 @@ const Sidebar = () => {
               updateModalsStates("sidebar", "close");
             }}
           >
-            X
+               <img
+              src={require(`assets/PNG/vectorx.png`)}
+              alt="avatar"
+              // width={40}
+            />
           </div>
         </div>
         <div

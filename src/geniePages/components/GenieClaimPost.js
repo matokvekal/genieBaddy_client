@@ -8,16 +8,9 @@ import HeadGenieNewPost from "geniePages/heads/HeadGenieNewPost";
 import MessageBubble from "./MessageBubble";
 import NoNewPostsToClame from "./NoNewPostsToClame";
 
-const GenieClaimPost = ({
-  postIndex,
-  posts,
-  setPosts,
-}) => {
-  const {
-    updateGenieNewPostCounter,
-    triggerToast,
-    genieNewPostsCounter,
-  } = useStore(useDataStore);
+const GenieClaimPost = ({ postIndex, posts, setPosts }) => {
+  const { updateGenieNewPostCounter, triggerToast, genieNewPostsCounter } =
+    useStore(useDataStore);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,8 +32,7 @@ const GenieClaimPost = ({
   return (
     <>
       <div className="claimpost-container">
-        <div className="carouselContainer">
-        </div>
+        <div className="carouselContainer"></div>
         <HeadGenieNewPost post={posts[postIndex]} />
         <div className="claimpost-content">
           {genieNewPostsCounter > 0 ? (

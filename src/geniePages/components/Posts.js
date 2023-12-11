@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import "./Posts.css";
 import Post from "./Post";
 import { useStore } from "zustand";
@@ -10,9 +10,10 @@ import NoPosts from "./NoNewPostsToClame";
 function Posts() {
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { getGeniePosts, setPostId, userGenieFilter, genieReadPost } =
+  const { getGeniePosts, setPostId, userGenieFilter, genieReadPost,geniePosts } =
     useStore(useDataStore);
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
+  const [filteredPost, setFilteredPost] = useState([]);
 
   useEffect(() => {
     // Restore scroll position when component mounts
@@ -47,7 +48,7 @@ function Posts() {
       try {
         const res = await getGeniePosts();
         if (res && res.length > 0) {
-          setPosts(res);
+          // setPosts(res);
           if (scrollContainerRef.current) {
             const savedScrollPosition =
               Number(localStorage.getItem("scrollPosition")) || 0;
@@ -56,7 +57,7 @@ function Posts() {
             }, 100);
           }
         } else {
-          setPosts([]);
+          // setPosts([]);
         }
       } catch (error) {
         console.error("Failed to fetch posts:", error);
@@ -66,33 +67,35 @@ function Posts() {
     fetchPosts();
   }, [getGeniePosts]);
 
-  const filteredPost = useMemo(() => {
-    let filtered;
-    switch (userGenieFilter) {
-      case POST_STATUS.ALL:
-        filtered = posts;
-        break;
-      case POST_STATUS.CLOSED:
-        filtered = posts.filter(
-          (conv) => conv.post_status === POST_STATUS.CLOSED
-        );
-        break;
-      case POST_STATUS.OPEN:
-        filtered = posts.filter(
-          (conv) => conv.post_status === POST_STATUS.OPEN
-        );
-        break;
-      case POST_STATUS.SAVED:
-        filtered = posts.filter(
-          (conv) =>
-            conv.post_status === POST_STATUS.CLOSED && conv.user_save === 1
-        );
-        break;
-      default:
-        filtered = posts;
-    }
-    return Array.isArray(filtered) ? filtered : [];
-  }, [userGenieFilter, posts]);
+
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      let data = await getGeniePosts();
+
+      data =
+        data &&
+        data.filter((post) => {
+          switch (userGenieFilter) {
+            case POST_STATUS.ALL:
+              return true;
+            case POST_STATUS.CLOSED:
+              return post.post_status === POST_STATUS.CLOSED;
+            case POST_STATUS.OPEN:
+              return post.post_status === POST_STATUS.OPEN;
+            case POST_STATUS.SAVED:
+              return (
+                post.post_status === POST_STATUS.CLOSED && post.user_save === 1
+              );
+            default:
+              return true;
+          }
+        });
+      setFilteredPost(data);
+    };
+    fetchPosts();
+  }, [userGenieFilter, getGeniePosts,geniePosts]);
+
   return (
     <>
       {(filteredPost && filteredPost.length) > 0 ? (

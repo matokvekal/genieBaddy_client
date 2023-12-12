@@ -27,7 +27,7 @@
    /* border:solid 1px red; */
    display: flex;
    border-top : 2px solid var(--gb-light-gray);
- 
+
  }
 
  
@@ -47,11 +47,40 @@
     align-items: center;
     }
     .main-genie-upper div{
- font-size: 1.3rem;
- font-weight: 650;
+      font-size: 1.3rem;
+      font-weight: 650;
     }
     .main-genie-upper img{
        height: 1.5rem;
        width: 1.5rem;
        line-height: 100%;
     }
+
+    .claim-post-overlay{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 5rem;
+      /* background-color: rgba(0, 0, 0, 0.2);  */
+      z-index: 10; /* Ensure it's above other content */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .claim-post-animate {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+    

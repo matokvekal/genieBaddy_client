@@ -61,6 +61,8 @@
    overflow: hidden;   
    text-overflow: ellipsis; 
    margin-bottom: 0.5rem;
+
+   direction: rtl;
 }
 .genie-rubi-icon{
    width: 1.2rem;

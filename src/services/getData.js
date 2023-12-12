@@ -249,6 +249,7 @@ export const fetchGenieNewChats = async () => {
   }
 };
 export const genieClaimPost = async (postId, avatar, genieNickname) => {
+  debugger;
   const EndPoint = `${API_ENDPOINT}/genieclamepost`;
   try {
     const response = await axios.post(

@@ -7,8 +7,8 @@
    display: flex;
    justify-content: space-around;
    align-items: center;
-   background: var(--gb-blue-bubble);
-   color:var(--gb-white);
+   background: var(--gb-light-gray);
+   color:var(--gb-dark-blue);
    width: 7rem;
 }
 .buttonClaim.disabled {

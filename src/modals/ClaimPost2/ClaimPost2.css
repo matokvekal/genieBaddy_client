@@ -1,0 +1,65 @@
+
+.modal-claim-post{
+   width: 100%;
+   height: 90%;
+   background: var(--gb-light-gray);
+   border-top-left-radius: 3rem;
+   border-top-right-radius: 3rem;
+   opacity: 0.95;
+   border-top: 1px solid lightgray;
+   border-bottom:none;
+   display:flex;
+   flex-direction: column;
+   margin-top: 5rem;
+
+}
+.claim-post-up{
+   margin-top: 1rem;
+   display: flex;
+   justify-content: flex-end;
+margin-right: 1rem;
+
+}
+.claim-post-up img{
+   width: 2rem;
+   height: 2rem;
+}
+.claim-post-down{
+
+   flex-grow: 1;
+   overflow-y: auto;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.claim-post-down.noposts{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.claim-post-head{
+width: 100%;
+align-items: center ;
+justify-content: space-between; 
+}
+.claim-post-body{
+   flex-grow: 1;
+   /* border:1px solid orange; */
+}
+
+.claim-babble{
+   display: flex;
+   flex-direction: row;
+   align-items: flex-start;
+   flex-direction: column;
+   height: 100%;
+   width: 90%;
+   padding:2rem;
+   background: var(--gb-blue-bubble25);
+
+   border-radius:2rem ;
+font-size: 1rem;;
+
+}
+
+

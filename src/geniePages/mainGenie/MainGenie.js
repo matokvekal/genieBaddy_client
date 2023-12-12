@@ -10,18 +10,20 @@ import Sidebar from "modals/UserSidebar";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import { POST_STATUS } from "constants/jeneral";
-import GenieClaimPost from "geniePages/components/GenieClaimPost";
+// import GenieClaimPost from "geniePages/components/GenieClaimPost";
 import GenieAchievements from "geniePages/components/GenieAchievements";
 import FooterClaimGenie from "geniePages/footer/FooterClaimGenie";
+import ClaimPost2 from "../../modals/ClaimPost2/ClaimPost2";
 
 const MainGenie = () => {
-  const { updateModalsStates, geniePages, modals ,setUserGenieFilter} = useStore(useDataStore);
+  const { updateModalsStates, geniePages, modals, setUserGenieFilter } =
+    useStore(useDataStore);
   const [postIndex, setPostIndex] = useState(0);
   const [newPosts, setNewPosts] = useState([]);
   const { t } = useTranslation();
   const handleModal = () => {
     updateModalsStates("filter", "close");
-   setUserGenieFilter(POST_STATUS.ALL);
+    setUserGenieFilter(POST_STATUS.ALL);
   };
   return (
     <>
@@ -31,7 +33,7 @@ const MainGenie = () => {
         <div className="header-genie">
           <Header />
         </div>
-        {geniePages.geniePosts && (
+        {(geniePages.geniePosts || geniePages.genieClaimPost) && (
           <div className="main-genie">
             <div className="main-genie-new-post">
               <div className="main-genie-upper">
@@ -60,26 +62,24 @@ const MainGenie = () => {
           </div>
         )}
         {geniePages.genieClaimPost && (
-          <GenieClaimPost
-            postIndex={postIndex}
-            posts={newPosts}
-            setPosts={setNewPosts}
-          />
+            <div className={`claim-post-overlay ${geniePages.genieClaimPost ? 'claim-post-animate' : ''}`}>
+            <ClaimPost2
+              postIndex={postIndex}
+              setPostIndex={setPostIndex}
+              newPosts={newPosts}
+              setNewPosts={setNewPosts}
+            />
+          </div>
         )}
         {geniePages.GenieAchievements && <GenieAchievements />}
-
         <div className="footer-genie" onClick={handleModal}>
-          {(geniePages.geniePosts ) && (
-            <Footer />
-          )}
-          {( geniePages.GenieAchievements) && (
-            <FooterAchiev />
-          )}
+          {geniePages.geniePosts && <Footer />}
+          {geniePages.GenieAchievements && <FooterAchiev />}
           {geniePages.genieClaimPost && (
             <FooterClaimGenie
               postIndex={postIndex}
               setPostIndex={setPostIndex}
-              posts={newPosts}
+              newPosts={newPosts}
               setNewPosts={setNewPosts}
             />
           )}

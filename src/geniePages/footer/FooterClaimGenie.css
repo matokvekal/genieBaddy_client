@@ -4,8 +4,8 @@ display: flex ;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-font-size: large;
-font-weight: 600;
+font-weight: 400;
+font-size: 0.9rem;
 }
 .claim-footer-area-genie{
    width: 100%;
@@ -14,7 +14,12 @@ font-weight: 600;
    justify-content: space-between;
    padding: 0 1rem;
    color:var(--gb-primary-black);
-   background: var(--gb-white);
+   background: var(--gb-light-gray);
    align-items: center;
    height: 5rem;
+   z-index: 300;
+}
+.claim-footer-right img,.claim-footer-left img{
+   font-size: 0.9rem;
+   font-weight: 400;
 }

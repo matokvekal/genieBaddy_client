@@ -6,12 +6,7 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import { toast, ToastContainer } from "react-toastify";
 
-function FooterClaimGenie({
-  postIndex,
-  setPostIndex,
-  posts,
-  setNewPosts,
-}) {
+function FooterClaimGenie({ postIndex, setPostIndex, newPosts, setNewPosts }) {
   const {
     updateGeniePagesStates,
     updateGenieNewPostCounter,
@@ -33,22 +28,26 @@ function FooterClaimGenie({
     setPostIndex(
       (prev) => (prev - 1 + genieNewPostsCounter) % genieNewPostsCounter
     );
-    
   };
 
-  const HndleClamePost = async () => {
+  const HandleClamePost = async () => {
+    if(!newPosts[postIndex]) return;
+    
     handleFooterMenu("genieClaimPost");
     try {
-      updateGenieNewPostCounter(0)
+      updateGenieNewPostCounter(0);
       const avatar = localStorage.getItem("avatar");
-      const genieNickname=getGenieNickName()
-      const res = await genieClaimPost(posts[postIndex].id, avatar,genieNickname);
+      const genieNickname = getGenieNickName();
+      const res = await genieClaimPost(
+        newPosts[postIndex].id,
+        avatar,
+        genieNickname
+      );
 
       if (res && res.status === 200 && res.statusText === "OK") {
         await cleanGeniePosts();
         setNewPosts([]);
         updateGeniePagesStates("geniePosts", "open");
-
       } else {
         if (res) {
           triggerToast(res);
@@ -61,7 +60,7 @@ function FooterClaimGenie({
   };
   return (
     <>
-      {genieNewPostsCounter>0&&<div className="claim-footer-area-genie">
+      <div className="claim-footer-area-genie">
         <div onClick={handleNext} className="claim-footer-left">
           <img
             src={require(`assets/PNG/left-arrow.png`)}
@@ -71,7 +70,7 @@ function FooterClaimGenie({
           <div>Previous</div>
         </div>
 
-        <div onClick={HndleClamePost} className="claim-footer-center">
+        <div onClick={HandleClamePost} className="claim-footer-center">
           <ButtonClaim text="Claim chat" />
         </div>
 
@@ -83,7 +82,7 @@ function FooterClaimGenie({
             alt="right-arrow"
           />
         </div>
-      </div>}
+      </div>
     </>
   );
 }

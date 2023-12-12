@@ -63,6 +63,9 @@ white-space: nowrap;
 overflow: hidden;   
 text-overflow: ellipsis; 
 margin-bottom: 0.5rem;
+
+direction: rtl;
+
 }
 .rubi-icon{
    width: 1.2rem;

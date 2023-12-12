@@ -19,11 +19,17 @@
    margin-left: 1rem;
    margin-right: 2rem;
 
+   direction: rtl;
+
+
 }
 .message-data.other{
    background: var(--gb-blue-bubble25);
    margin-left: 2rem;
    margin-right: 1rem;
+
+   direction: rtl;
+
 }
 
 .message-data{line-height: 1.8;}

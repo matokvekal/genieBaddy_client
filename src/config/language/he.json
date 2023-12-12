@@ -11,15 +11,34 @@
 		"delete_generic_title": "מחיקת {{entity}}",
 		"delete_generic_body": "האם אתה בטוח שברצונך למחוק את ה{{entity}}?"
 	},
-	"constraints": {
-		"constraint_types": {
-			"vehicle": "רכב",
-			"driver": "נהג",
-			"chaperone": "מלווה",
-			"blocked": "פסולים"
-		},
+	"topics": {
+  "General": "General1",
+  "Problems": "Problems",
+  "Divorce": "Divorce",
+  "Bad Mood": "Bad Mood",
+  "Job Quit": "Job Quit",
+  "Relationship Problems": "Relationship Problems",
+  "Financial Stress": "Financial Stress",
+  "Family Conflict": "Family Conflict",
+  "Health Issues": "Health Issues",
+  "Work-Life Balance": "Work-Life Balance",
+  "Procrastination": "Procrastination",
+  "Self-Esteem": "Self-Esteem",
+  "Anxiety": "Anxiety",
+  "Stress Management": "Stress Management",
+  "Communication Skills": "Communication Skills",
+  "Decision Making": "Decision Making",
+  "Time Management": "Time Management",
+  "Goal Setting": "Goal Setting",
+  "Emotional Intelligence": "Emotional Intelligence",
+  "Conflict Resolution": "Conflict Resolution",
+  "Motivation": "Motivation",
+  "Creativity": "Creativity",
+  "Leadership Development": "Leadership Development",
+  "Loneliness": "Loneliness",
+  "Sadness": "Sadness"
+	 },
 		"constraints": {
-			"safety_belts": "חגורת בטיחות",
 			"wifi": "wifi",
 			"toilet": "שירותים",
 			"finishing": "גימור",
@@ -44,5 +63,5 @@
 			"driver_drivers": "שם נהג",
 			"chaperone_chaperones": "שם מלווה"
 		}
-	}
+	
 }

@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import "./UserTopics.css";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import { useTranslation } from "react-i18next";
 
 function UserTopics({ selectedTopic, setSelectedTopic }) {
   const [topics, setTopics] = useState([]);
   const { getTopics,modals } = useStore(useDataStore);
-
+  const { t } = useTranslation();
   useEffect(() => {
     const fetchData = async () => {
       const topics = await getTopics();
@@ -33,7 +34,7 @@ function UserTopics({ selectedTopic, setSelectedTopic }) {
                     setSelectedTopic(topic);
                   }}
                 >
-                  <div className="button-topic-text">{topic.topic_name}</div>
+                  <div className="button-topic-text">{t(topic.topic_name)}</div>
                   <div className="button-topic-icon">{topic.active_genies}</div>
                 </button>
               </>

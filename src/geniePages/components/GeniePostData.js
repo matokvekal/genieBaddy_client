@@ -44,6 +44,11 @@ const GeniePostData = () => {
         sanitizedInput,
         postId: postId,
       });
+      if (res === "error") {
+        console.log("error, it may not your tun");
+        return;
+        //TODO  ad toast
+      }
       if (res.status === 200) {
         const result = await refreshGeniePosts();
         console.log(result);
@@ -53,7 +58,9 @@ const GeniePostData = () => {
     }
   };
   const post =
-    geniePosts && geniePosts[0] ? geniePosts.find((x) => x.id === postId) : null;
+    geniePosts && geniePosts[0]
+      ? geniePosts.find((x) => x.id === postId)
+      : null;
   const maxMessages = userLimits.maxMessages;
 
   useEffect(() => {
@@ -63,12 +70,12 @@ const GeniePostData = () => {
 
       if (post.last_writen_by?.includes("user")) {
         isDisabled = false;
-        placeholder = "Type your message here";
+        placeholder = "Type  message";
       } else if (
         post.last_writen_by === "genie_3" ||
         post.post_status === POST_STATUS.CLOSED
       ) {
-        placeholder = "Post is closed";
+        placeholder = "This conversation has ended.";
       }
 
       setDisabled(isDisabled);

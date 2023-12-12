@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import { useEffect } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useStore } from "zustand";
@@ -10,9 +10,12 @@ import { USERS_ROLES, PATHS_NAMES } from "constants";
 function LoginUser() {
   const navigate = useNavigate();
   const { handleLogin, mode, loginStatus } = useStore(useDataStore);
-  
+
   useEffect(() => {
-    if (loginStatus === true || localStorage.getItem("authenticated") === 'true') {
+    if (
+      loginStatus === true ||
+      localStorage.getItem("authenticated") === "true"
+    ) {
       navigate(PATHS_NAMES.USER);
     }
   }, [loginStatus, navigate]);
@@ -103,10 +106,10 @@ function LoginUser() {
                 to={PATHS_NAMES.REGISTERUSER}
                 className="Login__register-link"
               >
-                Register
+                Contact us
               </Link>
             </span>
-            <span>
+            {/* <span>
               Are you Genie?
               <Link
                 to={PATHS_NAMES.LOGINGENIE}
@@ -114,7 +117,7 @@ function LoginUser() {
               >
                 Genie Login
               </Link>
-            </span>
+            </span> */}
           </div>
         </form>
       </div>

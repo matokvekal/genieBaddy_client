@@ -10,6 +10,7 @@ import UserTopics from "./UserTopics";
 import Header from "../heads/Header";
 import HeadNewPost from "userPages/heads/HeadNewPost";
 import FooterPostData from "../footer/FooterPostData";
+import { useTranslation } from "react-i18next";
 
 const NewPost = ({ handleCloseNewPostModal }) => {
   const {
@@ -24,7 +25,7 @@ const NewPost = ({ handleCloseNewPostModal }) => {
   const [selectedTopic, setSelectedTopic] = useState("");
   const [disabledSend, setDisabledSend] = useState(false);
   const [textInput, setTextInput] = useState("");
-
+  const { t } = useTranslation();
 
 
   const sendChat = async () => {
@@ -71,7 +72,7 @@ const NewPost = ({ handleCloseNewPostModal }) => {
         <div className="newpost-main">
           <Header />
           <HeadNewPost
-            topicName={selectedTopic.topic_name}
+            topicName={t(selectedTopic.topic_name)}
             handleCloseNewPostModal={handleCloseNewPostModal}
           />
           <UserTopics
@@ -88,7 +89,7 @@ const NewPost = ({ handleCloseNewPostModal }) => {
               setTextInput={setTextInput}
               textInput={textInput}
               sendChat={sendChat}
-              placeholder={"Type your message here"}
+              placeholder={"Type  message "}
             />
           </div>
         </div>

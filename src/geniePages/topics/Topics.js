@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { getAllTopics } from "services/getData";
 import TopicCard from "./TopicCard";
 import "./Topics.css";
+import { useTranslation } from "react-i18next";
 
 const Topics = (props) => {
   const search = props.search;
+  const { t } = useTranslation();
   // console.log("At Topics");
   const [genieTopics, setGenieTopics] = useState([]);
   const [filteredTopics, setFilteredTopics] = useState([]);
-
   useEffect(() => {
     let data = [];
     const fetchData = async () => {
@@ -46,7 +47,7 @@ const Topics = (props) => {
         {filteredTopics &&
           filteredTopics
             .sort((a, b) => (a.topic_name > b.topic_name ? 1 : -1))
-            .map((topic) => <TopicCard key={topic.id} topic={topic} />)}
+            .map((topic) => <TopicCard key={topic.id} topic={t(topic)} />)}
       </>
     </div>
   );

@@ -8,25 +8,25 @@ const GenieAchievements = () => {
       header: "Days",
       text: "Spent out of your time",
       image: "calander1",
-      number: 250,
+      number: 0,
     },
     {
       header: "Posts",
       text: "Contribute to society",
       image: "posts",
-      number: 100,
+      number: 0,
     },
     {
       header: "Peoples",
       text: "You have helped",
       image: "peoples",
-      number: 20,
+      number: 0,
     },
     {
       header: "Rubies",
       text: "Given by users to you",
       image: "rubi2",
-      number: 45,
+      number: 0,
     },
   ]);
 

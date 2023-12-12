@@ -3,11 +3,12 @@ import Button2 from "components/Button2/Button2";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function HeadGeniePost({ post }) {
   const navigate = useNavigate();
   const { updateModalsStates } = useStore(useDataStore);
-
+  const { t } = useTranslation();
   function goBack() {
     navigate('/');   
   }
@@ -25,7 +26,7 @@ function HeadGeniePost({ post }) {
             </li>
             <li className="genie-head-nick-name">{post.user_nickname}(user)</li>
             <li className="genie-head-topic">
-              <Button2 text={post?.topic_name} />
+              <Button2 text={t(post?.topic_name)} />
             </li>
             <li
               className="genie-head-menu"

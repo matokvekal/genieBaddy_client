@@ -4,12 +4,16 @@ import Button2 from "components/Button2/Button2";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 
 function HeadUserPost({ topicName,handleCloseNewPostModal }) {
   const navigate = useNavigate();
   const { getUserNickName,updateModalsStates } = useStore(useDataStore);
   const [avatar] = useState(localStorage.getItem("avatar") || 1);
   const userNickName = getUserNickName();
+  const { t } = useTranslation();
+
   function goBack() {
     updateModalsStates("usertopics", "close")
     handleCloseNewPostModal()
@@ -37,7 +41,7 @@ function HeadUserPost({ topicName,handleCloseNewPostModal }) {
           </li>
           <li className="head-nick-name">{userNickName}</li>
           <li className="head-topic" onClick={()=>updateModalsStates("usertopics", "toggle")} >
-            <Button2 text={topicName?topicName:"Choose topic"} />
+            <Button2 text={t(topicName?topicName:"Choose topic")} />
           </li>
 
         </ul>

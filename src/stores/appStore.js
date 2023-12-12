@@ -579,16 +579,31 @@ const useDataStore = createStore((set, get) => ({
     }
     const freshPosts = result?.data?.result;
     try {
-      // set((state) => ({
-      //   ...state,
-      //   allPosts: [],
-      // }));
-      localStorage.removeItem("geniePosts");
-      localStorage.setItem("geniePosts", JSON.stringify(freshPosts));
+      // // Fetch current posts from local storage
+      const currentPostsString = localStorage.getItem("geniePosts");
+      let currentPosts = currentPostsString
+        ? JSON.parse(currentPostsString)
+        : [];
+
+      // Update current posts with fresh posts
+      freshPosts.forEach((freshPost) => {
+        const existingPostIndex = currentPosts.findIndex(
+          (p) => p.id === freshPost.id
+        );
+
+        if (existingPostIndex !== -1) {
+          // Update existing post
+          currentPosts[existingPostIndex] = freshPost;
+        } else {
+          // Add new post
+          currentPosts.push(freshPost);
+        }
+      });
+      localStorage.setItem("geniePosts", JSON.stringify(currentPosts));
 
       set((state) => ({
         ...state,
-        geniePosts: freshPosts,
+        geniePosts: currentPosts,
       }));
       return true;
     } catch (error) {
@@ -698,7 +713,8 @@ const useDataStore = createStore((set, get) => ({
         // get().refreshGeniePosts();
         return response;
       } else {
-        throw new Error("Unexpected status code");
+        console.log("Unexpected status code");
+        return "error";
       }
     } catch (error) {
       console.error("Error in geniePostChat:", error);

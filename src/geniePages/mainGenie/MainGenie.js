@@ -34,7 +34,10 @@ const MainGenie = () => {
           <Header />
         </div>
         {(geniePages.geniePosts || geniePages.genieClaimPost) && (
-          <div className="main-genie">
+          <div
+            className="main-genie"
+
+          >
             <div className="main-genie-new-post">
               <div className="main-genie-upper">
                 <div>{t("My Chats")}</div>
@@ -62,7 +65,11 @@ const MainGenie = () => {
           </div>
         )}
         {geniePages.genieClaimPost && (
-            <div className={`claim-post-overlay ${geniePages.genieClaimPost ? 'claim-post-animate' : ''}`}>
+          <div
+            className={`claim-post-overlay ${
+              geniePages.genieClaimPost ? "claim-post-animate" : ""
+            }`}
+          >
             <ClaimPost2
               postIndex={postIndex}
               setPostIndex={setPostIndex}

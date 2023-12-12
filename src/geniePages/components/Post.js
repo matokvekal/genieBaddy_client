@@ -3,6 +3,7 @@ import "./Post.css";
 import { POST_STATUS } from "constants/jeneral";
 import Button2 from "components/Button2/Button2";
 import Button3 from "components/Button3/Button3";
+import { useTranslation } from "react-i18next";
 
 function Post({ handleSelectPost, post }) {
   const {
@@ -17,7 +18,7 @@ function Post({ handleSelectPost, post }) {
     user_1,
   } = post;
   console.log("Post:", post);
-
+  const { t } = useTranslation();
   const showConversation = () => {
     handleSelectPost(post);
   };
@@ -108,7 +109,7 @@ function Post({ handleSelectPost, post }) {
           </div>
         </div>
         <div className="genie-row-middle-middle">
-          <Button2 text={topic_name} />{" "}
+          <Button2 text={t(topic_name)} />{" "}
         </div>
         <div className="genie-row-middle-bottom">{user_1}</div>
       </div>

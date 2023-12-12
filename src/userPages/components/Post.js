@@ -5,19 +5,21 @@ import Button2 from "components/Button2/Button2";
 import Button3 from "components/Button3/Button3";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import { useTranslation } from "react-i18next";
 
 function Post({ handleSelectPost, post }) {
   const showConversation = () => {
     updateModalsStates("all", "close");
     handleSelectPost(post);
   };
-
+  const { t } = useTranslation();
   const { updateModalsStates } = useStore(useDataStore);
   const renderRatingIcons = () => {
     let icons = [];
     for (let i = 0; i < post.rating; i++) {
       icons.push(
         <img
+          key={`icon-${i}`}
           src={require(`assets/PNG/rubi_red.png`)}
           className="rubi-icon"
           alt="rubi"
@@ -68,6 +70,16 @@ function Post({ handleSelectPost, post }) {
           alt="in conversation"
         />
       );
+    } else if (
+      post.post_status === POST_STATUS.CLOSED &&
+      post.user_read === 0 &&
+      post.last_writen_by.includes("genie_")
+    ) {
+      return (
+        <div className="row-right-middle circle circle-orange">
+          {messageKeys[post.last_writen_by]}
+        </div>
+      );
     } else {
       return null;
     }
@@ -91,6 +103,7 @@ function Post({ handleSelectPost, post }) {
   // });
   //   return messageCount;
   // };
+
   return (
     <div className="post-row " onClick={showConversation}>
       <div className="row-left">
@@ -119,7 +132,7 @@ function Post({ handleSelectPost, post }) {
           <div className="row-middle-upper-right">{renderRatingIcons()}</div>
         </div>
         <div className="row-middle-middle">
-          <Button2 text={post.topic_name} />
+          <Button2 text={t(post.topic_name)} />
         </div>
         <div className="row-middle-bottom">{post.user_1}</div>
       </div>

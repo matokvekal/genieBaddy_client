@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { updateTopic } from "services/getData";
 import "./TopicCard.css";
+import { useTranslation } from "react-i18next";
 
 const Topic = (props) => {
   const topic = props.topic;
   const [checked, setChecked] = useState(topic.topic_exists);
-
+  const { t } = useTranslation();
   const handleTopic = async () => {
     setChecked(!checked);
     let data = {
@@ -22,7 +23,7 @@ const Topic = (props) => {
 
   return (
     <section className="topic-card">
-      <header className="card-header">{topic.topic_name}</header>
+      <header className="card-header">{t(topic.topic_name)}</header>
       <div className="card-content">
         <div className="icon-container">
           <i className="fa fa-area-chart"></i>

@@ -2,11 +2,12 @@ import "./HeadGenieClaim.css";
 import Button2 from "components/Button2/Button2";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
+import { useTranslation } from "react-i18next";
 
 function HeadGenieClaim({ post }) {
   const { updateModalsStates} =
     useStore(useDataStore);
-
+    const { t } = useTranslation();
   return (
     <>
         <ul className="genie-head-items">
@@ -21,7 +22,7 @@ function HeadGenieClaim({ post }) {
           </li>
           <li className="genie-head-nick-name">{post.user_nickname}</li>
           <li className="genie-head-topic">
-            <Button2 text={post?.topic_name} />
+            <Button2 text={t(post?.topic_name)} />
           </li>
           <li
             className="genie-head-menu"

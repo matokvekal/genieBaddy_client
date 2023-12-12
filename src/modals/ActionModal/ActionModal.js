@@ -19,10 +19,9 @@ const ActionModal = ({ post }) => {
     };
     try {
       let res = await updateAction(data);
-      if(res.status === 200){
-      res = await getActionPostById(post.id);
+      if (res.status === 200) {
+        res = await getActionPostById(post.id);
       }
-
 
       updateModalsStates("action", "close");
     } catch (error) {
@@ -41,7 +40,7 @@ const ActionModal = ({ post }) => {
     <>
       <div className={`action-modal ${modals.action ? "open" : ""}`}>
         <div className="action-modal-container">
-          {userType === "user" && !isRatingFive && !isPostnew && (
+          {userType === "user" && !isRatingFive && isPostClosed && (
             <div
               className="row"
               onClick={() => handleAction(USER_ACTIONS.GIVE_RUBI)}
@@ -60,16 +59,25 @@ const ActionModal = ({ post }) => {
               <div>Close Chat</div>
             </div>
           )}
-          {userType === "user" && isPostClosed && (
+          {isPostClosed && (
             <div
               className="row"
               onClick={() => handleAction(USER_ACTIONS.DELETE_FOR_ME)}
             >
               <img src={require(`assets/PNG/delete_post.png`)} alt="delete" />
-              <div>Delete for me</div>
+              <div>Delete Chat</div>
             </div>
           )}
-          {userType === "user" && (isPostClosed || isPostnew) && (
+          {userType === "user" && (
+            <div
+              className="row"
+              onClick={() => handleAction(USER_ACTIONS.SAVE)}
+            >
+              <img src={require(`assets/PNG/save_post.png`)} alt="save" />
+              <div>Save Chat</div>
+            </div>
+          )}
+          {/* {userType === "user" && (isPostClosed || isPostnew) && (
             <div
               className="row"
               onClick={() => handleAction(USER_ACTIONS.DELETE_FOR_ALL)}
@@ -77,9 +85,9 @@ const ActionModal = ({ post }) => {
               <img src={require(`assets/PNG/delete_post.png`)} alt="delete" />
               <div>Delete for all</div>
             </div>
-          )}
+          )} */}
           {/* ... other buttons ... */}
-          {!isPostClosed && !isPostnew && (
+          {/* {!isPostClosed && !isPostnew && (
             <div
               className="row"
               onClick={() => handleAction(USER_ACTIONS.REPORT_CHAT)}
@@ -87,7 +95,7 @@ const ActionModal = ({ post }) => {
               <img src={require(`assets/PNG/report_post.png`)} alt="report" />
               <div>Report Chat</div>
             </div>
-          )}
+          )} */}
         </div>
         {/* Confirmation Modal */}
       </div>

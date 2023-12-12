@@ -2,6 +2,7 @@
 import { BsStar } from "react-icons/bs";
 import { PATHS_NAMES } from "constants";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function formatDate(dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -19,6 +20,7 @@ const ChatRow = (props) => {
   } = props.item;
   const _class =
     props.user === "genie" && last_writen_by === "user" ? "waiting" : "";
+    const { t } = useTranslation();
 
   const star = true;
   const navigate = useNavigate();
@@ -39,7 +41,7 @@ const ChatRow = (props) => {
       <div className="chat-item-middle">
         {_class ? "User is waiting for user to respond..." : ""}
         <div className="topic">{topic_id}</div>
-        <div className="topicName">{topic_name}</div>
+        <div className="topicName">{t(topic_name)}</div>
         <div className="header">{user_header}</div>
         <div className="bottom">
           <div className="date">{date}</div>

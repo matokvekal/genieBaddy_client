@@ -66,9 +66,9 @@ const UserPostData = () => {
         post.last_writen_by === "genie_3" ||
         post.post_status === POST_STATUS.CLOSED
       ) {
-        placeholder = "Post is closed";
+        placeholder = "This conversation has ended.";
       } else if (post.last_writen_by?.includes("genie")) {
-        placeholder = "Type your message here";
+        placeholder = "Type  message ";
         isDisabled = false;
       }
 

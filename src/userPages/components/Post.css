@@ -84,7 +84,7 @@ border-radius: 50%;
 display:flex;
 justify-content: center;
 align-items: center;
-color: var(--white);
+color: var(--gb-white);
 font-size: 0.9rem;
 }
 .row-right-upper{

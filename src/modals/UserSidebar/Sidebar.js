@@ -164,6 +164,9 @@ const Sidebar = () => {
             By using this app you accept our
             <strong>Terms and Conditions</strong>
           </div>
+          <div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSezbK1XZq1TyZYS7ooYc_AvHgsMI59soU-9bTyfPZ4clHB8vA/viewform?usp=pp_url" target="_blank" rel="noopener noreferrer">טופס דווח תקלות</a>
+          </div>
         </div>
       </div>
     </>

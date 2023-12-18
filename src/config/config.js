@@ -6,5 +6,5 @@ export const appInfo = {
 };
 export const userLimits = {
   user_limits_hours: 3,
-  maxMessages: 3,
+  maxMessages: 10,
 };

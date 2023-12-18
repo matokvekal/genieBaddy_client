@@ -4,7 +4,7 @@ function Button3({ text }) {
   return (
     <>
       <button className={`button3`}>
-        <div className="button1-text">{text}</div>
+        <div className="button3-text">{text}</div>
       </button>
     </>
   );

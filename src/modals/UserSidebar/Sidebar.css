@@ -166,3 +166,7 @@ font-size: large;
       display: flex;
     flex-direction: column;
     }
+
+    .bags-report{
+      margin-left:2rem;
+    }

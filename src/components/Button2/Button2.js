@@ -4,7 +4,7 @@ function Button2({ text, onclick=null }) {
   return (
     <>
       <button className={`button2`} onClick={onclick?onclick:null}>
-        <div className="button1-text">{text}</div>
+        <div className="button3-text">{text}</div>
       </button>
     </>
   );

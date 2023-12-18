@@ -3,6 +3,7 @@ import "./Post.css";
 import { POST_STATUS } from "constants/jeneral";
 import Button2 from "components/Button2/Button2";
 import Button3 from "components/Button3/Button3";
+import Button4 from "components/Button4/Button4";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import { useTranslation } from "react-i18next";
@@ -37,6 +38,12 @@ function Post({ handleSelectPost, post }) {
       return (
         <div className="row-right-bottom">
           <Button3 text={"NEW"} />
+        </div>
+      );
+    } else if (post.post_status === POST_STATUS.USER_AI) {
+      return (
+        <div className="row-right-bottom">
+          <Button4 text={"NEW"} />
         </div>
       );
     } else if (

@@ -358,12 +358,12 @@ const useDataStore = createStore((set, get) => ({
         return geniePosts;
       }
       const data = await fetchGeniePosts();
-      if (data.length === 0) {
-        return null;
-      } else {
+      if (data && data.length > 0) {
         get().saveGeniePostsToState(data);
         localStorage.setItem("geniePosts", JSON.stringify(data));
         return data;
+      } else {
+        return null;
       }
     } catch (err) {
       return { status: "error", info: err.message };
@@ -548,69 +548,64 @@ const useDataStore = createStore((set, get) => ({
         return false;
       }
       const freshPosts = result?.data?.result;
-      // set((state) => ({
-      //   ...state,
-      //   userPosts: [],
-      // }));
-
-      localStorage.removeItem("userPosts");
-
-      localStorage.setItem("userPosts", JSON.stringify(freshPosts));
-
-      set((state) => ({
-        ...state,
-        userPosts: freshPosts,
-      }));
-
-      return true;
-    } catch (error) {
-      console.error("Error during  refreshUserPosts:", error);
-      return false;
-    }
-  },
-  refreshGeniePosts: async () => {
-    const result = await genieRefreshPosts();
-
-    if (result.status !== 200) {
-      throw new Error(`Failed to fetch  GeniePosts: ${result.status}`);
-    }
-    if (result.data.result.length === 0) {
-      return false;
-    }
-    const freshPosts = result?.data?.result;
-    try {
-      // // Fetch current posts from local storage
-      const currentPostsString = localStorage.getItem("geniePosts");
-      let currentPosts = currentPostsString
-        ? JSON.parse(currentPostsString)
-        : [];
-
-      // Update current posts with fresh posts
-      freshPosts.forEach((freshPost) => {
-        const existingPostIndex = currentPosts.findIndex(
-          (p) => p.id === freshPost.id
-        );
-
-        if (existingPostIndex !== -1) {
-          // Update existing post
-          currentPosts[existingPostIndex] = freshPost;
-        } else {
-          // Add new post
-          currentPosts.push(freshPost);
-        }
+  
+      set((state) => {
+        const existingPostsMap = new Map(state.userPosts.map(post => [post.id, post]));
+  
+        freshPosts.forEach((freshPost) => {
+          existingPostsMap.set(freshPost.id, freshPost);
+        });
+  
+        const updatedPosts = Array.from(existingPostsMap.values());
+        state.saveUserPostsToState(updatedPosts);  // Update the store
+  
+        localStorage.setItem("userPosts", JSON.stringify(updatedPosts));  // Update local storage
+        return { userPosts: updatedPosts };
       });
-      localStorage.setItem("geniePosts", JSON.stringify(currentPosts));
-
-      set((state) => ({
-        ...state,
-        geniePosts: currentPosts,
-      }));
+  
       return true;
     } catch (error) {
-      console.error("Error during  refreshGeniePosts:", error);
+      console.error("Error during refreshUserPosts:", error);
       return false;
     }
   },
+  
+  refreshGeniePosts: async () => {
+    try {
+      const result = await genieRefreshPosts();
+  
+      if (result.status !== 200) {
+        throw new Error(`Failed to fetch GeniePosts: ${result.status}`);
+      }
+      if (result.data.result.length === 0) {
+        return false;
+      }
+      const freshPosts = result?.data?.result;
+  
+      // Fetch current posts from local storage
+      const currentPostsString = localStorage.getItem("geniePosts");
+      let currentPostsMap = new Map(currentPostsString ? JSON.parse(currentPostsString).map(post => [post.id, post]) : []);
+  
+      // Update current posts with fresh posts
+      freshPosts.forEach(freshPost => {
+        currentPostsMap.set(freshPost.id, freshPost);
+      });
+  
+      // Convert Map back to array for local storage and state update
+      const updatedPosts = Array.from(currentPostsMap.values());
+      localStorage.setItem("geniePosts", JSON.stringify(updatedPosts));
+  
+      set((state) => ({
+        ...state,
+        geniePosts: updatedPosts,
+      }));
+      return true;
+    } catch (error) {
+      console.error("Error during refreshGeniePosts:", error);
+      return false;
+    }
+  },
+  
   updateUserLimits: async (limits) => {
     try {
       const response = await getUserLimitsFromServer();

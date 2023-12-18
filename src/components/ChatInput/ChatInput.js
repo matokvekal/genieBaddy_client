@@ -29,6 +29,7 @@ const ChatInput = ({
   };
 
   const handleSend = () => {
+    updateModalsStates("all", "close");
     if (textInput.trim() !== "") {
       sendChat(textInput.trim());
       setTextInput("");

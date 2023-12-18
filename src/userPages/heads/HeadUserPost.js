@@ -28,7 +28,7 @@ function HeadUserPost({ post }) {
             <li className="head-avatar">
 
             </li>
-            <li className="head-nick-name">{post.genie_nickname }(genie)</li>
+            <li className="head-nick-name">{post.genie_nickname }(post.genie_nickname?genie:"No genie yet")</li>
             <li className="head-topic">
               <Button2 text={t(post?.topic_name)} />
             </li>

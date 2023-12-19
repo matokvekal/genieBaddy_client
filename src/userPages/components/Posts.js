@@ -101,7 +101,7 @@ function Posts() {
           ref={scrollContainerRef}
           onScroll={handleScroll}
         >
-          {filteredPost.map((post) =>
+          {filteredPost.sort((a,b)=>b.id-a.id).map((post) => //sort by id desc
             post && post.id ? (
               <Post
                 key={post.id}

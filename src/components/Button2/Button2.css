@@ -1,7 +1,7 @@
 .button2{
    border: 1px solid var(--gb-dark-blue);
-   height: 1.375rem;
-   /* max-height: 2rem; */
+   /* height: 1.375rem; */
+   max-height: 2rem;
    border-radius: 6.25rem;
    font-size: 0.9rem;
    font-weight: 600;
@@ -15,5 +15,5 @@
    border: 1px solid var(--gb-dark-blue);
 }
 .button2-text{
-   margin: 0.5rem;
+   margin: 0.1rem;
 }

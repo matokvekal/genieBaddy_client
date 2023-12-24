@@ -104,32 +104,25 @@ function App() {
     }
   }, [showToast, toastMessage, resetToast, toastType]);
 
-  const checkAccess = (Component, allowedRoles) => {
-    debugger;
+  const checkUserAccess = (Component, allowedRoles) => {
+    debugger
     const isLogin =
       loginStatus || localStorage.getItem("authenticated") === "true";
-    const userType = getUserType() || localStorage.getItem("userType");
-
     if (!isLogin) {
-      if (
-        localStorage.getItem("userType") === "user" ||
-        pathname.startsWith("/loginuser")
-      ) {
-        return <Navigate to="/login" />;
-      } else if (
-        localStorage.getItem("userType") === "genie" ||
-        pathname.startsWith("/logingenie")
-      ) {
-        return <Navigate to="/logingenie" />;
-      }else{
-        return <Navigate to="/" />;
-      }
-    } else if (allowedRoles && !allowedRoles.includes(userType)) {
-      return <Navigate to="/" />;
+      return <Navigate to="/loginuser" />;
     }
-
     return <Component />;
   };
+  const checkGenieAccess = (Component, allowedRoles) => {
+    debugger
+    const isLogin =
+      loginStatus || localStorage.getItem("authenticated") === "true";
+    if (!isLogin) {
+      return <Navigate to="/logingenie" />;
+    }
+    return <Component />;
+  };
+
   const getHomeComponent = () => {
     debugger;
     // const myUserType = getUserType() || localStorage.getItem("userType"); // Get userType here
@@ -157,28 +150,28 @@ function App() {
           <Route exact path="/logingenie" element={<LoginGenie />} />
           <Route
             exact
-            path="/user1"
-            element={checkAccess(MainUser, ["user"])}
+            path="/user"
+            element={checkUserAccess(MainUser, ["user"])}
           />
           <Route
             exact
             path="/userpostdata"
-            element={checkAccess(UserPostData, ["user"])}
+            element={checkUserAccess(UserPostData, ["user"])}
           />
           <Route
             exact
             path="/geniepostdata"
-            element={checkAccess(GeniePostData, ["genie"])}
+            element={checkGenieAccess(GeniePostData, ["genie"])}
           />
           <Route
             exact
             path="/userpostdata/:id"
-            element={checkAccess(UserPostData, ["user"])}
+            element={checkUserAccess(UserPostData, ["user"])}
           />
           <Route
             exact
             path="/genie"
-            element={checkAccess(MainGenie, ["genie"])}
+            element={checkGenieAccess(MainGenie, ["genie"])}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

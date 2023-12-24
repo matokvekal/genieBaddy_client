@@ -57,7 +57,7 @@ const ClaimPost2 = ({ postIndex, newPosts, setNewPosts }) => {
           <div className="claim-post-down noposts">
             <div className="nopost-section">
               <div className="nopost-text-upper">
-                You dont have any post yet
+               No ready post yet, please come back later.
               </div>
               <div className="nopost-text-middle">
                 Please wait for new posts.

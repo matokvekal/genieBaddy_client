@@ -1,5 +1,11 @@
 import { useEffect, useRef } from "react";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
 import LoginUser from "./auth/loginUser/LoginUser";
 import LoginGenie from "./auth/loginGenie/LoginGenie";
@@ -58,7 +64,6 @@ function App() {
       }
     };
   }, [loginStatus, getUserType, handleGenieNewChats, handleUserNotRead]); // Added getUserType to dependency array
-
   useEffect(() => {
     let isLogin =
       loginStatus || localStorage.getItem("authenticated") === "true";
@@ -99,7 +104,34 @@ function App() {
     }
   }, [showToast, toastMessage, resetToast, toastType]);
 
+  const checkAccess = (Component, allowedRoles) => {
+    debugger;
+    const isLogin =
+      loginStatus || localStorage.getItem("authenticated") === "true";
+    const userType = getUserType() || localStorage.getItem("userType");
+
+    if (!isLogin) {
+      if (
+        localStorage.getItem("userType") === "user" ||
+        pathname.startsWith("/loginuser")
+      ) {
+        return <Navigate to="/login" />;
+      } else if (
+        localStorage.getItem("userType") === "genie" ||
+        pathname.startsWith("/logingenie")
+      ) {
+        return <Navigate to="/logingenie" />;
+      }else{
+        return <Navigate to="/" />;
+      }
+    } else if (allowedRoles && !allowedRoles.includes(userType)) {
+      return <Navigate to="/" />;
+    }
+
+    return <Component />;
+  };
   const getHomeComponent = () => {
+    debugger;
     // const myUserType = getUserType() || localStorage.getItem("userType"); // Get userType here
     if (
       localStorage.getItem("userType") === "user" ||
@@ -121,16 +153,37 @@ function App() {
       <CookiesProvider>
         <Routes>
           <Route exact path="/" element={getHomeComponent()} />
-          <Route exact path={"/loginuser"} element={<LoginUser />} />
-          <Route exact path={"/logingenie"} element={<LoginGenie />} />
-          <Route exact path={"/user"} element={<MainUser />} />
-          <Route exact path="/userpostdata" element={<UserPostData />} />
-          <Route exact path="/geniepostdata" element={<GeniePostData />} />
-          <Route exact path="/userpostdata/:id" element={<UserPostData />} />
-          <Route exact path={"/genie"} element={<MainGenie />} />
-          <Route path="*" element={<NotFound />} /> {/* This is the new line */}
+          <Route exact path="/loginuser" element={<LoginUser />} />
+          <Route exact path="/logingenie" element={<LoginGenie />} />
+          <Route
+            exact
+            path="/user1"
+            element={checkAccess(MainUser, ["user"])}
+          />
+          <Route
+            exact
+            path="/userpostdata"
+            element={checkAccess(UserPostData, ["user"])}
+          />
+          <Route
+            exact
+            path="/geniepostdata"
+            element={checkAccess(GeniePostData, ["genie"])}
+          />
+          <Route
+            exact
+            path="/userpostdata/:id"
+            element={checkAccess(UserPostData, ["user"])}
+          />
+          <Route
+            exact
+            path="/genie"
+            element={checkAccess(MainGenie, ["genie"])}
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </CookiesProvider>
+
       <ToastContainer theme="colored" />
     </>
   );

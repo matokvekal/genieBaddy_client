@@ -35,11 +35,13 @@ const UserPostData = () => {
   }, [postId, navigate]);
 
   const sendChat = async () => {
-    
+    debugger
+
     if (textInput.trim() !== "") {
       const sanitizedInput = clearText(textInput.trim());
       console.log(sanitizedInput);
       setDisabled(true);
+      debugger
       const res = await userPostChat({
         sanitizedInput,
         postId: postId,

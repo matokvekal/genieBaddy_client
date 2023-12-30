@@ -1,6 +1,7 @@
 .chat-input{
    height: 5rem;
    display:flex;
+   background-color: white;
    /* flex-direction: row;
    justify-content: space-between;
    width: 100%; */

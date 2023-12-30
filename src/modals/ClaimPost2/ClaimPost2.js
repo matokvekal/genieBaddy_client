@@ -7,8 +7,12 @@ import { genieGetNewPosts } from "services/getData";
 import { useNavigate } from "react-router-dom";
 
 const ClaimPost2 = ({ postIndex, newPosts, setNewPosts }) => {
-  const { updateGenieNewPostCounter, triggerToast, updateGeniePagesStates } =
-    useStore(useDataStore);
+  const {
+    updateGenieNewPostCounter,
+    triggerToast,
+    updateGeniePagesStates,
+    updateModalsStates,
+  } = useStore(useDataStore);
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +35,7 @@ const ClaimPost2 = ({ postIndex, newPosts, setNewPosts }) => {
 
   function goBack() {
     updateGeniePagesStates("geniePosts", "open");
+    updateModalsStates("sidebar", "close");
     navigate("/");
     // window.history.back();
   }
@@ -48,7 +53,10 @@ const ClaimPost2 = ({ postIndex, newPosts, setNewPosts }) => {
           <>
             <div className="claim-post-down">
               <HeadGenieClaim post={newPosts[postIndex]} />
-              <div className="claim-babble">
+              <div
+                className="claim-babble"
+                onClick={() => updateModalsStates("sidebar", "close")}
+              >
                 {newPosts[postIndex][`user_1`]}
               </div>
             </div>
@@ -57,7 +65,7 @@ const ClaimPost2 = ({ postIndex, newPosts, setNewPosts }) => {
           <div className="claim-post-down noposts">
             <div className="nopost-section">
               <div className="nopost-text-upper">
-               No ready post yet, please come back later.
+                No ready post yet, please come back later.
               </div>
               <div className="nopost-text-middle">
                 Please wait for new posts.

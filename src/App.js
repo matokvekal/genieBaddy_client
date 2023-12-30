@@ -105,7 +105,6 @@ function App() {
   }, [showToast, toastMessage, resetToast, toastType]);
 
   const checkUserAccess = (Component, allowedRoles) => {
-    debugger
     const isLogin =
       loginStatus || localStorage.getItem("authenticated") === "true";
     if (!isLogin) {
@@ -114,7 +113,6 @@ function App() {
     return <Component />;
   };
   const checkGenieAccess = (Component, allowedRoles) => {
-    debugger
     const isLogin =
       loginStatus || localStorage.getItem("authenticated") === "true";
     if (!isLogin) {
@@ -124,7 +122,6 @@ function App() {
   };
 
   const getHomeComponent = () => {
-    debugger;
     // const myUserType = getUserType() || localStorage.getItem("userType"); // Get userType here
     if (
       localStorage.getItem("userType") === "user" ||

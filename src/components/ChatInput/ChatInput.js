@@ -47,12 +47,14 @@ const ChatInput = ({
           onChange={handleInputChange}
         />
 
-        <img
-          onClick={handleSend}
-          src={require(`assets/PNG/send1.png`)}
-          className="send-icon"
-          alt="send"
-        />
+        {!disabled && (
+          <img
+            onClick={handleSend}
+            src={require(`assets/PNG/send1.png`)}
+            className="send-icon"
+            alt="send"
+          />
+        )}
       </div>
       <div className="chat-input-mic">
         <img

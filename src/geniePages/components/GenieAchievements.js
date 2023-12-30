@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import GenieAchievRow from "./GenieAchievRow";
+import { useStore } from "zustand";
+import useDataStore from "stores/appStore";
 import "./GenieAchievements.css";
 
 const GenieAchievements = () => {
+  const { updateModalsStates } = useStore(useDataStore);
   const [rows] = useState([
     {
       header: "Days",
@@ -31,8 +34,7 @@ const GenieAchievements = () => {
   ]);
 
   return (
-    <>
-      <div className="achiev-container">
+      <div className="achiev-container" onClick={() => updateModalsStates("sidebar", "close")}>
         <div className="achiev-upper">
           <div className="achiev-upper-text">
             <h1>Achievements</h1>
@@ -52,7 +54,6 @@ const GenieAchievements = () => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 

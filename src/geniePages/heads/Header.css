@@ -26,6 +26,9 @@
  li.genie-icon-bar{
    flex-grow: 1;
    justify-content:start;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
+   line-height: 100%;
  }
  li.genie-icon-search{
    justify-content: flex-end;

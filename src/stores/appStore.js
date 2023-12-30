@@ -46,7 +46,7 @@ export const initialState = {
   geniePages: {
     genieClaimPost: false,
     GenieAchievements: false,
-    geniePosts: true,
+    geniePosts: true,    
   },
   user_limits: {
     USER_CHATS_PER_POST: null,

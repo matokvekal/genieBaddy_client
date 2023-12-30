@@ -29,15 +29,12 @@ const MainGenie = () => {
     <>
       <Sidebar />
       {modals?.filter && <FilterModalGenie />}
-      <div className="container-genie">
+      <div className="container-genie" >
         <div className="header-genie">
           <Header />
         </div>
         {(geniePages.geniePosts || geniePages.genieClaimPost) && (
-          <div
-            className="main-genie"
-
-          >
+          <div className="main-genie" onClick={() => updateModalsStates("sidebar", "close")} >
             <div className="main-genie-new-post">
               <div className="main-genie-upper">
                 <div>{t("My Chats")}</div>

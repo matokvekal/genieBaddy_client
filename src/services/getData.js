@@ -278,10 +278,8 @@ export const updateAction = async (data) => {
 };
 export const userPostData = async (payload) => {
   try {
-    debugger
     const EndPoint = `${API_ENDPOINT}/userpost`;
     console.log("at userPostDatation :");
-    debugger;
     const response = await axios.post(EndPoint, payload, configHeader());
     return response;
   } catch (error) {

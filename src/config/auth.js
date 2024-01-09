@@ -11,7 +11,7 @@ const development = {
   apiBaseHost: `http://${LOCAL_SERVER}:5000/api/auth`,
 };
 const production = {
-  apiBaseHost: `api/gb`,
+  apiBaseHost: `api/auth`,
 };
 
 const envConfigs = {

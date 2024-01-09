@@ -145,7 +145,7 @@ function LoginUser() {
           {page === "login"
             ? "Login user."
             : page === "register"
-            ? "Register user"
+            ? "Register user."
             : "Confirm Code"}
         </h2>
         {page === "login" && (

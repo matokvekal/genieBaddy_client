@@ -29,7 +29,7 @@ function HeadMenu() {
               />
           </li>
           <li className="genie-logo">
-            <div className="genie-logo-text">GenieBuddy</div>
+            <div className="genie-logo-text">Share</div>
             <div className="genie-logo-img">
               <img
                 src={require(`assets/PNG/genie1.png`)}

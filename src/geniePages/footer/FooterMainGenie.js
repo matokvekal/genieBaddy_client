@@ -4,8 +4,10 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 function FooterMainGenie() {
-  const { updateGeniePagesStates } = useStore(useDataStore);
-
+  const { updateGeniePagesStates,geniePages } = useStore(useDataStore);
+  // genieClaimPost: false,
+  // GenieAchievements: false,
+  // geniePosts: true,
   const handleFooterMenu = (item) => {
     console.log("item", item);
     updateGeniePagesStates(item, "open");
@@ -22,7 +24,7 @@ function FooterMainGenie() {
               alt="genie_chats"
             />
           </div>
-          <div>chats</div>
+          <div className={geniePages.geniePosts?"iconSelect":null}>chats</div>
         </div>
 
         <div className="footer-line">|</div>
@@ -31,7 +33,7 @@ function FooterMainGenie() {
           onClick={() => handleFooterMenu("genieClaimPost")}
         >
           <img
-            src={require(`assets/PNG/genie_new2.png`)}
+            src={require(`assets/PNG/genie_new.png`)}
             className="genie_new2"
             alt="genie_new"
           />
@@ -47,7 +49,7 @@ function FooterMainGenie() {
               alt="genie_stats"
             />
           </div>
-          <div>Me</div>
+          <div className={geniePages.GenieAchievements?"iconSelect":null}>Me</div>
         </div>
       </div>
     </>

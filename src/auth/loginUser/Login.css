@@ -96,7 +96,7 @@
  }
  
  .Login__submit-btn:hover {
-   background-color: var(--background-blue);
+   background-color: var(--gb-purple);
  }
  
  .Login__register-link {

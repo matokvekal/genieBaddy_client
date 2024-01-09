@@ -1,6 +1,6 @@
 import { createStore } from "zustand";
 import Cookies from "js-cookie";
-import { Login } from "../services/Auth";
+import { Login, RegisterUser, confirmOtp } from "../services/Auth";
 import moment from "moment";
 import { POST_STATUS } from "../constants";
 
@@ -18,6 +18,7 @@ import {
   geniePostData,
   userRefreshPosts,
   genieRefreshPosts,
+ 
 } from "services/getData";
 // import { exists } from "i18next";
 export const initialState = {
@@ -46,7 +47,7 @@ export const initialState = {
   geniePages: {
     genieClaimPost: false,
     GenieAchievements: false,
-    geniePosts: true,    
+    geniePosts: true,
   },
   user_limits: {
     USER_CHATS_PER_POST: null,
@@ -209,7 +210,7 @@ const useDataStore = createStore((set, get) => ({
     }));
     localStorage.setItem("genieNickName", genieNickName);
   },
-  getUsername: () => {
+  getUserName: () => {
     const state = get();
     let userName =
       get().userName || localStorage.getItem("userName") || state.userType;
@@ -279,7 +280,7 @@ const useDataStore = createStore((set, get) => ({
     }));
     localStorage.setItem("authenticated", loginStatus);
   },
-  handleLogin: async ({ username, password, userRole }) => {
+  handleLogin: async ({ username, password, userRole, page }) => {
     try {
       if (!username || !password) {
         return false;
@@ -311,6 +312,47 @@ const useDataStore = createStore((set, get) => ({
       localStorage.setItem("userType", data.user_role);
       localStorage.removeItem("userPosts");
       return { ...data, status: 200 };
+    } catch (e) {
+      console.error("error in handleLogin", e);
+    }
+  },
+  handleregister: async ({ username, password, userRole }) => {
+    try {
+      if (!username || !password) {
+        return false;
+      }
+      let AuthParameters = {
+        email: username,
+        password: password,
+        user_role: userRole,
+      };
+      const response = await RegisterUser(AuthParameters);
+      if (response.status !== 200) {
+        return { info: "notFound", status: response.status };
+      }
+      return { response };
+    } catch (e) {
+      console.error("error in handleLogin", e);
+    }
+  },
+  handleConfirmOtp: async (confirmationCode, email) => {
+    try {
+      if (!confirmationCode || !/^\d{6}$/.test(confirmationCode)) {
+        console.error("Invalid OTP: OTP must be a 6 digit number");
+        return { info: "invalidOtp", status: 400 }; // You can set an appropriate status code
+      }
+      const values = {};
+      values.email = email;
+      values.confirmationCode = confirmationCode;
+
+      let AuthParameters = {
+        values,
+      };
+      const response = await confirmOtp(AuthParameters);
+      if (response.status !== 200) {
+        return { info: "notFound", status: response.status };
+      }
+      return { response };
     } catch (e) {
       console.error("error in handleLogin", e);
     }
@@ -548,32 +590,34 @@ const useDataStore = createStore((set, get) => ({
         return false;
       }
       const freshPosts = result?.data?.result;
-  
+
       set((state) => {
-        const existingPostsMap = new Map(state.userPosts.map(post => [post.id, post]));
-  
+        const existingPostsMap = new Map(
+          state.userPosts.map((post) => [post.id, post])
+        );
+
         freshPosts.forEach((freshPost) => {
           existingPostsMap.set(freshPost.id, freshPost);
         });
-  
+
         const updatedPosts = Array.from(existingPostsMap.values());
-        state.saveUserPostsToState(updatedPosts);  // Update the store
-  
-        localStorage.setItem("userPosts", JSON.stringify(updatedPosts));  // Update local storage
+        state.saveUserPostsToState(updatedPosts); // Update the store
+
+        localStorage.setItem("userPosts", JSON.stringify(updatedPosts)); // Update local storage
         return { userPosts: updatedPosts };
       });
-  
+
       return true;
     } catch (error) {
       console.error("Error during refreshUserPosts:", error);
       return false;
     }
   },
-  
+
   refreshGeniePosts: async () => {
     try {
       const result = await genieRefreshPosts();
-  
+
       if (result.status !== 200) {
         throw new Error(`Failed to fetch GeniePosts: ${result.status}`);
       }
@@ -581,20 +625,24 @@ const useDataStore = createStore((set, get) => ({
         return false;
       }
       const freshPosts = result?.data?.result;
-  
+
       // Fetch current posts from local storage
       const currentPostsString = localStorage.getItem("geniePosts");
-      let currentPostsMap = new Map(currentPostsString ? JSON.parse(currentPostsString).map(post => [post.id, post]) : []);
-  
+      let currentPostsMap = new Map(
+        currentPostsString
+          ? JSON.parse(currentPostsString).map((post) => [post.id, post])
+          : []
+      );
+
       // Update current posts with fresh posts
-      freshPosts.forEach(freshPost => {
+      freshPosts.forEach((freshPost) => {
         currentPostsMap.set(freshPost.id, freshPost);
       });
-  
+
       // Convert Map back to array for local storage and state update
       const updatedPosts = Array.from(currentPostsMap.values());
       localStorage.setItem("geniePosts", JSON.stringify(updatedPosts));
-  
+
       set((state) => ({
         ...state,
         geniePosts: updatedPosts,
@@ -605,7 +653,7 @@ const useDataStore = createStore((set, get) => ({
       return false;
     }
   },
-  
+
   updateUserLimits: async (limits) => {
     try {
       const response = await getUserLimitsFromServer();

@@ -71,7 +71,7 @@ function FooterClaimGenie({ postIndex, setPostIndex, newPosts, setNewPosts }) {
         </div>
 
         <div onClick={HandleClamePost} className="claim-footer-center">
-          <ButtonClaim text="Claim chat" />
+          <ButtonClaim text="Select chat" />
         </div>
 
         <div onClick={hendlePrev} className="claim-footer-right">

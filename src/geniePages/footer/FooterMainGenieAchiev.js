@@ -4,7 +4,7 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 function FooterMainGenie() {
-  const { updateGeniePagesStates } = useStore(useDataStore);
+  const { updateGeniePagesStates,geniePages } = useStore(useDataStore);
 
   const handleFooterMenu = (item) => {
     console.log("item", item);
@@ -46,7 +46,7 @@ function FooterMainGenie() {
               alt="genie_stats"
             />
           </div>
-          <div>Me</div>
+          <div className={geniePages.GenieAchievements?"iconSelect":null}>Me</div>
         </div>
       </div>
     </>

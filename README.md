@@ -1,5 +1,15 @@
 ### `npm start`
 
+9/1/24
+genie can take only 1 chat until he an
+genie can see only few lines at cahts
+change button colors to selected page
+fix height of topics
+chnage the word claim
+send emails 
+
+
+
 what to test❌✅
 
 1.new user ✅

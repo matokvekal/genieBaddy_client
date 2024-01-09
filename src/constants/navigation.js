@@ -4,7 +4,7 @@ export const PATHS_NAMES = {
   EMPTY: "/",
   LOGINUSER: "/loginuser",
   LOGINGENIE: "/logingenie",
-  REGISTER: "/register",
+  // REGISTER: "/register",
   USERCHAT: "/userchat",
   MAIN: "/user",
   USER: "/user",

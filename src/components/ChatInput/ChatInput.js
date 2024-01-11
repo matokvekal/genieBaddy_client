@@ -27,7 +27,9 @@ const ChatInput = ({
       event.target.style.height = "3rem"; // Reset to initial height if input is empty
     }
   };
-
+const handleClickArea = () => {
+  updateModalsStates("sidebar", "close");
+}
   const handleSend = () => {
     updateModalsStates("all", "close");
     if (textInput.trim() !== "") {
@@ -45,6 +47,7 @@ const ChatInput = ({
           value={textInput}
           placeholder={placeholder}
           onChange={handleInputChange}
+          onClick={handleClickArea}
         />
 
         {!disabled && (

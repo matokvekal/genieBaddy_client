@@ -4,7 +4,7 @@ import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 
 function FooterMainGenie() {
-  const { updateGeniePagesStates,geniePages } = useStore(useDataStore);
+  const { updateGeniePagesStates, geniePages } = useStore(useDataStore);
 
   const handleFooterMenu = (item) => {
     console.log("item", item);
@@ -15,18 +15,6 @@ function FooterMainGenie() {
     <>
       <div className="footer-area genie">
         <div className="box footer-left">
-          <div onClick={() => handleFooterMenu("genieClaimPost")}>
-            <img
-              src={require(`assets/PNG/genie_new.png`)}
-              className="genie_new"
-              alt="genie_new"
-            />
-          </div>
-
-          <div>new</div>
-        </div>
-        <div className="footer-line">|</div>
-        <div className="box footer-center">
           <div onClick={() => handleFooterMenu("geniePosts")}>
             <img
               src={require(`assets/PNG/genie_chats.png`)}
@@ -36,7 +24,17 @@ function FooterMainGenie() {
           </div>
           <div>chats</div>
         </div>
-
+        <div className="footer-line">|</div>
+        <div className="box footer-center">
+          <div onClick={() => handleFooterMenu("genieClaimPost")}>
+            <img
+              src={require(`assets/PNG/genie_new.png`)}
+              className="genie_new2"
+              alt="genie_new"
+            />
+          </div>
+          <div>new</div>
+        </div>
         <div className="footer-line">|</div>
         <div className="box footer-right">
           <div onClick={() => handleFooterMenu("GenieAchievements")}>
@@ -46,7 +44,9 @@ function FooterMainGenie() {
               alt="genie_stats"
             />
           </div>
-          <div className={geniePages.GenieAchievements?"iconSelect":null}>Me</div>
+          <div className={geniePages.GenieAchievements ? "iconSelect" : null}>
+            Me
+          </div>
         </div>
       </div>
     </>

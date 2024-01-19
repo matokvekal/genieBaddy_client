@@ -36,6 +36,7 @@ export const initialState = {
   genieNewPostsCounter: 0,
   userGenieFilter: POST_STATUS.DEFAULT,
   postId: null,
+  refreshStatus: false,
   modals: {
     sidebar: false,
     action: false,
@@ -188,6 +189,16 @@ const useDataStore = createStore((set, get) => ({
       isNewChat: type,
     }));
   },
+  updateRefreshStatus: (type) => {
+    set((state) => ({
+      ...state,
+      refreshStatus: type,
+    }));
+  },
+  getRefreshStatus: () => {
+    let ststus = get().refreshStatus;
+    return ststus;
+  },
   updateUserName: (name) => {
     set((state) => ({
       ...state,
@@ -279,29 +290,28 @@ const useDataStore = createStore((set, get) => ({
     }));
     localStorage.setItem("authenticated", loginStatus);
   },
-  handlerefreshUser: async () => {
-    console.log("start handlerefreshUser 1 min");
+  handleRefreshUser: async () => {
+    console.log("start handleRefreshUser  1 min");
     try {
-        // Fetch from server
-        const res = await fetchUserPosts();
-        const data = res?.data?.result;
-        if (data.length === 0) {
-          return null;
-        } else {
-          get().saveUserPostsToState(data);
-          get().savePostsToIndexLS(data);
-  
-          return data;
+      // Fetch from server
+      const res = await fetchUserPosts();
+      const data = res?.data?.result;
+      if (data.length === 0) {
+        return null;
+      } else {
+        get().saveUserPostsToState(data);
+        get().savePostsToIndexLS(data);
+
+        return data;
       }
     } catch (err) {
-      console.log("error in handlerefreshUser", err);
+      console.log("error in handleRefreshUser ", err);
       return false;
     }
   },
   handleRefreshGenie: async () => {
     console.log("start handleRefreshGenie 1 min");
     try {
-    
       const data = await fetchGeniePosts();
       if (data && data.length > 0) {
         get().saveGeniePostsToState(data);

@@ -16,7 +16,7 @@ const Sidebar = () => {
     getGenieNickName,
     updateGenieNickName,
     getUserType,
-    handlerefreshUser,
+    handleRefreshUser,
     handleRefreshGenie,
   } = useStore(useDataStore);
   // const navigate = useNavigate();
@@ -62,7 +62,7 @@ const Sidebar = () => {
   };
   const handlerefresh = () => {
     if (userType === "user") {
-      handlerefreshUser();
+      handleRefreshUser();
     } else {
       handleRefreshGenie();
     }

@@ -20,7 +20,6 @@ function LoginUser() {
   // const [page, setPage] = useState("login");register  register
   const [page, setPage] = useState("login");
   const [isLoading, setIsLoading] = useState(false);
-
   const handleSwitchLogin = (newPage) => {
     // Reset form state for a clean switch
     formik.resetForm({

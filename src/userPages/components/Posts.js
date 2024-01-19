@@ -10,8 +10,15 @@ import NoPosts from "./NoPosts";
 function Posts() {
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { getUserPosts, setPostId, userGenieFilter, userReadPost, userPosts } =
-    useStore(useDataStore);
+  const {
+    getUserPosts,
+    setPostId,
+    userGenieFilter,
+    userReadPost,
+    userPosts,
+    getRefreshStatus,
+    handleRefreshUser,
+  } = useStore(useDataStore);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -41,6 +48,11 @@ function Posts() {
     },
     [setPostId, navigate]
   );
+  useEffect(() => {
+    if (getRefreshStatus()) {
+      handleRefreshUser();
+    }
+  }, []);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -101,15 +113,20 @@ function Posts() {
           ref={scrollContainerRef}
           onScroll={handleScroll}
         >
-          {filteredPost.sort((a,b)=>b.id-a.id).map((post) => //sort by id desc
-            post && post.id ? (
-              <Post
-                key={post.id}
-                post={post}
-                handleSelectPost={handleSelectPost}
-              />
-            ) : null
-          )}
+          {filteredPost
+            .sort((a, b) => b.id - a.id)
+            .map(
+              (
+                post //sort by id desc
+              ) =>
+                post && post.id ? (
+                  <Post
+                    key={post.id}
+                    post={post}
+                    handleSelectPost={handleSelectPost}
+                  />
+                ) : null
+            )}
         </div>
       ) : (
         <NoPosts />

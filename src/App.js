@@ -35,12 +35,16 @@ function App() {
     handleUserNotRead,
     setUserType,
     handleGenieNewChats,
+    updateRefreshStatus,
   } = useStore(useDataStore);
-
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
-
+  useEffect(() => {
+    if (window.location.pathname.includes("refresh")) {
+      updateRefreshStatus(true);
+    }
+  }, []);
   useEffect(() => {
     let chatCheckInterval;
     if (loginStatus || localStorage.getItem("authenticated") === "true") {
@@ -94,6 +98,7 @@ function App() {
     getUserType,
     setLoginStatus,
   ]);
+
 
   useEffect(() => {
     if (showToast && toastMessage) {

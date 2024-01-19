@@ -4,7 +4,7 @@ import Button1 from "components/Button1/Button1";
 import { useStore } from "zustand";
 import useDataStore from "stores/appStore";
 import { PATHS_NAMES } from "constants";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const {
@@ -16,6 +16,8 @@ const Sidebar = () => {
     getGenieNickName,
     updateGenieNickName,
     getUserType,
+    handlerefreshUser,
+    handleRefreshGenie,
   } = useStore(useDataStore);
   // const navigate = useNavigate();
   const userType = getUserType() || localStorage.getItem("userType");
@@ -58,6 +60,14 @@ const Sidebar = () => {
   const handleContactUs = () => {
     console.log("contact");
   };
+  const handlerefresh = () => {
+    if (userType === "user") {
+      handlerefreshUser();
+    } else {
+      handleRefreshGenie();
+    }
+    updateModalsStates("sidebar", "close");
+  };
   const saveProfile = () => {
     userType === "genie"
       ? updateGenieNickName(nickName)
@@ -78,7 +88,7 @@ const Sidebar = () => {
               updateModalsStates("sidebar", "close");
             }}
           >
-               <img
+            <img
               src={require(`assets/PNG/vectorx.png`)}
               alt="avatar"
               // width={40}
@@ -146,9 +156,22 @@ const Sidebar = () => {
             <Button1
               className="button1-footer"
               disabled={false}
+              onClick={handlerefresh}
+              text="Refresh all"
+              icon={
+                <img
+                  src={require(`assets/PNG/refresh.png`)}
+                  alt="refresh"
+                  width="20"
+                />
+              }
+            ></Button1>
+            <Button1
+              className="button1-footer"
+              disabled={false}
               onClick={handleContactUs}
               text="Contact Us"
-              icon={<img src={require(`assets/PNG/email.png`)} alt="avatar" />}
+              icon={<img src={require(`assets/PNG/email.png`)} alt="email" />}
             ></Button1>
             <Button1
               className="button1-footer"
@@ -156,16 +179,22 @@ const Sidebar = () => {
               onClick={handleLogOut}
               text="Logout"
               icon={
-                <img src={require(`assets/PNG/arrow-right.png`)} alt="avatar" />
+                <img src={require(`assets/PNG/arrow-right.png`)} alt="logout" />
               }
             ></Button1>
           </div>
           <div className="sidebar-footer">
             By using this app you accept our
-            <strong>Terms and Conditions</strong>
+            <strong>Terms and Conditions:</strong>
           </div>
           <div className="bags-report">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSezbK1XZq1TyZYS7ooYc_AvHgsMI59soU-9bTyfPZ4clHB8vA/viewform?usp=pp_url" target="_blank" rel="noopener noreferrer">טופס דווח תקלות</a>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSezbK1XZq1TyZYS7ooYc_AvHgsMI59soU-9bTyfPZ4clHB8vA/viewform?usp=pp_url"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              טופס דווח תקלות
+            </a>
           </div>
         </div>
       </div>

@@ -70,7 +70,7 @@ font-size: large;
 .sidebar-main{
       width: 100%;
       /* flex-grow: 1; */
-      /* height: 50%; */
+      height: 50%;
       /* margin-top: 0.5rem; */
 }
 .sidebar-buttons{

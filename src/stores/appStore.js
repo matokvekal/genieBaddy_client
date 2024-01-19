@@ -18,7 +18,6 @@ import {
   geniePostData,
   userRefreshPosts,
   genieRefreshPosts,
- 
 } from "services/getData";
 // import { exists } from "i18next";
 export const initialState = {
@@ -280,6 +279,42 @@ const useDataStore = createStore((set, get) => ({
     }));
     localStorage.setItem("authenticated", loginStatus);
   },
+  handlerefreshUser: async () => {
+    console.log("start handlerefreshUser 1 min");
+    try {
+      const response = await fetchUserPosts();
+      const data = response?response:null;
+      if (data.length === 0) {
+        return null;
+      } else {
+        get().saveUserPostsToState(data);
+        localStorage.setItem("userPosts", JSON.stringify(data));
+        return data;
+      }
+    } catch (err) {
+      console.log("error in handlerefreshUser", err);
+      return false;
+    }
+  },
+  handleRefreshGenie: async () => {
+    console.log("start handleRefreshGenie 1 min");
+    try {
+      debugger
+      const response = await fetchGeniePosts();
+      const data = response?response:null;
+      if (data.length === 0) {
+        return null;
+      } else {
+        get().saveGeniePostsToState(data);
+        localStorage.setItem("geniePosts", JSON.stringify(data));
+        return data;
+      }
+    } catch (err) {
+      console.log("error in handleRefreshGenie", err);
+      return false;
+    }
+  },
+
   handleLogin: async ({ username, password, userRole, page }) => {
     try {
       if (!username || !password) {
@@ -408,7 +443,8 @@ const useDataStore = createStore((set, get) => ({
         return null;
       }
     } catch (err) {
-      return { status: "error", info: err.message };
+      console.log("error in getGeniePosts", err);
+      return false;
     }
   },
   handleUserNotRead: async () => {

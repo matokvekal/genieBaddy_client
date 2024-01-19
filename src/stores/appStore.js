@@ -282,14 +282,16 @@ const useDataStore = createStore((set, get) => ({
   handlerefreshUser: async () => {
     console.log("start handlerefreshUser 1 min");
     try {
-      const response = await fetchUserPosts();
-      const data = response?response:null;
-      if (data.length === 0) {
-        return null;
-      } else {
-        get().saveUserPostsToState(data);
-        localStorage.setItem("userPosts", JSON.stringify(data));
-        return data;
+        // Fetch from server
+        const res = await fetchUserPosts();
+        const data = res?.data?.result;
+        if (data.length === 0) {
+          return null;
+        } else {
+          get().saveUserPostsToState(data);
+          get().savePostsToIndexLS(data);
+  
+          return data;
       }
     } catch (err) {
       console.log("error in handlerefreshUser", err);
@@ -299,15 +301,14 @@ const useDataStore = createStore((set, get) => ({
   handleRefreshGenie: async () => {
     console.log("start handleRefreshGenie 1 min");
     try {
-      debugger
-      const response = await fetchGeniePosts();
-      const data = response?response:null;
-      if (data.length === 0) {
-        return null;
-      } else {
+    
+      const data = await fetchGeniePosts();
+      if (data && data.length > 0) {
         get().saveGeniePostsToState(data);
         localStorage.setItem("geniePosts", JSON.stringify(data));
         return data;
+      } else {
+        return null;
       }
     } catch (err) {
       console.log("error in handleRefreshGenie", err);

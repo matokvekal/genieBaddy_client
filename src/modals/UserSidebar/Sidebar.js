@@ -61,11 +61,11 @@ const Sidebar = () => {
     console.log("contact");
   };
   const handlerefresh = () => {
-    // if (userType === "user") {
-    //   handlerefreshUser();
-    // } else {
-    //   handleRefreshGenie();
-    // }
+    if (userType === "user") {
+      handlerefreshUser();
+    } else {
+      handleRefreshGenie();
+    }
     updateModalsStates("sidebar", "close");
   };
   const saveProfile = () => {

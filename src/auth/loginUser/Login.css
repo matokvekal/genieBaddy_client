@@ -4,14 +4,15 @@
    justify-content: center;
    align-items: center;
    height: 100vh;
-   background: linear-gradient(to right, var(--gb-light-gray), var(--white));
+   /* background: linear-gradient(to right, var(--gb-light-gray), var(--white)); */
+   background: var(--gb-login-bg);
  }
  
  .Login__title {
-   font-size: 32px;
+   font-size: 26px;
    font-weight: bold;
    text-align: center;
-   margin-bottom: 20px;
+   /* margin-bottom: 20px; */
  }
  div.text-danger {
   height: 20px; 
@@ -32,12 +33,18 @@
    width: 100%;
    margin-top: 10px;
    padding: 30px;
-   background-color: var(--gb-purple);
-   border: 1px solid var(--white);
-   border-radius: 8px;
-   box-shadow: 0 4px 8px var(--black);
+   /* background-color: var(--gb-purple); */
+   /* border: 1px solid var(--white); */
+   /* border-radius: 8px; */
+   /* box-shadow: 0 4px 8px var(--black); */
  }
- 
+ div.cherry-img{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
  .Login__form__error {
    color: var(--form-error);
    margin-top: 8px;
@@ -45,13 +52,13 @@
  }
  
  .Login__form .form-group {
-   margin-bottom: 20px;
+   margin-bottom: 9px;
  }
  
  .Login__form label {
    display: block;
-   font-size: 18px;
-   font-weight: bold;
+   font-size: 16px;
+   font-weight: 600;
    margin-bottom: 8px;
  }
  
@@ -62,7 +69,7 @@
    padding: 12px;
    font-size: 16px;
    border: 1px solid var(--grey);
-   border-radius: 6px;
+   border-radius: 20px;
  }
  
  .Login__form__error small {
@@ -80,14 +87,16 @@
  }
  
  button.Login__submit-btn {
-   background-color: var(--gb-circle-orange);
+   background-color: var(--gb-dark-gray);
    color: var(--white); 
    border: none;
-   padding: 12px 24px;
-   border-radius: 6px;
-   font-size: 18px;
+   padding: 10px 14px;
+   border-radius: 20px;
+   font-size: 16px;
    cursor: pointer;
    transition: background-color 0.3s ease;
+   width: 100%  ;
+   margin-top: 30px;
  }
  
  .Login__submit-btn:disabled {
@@ -112,16 +121,18 @@
  }
  .text-center{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
  }
+
  .Login__form input[type="text"],
 .Login__form input[type="password"] {
-  padding: 15px; /* Increased padding */
+  padding: 8px; /* Increased padding */
   font-size: 18px; /* Larger font size */
 }
 .Login__submit-btn {
-  padding: 15px 30px;
-  font-size: 20px;
+  padding: 5px 3px;
+  font-size: 16px;
   /* Other styles */
 }
 .Login__submit-btn:hover {
@@ -131,4 +142,23 @@ div.text-danger {
   font-size: 16px; /* Larger font size */
   padding: 10px; /* Padding for better visibility */
   /* Other styles */
+}
+.form-group.my-3.terms{
+  display: flex ;
+  flex-direction: row;
+  align-items: center;
+
+}
+hr.mt-4{
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  width: 60%;
+} 
+label.ml-1{
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  margin-top: 5px;
 }

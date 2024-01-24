@@ -142,9 +142,9 @@ function LoginUser() {
       <div className="col-lg-6 order-sm-0 order-lg-1 my-lg-5">
         <h2 className="Login__title">
           {page === "login"
-            ? "Login user."
+            ? "Share"
             : page === "register"
-            ? "Register user."
+            ? "Register to Share"
             : "Confirm Code"}
         </h2>
         {page === "login" && (
@@ -192,12 +192,28 @@ function LoginUser() {
                 Login
               </button>
             </div>
+            <div className="form-group my-4">
+              <hr className="mt-4 hr" />
+            </div>
+
             {/* {mode === "development" && <h2>MODE:DEVELOPMENT</h2>} */}
-            <hr className="mt-4" />
+            {/* <hr className="mt-4" /> */}
             <div className="text-center">
               <span onClick={() => handleSwitchLogin("register")}>
                 Don't have an account? Register
               </span>
+            </div>
+            <div className="form-group my-4">
+              <hr className="mt-4 hr" />
+              <div className="cherry-img">
+              <img
+                src={require(`assets/PNG/cherry1.png`)}
+                className="cherry"
+                alt="send"
+                width={30}
+              />
+              </div>
+     
             </div>
           </form>
         )}
@@ -270,7 +286,7 @@ function LoginUser() {
                 </div>
               ) : null}
             </div>
-            <div className="form-group my-3">
+            <div className="form-group my-3 terms">
               <input
                 type="checkbox"
                 id="termsAccepted"

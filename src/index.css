@@ -51,6 +51,7 @@ textarea {
    --gb-font-inter:#303030;
    --gb-dark-gray:#5c5c5c83;
    --gb-login-bg:rgba(255,251,243,0.9);
+   --gb-login-dark:#231d1dad;
 
    --gb-danger:red;
    --gb-box-shadow1: 0px 2px 2px 0px rgba(0, 0, 0, 0.15);

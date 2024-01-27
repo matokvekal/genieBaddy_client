@@ -1,5 +1,5 @@
-import {useEffect} from "react";
-import "./Login.css";
+import { useEffect } from "react";
+import "./LoginGenie.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useStore } from "zustand";
 import useDataStore from "../../stores/appStore";
@@ -11,11 +11,14 @@ function LoginGenie() {
   const navigate = useNavigate();
   const { handleLogin, mode, loginStatus } = useStore(useDataStore);
 
- useEffect(() => {
-    if (loginStatus === true || localStorage.getItem("authenticated") === 'true') {
+  useEffect(() => {
+    if (
+      loginStatus === true ||
+      localStorage.getItem("authenticated") === "true"
+    ) {
       navigate(PATHS_NAMES.GENIE);
     }
-  }, [loginStatus, navigate]); 
+  }, [loginStatus, navigate]);
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -35,7 +38,7 @@ function LoginGenie() {
     onSubmit: async (values) => {
       const res = await handleLogin(
         values,
-        (values.userRole = 'genie')
+        (values.userRole = "genie")
         // (values.userRole = USERS_ROLES.GENIE)
       );
       if (res.status !== 200) {
@@ -49,7 +52,15 @@ function LoginGenie() {
   return (
     <div className="Logingenie  d-flex row justify-content-center">
       <div className="col-lg-6 order-sm-0 order-lg-1 my-lg-5">
-        <h2 className="Logingenie__title">Login Genie</h2>
+        <div className="cherry-img">
+          <img
+            src={require(`assets/PNG/cherry2.png`)}
+            className="cherry"
+            alt="send"
+            width={30}
+          />
+        </div>
+        <h2 className="Logingenie__title">Share for Genie</h2>
         <form
           className="Logingenie__form mt-5 col-lg-8 px-0"
           onSubmit={formik.handleSubmit}
@@ -90,11 +101,14 @@ function LoginGenie() {
             ) : null}
           </div>
           <div className="form-group my-2 text-right">
-            <button type="submit" className="mt-3 Login__submit-btn">
+            <button
+              type="submit"
+              className="mt-3 Logingenie__submit-btn1 genie"
+            >
               Login
             </button>
           </div>
-          {mode === "development" && <h2>MODE:DEVELOPMENT</h2>}
+          {/* {mode === "development" && <h2>MODE:DEVELOPMENT</h2>} */}
           <hr className="mt-4" />
           <div className="text-center">
             <span>
